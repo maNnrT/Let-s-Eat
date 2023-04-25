@@ -7,10 +7,10 @@ function App(): JSX.Element {
   return (
     <div>
       <ul>
-        <li>
+        <li className="text-secondary">
           <Link to="/">Homepage</Link>
         </li>
-        <li>
+        <li className="text-secondary">
           <Link to="/aboutus">AboutUs</Link>
         </li>
       </ul>

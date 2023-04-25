@@ -1,5 +1,5 @@
 import Header from '../component/Header';
-import Footer from './Footer';
+import Footer from '../component/Footer';
 
 function DefaultLayout({ children }: any): JSX.Element {
   return (
