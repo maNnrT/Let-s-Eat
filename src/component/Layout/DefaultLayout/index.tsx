@@ -7,7 +7,7 @@ function DefaultLayout({ children }: any): JSX.Element {
   return (
     <div className="flex flex-col items-center">
       <Header />
-      <div className="container h-[2000px] bg-717171">{children}</div>
+      <div className="h-auto">{children}</div>
       <Footer />
     </div>
   );
