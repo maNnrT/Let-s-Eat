@@ -6,14 +6,6 @@ import { DefaultLayout } from './component/Layout';
 function App(): JSX.Element {
   return (
     <div>
-      <ul>
-        <li className="text-secondary">
-          <Link to="/">Homepage</Link>
-        </li>
-        <li className="text-secondary">
-          <Link to="/aboutus">AboutUs</Link>
-        </li>
-      </ul>
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
@@ -36,8 +28,6 @@ function App(): JSX.Element {
               ></Route>
             );
           })}
-          {/* <Route path='/' element={<Homepage/>}/>
-          <Route path='/aboutus' element={<AboutUs/>}/> */}
         </Routes>
       </div>
     </div>
