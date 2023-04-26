@@ -23,6 +23,11 @@ export default {
         767676: "#767676",
         "71655b": "#71655B",
         f6f5f4: "#F6F5F4",
+        151618: "#151618",
+        373838: "#373838",
+        d2d0cf: "#D2D0CF",
+        f6f4f3: "#F6F4F3",
+        cfcfcf: "#CFCFCF",
       },
       fontFamily: {
         fahkwang: ["Fahkwang", "sans-serif"],

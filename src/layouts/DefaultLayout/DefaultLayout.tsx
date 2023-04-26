@@ -5,9 +5,9 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 function DefaultLayout({ children }: any): JSX.Element {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <Header />
-      <div className="h-auto">{children}</div>
+      <div className="h-auto w-full">{children}</div>
       <Footer />
     </div>
   );

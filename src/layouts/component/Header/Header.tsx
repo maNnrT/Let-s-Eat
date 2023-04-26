@@ -15,7 +15,7 @@ function Header(): JSX.Element {
     setNav(!nav);
   };
   return (
-    <div className="flex justify-center h-[100px] w-full absolute top-0 left-0 right-0 z-[1]">
+    <div className="flex justify-center h-[100px] w-full absolute top-0  z-[1]">
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to="/">

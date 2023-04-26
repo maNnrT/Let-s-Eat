@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react'  
-import classNames from 'classnames'
-import styles from './Slider.module.scss'
+import { useState, useEffect } from 'react';
+import classNames from 'classnames';
+import styles from './Slider.module.scss';
 
 import heroBannerHomepage from '../../../assets/Image/HeroBanner_Homepage.png';
 import heroBannerHomepage2 from '../../../assets/Image/HeroBanner_Homepage2.png';
@@ -10,46 +10,43 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import leftArrow from '../../../assets/svg/back_Arrow.svg';
 import rightArrow from '../../../assets/svg/next_Arrow.svg';
 import { RxDotFilled } from 'react-icons/rx';
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 //w-[1.2rem] h-[1.2rem] rounded-full bg-71655b
 function Slider() {
-    const slides = [
-      {
-        index: 0,
-        url: heroBannerHomepage,
-      },
-      {
-        index: 1,
-        url: heroBannerHomepage2,
-      },
-      {
-        index: 2,
-        url: heroBannerHomepage3,
-      },
-      {
-        index: 3,
-        url: heroBannerHomepage4,
-      },
-    ];
-    const [currentIndex, setCurrentIndex] = useState(0);
-    useEffect(() => {
-        console.log('check',currentIndex);
-    }, [currentIndex]);
-    const prevSlide = () => {
-      const isFirstSlide = currentIndex === 0;
-      const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-      setCurrentIndex(newIndex);
-    };
+  const slides = [
+    {
+      index: 0,
+      url: heroBannerHomepage,
+    },
+    {
+      index: 1,
+      url: heroBannerHomepage2,
+    },
+    {
+      index: 2,
+      url: heroBannerHomepage3,
+    },
+    {
+      index: 3,
+      url: heroBannerHomepage4,
+    },
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
 
-    const nextSlide = () => {
-      const isLastSlide = currentIndex === slides.length - 1;
-      const newIndex = isLastSlide ? 0 : currentIndex + 1;
-      setCurrentIndex(newIndex);
-    };
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
   return (
     <div
       style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-      className="w-[100vw] h-[90rem] rounded-2xl bg-center bg-cover duration-500"
+      className="w-full h-[90rem] bg-center bg-cover relative duration-500"
     >
       <div className="block absolute top-[34.8rem] left-[3.9rem] cursor-pointer">
         <img src={leftArrow} alt="" onClick={prevSlide} />
@@ -77,23 +74,22 @@ function Slider() {
           </button>
         </div>
         <div className="flex justify-between items-center mt-[2.8rem] w-[9.6rem]">
-            {slides.map((slide,index)=>{
-                return (
-                  <div
-                    key={index}
-                    className={
-                      currentIndex === index
-                        ? 'w-[1.2rem] h-[1.2rem] rounded-full bg-f6f5f4'
-                        : 'w-[1.2rem] h-[1.2rem] rounded-full bg-71655b'
-                    }
-                  ></div>
-                );
-            })}
-
+          {slides.map((slide, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  currentIndex === index
+                    ? 'w-[1.2rem] h-[1.2rem] rounded-full bg-f6f5f4'
+                    : 'w-[1.2rem] h-[1.2rem] rounded-full bg-71655b'
+                }
+              ></div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-export default Slider
+export default Slider;
