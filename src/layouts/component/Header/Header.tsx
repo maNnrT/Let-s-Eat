@@ -1,11 +1,13 @@
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-
+import config from '../../../config';
 import { useState } from 'react';
 import logo from '../../../assets/svg/Logo.svg';
 import cart from '../../../assets/svg/cart.svg';
 import { Link } from 'react-router-dom';
 import { AiOutlineMenu } from 'react-icons/ai';
+import HeaderMenu, { HeaderItem } from './HeaderMenu';
+
 const cx = classNames.bind(styles);
 function Header(): JSX.Element {
   const [nav, setNav] = useState<boolean>(false);
@@ -17,25 +19,15 @@ function Header(): JSX.Element {
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to="/">
-            <img src={logo} alt="logo" className="mr-[65px] " />
+            <img src={logo} alt="logo" className="mr-[6.5rem] " />
           </Link>
-          <ul className="flex items-center justify-between">
-            <li className="text-secondary font-bold text-[1.8rem] leading-[3rem] mr-[32px]">
-              <Link to="/">Homepage</Link>
-            </li>
-            <li className="font-medium text-[1.8rem] leading-[3rem] mr-[32px] tracking-[0.03em]">
-              <Link to="/aboutus">About us</Link>
-            </li>
-            <li className="font-medium text-[1.8rem] leading-[3rem] mr-[32px] tracking-[0.03em]">
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li className="font-medium text-[1.8rem] leading-[3rem] mr-[32px] tracking-[0.03em]">
-              <Link to="/menucombo">Menu Combo</Link>
-            </li>
-            <li className="font-medium text-[1.8rem] leading-[3rem] tracking-[0.03em]">
-              <Link to="/shop">Shop</Link>
-            </li>
-          </ul>
+          <HeaderMenu>
+            <HeaderItem title="Homepage" to={config.routes.homepage}></HeaderItem>
+            <HeaderItem title="About Us" to={config.routes.aboutus}></HeaderItem>
+            <HeaderItem title="Contact" to={config.routes.contact}></HeaderItem>
+            <HeaderItem title="Menu Combo" to={config.routes.menucombo}></HeaderItem>
+            <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
+          </HeaderMenu>
         </div>
         <div className="flex items-center justify-end ">
           <div
