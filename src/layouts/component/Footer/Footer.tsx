@@ -1,10 +1,13 @@
-import logo from '../../../../assets/svg/Logo_white.svg';
-import instagram from '../../../../assets/svg/insta_Footer.svg';
-import linkedin from '../../../../assets/svg/linkedin_Footer.svg';
-import twitter from '../../../../assets/svg/twitter_Footer.svg';
+import classNames from 'classnames';
+import styles from './Footer.module.scss';
+import logo from '../../../assets/svg/Logo_white.svg';
+import instagram from '../../../assets/svg/insta_Footer.svg';
+import linkedin from '../../../assets/svg/linkedin_Footer.svg';
+import twitter from '../../../assets/svg/twitter_Footer.svg';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
+const cx = classNames.bind(styles)
 function Footer(): JSX.Element {
   return (
     <div className="w-full h-[52rem] bg-primary ">

@@ -1,5 +1,1 @@
-function Contact() {
-  return <div className="text-secondary">Contact</div>;
-}
-
-export default Contact;
+export {default} from './Contact'

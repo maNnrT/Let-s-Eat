@@ -1,8 +1,8 @@
 import './App.css';
 import { Fragment } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
-import { DefaultLayout } from './component/Layout';
+import { DefaultLayout } from './layouts';
 function App(): JSX.Element {
   return (
     <div>

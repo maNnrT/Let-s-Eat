@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import styles from './Header.module.scss';
 
 import { useState } from 'react';
-import logo from '../../../../assets/svg/Logo.svg';
-import cart from '../../../../assets/svg/cart.svg';
+import logo from '../../../assets/svg/Logo.svg';
+import cart from '../../../assets/svg/cart.svg';
 import { Link } from 'react-router-dom';
 import { AiOutlineMenu } from 'react-icons/ai';
 const cx = classNames.bind(styles);
