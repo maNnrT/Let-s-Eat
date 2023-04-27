@@ -15,7 +15,7 @@ function Homepage() {
     <div>
       <Slider />
       <div className="w-full h-auto bg-primary">
-        <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem]">
+        <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
           <div className="container">
             <div className="grid grid-cols-2 py-[7.2rem] w-full gap-x-[3.2rem] px-[10.3rem] ">
               <div className="">
@@ -123,7 +123,7 @@ function Homepage() {
         </div>
       </div>
       <div
-        className="w-full h-[90rem] bg-no-repeat bg-cover bg-center "
+        className="w-full h-[90rem] bg-no-repeat bg-cover bg-center relative"
         style={{ backgroundImage: `url(${sweetBakery})` }}
       >
         <div className="container">
@@ -170,7 +170,7 @@ function Homepage() {
         </div>
       </div>
       <div className="w-full h-auto bg-primary">
-        <div className="panel-layer mt-[-22.8rem] mb-[-13.8rem]">
+        <div className="panel-layer mt-[-22.8rem] mb-[-13.8rem] z-[1]">
           <div className="container">
             <div className=" flex flex-col items-center pt-[6rem]">
               <span className="text-secondary leading-[0px]">——</span>
@@ -183,16 +183,16 @@ function Homepage() {
                 extraordinary things. We can’t imagine doing anything more gratifying than baking our, and your, bread.
               </p>
               <div className="mt-[4rem] w-[48rem] h-[5.4rem] grid grid-cols-4 gap-[0.4rem]">
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0">
+                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
                   Fresh Baked
                 </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0">
+                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
                   Sweet cake
                 </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0">
+                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
                   Breakfast
                 </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0">
+                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
                   Coffee & Tea
                 </button>
               </div>

@@ -10,8 +10,8 @@ import { MdEmail } from 'react-icons/md';
 const cx = classNames.bind(styles);
 function Footer(): JSX.Element {
   return (
-    <div className="w-full h-[52rem] bg-primary ">
-      <div className="container h-[23.5rem] grid grid-cols-2 mt-[20rem] bg-transparent">
+    <div className="w-full h-[52rem] bg-primary relative ">
+      <div className="container h-[23.5rem] grid grid-cols-2  mt-[20rem] bg-transparent">
         <div className=" flex flex-col items-start">
           <img src={logo} alt="" className="w-[17.6rem]" />
           <p className="mt-[2rem] font-light text-[1.6rem] w-[48.9rem] text-717171">
