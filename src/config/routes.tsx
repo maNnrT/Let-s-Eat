@@ -1,5 +1,6 @@
 enum routes {
   login='/login',
+  register='/register',
   homepage= '/',
   aboutus= '/aboutus',
   contact= '/contact',
@@ -7,4 +8,5 @@ enum routes {
   shop= '/shop',
   nomatch='*'
 }
+
 export default routes;

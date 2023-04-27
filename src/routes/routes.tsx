@@ -8,7 +8,8 @@ import AboutUs from '../pages/AboutUs';
 import Contact from '../pages/Contact';
 import MenuCombo from '../pages/MenuCombo';
 import Shop from '../pages/Shop';
-import Login from '../pages/Login/Login';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
 import NoMatch from '../pages/NoMatch';
 type pathObject = {
   path: string;
@@ -23,6 +24,7 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.menucombo, component: MenuCombo },
   { path: config.routes.shop, component: Shop },
   { path: config.routes.login, component: Login, layout: FooterOnly },
+  { path: config.routes.register, component: Register, layout: FooterOnly },
   { path: config.routes.nomatch, component: NoMatch },
 ];
 const privateRoutes: pathObject[] = [];

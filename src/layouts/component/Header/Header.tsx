@@ -30,7 +30,15 @@ function Header(): JSX.Element {
           </HeaderMenu>
         </div>
         <div className="flex items-center justify-between w-[30rem] ">
-          <Link to={config.routes.login} className="btn-secondary ">Login</Link>
+          <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem]">
+            Login
+          </Link>
+          <Link to={config.routes.register} className="btn-secondary w-[10rem] h-[3rem]">
+            Sign up
+          </Link>
+          {/* <Link to={config.routes.login} className="btn-secondary w-[10rem] h-[3rem]">
+            Sign out
+          </Link> */}
           <div
             className='relative mr-[5px]
                     after:content-["5"]

@@ -5,10 +5,13 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
+import config from '../../config';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const schema = yup
   .object({
-    email: yup.string().required('Email is required!').email('Email not valid!'),
+    email: yup.string().required('Email is required!').email('Email is invalid!'),
     passwords: yup.string().required('Password is required!'),
   })
   .required();
@@ -22,6 +25,10 @@ type FormData = yup.InferType<typeof schema>;
 //     confirmPasswords:string,
 //     term:boolean,
 // }
+type account={
+  username:string,
+  password:string,
+}
 function Login(): JSX.Element {
   const {
     register,
@@ -30,9 +37,38 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: FormData) => console.log(data);
+  const navigate = useNavigate()
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+   axios.get(config.api.accounts)
+     .then((res) => {
+       console.log('check:', res);
+       console.log(
+         res.data.some((account: account) => {
+           return account.username === data.email && account.password === data.passwords;
+         }),
+       );
+       if (
+         res.data.some((account: account) => {
+           return account.username === data.email && account.password === data.passwords;
+         })
+       ) {
+         navigate('/');
+         console.log(isLogin);
+         setIsLogin(true);
+       } else {
+         setIsLogin(false);
+         console.log(isLogin);
+         alert('Email or password is wrong!');
+       }
+     })
+     .catch(() => {
+       console.error("Can't get accounts");
+     });
+  };
   const [email, setEmail] = React.useState<string>('');
   const [passwords, setPasswords] = React.useState<string>('');
+  const [isLogin,setIsLogin] = React.useState<boolean>(false)
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -42,10 +78,10 @@ function Login(): JSX.Element {
   return (
     <div className="w-full mb-[-12rem] ">
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1]">
-        <div className="w-[45%] bg-white h-[40rem] flex flex-col items-start p-[2rem]">
+        <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">Login</p>
           <p className="font-light text-[1.6rem] text-666565 mt-[1rem]">
-            Don't have account <span className='underline cursor-pointer'>Sign Up</span> {/*Đổi thành Link*/}
+            Don't have an account? <Link to={config.routes.register} className="underline cursor-pointer text-secondary">Sign Up</Link> {/*Đổi thành Link*/}
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-[1rem]">
             <div className="flex flex-col">
@@ -58,7 +94,7 @@ function Login(): JSX.Element {
                 type="email"
                 id="email"
                 placeholder="Enter email..."
-                className="border-[2px] border-secondary outline-none h-[3rem]"
+                className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
                 value={email}
                 onChange={(e) => handleEmail(e)}
               />
@@ -66,14 +102,14 @@ function Login(): JSX.Element {
             </div>
             <div className="flex flex-col">
               <label htmlFor="passwords" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                Mật khẩu
+                Passwords
               </label>
               <input
                 {...register('passwords')}
                 type="password"
                 id="passwords"
-                placeholder="Enter mật khẩu..."
-                className="border-[2px] border-secondary outline-none h-[3rem]"
+                placeholder="Enter passwords..."
+                className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
                 value={passwords}
                 onChange={(e) => handlePasswords(e)}
               />
