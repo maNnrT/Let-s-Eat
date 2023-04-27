@@ -18,7 +18,7 @@ function Header(): JSX.Element {
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[1]">
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
-          <Link to="/">
+          <Link to={config.routes.homepage}>
             <img src={logo} alt="logo" className="mr-[6.5rem] " />
           </Link>
           <HeaderMenu>
@@ -29,7 +29,8 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
-        <div className="flex items-center justify-end ">
+        <div className="flex items-center justify-between w-[30rem] ">
+          <Link to={config.routes.login} className="btn-secondary ">Login</Link>
           <div
             className='relative mr-[5px]
                     after:content-["5"]

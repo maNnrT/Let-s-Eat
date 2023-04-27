@@ -9,7 +9,7 @@ function App(): JSX.Element {
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
-            let Layout: any = DefaultLayout;
+            let Layout:any= DefaultLayout;
             if (route.layout) {
               Layout = route.layout;
             } else if (route.layout === null) {

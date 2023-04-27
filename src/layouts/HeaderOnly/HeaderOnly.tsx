@@ -2,7 +2,7 @@ import Header from '../component/Header/Header';
 import styles from './HeaderOnly.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-function DefaultLayout({ children }: any): JSX.Element {
+function HeaderOnly({ children }: any): JSX.Element {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ function DefaultLayout({ children }: any): JSX.Element {
     </>
   );
 }
-export default DefaultLayout;
+export default HeaderOnly;

@@ -4,7 +4,11 @@ import { NavLink } from 'react-router-dom';
 const cx = classNames.bind(styles);
 // "text-[1.8rem] leading-[3rem] tracking-[0.03em] mr-[32px] font-medium active:font-bold active:text-secondary active:tracking-normal"
 // {(navData) => cx('text-[1.8rem] leading-[3rem] tracking-[0.03em] mr-[32px] font-medium', {active:navData.isActive})}
-function HeaderItem({ title, to }: any) {
+interface Props {
+  title:string,
+  to:string,
+}
+function HeaderItem({ title, to }: Props) {
   return (
     <NavLink
       to={to}
