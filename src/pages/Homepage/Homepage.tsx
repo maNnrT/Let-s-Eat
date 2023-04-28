@@ -18,12 +18,12 @@ import config from '../../config';
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate()
-  React.useEffect(()=>{
-    if (isLogin === false) {
-      navigate(config.routes.login)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  // React.useEffect(()=>{
+  //   if (isLogin === false) {
+  //     navigate(config.routes.login)
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[])
   return (
     <div>
       <Slider />

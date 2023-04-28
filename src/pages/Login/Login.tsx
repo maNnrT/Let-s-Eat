@@ -107,7 +107,7 @@ function Login(): JSX.Element {
                 type="email"
                 id="email"
                 placeholder="Enter email..."
-                className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                 value={email}
                 onChange={(e) => handleEmail(e)}
               />
@@ -122,7 +122,7 @@ function Login(): JSX.Element {
                 type="password"
                 id="passwords"
                 placeholder="Enter passwords..."
-                className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                 value={passwords}
                 onChange={(e) => handlePasswords(e)}
               />

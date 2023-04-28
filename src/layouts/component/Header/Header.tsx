@@ -42,8 +42,8 @@ function Header(): JSX.Element {
         <div className="flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
-              <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem]">
-                Login
+              <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem] mr-[2rem]">
+                Log in
               </Link>
               <Link to={config.routes.register} className="btn-secondary w-[10rem] h-[3rem]">
                 Sign up

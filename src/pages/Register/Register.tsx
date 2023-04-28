@@ -167,7 +167,7 @@ function Login(): JSX.Element {
                       type="text"
                       id="firstname"
                       placeholder="Enter first name..."
-                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                       value={firstName}
                       onChange={(e) => handleFirstName(e)}
                     />
@@ -182,7 +182,7 @@ function Login(): JSX.Element {
                       type="text"
                       id="lastname"
                       placeholder="Enter last name..."
-                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                       value={lastName}
                       onChange={(e) => handleLastName(e)}
                     />
@@ -198,7 +198,7 @@ function Login(): JSX.Element {
                     type="email"
                     id="email"
                     placeholder="Enter email..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                     value={email}
                     onChange={(e) => handleEmail(e)}
                   />
@@ -213,7 +213,7 @@ function Login(): JSX.Element {
                     type="password"
                     id="password"
                     placeholder="Enter passwords..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565"
                     value={password}
                     onChange={(e) => handlePassword(e)}
                   />
@@ -228,7 +228,7 @@ function Login(): JSX.Element {
                     type="password"
                     id="confirmPassword"
                     placeholder="Enter confirm password..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
+                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                     value={confirmPassword}
                     onChange={(e) => handleConfirmPassword(e)}
                   />
