@@ -1,45 +1,39 @@
-import classNames from 'classnames/bind';
-import styles from './Register.module.scss';
-const cx = classNames.bind(styles);
+// import classNames from 'classnames/bind';
+// import styles from './Register.module.scss';
+// const cx = classNames.bind(styles);
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import config from '../../config';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import * as request from '../../utils/request';
-import RegisterSuccessful from './RegisterSuccessful/RegisterSuccessful';
-const schema = yup
-  .object({
-    firstName: yup.string().required('First name is required!'),
-    lastName: yup.string().required('Last name is required!'),
-    email: yup.string().required('Email is required!').email('Email is invalid!'),
-    password: yup.string().required('Password is required!').min(8, 'Password must have at least 8 characters '),
-    confirmPassword: yup
-      .string()
-      .required('Confirm password is required!')
-      .min(8, 'Confirm password must have at least 8 characters ')
-      .oneOf([yup.ref('password')], 'Confirm password must be the same with password'),
-    term: yup.bool().oneOf([true], 'You must agree to our term'),
-  })
-  .required();
-type FormData = yup.InferType<typeof schema>;
-// interface FormInfo{
-//     firstName:string,
-//     lastName:string,
-//     age:number,
-//     email:string,
-//     passwords:string,
-//     confirmPasswords:string,
-//     term:boolean,
-// }
-type account = {
-  username: string;
-  password: string;
-};
+import RegisterSuccessful from './RegisterSuccessful';
+import { getAccounts,addNewAccounts } from './RegisterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccountsRegisterSelector } from '../../redux/selectors';
+
 function Login(): JSX.Element {
+  const schema = yup
+    .object({
+      firstName: yup.string().required('First name is required!'),
+      lastName: yup.string().required('Last name is required!'),
+      email: yup.string().required('Email is required!').email('Email is invalid!'),
+      password: yup.string().required('Password is required!').min(8, 'Password must have at least 8 characters '),
+      confirmPassword: yup
+        .string()
+        .required('Confirm password is required!')
+        .min(8, 'Confirm password must have at least 8 characters ')
+        .oneOf([yup.ref('password')], 'Confirm password must be the same with password'),
+      term: yup.bool().oneOf([true], 'You must agree to our term'),
+    })
+    .required();
+  type FormData = yup.InferType<typeof schema>;
+  type account = {
+    username: string;
+    password: string;
+  };
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -47,39 +41,76 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const accountList = useSelector(getAccountsRegisterSelector);
   const onSubmit = (data: FormData) => {
-    request
-      .get(config.api.accounts)
-      .then((res) => {
-        const isExist = res.every((account: account) => {
-          return account.username !== data.email;
-        });
-        if (isExist !== false) {
-          request
-            .post(config.api.accounts, {
-              username: data.email,
-              password: data.password,
-              firstname: data.firstName,
-              lastname: data.lastName,
-            })
-            .then(() => {
-              if (ref.current) ref.current.innerHTML = '';
-              setIsSignUpSuccess(true);
-            })
-            .catch(() => {
-              console.error("Can't add new account");
-              setIsSignUpSuccess(false);
-            });
-        } else {
-          if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
+    // request
+    //   .get(config.api.accounts)
+    //   .then((res) => {
+    //     const isExist = res.every((account: account) => {
+    //       return account.username !== data.email;
+    //     });
+    //     if (isExist !== false) {
+    //       request
+    //         .post(config.api.accounts, {
+    //           username: data.email,
+    //           password: data.password,
+    //           firstname: data.firstName,
+    //           lastname: data.lastName,
+    //         })
+    //         .then(() => {
+    //           if (ref.current) ref.current.innerHTML = '';
+    //           setIsSignUpSuccess(true);
+    //         })
+    //         .catch(() => {
+    //           console.error("Can't add new account");
+    //           setIsSignUpSuccess(false);
+    //         });
+    //     } else {
+    //       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
+    //       setIsSignUpSuccess(false);
+    //     }
+    //   })
+    //   .catch(() => {
+    //     console.error("Can't get accounts");
+    //     setIsSignUpSuccess(false);
+    //   });
+    const isExist = accountList.every((account: account) => {
+      return account.username !== data.email;
+    });
+    if (isExist !== false) {
+      // request
+      //   .post(config.api.accounts, {
+      //     username: data.email,
+      //     password: data.password,
+      //     firstname: data.firstName,
+      //     lastname: data.lastName,
+      //   })
+      //   .then(() => {
+      //     if (ref.current) ref.current.innerHTML = '';
+      //     setIsSignUpSuccess(true);
+      //   })
+      //   .catch(() => {
+      //     console.error("Can't add new account");
+      //     setIsSignUpSuccess(false);
+      //   });
+      dispatch(addNewAccounts(data))
+        .then(()=>{
+          if (ref.current) ref.current.innerHTML = '';
+          setIsSignUpSuccess(true);
+        })
+        .catch(()=>{
+          console.error("Can't add new account");
           setIsSignUpSuccess(false);
-        }
-      })
-      .catch(() => {
-        console.error("Can't get accounts");
-        setIsSignUpSuccess(false);
-      });
+        })
+    } else {
+      if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
+      setIsSignUpSuccess(false);
+    }
   };
+  React.useEffect(() => {
+    dispatch(getAccounts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [firstName, setFirstName] = React.useState<string>('');
   const [lastName, setLastName] = React.useState<string>('');
@@ -87,7 +118,7 @@ function Login(): JSX.Element {
   const [password, setPassword] = React.useState<string>('');
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [term, setTerm] = React.useState<boolean>(false);
-  const [isSignUpSuccess, setIsSignUpSuccess] =React.useState<boolean>(false);
+  const [isSignUpSuccess, setIsSignUpSuccess] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
@@ -112,7 +143,7 @@ function Login(): JSX.Element {
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">Sign Up</p>
-          {isSignUpSuccess===false ? (
+          {isSignUpSuccess === false ? (
             <>
               <div className="font-light text-[1.6rem] text-666565 mt-[1rem]">
                 Already have an account?{' '}
@@ -222,7 +253,7 @@ function Login(): JSX.Element {
               </form>
             </>
           ) : (
-            <RegisterSuccessful/>
+            <RegisterSuccessful />
           )}
         </div>
       </div>

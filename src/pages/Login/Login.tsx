@@ -1,6 +1,6 @@
-import classNames from 'classnames/bind';
-import styles from './Login.module.scss';
-const cx = classNames.bind(styles);
+// import classNames from 'classnames/bind';
+// import styles from './Login.module.scss';
+// const cx = classNames.bind(styles);
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,8 +8,10 @@ import * as yup from 'yup';
 import config from '../../config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import * as request from '../../utils/request';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccounts } from './LoginSlice';
+import { setIsLoginTrue, setIsLoginFalse } from './LoginSlice';
+import { getAccountsLoginSelector } from '../../redux/selectors';
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),
@@ -17,15 +19,6 @@ const schema = yup
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
-// interface FormInfo{
-//     firstName:string,
-//     lastName:string,
-//     age:number,
-//     email:string,
-//     passwords:string,
-//     confirmPasswords:string,
-//     term:boolean,
-// }
 type account = {
   username: string;
   password: string;
@@ -38,30 +31,48 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const accountList = useSelector(getAccountsLoginSelector);
   const onSubmit = (data: FormData) => {
-    request
-      .get(config.api.accounts)
-      .then((res) => {
-        if (
-          res.some((account: account) => {
-            return account.username === data.email && account.password === data.passwords;
-          })
-        ) {
-          navigate('/');
-          setIsLogin(true);
-        } else {
-          setIsLogin(false);
-          if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
-        }
+    // request
+    //   .get(config.api.accounts)
+    //   .then((res) => {
+    //     if (
+    //       res.some((account: account) => {
+    //         return account.username === data.email && account.password === data.passwords;
+    //       })
+    //     ) {
+    //       navigate('/');
+    //       setIsLogin(true);
+    //     } else {
+    //       setIsLogin(false);
+    //       if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
+    //     }
+    //   })
+    //   .catch(() => {
+    //     console.error("Can't get accounts");
+    //   });
+    // console.log("list account", accountList);
+    if (
+      accountList.some((account: account) => {
+        return account.username === data.email && account.password === data.passwords;
       })
-      .catch(() => {
-        console.error("Can't get accounts");
-      });
+    ) {
+      dispatch(setIsLoginTrue());
+      navigate('/');
+    } else {
+      if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
+      dispatch(setIsLoginFalse());
+    }
   };
+  React.useEffect(() => {
+    dispatch(getAccounts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [email, setEmail] = React.useState<string>('');
   const [passwords, setPasswords] = React.useState<string>('');
-  const [isLogin, setIsLogin] = React.useState<boolean>(false);
+  // const [isLogin, setIsLogin] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -80,7 +91,9 @@ function Login(): JSX.Element {
               Sign Up
             </Link>{' '}
           </div>
-          <p className="font-light text-[1.6rem] text-red-600 mt-[1rem] " ref={ref}>{}</p>
+          <p className="font-light text-[1.6rem] text-red-600 mt-[1rem] " ref={ref}>
+            {}
+          </p>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-[1rem]">
             <div className="flex flex-col">
               <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary">

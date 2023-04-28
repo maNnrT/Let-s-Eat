@@ -4,14 +4,14 @@ import App from './App.tsx';
 import './index.css';
 import GlobalStyles from './component/GlobalStyles';
 import { BrowserRouter } from 'react-router-dom';
-
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-      <GlobalStyles>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </GlobalStyles>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <GlobalStyles>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </GlobalStyles>
+  </Provider>,
 );
