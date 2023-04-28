@@ -9,6 +9,7 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import * as request from '../../utils/request';
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),
@@ -25,10 +26,10 @@ type FormData = yup.InferType<typeof schema>;
 //     confirmPasswords:string,
 //     term:boolean,
 // }
-type account={
-  username:string,
-  password:string,
-}
+type account = {
+  username: string;
+  password: string;
+};
 function Login(): JSX.Element {
   const {
     register,
@@ -37,38 +38,31 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const onSubmit = (data: FormData) => {
-    console.log(data);
-   axios.get(config.api.accounts)
-     .then((res) => {
-       console.log('check:', res);
-       console.log(
-         res.data.some((account: account) => {
-           return account.username === data.email && account.password === data.passwords;
-         }),
-       );
-       if (
-         res.data.some((account: account) => {
-           return account.username === data.email && account.password === data.passwords;
-         })
-       ) {
-         navigate('/');
-         console.log(isLogin);
-         setIsLogin(true);
-       } else {
-         setIsLogin(false);
-         console.log(isLogin);
-         alert('Email or password is wrong!');
-       }
-     })
-     .catch(() => {
-       console.error("Can't get accounts");
-     });
+    request
+      .get(config.api.accounts)
+      .then((res) => {
+        if (
+          res.some((account: account) => {
+            return account.username === data.email && account.password === data.passwords;
+          })
+        ) {
+          navigate('/');
+          setIsLogin(true);
+        } else {
+          setIsLogin(false);
+          if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
+        }
+      })
+      .catch(() => {
+        console.error("Can't get accounts");
+      });
   };
   const [email, setEmail] = React.useState<string>('');
   const [passwords, setPasswords] = React.useState<string>('');
-  const [isLogin,setIsLogin] = React.useState<boolean>(false)
+  const [isLogin, setIsLogin] = React.useState<boolean>(false);
+  const ref = React.useRef<HTMLParagraphElement>(null);
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -80,9 +74,13 @@ function Login(): JSX.Element {
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">Login</p>
-          <p className="font-light text-[1.6rem] text-666565 mt-[1rem]">
-            Don't have an account? <Link to={config.routes.register} className="underline cursor-pointer text-secondary">Sign Up</Link> {/*Đổi thành Link*/}
-          </p>
+          <div className="font-light text-[1.6rem] text-666565 mt-[1rem]">
+            Don't have an account?{' '}
+            <Link to={config.routes.register} className="underline cursor-pointer text-secondary">
+              Sign Up
+            </Link>{' '}
+          </div>
+          <p className="font-light text-[1.6rem] text-red-600 mt-[1rem] " ref={ref}>{}</p>
           <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-[1rem]">
             <div className="flex flex-col">
               <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary">

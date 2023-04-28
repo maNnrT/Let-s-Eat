@@ -1,4 +1,4 @@
 enum api {
-  accounts = 'http://localhost:3000/accounts',
+  accounts = '/accounts',
 }
 export default api;
