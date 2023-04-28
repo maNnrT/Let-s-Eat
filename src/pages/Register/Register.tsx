@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import config from '../../config';
 import { Link } from 'react-router-dom';
-import * as request from '../../utils/request';
+// import * as request from '../../utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
 import { getAccounts,addNewAccounts } from './RegisterSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -142,10 +142,12 @@ function Login(): JSX.Element {
     <div className="w-full mb-[-12rem] ">
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
-          <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">Sign Up</p>
+          <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">
+            Sign Up
+          </p>
           {isSignUpSuccess === false ? (
             <>
-              <div className="font-light text-[1.6rem] text-666565 mt-[1rem]">
+              <div className="font-light text-[1.6rem] text-666565 mt-[1rem] self-center">
                 Already have an account?{' '}
                 <Link to={config.routes.login} className="underline cursor-pointer text-secondary">
                   Log in
@@ -165,7 +167,7 @@ function Login(): JSX.Element {
                       type="text"
                       id="firstname"
                       placeholder="Enter first name..."
-                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                       value={firstName}
                       onChange={(e) => handleFirstName(e)}
                     />
@@ -180,7 +182,7 @@ function Login(): JSX.Element {
                       type="text"
                       id="lastname"
                       placeholder="Enter last name..."
-                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                      className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                       value={lastName}
                       onChange={(e) => handleLastName(e)}
                     />
@@ -196,7 +198,7 @@ function Login(): JSX.Element {
                     type="email"
                     id="email"
                     placeholder="Enter email..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                     value={email}
                     onChange={(e) => handleEmail(e)}
                   />
@@ -211,7 +213,7 @@ function Login(): JSX.Element {
                     type="password"
                     id="password"
                     placeholder="Enter passwords..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                     value={password}
                     onChange={(e) => handlePassword(e)}
                   />
@@ -226,30 +228,20 @@ function Login(): JSX.Element {
                     type="password"
                     id="confirmPassword"
                     placeholder="Enter confirm password..."
-                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                    className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                     value={confirmPassword}
                     onChange={(e) => handleConfirmPassword(e)}
                   />
                   <p className="text-red-600">{errors.confirmPassword?.message}</p>
                 </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    name=""
-                    id="term"
-                    className="mr-2 mt-[1.8rem]"
-                    onChange={handleTerm}
-                    checked={term}
-                  />
-                  <label
-                    htmlFor="term"
-                    className="font-light text-[1.6rem] text-666565 mt-[1rem] inline cursor-default"
-                  >
-                    I agreed with{' '}
+                <div className="flex justify-center items-center mt-[1.8rem]">
+                  <input type="checkbox" name="" id="term" className="mr-2" onChange={handleTerm} checked={term} />
+                  <label htmlFor="term" className="font-light text-[1.6rem] text-666565 inline cursor-default mr-2">
+                    I agreed with
                   </label>
                   <span className="text-secondary underline cursor-pointer">terms and services</span>
                 </div>
-                <button className="btn-secondary mt-[1.8rem]">Submit</button>
+                <button className="btn-secondary mt-[1.8rem] mx-auto">Submit</button>
               </form>
             </>
           ) : (

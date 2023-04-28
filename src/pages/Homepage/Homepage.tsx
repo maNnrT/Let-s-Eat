@@ -1,5 +1,6 @@
-import classNames from 'classnames/bind';
-import styles from './Homepage.module.scss';
+// import classNames from 'classnames/bind';
+// import styles from './Homepage.module.scss';
+import * as React from 'react';
 import Slider from './Slider';
 import CarouselProduct from './CarouselProduct';
 import CarouselCustomer from './CarouselCustomer';
@@ -9,8 +10,20 @@ import natureIngredient from '../../assets/svg/ingredients_Feature.svg';
 import workingHoursImg from '../../assets/image/image2.png';
 import sweetBakery from '../../assets/image/image3.png';
 import testimonial from '../../assets/Image/image9.png';
-const cx = classNames.bind(styles);
+import { getIsLogin } from '../../redux/selectors';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import config from '../../config';
+// const cx = classNames.bind(styles);
 function Homepage() {
+  const isLogin = useSelector(getIsLogin);
+  const navigate = useNavigate()
+  React.useEffect(()=>{
+    if (isLogin === false) {
+      navigate(config.routes.login)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <div>
       <Slider />

@@ -1,19 +1,29 @@
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
+// import classNames from 'classnames/bind';
+// import styles from './Header.module.scss';
+// const cx = classNames.bind(styles);
 import config from '../../../config';
-import { useState } from 'react';
+// import { useState } from 'react';
 import logo from '../../../assets/svg/Logo.svg';
 import cart from '../../../assets/svg/cart.svg';
-import { Link } from 'react-router-dom';
-import { AiOutlineMenu } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+// import { AiOutlineMenu } from 'react-icons/ai';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
+import { getIsLogin } from '../../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoginFalse } from '../../../pages/Login/LoginSlice';
 
-const cx = classNames.bind(styles);
 function Header(): JSX.Element {
-  const [nav, setNav] = useState<boolean>(false);
-  const handleNav = (): void => {
-    setNav(!nav);
+  // const [nav, setNav] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const handleNav = (): void => {
+  //   setNav(!nav);
+  // };
+  const handleLogOut = () => {
+    dispatch(setIsLoginFalse());
+    navigate(config.routes.login);
   };
+  const isLogin = useSelector(getIsLogin);
   return (
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[1]">
       <div className="h-full container flex items-center justify-between">
@@ -29,35 +39,45 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
-        <div className="flex items-center justify-between w-[30rem] ">
-          <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem]">
-            Login
-          </Link>
-          <Link to={config.routes.register} className="btn-secondary w-[10rem] h-[3rem]">
-            Sign up
-          </Link>
+        <div className="flex items-center justify-end w-auto ">
+          {!isLogin ? (
+            <>
+              <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem]">
+                Login
+              </Link>
+              <Link to={config.routes.register} className="btn-secondary w-[10rem] h-[3rem]">
+                Sign up
+              </Link>
+            </>
+          ) : (
+            <>
+              <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
+                Log out
+              </button>
+              <div
+                className='relative mr-[5px]
+                      after:content-["5"]
+                      after:font-normal
+                      after:text-[1.2rem]
+                      after:leading-[2rem]
+                      after:flex
+                      after:justify-center
+                      after:items-center
+                      after:absolute
+                      after:top-[-2px]
+                      after:right-[-1px]
+                      after:w-4
+                      after:h-4
+                      after:bg-secondary
+                      after:rounded-full '
+              >
+                <img src={cart} alt="" />
+              </div>
+            </>
+          )}
           {/* <Link to={config.routes.login} className="btn-secondary w-[10rem] h-[3rem]">
             Sign out
           </Link> */}
-          <div
-            className='relative mr-[5px]
-                    after:content-["5"]
-                    after:font-normal
-                    after:text-[1.2rem]
-                    after:leading-[2rem]
-                    after:flex
-                    after:justify-center
-                    after:items-center
-                    after:absolute
-                    after:top-[-2px]
-                    after:right-[-1px]
-                    after:w-4
-                    after:h-4
-                    after:bg-secondary
-                    after:rounded-full '
-          >
-            <img src={cart} alt="" />
-          </div>
         </div>
         {/* <div className="md:hidden mr-[24px]" onClick={handleNav}>
           <AiOutlineMenu size={24} color="rgba(255, 255, 255, 0.95)" />{' '}

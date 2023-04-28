@@ -84,8 +84,10 @@ function Login(): JSX.Element {
     <div className="w-full mb-[-12rem] ">
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
-          <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">Login</p>
-          <div className="font-light text-[1.6rem] text-666565 mt-[1rem]">
+          <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">
+            Login
+          </p>
+          <div className="font-light text-[1.6rem] text-666565 mt-[1rem] self-center">
             Don't have an account?{' '}
             <Link to={config.routes.register} className="underline cursor-pointer text-secondary">
               Sign Up
@@ -105,14 +107,14 @@ function Login(): JSX.Element {
                 type="email"
                 id="email"
                 placeholder="Enter email..."
-                className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                 value={email}
                 onChange={(e) => handleEmail(e)}
               />
               <p className="text-red-600">{errors.email?.message}</p>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="passwords" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
+              <label htmlFor="passwords" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem] ">
                 Passwords
               </label>
               <input
@@ -120,13 +122,13 @@ function Login(): JSX.Element {
                 type="password"
                 id="passwords"
                 placeholder="Enter passwords..."
-                className="border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                className="border-[2px] border-secondary outline-none h-[3rem] text-666565 placeholder:pl-[1rem]"
                 value={passwords}
                 onChange={(e) => handlePasswords(e)}
               />
               <p className="text-red-600">{errors.passwords?.message}</p>
             </div>
-            <button className="btn-secondary mt-[1.8rem]">Login</button>
+            <button className="btn-secondary mt-[1.8rem] mx-auto">Login</button>
           </form>
         </div>
       </div>
