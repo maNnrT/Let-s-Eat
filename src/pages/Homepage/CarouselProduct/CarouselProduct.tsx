@@ -1,52 +1,49 @@
-import { useRef } from 'react';
+import * as React from 'react';
 import CarouselItem from './CarouselItem';
+// import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './Carousel.css';
 // import required modules
-export default function CarouselProduct() {
-  const ref = useRef<any>();
+type product = {
+  id: number;
+  type:string;
+  img: string;
+  name: string;
+  description:string,
+  price:string,
+};
+interface Props {
+  products:product[]
+}
+export default function CarouselProduct({products}:Props) {
+  const ref = React.useRef<any>();
   const swipeNext = () => {
     ref.current.swiper.slideNext();
   };
   const swipePrev = () => {
     ref.current.swiper.slidePrev();
   };
+  console.log('check:', products);
+  
   return (
     <>
       <Swiper slidesPerView={4} spaceBetween={32} className="mySwiper" ref={ref}>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CarouselItem />
-        </SwiperSlide>
+        {products.map((product) => (
+            <SwiperSlide key={product.id}>
+              <CarouselItem
+                img={product.img}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+              />
+            </SwiperSlide>
+        ))}
       </Swiper>
       <div className="w-[8.8rem] flex justify-between mx-auto mt-[2.8rem]">
         <button

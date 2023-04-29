@@ -39,7 +39,8 @@ const registerSlice = createSlice({
         if (action.payload) state.accounts = action.payload;
         state.status = 'idle';
       })
-      .addCase(getAccounts.rejected, () => {
+      .addCase(getAccounts.rejected, (state) => {
+        state.status = 'idle';
         console.error('Cant get accounts');
       });
   },

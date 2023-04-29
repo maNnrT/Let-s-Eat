@@ -11,19 +11,28 @@ import workingHoursImg from '../../assets/image/image2.png';
 import sweetBakery from '../../assets/image/image3.png';
 import testimonial from '../../assets/Image/image9.png';
 import { getIsLogin } from '../../redux/selectors';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import config from '../../config';
+import { getProductsSelector } from '../../redux/selectors';
+import { getProducts } from './HompageSlice';
 // const cx = classNames.bind(styles);
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
-  const navigate = useNavigate()
-  // React.useEffect(()=>{
-  //   if (isLogin === false) {
-  //     navigate(config.routes.login)
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // },[])
+  const navigate = useNavigate();
+  React.useEffect(()=>{
+    if (isLogin === false) {
+      navigate(config.routes.login)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  const dispatch = useDispatch();
+  const products = useSelector(getProductsSelector);
+  React.useEffect(() => {
+    dispatch(getProducts());
+    console.log('check:', products);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <Slider />
@@ -209,8 +218,8 @@ function Homepage() {
                   Coffee & Tea
                 </button>
               </div>
-              <div className="mt-[4rem] mb-[6rem] w-[121.6rem] h-auto">
-                <CarouselProduct />
+              <div className="mt-[4rem] mb-[12.8rem] w-[121.6rem] h-[41.2rem]">
+                <CarouselProduct products={products} />
               </div>
             </div>
           </div>
@@ -225,7 +234,7 @@ function Homepage() {
                     OUR CUSTOMERS!
                   </h1>
                   <div className="w-full">
-                    <CarouselCustomer></CarouselCustomer>
+                    <CarouselCustomer />
                   </div>
                 </div>
                 <div
