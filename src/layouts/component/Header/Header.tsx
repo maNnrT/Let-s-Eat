@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin } from '../../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginFalse } from '../../../pages/Login/LoginSlice';
+import { setIsLoginFalse } from '../../../redux/Slice/LoginSlice';
 
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);

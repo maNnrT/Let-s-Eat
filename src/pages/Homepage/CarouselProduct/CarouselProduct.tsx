@@ -29,7 +29,7 @@ export default function CarouselProduct({products}:Props) {
   const swipePrev = () => {
     ref.current.swiper.slidePrev();
   };
-  console.log('check:', products);
+  // console.log('check:', products);
   
   return (
     <>

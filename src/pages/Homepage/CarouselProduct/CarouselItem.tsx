@@ -5,7 +5,7 @@ interface Props {
   price:string
 }
 function CarouselItem({img,name,description,price}:Props) {
-    console.log("check:", img,name,description,price);
+    // console.log("check:", img,name,description,price);
     
   return (
     <div className="w-full h-full bg-white flex flex-col">

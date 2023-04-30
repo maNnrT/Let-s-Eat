@@ -4,16 +4,19 @@ import config from '../../config';
 
 type product = {
   id: number;
+  type: string;
   img: string;
   name: string;
   description: string;
+  ingredient: string;
+  detail: string;
   price: string;
 };
 interface initialState {
   products: product[];
   status: string;
 }
-const homepageSlice = createSlice({
+const productsSlice = createSlice({
   name: 'homepage',
   initialState: { products: [], status: 'idle' } as initialState,
   reducers: {},
@@ -31,7 +34,7 @@ const homepageSlice = createSlice({
       });
   },
 });
-export const getProducts = createAsyncThunk('homepage/getProduct', async () => {
+export const getProducts = createAsyncThunk('products/getProducts', async () => {
   try {
     const res = await request.get(config.api.products);
     return res as product[];
@@ -40,4 +43,4 @@ export const getProducts = createAsyncThunk('homepage/getProduct', async () => {
   }
 });
 
-export default homepageSlice;
+export default productsSlice;

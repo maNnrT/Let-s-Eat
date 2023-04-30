@@ -6,6 +6,8 @@ import cookieImg from '../../assets/image/image10.png';
 import coffeeTeaImg from '../../assets/image/image11.png';
 import freshBakedImg from '../../assets/image/image12.png';
 import cheeseCake from '../../assets/image/image13.png';
+import { Link } from 'react-router-dom';
+import config from '../../config';
 const cx = classNames.bind(styles);
 function Shop() {
   return (
@@ -32,9 +34,9 @@ function Shop() {
             className="w-full h-full flex justify-center items-center cursor-pointer"
             style={{ backgroundImage: `url(${freshBakedImg})` }}
           >
-            <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">
+            <Link to={config.routes.shop_freshbaked} className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">
               Fresh baked
-            </p>
+            </Link>
           </div>
           <div
             className="w-full h-full flex justify-center items-center cursor-pointer"

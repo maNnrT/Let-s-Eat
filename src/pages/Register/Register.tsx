@@ -9,7 +9,7 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 // import * as request from '../../utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
-import { getAccounts,addNewAccounts } from './RegisterSlice';
+import { getAccounts, addNewAccounts } from '../../redux/Slice/RegisterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsRegisterSelector } from '../../redux/selectors';
 
@@ -94,14 +94,14 @@ function Login(): JSX.Element {
       //     setIsSignUpSuccess(false);
       //   });
       dispatch(addNewAccounts(data))
-        .then(()=>{
+        .then(() => {
           if (ref.current) ref.current.innerHTML = '';
           setIsSignUpSuccess(true);
         })
-        .catch(()=>{
+        .catch(() => {
           console.error("Can't add new account");
           setIsSignUpSuccess(false);
-        })
+        });
     } else {
       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
       setIsSignUpSuccess(false);

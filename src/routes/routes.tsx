@@ -8,6 +8,7 @@ import AboutUs from '../pages/AboutUs';
 import Contact from '../pages/Contact';
 import MenuCombo from '../pages/MenuCombo';
 import Shop from '../pages/Shop';
+import FreshBaked from '../pages/Shop/Fresh Baked';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NoMatch from '../pages/NoMatch';
@@ -23,6 +24,7 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.contact, component: Contact },
   { path: config.routes.menucombo, component: MenuCombo },
   { path: config.routes.shop, component: Shop },
+  { path: config.routes.shop_freshbaked, component: FreshBaked },
   { path: config.routes.login, component: Login, layout: FooterOnly },
   { path: config.routes.register, component: Register, layout: FooterOnly },
   { path: config.routes.nomatch, component: NoMatch },

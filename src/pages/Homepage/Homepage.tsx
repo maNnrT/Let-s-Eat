@@ -15,20 +15,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import { getProductsSelector } from '../../redux/selectors';
-import { getProducts } from './HompageSlice';
+import { getProducts } from '../../redux/Slice/ProductsSlice';
 // const cx = classNames.bind(styles);
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
-  React.useEffect(()=>{
-    if (isLogin === false) {
-      navigate(config.routes.login)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
   const dispatch = useDispatch();
   const products = useSelector(getProductsSelector);
   React.useEffect(() => {
+    // if (isLogin === false) {
+    //   navigate(config.routes.login);
+    // }
     dispatch(getProducts());
     console.log('check:', products);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -9,8 +9,8 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccounts } from './LoginSlice';
-import { setIsLoginTrue, setIsLoginFalse } from './LoginSlice';
+import { getAccounts } from '../../redux/Slice/LoginSlice';
+import { setIsLoginTrue, setIsLoginFalse } from '../../redux/Slice/LoginSlice';
 import { getAccountsLoginSelector } from '../../redux/selectors';
 const schema = yup
   .object({

@@ -14,7 +14,18 @@
   .container {
     @apply w-full max-w-[85vw] mx-auto;
   }
-  .btn-secondary{
-    @apply flex justify-center items-center w-[17.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary
+  .btn-secondary {
+    @apply flex justify-center items-center w-[17.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary;
+  }
+}
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #d08c30;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background-color: #fdf9f5;
   }
 }
