@@ -4,7 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '../../../redux/selectors';
 import { getProducts } from '../../../redux/Slice/ProductsSlice';
 import FreshBakedItem from './FreshBakedItem/FreshBakedItem';
+import FreshBakedItemDetail from './FreshBakedItemDetail/FreshBakedItemDetail';
 function FreshBaked() {
+  const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
+  const handleOpenModal = (id: number): void => {
+    setSelectedItem(id);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const dispatch = useDispatch();
   const products = useSelector(getProductsSelector);
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
@@ -26,6 +38,7 @@ function FreshBaked() {
         <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Shop/Category</p>
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
+        {openModal && <FreshBakedItemDetail id={selectedItem} onClose={handleCloseModal} />}
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Our menu</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
@@ -43,7 +56,7 @@ function FreshBaked() {
             <div className="w-[48.8rem] h-[47.6rem] border-[1.5px] border-secondary p-[2rem]">
               <div>
                 {arrayProducts1.map((product) => (
-                  <div key={product.id}>
+                  <div key={product.id} onClick={() => handleOpenModal(product.id)}>
                     <FreshBakedItem
                       id={product.id}
                       name={product.name}
@@ -66,7 +79,7 @@ function FreshBaked() {
             <div className="w-[48.8rem] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="w-full">
                 {arrayProducts2.map((product) => (
-                  <div key={product.id}>
+                  <div key={product.id} onClick={() => handleOpenModal(product.id)}>
                     <FreshBakedItem
                       id={product.id}
                       name={product.name}

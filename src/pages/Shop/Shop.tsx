@@ -9,6 +9,12 @@ import cheeseCake from '../../assets/image/image13.png';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 const cx = classNames.bind(styles);
+const categories = [
+  { title:'Fresh Baked',to: config.routes.shop_freshbaked, img: freshBakedImg },
+  { title:'Cookies',to: config.routes.shop_cookies, img: cookieImg },
+  { title:'Coffee & Tea',to: config.routes.shop_coffeeTea, img: coffeeTeaImg },
+  { title:'Chessecake',to: config.routes.shop_chessecake, img: cheeseCake },
+];
 function Shop() {
   return (
     <div className="w-full mb-[-12rem]">
@@ -30,34 +36,17 @@ function Shop() {
           menu and choose the perfect dishes for your meal.
         </p>
         <div className="container grid grid-cols-4 gap-x-[3.2rem] h-[41.2rem] mt-[6rem]">
-          <div
-            className="w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundImage: `url(${freshBakedImg})` }}
-          >
-            <Link to={config.routes.shop_freshbaked} className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">
-              Fresh baked
+          {categories.map((category) => (
+            <Link
+              to={category.to}
+              className="w-full h-full flex justify-center items-center cursor-pointer hover:scale-110 duration-500"
+              style={{ backgroundImage: `url(${category.img})` }}
+            >
+              <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">
+                {category.title}
+              </p>
             </Link>
-          </div>
-          <div
-            className="w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundImage: `url(${cookieImg})` }}
-          >
-            <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">Cookies</p>
-          </div>
-          <div
-            className="w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundImage: `url(${coffeeTeaImg})` }}
-          >
-            <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">
-              Coffee & tea
-            </p>
-          </div>
-          <div
-            className="w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundImage: `url(${cheeseCake})` }}
-          >
-            <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">Cheesecake</p>
-          </div>
+          ))}
         </div>
       </div>
     </div>
