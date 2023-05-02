@@ -16,7 +16,7 @@ function CarouselItem() {
           "I just wanted to let you know how much my family enjoyed the cake you made for my husband's birthday. It was
           truly delicious! Thanks again. I now have a new favorite bakery!”
         </p>
-        <p className="text-[2rem] font-medium text-3d3535 mt-[0.8rem] text-center ">Karen P, New York</p>
+        <p className="text-[2rem] font-medium text-3d3535 mt-[0.8rem] mb-[3.2rem] text-center ">Karen P, New York</p>
       </div>
     </div>
   );

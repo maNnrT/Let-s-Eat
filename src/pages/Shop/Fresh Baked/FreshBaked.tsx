@@ -19,6 +19,7 @@ function FreshBaked() {
 
   const dispatch = useDispatch();
   const products = useSelector(getProductsSelector);
+  
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
   const arrayProducts1 = [...products].reverse().slice(0, 4);
   const arrayProducts2 = [...products].reverse().slice(4, products.length);
@@ -26,6 +27,7 @@ function FreshBaked() {
 
   React.useEffect(() => {
     dispatch(getProducts());
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -56,7 +58,7 @@ function FreshBaked() {
             <div className="w-[48.8rem] h-[47.6rem] border-[1.5px] border-secondary p-[2rem]">
               <div>
                 {arrayProducts1.map((product) => (
-                  <div key={product.id} onClick={() => handleOpenModal(product.id)}>
+                  <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
                     <FreshBakedItem
                       id={product.id}
                       name={product.name}
@@ -68,18 +70,18 @@ function FreshBaked() {
                 ))}
               </div>
             </div>
-            <div className="w-full h-auto mt-[3.2rem] mb-[20.1rem]">
-              <img src="http://127.0.0.1:8887/image25.png" alt="" />
+            <div className="w-full  h-auto mt-[3.2rem] mb-[20.1rem] self-end mr-0">
+              <img src="http://127.0.0.1:8887/image25.png" alt="" className="w-full" />
             </div>
           </div>
           <div className="w-full flex flex-col items-start">
             <div className="w-full h-auto mb-[3.2rem]">
-              <img src="http://127.0.0.1:8887/image18.png" alt="" />
+              <img src="http://127.0.0.1:8887/image18.png" alt="" className="w-full" />
             </div>
             <div className="w-[48.8rem] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="w-full">
                 {arrayProducts2.map((product) => (
-                  <div key={product.id} onClick={() => handleOpenModal(product.id)}>
+                  <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
                     <FreshBakedItem
                       id={product.id}
                       name={product.name}

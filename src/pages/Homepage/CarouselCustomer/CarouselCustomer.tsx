@@ -8,6 +8,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './Carousel.css';
+import { Pagination } from 'swiper';
 // import required modules
 export default function CarouselProduct() {
   const ref = useRef<any>();
@@ -18,8 +19,22 @@ export default function CarouselProduct() {
     ref.current.swiper.slidePrev();
   };
   return (
-    <div className="w-full relative mb-[10.4rem]">
-      <Swiper slidesPerView={1} className="mySwiper" ref={ref}>
+    <div className="w-full relative mb-[7.6rem] h-auto ">
+      <Swiper
+        pagination={true}
+        modules={[Pagination]}
+        slidesPerView={1}
+        className="mySwiper"
+        ref={ref}
+        style={{
+          '--swiper-pagination-color': '#D08C30',
+          '--swiper-pagination-bullet-inactive-color': '#F3D2A5',
+          '--swiper-pagination-bullet-inactive-opacity': '1',
+          '--swiper-pagination-bullet-size': '1.2rem',
+          '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
+          'padding-bottom': '3.2rem',
+        }}
+      >
         <SwiperSlide>
           <CarouselItem />
         </SwiperSlide>

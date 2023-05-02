@@ -4,13 +4,14 @@ import config from '../../config';
 import { object } from 'yup';
 
 type product = {
-  id: number|undefined;
+  id: number | undefined;
   type: string;
   img: string;
   name: string;
   description: string;
   ingredient: string;
   detail: string;
+  detailImg: string;
   price: string;
 };
 interface initialState {
@@ -31,6 +32,7 @@ const productsSlice = createSlice({
       description: '',
       ingredient: '',
       detail: '',
+      detailImg:'',
       price: '',
     },
   } as initialState,
