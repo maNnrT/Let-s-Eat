@@ -121,19 +121,19 @@ function Homepage() {
                 <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center">
                   On weekend & Holiday
                 </h6>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[9px]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
                   08:00 - 14:00
                 </p>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-1">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
                   08:00 - 14:00
                 </p>
-                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center mt-[32px]">
+                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center mt-[3.2rem]">
                   Weekday
                 </h6>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[9px]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
                   08:00 - 14:00
                 </p>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-1">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
                   08:00 - 14:00
                 </p>
               </div>
