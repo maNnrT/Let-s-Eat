@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { CSSProperties, useRef } from 'react';
 import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import './Carousel.css';
 import { Pagination } from 'swiper';
 // import required modules
-export default function CarouselProduct() {
+export default function CarouselCustomer() {
   const ref = useRef<any>();
   const swipeNext = () => {
     ref.current.swiper.slideNext();
@@ -26,14 +26,16 @@ export default function CarouselProduct() {
         slidesPerView={1}
         className="mySwiper"
         ref={ref}
-        style={{
-          '--swiper-pagination-color': '#D08C30',
-          '--swiper-pagination-bullet-inactive-color': '#F3D2A5',
-          '--swiper-pagination-bullet-inactive-opacity': '1',
-          '--swiper-pagination-bullet-size': '1.2rem',
-          '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
-          'padding-bottom': '3.2rem',
-        }}
+        style={
+          {
+            '--swiper-pagination-color': '#D08C30',
+            '--swiper-pagination-bullet-inactive-color': '#F3D2A5',
+            '--swiper-pagination-bullet-inactive-opacity': '1',
+            '--swiper-pagination-bullet-size': '1.2rem',
+            '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
+            paddingBottom: '3.2rem',
+          } as CSSProperties
+        }
       >
         <SwiperSlide>
           <CarouselItem />

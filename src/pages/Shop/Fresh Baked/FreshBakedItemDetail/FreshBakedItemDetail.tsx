@@ -52,13 +52,15 @@ function FreshBakedItemDetail({ id, onClose }: Props) {
           slidesPerView={1}
           className="mySwiper"
           ref={ref}
-          style={{
-            '--swiper-pagination-color': '#D08C30',
-            '--swiper-pagination-bullet-inactive-color': '#FFFFFF',
-            '--swiper-pagination-bullet-inactive-opacity': '0.3',
-            '--swiper-pagination-bullet-size': '1.2rem',
-            '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
-          }}
+          style={
+            {
+              '--swiper-pagination-color': '#D08C30',
+              '--swiper-pagination-bullet-inactive-color': '#FFFFFF',
+              '--swiper-pagination-bullet-inactive-opacity': '0.3',
+              '--swiper-pagination-bullet-size': '1.2rem',
+              '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
+            } as React.CSSProperties
+          }
         >
           {productById.detailImg &&
             JSON.parse(productById.detailImg).map((img: string) => (
@@ -81,17 +83,6 @@ function FreshBakedItemDetail({ id, onClose }: Props) {
               </SwiperSlide>
             ))}
         </Swiper>
-        {/* <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-          <SwiperSlide className="text-secondary">Slide 1</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 2</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 3</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 4</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 5</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 6</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 7</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 8</SwiperSlide>
-          <SwiperSlide className="text-secondary">Slide 9</SwiperSlide>
-        </Swiper> */}
         <div>
           <div className="mt-[9rem]">
             <span className="text-secondary mr-[0.8rem] text-[3.2rem] ">—</span>
