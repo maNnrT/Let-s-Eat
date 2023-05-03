@@ -25,7 +25,7 @@ function Header(): JSX.Element {
   };
   const isLogin = useSelector(getIsLogin);
   return (
-    <div className="flex justify-center h-[100px] w-full absolute top-0  z-[1]">
+    <div className="flex justify-center h-[100px] w-full absolute top-0  z-[2]">
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to={config.routes.homepage}>
