@@ -78,7 +78,10 @@ function MenuCombo() {
                   </div>
                 </div>
               </div>
-              <div className="h-full px-[4.4rem] py-[28.6rem]" style={{ backgroundImage: `url(${loveCombo})` }}>
+              <div
+                className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat"
+                style={{ backgroundImage: `url(${loveCombo})` }}
+              >
                 <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For 2 people</p>
                 <p className="font-fahkwang font-normal text-[4rem] leading-[100%] text-center uppercase mt-[1.6rem]">
                   LOVE COMBO
@@ -90,7 +93,7 @@ function MenuCombo() {
                 </div>
               </div>
               <div
-                className="h-full p-[3.2rem] relative"
+                className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat"
                 style={{
                   backgroundImage: `url(${loveCombo2})`,
                 }}
@@ -401,16 +404,10 @@ function MenuCombo() {
             </div>
           </SwiperSlide>
         </Swiper>
-        <button
-          className="w-auto h-auto text-[#ACACAC] absolute top-[63.2rem] left-[4rem] z-[2]"
-          onClick={swipePrev}
-        >
+        <button className="w-auto h-auto text-[#ACACAC] absolute top-[63.2rem] left-[4rem] z-[2]" onClick={swipePrev}>
           <BsChevronLeft size={36} />
         </button>
-        <button
-          className="w-auto h-auto text-[#ACACAC] absolute top-[63.2rem] right-[4rem] z-[2]"
-          onClick={swipeNext}
-        >
+        <button className="w-auto h-auto text-[#ACACAC] absolute top-[63.2rem] right-[4rem] z-[2]" onClick={swipeNext}>
           <BsChevronRight size={36} />
         </button>
       </div>

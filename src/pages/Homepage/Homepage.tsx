@@ -42,10 +42,10 @@ function Homepage() {
               </div>
               <div className="flex flex-col">
                 <div>
-                  <span className="text-secondary mr-[0.8rem] text-[3.2rem]">—</span>
-                  <p className="font-normal text-[1.8rem] text-secondary inline-block">ABOUT US</p>
+                  <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0%]">—</span>
+                  <p className="font-normal text-[1.8rem] text-secondary inline-block uppercase">ABOUT US</p>
                 </div>
-                <h2 className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 ">
+                <h2 className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 uppercase">
                   LET'S EAT!
                 </h2>
                 <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem]">
@@ -142,7 +142,7 @@ function Homepage() {
         </div>
       </div>
       <div
-        className="w-full h-[90rem] bg-no-repeat bg-cover bg-center relative"
+        className="w-full h-[76rem] bg-no-repeat bg-cover bg-center relative"
         style={{ backgroundImage: `url(${sweetBakery})` }}
       >
         <div className="container">
@@ -189,7 +189,7 @@ function Homepage() {
         </div>
       </div>
       <div className="w-full h-auto bg-primary">
-        <div className="panel-layer mt-[-22.8rem] mb-[-13.8rem] z-[1]">
+        <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
           <div className="container">
             <div className=" flex flex-col items-center pt-[6rem]">
               <span className="text-secondary leading-[0px]">——</span>

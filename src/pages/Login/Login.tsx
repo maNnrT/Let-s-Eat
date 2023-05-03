@@ -72,7 +72,6 @@ function Login(): JSX.Element {
   }, []);
   const [email, setEmail] = React.useState<string>('');
   const [passwords, setPasswords] = React.useState<string>('');
-  // const [isLogin, setIsLogin] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
