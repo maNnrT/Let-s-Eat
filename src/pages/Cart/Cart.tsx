@@ -41,14 +41,14 @@ function Cart() {
                 </th>
                 <th>
                   <div className="flex justify-center items-center">
-                    <p className="font-medium text-[1.8rem] text-primary">Subtotal</p>
+                    <p className="font-medium text-[1.8rem] text-primary"></p>
                   </div>
                 </th>
               </tr>
             </table>
           </div>
           <div>
-            
+
           </div>
         </div>
       </div>
