@@ -63,12 +63,12 @@ function FreshBaked() {
           Freshly baked bread. Natural, crusty, straight from the oven: our fresh bread. Always fresh? Of course! A wide
           choice?
         </p>
-        <div className="container grid grid-cols-2 gap-x-[3.2rem] h-[auto] mt-[8.8rem] ">
+        <div className="container grid grid-cols-2 gap-x-[3.2rem] h-auto mt-[8.8rem] ">
           <div className="w-full pt-[1.6rem] flex flex-col items-end">
-            <p className="font-fahkwang font-semibold text-[2.4rem] leading [31rem] text-center uppercase text-secondary mr-[14.9rem]">
-              Fresh Baked
-            </p>
-            <div className="w-[48.8rem] h-[47.6rem] border-[1.5px] border-secondary p-[2rem]">
+            <div className="w-[82.7%] h-[47.6rem] border-[1.5px] border-secondary p-[2rem] relative mt-[7.9rem]">
+              <p className="font-fahkwang font-semibold text-[2.4rem] leading-[130%] text-center uppercase text-secondary absolute top-[-4.8rem] right-[50%] translate-x-[50%]">
+                Fresh Baked
+              </p>
               <div>
                 {arrayProducts1.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
@@ -91,7 +91,7 @@ function FreshBaked() {
             <div className="w-full h-auto mb-[3.2rem]">
               <img src="http://127.0.0.1:8887/image18.png" alt="" className="w-full" />
             </div>
-            <div className="w-[48.8rem] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
+            <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="w-full">
                 {arrayProducts2.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">

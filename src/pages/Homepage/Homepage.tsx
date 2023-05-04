@@ -30,9 +30,9 @@ function Homepage() {
     { value: 'coffeeTea', title: 'Coffee & Tea' },
   ];
   React.useEffect(() => {
-    if (isLogin === false) {
-      navigate(config.routes.login);
-    }
+    // if (isLogin === false) {
+    //   navigate(config.routes.login);
+    // }
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

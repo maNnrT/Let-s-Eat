@@ -10,6 +10,7 @@ enum routes {
   shop_cookies = '/shop/cookies',
   shop_coffeeTea = '/shop/coffeeTea',
   shop_chessecake = '/shop/chessecake',
+  cart = '/cart',
   nomatch = '*',
 }
 

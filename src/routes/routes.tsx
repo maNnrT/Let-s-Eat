@@ -12,10 +12,11 @@ import FreshBaked from '../pages/Shop/Fresh Baked';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NoMatch from '../pages/NoMatch';
+import Cart from '../pages/Cart';
 type pathObject = {
   path: string;
   component: () => JSX.Element;
-  layout?: any;
+  layout?: ({children}:any) => JSX.Element;
 };
 
 const publicRoutes: pathObject[] = [
@@ -29,6 +30,8 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.register, component: Register, layout: FooterOnly },
   { path: config.routes.nomatch, component: NoMatch },
 ];
-const privateRoutes: pathObject[] = [];
+const privateRoutes: pathObject[] = [
+  {path: config.routes.cart,component:Cart}
+];
 
 export { publicRoutes, privateRoutes };

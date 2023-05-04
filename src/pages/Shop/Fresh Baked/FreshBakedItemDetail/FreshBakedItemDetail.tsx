@@ -17,9 +17,23 @@ interface Props {
   id: number | undefined;
   onClose: () => void;
 }
-function FreshBakedItemDetail({ id, onClose }: Props):JSX.Element {
+function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
   const productById = useSelector(getProductByIdSelector);
+  const [numberInput, setNumberInput] = React.useState<number>(1);
+  const decreaseNumber = () => {
+    setNumberInput((pre: number): number => {
+      if (pre >= 2) return pre - 1;
+      else return 1;
+    });
+  };
+  const increaseNumber = () => {
+    setNumberInput((pre: number): number => {
+      if (pre >= 1) return pre + 1;
+      else return 1;
+    });
+  };
+
   // console.log('check:', typeof productById.detailImg);
   // let arrImg: string[];
   // if (productById.detailImg) {
@@ -46,7 +60,7 @@ function FreshBakedItemDetail({ id, onClose }: Props):JSX.Element {
 
   return (
     <div className="bg-[rgba(0,0,0,0.5)] absolute h-full w-full z-10">
-      <div className="container grid grid-cols-2 gap-x-[3.2rem] h-[65.6rem] min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
+      <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
         <Swiper
           pagination={true}
           modules={[Pagination]}
@@ -96,7 +110,22 @@ function FreshBakedItemDetail({ id, onClose }: Props):JSX.Element {
             ${productById.price}
           </p>
           <p className="font-light text-[1.6rem] text-666565 mt-[2.8rem]">{productById.detail}</p>
-          <button className="mt-[2.4rem] btn-secondary">ADD TO CART</button>
+          <div className="mt-[5.7rem] h-[2.8rem] flex justify-start ">
+            <button className="w-[2.8rem] h-full bg-e9e9e9 text-[1.6rem] text-aaa9a9" onClick={decreaseNumber}>
+              -
+            </button>
+            <input
+              type="number"
+              className="h-full outline-none w-[5.4rem] text-primary text-center"
+              min="1"
+              value={numberInput}
+              readOnly
+            />
+            <button className="w-[2.8rem] h-full bg-e9e9e9 text-[1.2rem] text-aaa9a9" onClick={increaseNumber}>
+              +
+            </button>
+          </div>
+          <button className="mt-[2.4rem] btn-secondary mb-[6.2rem]">ADD TO CART</button>
           <span
             className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2rem] cursor-pointer"
             onClick={onClose}

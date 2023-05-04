@@ -54,7 +54,7 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <div
+              <Link to={config.routes.cart}
                 className='relative mr-[5px]
                       after:content-["5"]
                       after:font-normal
@@ -72,33 +72,11 @@ function Header(): JSX.Element {
                       after:rounded-full '
               >
                 <img src={cart} alt="" />
-              </div>
+              </Link>
             </>
           )}
-          {/* <Link to={config.routes.login} className="btn-secondary w-[10rem] h-[3rem]">
-            Sign out
-          </Link> */}
+          
         </div>
-        {/* <div className="md:hidden mr-[24px]" onClick={handleNav}>
-          <AiOutlineMenu size={24} color="rgba(255, 255, 255, 0.95)" />{' '}
-        </div> */}
-        {/* <div
-          className={
-            nav
-              ? 'fixed flex flex-col right-0 top-0 w-[179px] h-[320px] border-r border-r-gray-900 bg-primary ease-in-out duration-500'
-              : 'fixed right-[-100%]'
-          }
-        >
-          <ul className="mt-[80px] ml-[16px]">
-            <li className="font-bold text-[1.6rem] leading-[1.6rem] text-secondary">Homepage</li>
-            <li className="font-medium text-[1.6rem] leading-[1.6rem] pt-4">About us</li>
-            <li className="font-medium text-[1.6rem] leading-[1.6rem] pt-4">Contact</li>
-            <li className="font-medium text-[1.6rem] leading-[1.6rem] pt-4">Shop</li>
-          </ul>
-          <button className="w-[139px] h-[52px] mt-[32px] ml-[16px] text-secondary font-semibold text-[1.8rem] leading-[3rem]  border-[1.5px] border-secondary">
-            <p>Cart(5)</p>
-          </button>
-        </div> */}
       </div>
     </div>
   );
