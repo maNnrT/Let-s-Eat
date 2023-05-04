@@ -26,6 +26,7 @@ function FreshBakedItem({ id, name, img, ingredient, price }: Props) {
       <div className="flex flex-col w-full h-full ml-[1.6rem] ">
         <div className="pt-[0.4rem] flex justify-between items-center mt-[0.7rem]">
           <p className="font-fahkwang font-normal text-[2rem] leading-[2.6rem] text-primary ">{name}</p>
+          <div className='border-b-[4px] border-dotted border-666565 flex-1 h-[1.8rem] mx-[0.7rem]'></div>
           <p className="font-normal text-[2.4rem] leading-[130%] text-333231">${price}</p>
         </div>
         <div className="mt-[1.2rem] flex justify-between items-center">

@@ -27,7 +27,7 @@ function Homepage() {
     { value: 'freshbaked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
     { value: 'breakfast', title: 'Breakfast' },
-    { value: 'coffeeTea', title: 'coffeeTea' },
+    { value: 'coffeeTea', title: 'Coffee & Tea' },
   ];
   React.useEffect(() => {
     if (isLogin === false) {
@@ -54,17 +54,19 @@ function Homepage() {
                   <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0%]">—</span>
                   <p className="font-normal text-[1.8rem] text-secondary inline-block uppercase">ABOUT US</p>
                 </div>
-                <h2 className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 uppercase">
+                <h2 className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 uppercase line-clamp-1">
                   LET'S EAT!
                 </h2>
-                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem]">
+                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem] line-clamp-6">
                   Let’s Eat is a big bakery in New York. We’re a wholesale bakery that provides delicious and all
                   natural baked goods to New York neighborhood restaurants, coffee houses and specialty food shops. We
                   offer packaged goods, as well as products for food service and private wholesale label customers. For
                   over 20 years, our dedication has been to provide quality, wholesome, hand crafted and (most
                   importantly) delicious products.
                 </p>
-                <button className="mt-[4rem] btn-secondary">READ MORE</button>
+                <button className="mt-[4rem] btn-secondary" onClick={() => navigate('/aboutus')}>
+                  READ MORE
+                </button>
               </div>
             </div>
           </div>
@@ -73,38 +75,38 @@ function Homepage() {
             <div className=" flex flex-col items-center ">
               <span className="text-secondary text-[3.2rem]">—</span>
               <p className="font-mukta font-normal text-[1.8rem] text-secondary mt-[0.8rem]">FEATURE</p>
-              <h1 className="font-fahkwang font-normal text-[4rem] leading-[120%] mt-[2.1rem] text-151618 text-center max-w-[54.8rem] uppercase">
+              <h1 className="font-fahkwang font-normal text-[4rem] leading-[120%] mt-[2.1rem] text-151618 text-center max-w-[54.8rem] uppercase ">
                 The birthplace of sweet breads
               </h1>
-              <p className=" font-light text-[1.6rem] text-666565 mt-[1.6rem] text-center max-w-[59.4rem]">
+              <p className=" font-light text-[1.6rem] text-666565 mt-[1.6rem] text-center max-w-[59.4rem] ">
                 We believe in the power of community, in helping those around us and living as sustainably as possible
               </p>
             </div>
             <div className="grid grid-cols-3 mt-[4.3rem] w-full gap-x-[3.2rem]">
               <div>
                 <img src={menuFeature} alt="" className="mx-auto" />
-                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem]">
+                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem] line-clamp-1">
                   Menu for every taste
                 </h3>
-                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem]">
+                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem] line-clamp-2">
                   Wide variety of breads, bringing great flavors to your meal
                 </p>
               </div>
               <div>
                 <img src={natureIngredient} alt="" className="mx-auto" />
-                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem]">
+                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem] line-clamp-1">
                   Natural ingredients
                 </h3>
-                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem]">
+                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem] line-clamp-2">
                   We use only natural ingredients in the cooking of our product
                 </p>
               </div>
               <div>
                 <img src={menuFeature} alt="" className="mx-auto" />
-                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem]">
+                <h3 className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] text-center text-373838 mt-[2rem] line-clamp-1">
                   Experienced chefs
                 </h3>
-                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem]">
+                <p className="font-light text-[1.8rem] text-center text-666565 mt-[0.8rem] line-clamp-2">
                   We have 20 years of experience in baking & distributing our products
                 </p>
               </div>
@@ -112,9 +114,9 @@ function Homepage() {
           </div>
           <div className="panel-seperate"></div>
           <div className="container py-[9.8rem] px-[10.4rem] ">
-            <div className="grid grid-cols-12  bg-white h-[36rem]">
+            <div className="grid grid-cols-12  bg-white h-auto">
               <div
-                className="bg-no-repeat bg-cover bg-center p-[4rem] col-span-7"
+                className="bg-no-repeat bg-cover bg-center p-[4rem] col-span-7 h-full"
                 style={{ backgroundImage: `url(${workingHoursImg})` }}
               >
                 <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0] ">—</span>
@@ -124,7 +126,9 @@ function Homepage() {
                 <p className="font-light text-[1.6rem] text-d2d0cf mt-[1.9rem]">
                   90 Broad St. 90 Broad Street, 2nd floor, New York, NY
                 </p>
-                <button className="mt-[6rem] btn-secondary">CONTACT US</button>
+                <button className="mt-[6rem] btn-secondary" onClick={() => navigate('/contact')}>
+                  CONTACT US
+                </button>
               </div>
               <div className="flex flex-col items-center pt-[6rem] col-span-5">
                 <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center">
@@ -223,7 +227,7 @@ function Homepage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-[4rem] mb-[12.8rem] w-[121.6rem] h-[41.2rem]">
+              <div className="mt-[4rem] mb-[12.8rem] container h-fit">
                 <CarouselProduct products={products} />
               </div>
             </div>

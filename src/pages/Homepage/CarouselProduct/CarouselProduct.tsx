@@ -12,16 +12,16 @@ import './Carousel.css';
 // import required modules
 type product = {
   id: number;
-  type:string;
+  type: string;
   img: string;
   name: string;
-  description:string,
-  price:string,
+  description: string;
+  price: string;
 };
 interface Props {
-  products:product[]
+  products: product[];
 }
-export default function CarouselProduct({products}:Props) {
+export default function CarouselProduct({ products }: Props) {
   const ref = React.useRef<any>();
   const swipeNext = () => {
     ref.current.swiper.slideNext();
@@ -30,19 +30,41 @@ export default function CarouselProduct({products}:Props) {
     ref.current.swiper.slidePrev();
   };
   // console.log('check:', products);
-  
+
   return (
     <>
-      <Swiper slidesPerView={4} spaceBetween={32} className="mySwiper" ref={ref}>
+      <Swiper
+        className="mySwiper"
+        ref={ref}
+        breakpoints={{
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 32,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 32,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 32,
+          },
+          1536: {
+            slidesPerView: 5,
+            spaceBetween: 32,
+          },
+        }}
+      >
         {products.map((product) => (
-            <SwiperSlide key={product.id}>
-              <CarouselItem
-                img={product.img}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-              />
-            </SwiperSlide>
+          <SwiperSlide key={product.id}>
+            <CarouselItem
+              img={product.img}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+            />
+          </SwiperSlide>
         ))}
       </Swiper>
       <div className="w-[8.8rem] flex justify-between mx-auto mt-[2.8rem]">
