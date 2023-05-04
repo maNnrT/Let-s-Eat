@@ -2,7 +2,7 @@ import './App.css';
 import { Fragment } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
-import { DefaultLayout } from './layouts';
+import { DefaultLayout } from './layouts';  
 function App(): JSX.Element {
   return (
     <div>

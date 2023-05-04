@@ -9,9 +9,9 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 // import * as request from '../../utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
-import { getAccounts, addNewAccounts } from '../../redux/Slice/RegisterSlice';
+import { getAccounts, addNewAccounts } from '../../redux/Slice/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountsRegisterSelector } from '../../redux/selectors';
+import { getAccountsSelector } from '../../redux/selectors';
 
 function Login(): JSX.Element {
   const schema = yup
@@ -41,7 +41,7 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const accountList = useSelector(getAccountsRegisterSelector);
+  const accountList = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
     // request
     //   .get(config.api.accounts)

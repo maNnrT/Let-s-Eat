@@ -1,27 +1,18 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '../../utils/request';
 import config from '../../config';
-type account ={
-    username:string,
-    password:string,
-}
+type account = {
+  username: string;
+  password: string;
+};
 interface initialState {
-    isLogin:boolean,
-    accounts:account[],
-    status:string
+  accounts: account[];
+  status: string;
 }
 const loginSlice = createSlice({
   name: 'login',
-  initialState: { isLogin:false, accounts: [], status: 'idle' } as initialState,
-  reducers: {
-    setIsLoginTrue:(state) =>{
-        state.isLogin=true
-    },
-    setIsLoginFalse:(state) =>{
-        state.isLogin=false
-    }
-  },
+  initialState: { accounts: [], status: 'idle' } as initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getAccounts.pending, (state) => {
@@ -46,5 +37,4 @@ export const getAccounts = createAsyncThunk('login/getAccounts', async () => {
     console.error('Cant get accounts');
   }
 });
-export const { setIsLoginTrue, setIsLoginFalse} = loginSlice.actions;
-export default loginSlice
+export default loginSlice;

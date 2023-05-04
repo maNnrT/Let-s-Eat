@@ -25,8 +25,8 @@ const schema = yup
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
-const registerSlice = createSlice({
-  name: 'register',
+const accountsSlice = createSlice({
+  name: 'accounts',
   initialState: { accounts: [], status: 'idle' } as initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -45,7 +45,7 @@ const registerSlice = createSlice({
       });
   },
 });
-export const getAccounts = createAsyncThunk('register/getAccounts', async () => {
+export const getAccounts = createAsyncThunk('accounts/getAccounts', async () => {
   try {
     const res = await request.get(config.api.accounts);
     return res as account[];
@@ -53,16 +53,16 @@ export const getAccounts = createAsyncThunk('register/getAccounts', async () => 
     console.error('Cant get accounts');
   }
 });
-export const addNewAccounts = createAsyncThunk('register/addNewAccounts', async (data: FormData) => {
-    try {
-      await request.post(config.api.accounts, {
-        username : data.email,
-        password : data.password,
-        firstName : data.firstName,
-        lastName : data.lastName,
-      });
-    } catch {
-      console.error("Can't add new account");
-    }
+export const addNewAccounts = createAsyncThunk('accounts/addNewAccounts', async (data: FormData) => {
+  try {
+    await request.post(config.api.accounts, {
+      username: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+    });
+  } catch {
+    console.error("Can't add new account");
+  }
 });
-export default registerSlice;
+export default accountsSlice;

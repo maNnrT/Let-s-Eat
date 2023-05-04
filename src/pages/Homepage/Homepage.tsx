@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { filterChange } from '../../redux/Slice/ProductsSlice';
 import { getProductsByFilterSelector } from '../../redux/selectors';
 import { getProducts } from '../../redux/Slice/ProductsSlice';
+import config from '../../config';
 // const cx = classNames.bind(styles);
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
@@ -29,9 +30,9 @@ function Homepage() {
     { value: 'coffeeTea', title: 'coffeeTea' },
   ];
   React.useEffect(() => {
-    // if (isLogin === false) {
-    //   navigate(config.routes.login);
-    // }
+    if (isLogin === false) {
+      navigate(config.routes.login);
+    }
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

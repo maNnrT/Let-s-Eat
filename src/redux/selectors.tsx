@@ -12,7 +12,8 @@ type product = {
 };
 export const getAccountsLoginSelector = (state: any) => state.login.accounts;
 export const getAccountsRegisterSelector = (state: any) => state.register.accounts;
-export const getIsLogin = (state: any) => state.login.isLogin;
+export const getAccountsSelector = (state: any) => state.accounts.accounts;
+export const getIsLogin = (state: any) => state.checkLogin.isLogin;
 export const getProductsSelector = (state: any) => state.products.products;
 export const getProductsByTypeSelector = (state: any) => state.products.products;
 export const getProductByIdSelector = (state: any) => state.products.productById;

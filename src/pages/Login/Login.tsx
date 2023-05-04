@@ -9,9 +9,9 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccounts } from '../../redux/Slice/LoginSlice';
-import { setIsLoginTrue, setIsLoginFalse } from '../../redux/Slice/LoginSlice';
-import { getAccountsLoginSelector } from '../../redux/selectors';
+import { getAccounts } from '../../redux/Slice/AccountsSlice';
+import { setIsLoginTrue, setIsLoginFalse } from '../../redux/Slice/CheckLoginSlice';
+import { getAccountsSelector } from '../../redux/selectors';
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),
@@ -33,27 +33,8 @@ function Login(): JSX.Element {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accountList = useSelector(getAccountsLoginSelector);
+  const accountList = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    // request
-    //   .get(config.api.accounts)
-    //   .then((res) => {
-    //     if (
-    //       res.some((account: account) => {
-    //         return account.username === data.email && account.password === data.passwords;
-    //       })
-    //     ) {
-    //       navigate('/');
-    //       setIsLogin(true);
-    //     } else {
-    //       setIsLogin(false);
-    //       if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
-    //     }
-    //   })
-    //   .catch(() => {
-    //     console.error("Can't get accounts");
-    //   });
-    // console.log("list account", accountList);
     if (
       accountList.some((account: account) => {
         return account.username === data.email && account.password === data.passwords;
