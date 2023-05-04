@@ -5,6 +5,17 @@ import { getProductsSelector } from '../../../redux/selectors';
 import { getProducts } from '../../../redux/Slice/ProductsSlice';
 import FreshBakedItem from './FreshBakedItem/FreshBakedItem';
 import FreshBakedItemDetail from './FreshBakedItemDetail/FreshBakedItemDetail';
+type product = {
+  id: number | undefined;
+  type: string;
+  img: string;
+  name: string;
+  description: string;
+  ingredient: string;
+  detail: string;
+  detailImg: string;
+  price: string;
+};
 function FreshBaked() {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
   const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
@@ -18,8 +29,10 @@ function FreshBaked() {
   };
 
   const dispatch = useDispatch();
-  const products = useSelector(getProductsSelector);
-  
+  let products = useSelector(getProductsSelector);
+  products = products.filter((product: product) => {
+    return product.type === 'freshbaked';
+  });
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
   const arrayProducts1 = [...products].reverse().slice(0, 4);
   const arrayProducts2 = [...products].reverse().slice(4, products.length);

@@ -5,8 +5,7 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
-import check from '../../../assets/svg/check_formCheckOut.svg'
+import check from '../../../assets/svg/check_formCheckOut.svg';
 // import * as request from '../../utils/request';
 const schema = yup
   .object({
@@ -16,8 +15,11 @@ const schema = yup
     message: yup.string(),
   })
   .required();
+interface Props  {
+  openModal: () => void;
+}
 type FormData = yup.InferType<typeof schema>;
-function Login(): JSX.Element {
+function AboutUsForm({ openModal }:Props): JSX.Element {
   const {
     register,
     handleSubmit,
@@ -25,7 +27,7 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: FormData) => console.log(data);
+  const onSubmit = (data: FormData) => openModal();
 
   const [name, setName] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
@@ -43,7 +45,7 @@ function Login(): JSX.Element {
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
-  
+
   return (
     <div className="w-full mt-[4rem] flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -139,4 +141,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default AboutUsForm;

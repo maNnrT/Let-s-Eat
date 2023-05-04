@@ -1,3 +1,4 @@
+import * as React from 'react';
 import classNames from 'classnames/bind';
 import styles from './AboutUs.module.scss';
 const cx = classNames.bind(styles);
@@ -19,17 +20,24 @@ import logoipsum from '../../assets/svg/logoipsum.svg';
 import logoipsum2 from '../../assets/svg/logoipsum2.svg';
 import logoipsum3 from '../../assets/svg/logoipsum3.svg';
 import contactUs from '../../assets/image/image48.png';
-import { useNavigate } from 'react-router-dom';
+import popupImg from '../../assets/svg/image_PopUp.svg';
+import { Link, useNavigate } from 'react-router-dom';
 import AboutUsForm from './AboutUsForm';
+import config from '../../config';
+// import Popup from '../../component/Popup/Popup';
 function AboutUs() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const ref = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    ref.current?.showModal();
+  };
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div
         className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center"
         style={{ backgroundImage: `url(${heroBannerAboutUs})` }}
       >
-        <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">MENU COMBO</p>
+        <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">About us</p>
         <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/About us</p>
       </div>
       <div className="w-full h-fit px-[11.2rem] py-[10rem] bg-fdf9f5 ">
@@ -53,7 +61,9 @@ function AboutUs() {
               things. We want to play our part to bring humanity back into the food world, back to local communities. We
               can’t imagine doing anything more gratifying than baking our, and your bread.
             </p>
-            <a href='#contact' className="mt-[4rem] btn-secondary uppercase">CONTACT US</a>
+            <a href="#contact" className="mt-[4rem] btn-secondary uppercase">
+              CONTACT US
+            </a>
           </div>
           <div className="grid grid-cols-[40.2%_auto] gap-x-[3.2rem]">
             <div className="h-auto">
@@ -253,7 +263,42 @@ function AboutUs() {
           </div>
         </div>
       </div>
-      <div className="w-full h-auto bg-primary" id='contact'>
+      <div className="w-full h-auto bg-primary relative" id="contact">
+        <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" ref={ref}>
+          <form className="w-full h-full">
+            <div className="flex flex-col items-center h-auto relative pt-[8rem] pb-[12rem] px-[9rem]">
+              <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>
+              <p className="font-normal text-[1.8rem] text-secondary mt-[0.8rem] uppercase">THANK YOU</p>
+              <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
+                FOR SENDING US MESSAGE
+              </h1>
+              <img src={popupImg} alt="" className="mt-[5.2rem]" />
+              <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center mx-[0.5rem]">
+                We will appreciate your opinion. Please keep an eye on your phone and email to receive feedback from us.
+                Don't forget to follow Let's Eat Bakery to receive the latest information. Best regards!
+              </p>
+              <Link to={config.routes.homepage} className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem]">
+                back to homepage
+              </Link>
+              <button
+                type="submit"
+                formMethod="dialog"
+                className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2.4rem] cursor-pointer"
+              >
+                &times;
+              </button>
+            </div>
+          </form>
+        </dialog>
+        {/* <Popup
+          subTitle="thank you"
+          title="FOR SENDING US MESSAGE"
+          description="We will appreciate your opinion. Please keep an eye on your phone and email to receive feedback from us.
+                Don't forget to follow Let's Eat Bakery to receive the latest information. Best regards!"
+          to={config.routes.homepage}
+          btnTitle='back to homepage'
+          open={openModal}
+        ></Popup> */}
         <div className="panel-layer h-auto mt-[-9.2rem] mb-[-13.8rem] z-[1] grid grid-cols-2 gap-x-[3.2rem]">
           <img src={contactUs} alt="" />
           <div className="flex flex-col pt-[6rem] pr-[4rem] pb-[4.9rem]">
@@ -268,7 +313,7 @@ function AboutUs() {
               Tell us your vision and we can help you. Wanna have a perfect meal for your family? Don’t wait and leave
               us your request.
             </p>
-            <AboutUsForm/>
+            <AboutUsForm openModal={openModal} />
           </div>
         </div>
       </div>

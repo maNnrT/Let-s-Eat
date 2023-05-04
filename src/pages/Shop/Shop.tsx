@@ -19,7 +19,7 @@ function Shop() {
   return (
     <div className="w-full mb-[-12rem]">
       <div
-        className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center"
+        className="w-full h-[60rem] bg-center bg-cover bg-no-repeat relative flex flex-col items-center justify-center"
         style={{ backgroundImage: `url(${heroBannerCategory})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Category</p>
@@ -37,10 +37,10 @@ function Shop() {
         </p>
         <div className="container grid grid-cols-4 gap-x-[3.2rem] h-fit mt-[6rem] mb-[11.5rem]">
           {categories.map((category) => (
-            <div key={categories.indexOf(category)} className='h-auto'>
+            <div key={categories.indexOf(category)} className="h-auto">
               <Link
                 to={category.to}
-                className="w-full h-[41.2rem] flex justify-center items-center cursor-pointer hover:scale-110 duration-500"
+                className="w-full h-[41.2rem] flex justify-center bg-center bg-cover bg-no-repeat items-center cursor-pointer hover:scale-110 duration-500"
                 style={{ backgroundImage: `url(${category.img})` }}
               >
                 <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">

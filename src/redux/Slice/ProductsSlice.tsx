@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '../../utils/request';
 import config from '../../config';
-import { object } from 'yup';
 
 type product = {
   id: number | undefined;
@@ -18,9 +17,10 @@ interface initialState {
   products: product[];
   status: string;
   productById: product;
+  filter:string;
 }
 const productsSlice = createSlice({
-  name: 'homepage',
+  name: 'products',
   initialState: {
     products: [],
     status: 'idle',
@@ -32,11 +32,16 @@ const productsSlice = createSlice({
       description: '',
       ingredient: '',
       detail: '',
-      detailImg:'',
+      detailImg: '',
       price: '',
     },
+    filter: 'freshbaked',
   } as initialState,
-  reducers: {},
+  reducers: {
+    filterChange: (state, action) => {
+      state.filter= action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProducts.pending, (state) => {
@@ -77,5 +82,5 @@ export const getProductById = createAsyncThunk('products/getProductByID', async 
     console.error('Cant get product');
   }
 });
-
+export const { filterChange } = productsSlice.actions;
 export default productsSlice;

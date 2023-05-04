@@ -13,23 +13,31 @@ import testimonial from '../../assets/Image/image9.png';
 import { getIsLogin } from '../../redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import config from '../../config';
-import { getProductsSelector } from '../../redux/selectors';
+import { filterChange } from '../../redux/Slice/ProductsSlice';
+import { getProductsByFilterSelector } from '../../redux/selectors';
 import { getProducts } from '../../redux/Slice/ProductsSlice';
 // const cx = classNames.bind(styles);
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(getProductsSelector);
+  const products = useSelector(getProductsByFilterSelector);
+  const filterBtn = [
+    { value: 'freshbaked', title: 'Fresh Baked' },
+    { value: 'sweetcake', title: 'Sweet cake' },
+    { value: 'breakfast', title: 'Breakfast' },
+    { value: 'coffeeTea', title: 'coffeeTea' },
+  ];
   React.useEffect(() => {
     // if (isLogin === false) {
     //   navigate(config.routes.login);
     // }
     dispatch(getProducts());
-    console.log('check:', products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    dispatch(filterChange((e.target as HTMLButtonElement).value));
+  };
   return (
     <div>
       <Slider />
@@ -192,7 +200,7 @@ function Homepage() {
         <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
           <div className="container">
             <div className=" flex flex-col items-center pt-[6rem]">
-              <span className="text-secondary leading-[0px]">——</span>
+              <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>
               <p className="font-normal text-[1.8rem] text-secondary mt-[0.8rem]">OUR MENU</p>
               <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
                 Special dishes!
@@ -201,19 +209,18 @@ function Homepage() {
                 We bake by hand with natural ingredients, and while we are ordinary people, we want to make
                 extraordinary things. We can’t imagine doing anything more gratifying than baking our, and your, bread.
               </p>
-              <div className="mt-[4rem] w-[48rem] h-[5.4rem] grid grid-cols-4 gap-[0.4rem]">
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
-                  Fresh Baked
-                </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
-                  Sweet cake
-                </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
-                  Breakfast
-                </button>
-                <button className="h-full bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0">
-                  Coffee & Tea
-                </button>
+              <div className="mt-[4rem] w-auto h-[5.4rem] grid grid-cols-4 gap-[0.4rem]">
+                {filterBtn.map((filter) => (
+                  <div key={filterBtn.indexOf(filter)}>
+                    <button
+                      value={filter.value}
+                      onClick={handleFilterChange}
+                      className="h-full w-[12.7rem] bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0"
+                    >
+                      {filter.title}
+                    </button>
+                  </div>
+                ))}
               </div>
               <div className="mt-[4rem] mb-[12.8rem] w-[121.6rem] h-[41.2rem]">
                 <CarouselProduct products={products} />

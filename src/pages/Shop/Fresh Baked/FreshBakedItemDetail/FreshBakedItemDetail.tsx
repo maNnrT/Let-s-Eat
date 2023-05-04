@@ -17,20 +17,21 @@ interface Props {
   id: number | undefined;
   onClose: () => void;
 }
-function FreshBakedItemDetail({ id, onClose }: Props) {
+function FreshBakedItemDetail({ id, onClose }: Props):JSX.Element {
   const dispatch = useDispatch();
   const productById = useSelector(getProductByIdSelector);
-  console.log('check:', typeof productById.detailImg);
-  let arrImg: string[];
-  if (productById.detailImg) {
-    arrImg = JSON.parse(productById.detailImg);
-    arrImg.map((img: string) => {
-      console.log(typeof img);
+  // console.log('check:', typeof productById.detailImg);
+  // let arrImg: string[];
+  // if (productById.detailImg) {
+  //   arrImg = JSON.parse(productById.detailImg);
+  //   arrImg.map((img: string) => {
+  //     console.log(typeof img);
 
-      console.log(arrImg.indexOf(img));
-    });
-  }
+  //     console.log(arrImg.indexOf(img));
+  //   });
+  // }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = React.useRef<any>();
   const swipeNext = () => {
     ref.current.swiper.slideNext();
