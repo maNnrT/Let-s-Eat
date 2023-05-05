@@ -13,6 +13,7 @@ interface Props {
   cart: item[];
 }
 function CartTable({ cart }: Props): JSX.Element {
+  const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = (num:number) => {
     if (num >= 2) return num - 1;
     else return 1;
@@ -21,6 +22,9 @@ function CartTable({ cart }: Props): JSX.Element {
     if (num >= 1) return num + 1;
     else return 1;
   };
+  //  React.useEffect(() => {
+  //    setNumberInput(Number(quantity));
+  //  }, [numberInput]);
   return (
     <div className="container mt-[6rem]">
       <div className="w-[82.3%] mx-auto bg-fefefd">
@@ -53,7 +57,14 @@ function CartTable({ cart }: Props): JSX.Element {
             <tbody className="w-full">
               {cart.map((item) => (
                 <React.Fragment key={item.id}>
-                  <CartItem img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
+                  <CartItem
+                    img={item.img}
+                    name={item.name}
+                    price={item.price}
+                    quantity={item.quantity}
+                    increase={increaseNumber}
+                    decrease={decreaseNumber}
+                  />
                 </React.Fragment>
               ))}
               {/* <tr className="h-fit w-full  ">

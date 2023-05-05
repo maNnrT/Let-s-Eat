@@ -5,6 +5,8 @@ interface Props {
   name: string;
   price: string;
   quantity: string;
+  increase: (num: number) => number;
+  decrease: (num: number) => number;
 }
 
 function CartItem({ img, name, price, quantity }: Props): JSX.Element {
