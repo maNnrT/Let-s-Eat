@@ -1,5 +1,6 @@
 enum api {
   accounts = '/accounts',
-  products = '/products'
+  products = '/products',
+  userCarts = '/userCarts',
 }
 export default api;

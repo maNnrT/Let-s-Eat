@@ -8,7 +8,7 @@ function CarouselItem({img,name,description,price}:Props) {
   return (
     <div className="w-full h-full bg-white flex flex-col">
       <div className="w-full h-[26.1rem]">
-        <img src={img} alt="" className="w-full h-[26.1rem]" />
+        <img src={img} alt="" className="w-full h-[26.1rem] object-cover" />
       </div>
       <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
         <p className="text-[2.2rem] leading-[2.9rem] font-fahkwang font-semibold text-444546 text-left line-clamp-1">

@@ -31,7 +31,7 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.nomatch, component: NoMatch },
 ];
 const privateRoutes: pathObject[] = [
-  {path: config.routes.cart,component:Cart}
+  {path: `${config.routes.cart}`,component:Cart}
 ];
 
 export { publicRoutes, privateRoutes };

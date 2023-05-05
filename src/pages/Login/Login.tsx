@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccounts } from '../../redux/Slice/AccountsSlice';
-import { setIsLoginTrue, setIsLoginFalse } from '../../redux/Slice/CheckLoginSlice';
+import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '../../redux/Slice/CheckLoginSlice';
 import { getAccountsSelector } from '../../redux/selectors';
 const schema = yup
   .object({
@@ -35,12 +35,12 @@ function Login(): JSX.Element {
   const navigate = useNavigate();
   const accountList = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    if (
-      accountList.some((account: account) => {
-        return account.username === data.email && account.password === data.passwords;
-      })
-    ) {
+    const user = accountList.find((account: account) => {
+      return account.username === data.email && account.password === data.passwords;
+    });
+    if (user) {
       dispatch(setIsLoginTrue());
+      dispatch(setIdUser(user.id));
       navigate('/');
     } else {
       if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';

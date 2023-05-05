@@ -81,7 +81,7 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
             JSON.parse(productById.detailImg).map((img: string) => (
               <SwiperSlide key={JSON.parse(productById.detailImg).indexOf(img)}>
                 <div className="w-full relative h-full">
-                  <img src={img} alt="" className="w-full h-full" />
+                  <img src={img} alt="" className="w-full h-full object-cover" />
                   <button
                     className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] left-[2.6rem]"
                     onClick={swipePrev}

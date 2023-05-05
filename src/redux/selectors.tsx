@@ -10,10 +10,14 @@ type product = {
   detailImg: string;
   price: string;
 };
-export const getAccountsLoginSelector = (state: any) => state.login.accounts;
-export const getAccountsRegisterSelector = (state: any) => state.register.accounts;
+
+
+// export const getAccountsLoginSelector = (state: any) => state.login.accounts;
+// export const getAccountsRegisterSelector = (state: any) => state.register.accounts;
+export const getUserCartListSelector = (state: any) => state.userCartList.userCartList;
 export const getAccountsSelector = (state: any) => state.accounts.accounts;
 export const getIsLogin = (state: any) => state.checkLogin.isLogin;
+export const getIdUser = (state: any) => state.checkLogin.idUser;
 export const getProductsSelector = (state: any) => state.products.products;
 export const getProductsByTypeSelector = (state: any) => state.products.products;
 export const getProductByIdSelector = (state: any) => state.products.productById;

@@ -8,7 +8,7 @@ import cart from '../../../assets/svg/cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
 // import { AiOutlineMenu } from 'react-icons/ai';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
-import { getIsLogin } from '../../../redux/selectors';
+import { getIsLogin,getIdUser } from '../../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '../../../redux/Slice/CheckLoginSlice';
 
@@ -24,6 +24,7 @@ function Header(): JSX.Element {
     navigate(config.routes.login);
   };
   const isLogin = useSelector(getIsLogin);
+  const idUser = useSelector(getIdUser);
   return (
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[2]">
       <div className="h-full container flex items-center justify-between">
@@ -54,7 +55,7 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link to={config.routes.cart}
+              <Link to={`${config.routes.cart}`}
                 className='relative mr-[5px]
                       after:content-["5"]
                       after:font-normal
@@ -64,12 +65,14 @@ function Header(): JSX.Element {
                       after:justify-center
                       after:items-center
                       after:absolute
-                      after:top-[-2px]
-                      after:right-[-1px]
+                      after:top-0
+                      after:right-0
                       after:w-4
                       after:h-4
                       after:bg-secondary
-                      after:rounded-full '
+                      after:rounded-full 
+                      after:translate-x-[50%]
+                      after:translate-y-[-25%]'
               >
                 <img src={cart} alt="" />
               </Link>

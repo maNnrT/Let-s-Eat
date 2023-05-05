@@ -2,8 +2,12 @@ import Header from '../component/Header';
 import Footer from '../component/Footer';
 import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
+import { ReactNode } from 'react';
 const cx = classNames.bind(styles);
-function DefaultLayout({ children }: any): JSX.Element {
+interface Props {
+  children: ReactNode;
+}
+function DefaultLayout({ children }: Props): JSX.Element {
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
