@@ -5,6 +5,7 @@ import config from '../../config';
 type product = {
   id: number | undefined;
   type: string;
+  dish:string;
   img: string;
   name: string;
   description: string;
@@ -28,6 +29,7 @@ const productsSlice = createSlice({
       id: undefined,
       type: '',
       img: '',
+      dish:'',
       name: '',
       description: '',
       ingredient: '',

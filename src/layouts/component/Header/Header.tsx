@@ -8,9 +8,12 @@ import cart from '../../../assets/svg/cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
 // import { AiOutlineMenu } from 'react-icons/ai';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
-import { getIsLogin,getIdUser } from '../../../redux/selectors';
+import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '../../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginFalse } from '../../../redux/Slice/CheckLoginSlice';
+import { setIsLoginFalse } from '../../../redux/feature/CheckLoginSlice';
+import * as React from 'react';
+import { getUserCart } from '../../../redux/feature/CartSlice';
+// import { getUserCart } from '../../../redux/Slice/CartSlice';
 
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
@@ -24,7 +27,16 @@ function Header(): JSX.Element {
     navigate(config.routes.login);
   };
   const isLogin = useSelector(getIsLogin);
-  const idUser = useSelector(getIdUser);
+  const idUser = useSelector(getIdUserSelector);
+  // const cart = useSelector(getUserCartSelector);
+  const totalQuantity = useSelector(getTotalQuantitySelector);
+  // console.log(totalQuantity);
+
+  React.useEffect(() => {
+    dispatch(getUserCart(idUser));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idUser]);
+  // console.log(idUser);
   return (
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[2]">
       <div className="h-full container flex items-center justify-between">
@@ -55,7 +67,8 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link to={`${config.routes.cart}`}
+              <Link
+                to={`${config.routes.cart}`}
                 className='relative mr-[5px]
                       after:content-["5"]
                       after:font-normal
@@ -78,7 +91,6 @@ function Header(): JSX.Element {
               </Link>
             </>
           )}
-          
         </div>
       </div>
     </div>

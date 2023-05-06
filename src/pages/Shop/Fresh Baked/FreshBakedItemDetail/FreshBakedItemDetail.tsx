@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductByIdSelector } from '../../../../redux/selectors';
-import { getProductById } from '../../../../redux/Slice/ProductsSlice';
+import { getProductById } from '../../../../redux/feature/ProductsSlice';
 // import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -12,7 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-
+import { addToCart } from '../../../../redux/feature/CartSlice';
 interface Props {
   id: number | undefined;
   onClose: () => void;
@@ -20,6 +20,9 @@ interface Props {
 function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
   const productById = useSelector(getProductByIdSelector);
+  // const handleAddToCart = (productById:product) => {
+  //   dispatch(addToCart({ productById.id, }));
+  // };
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
@@ -125,7 +128,22 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
               +
             </button>
           </div>
-          <button className="mt-[2.4rem] btn-secondary mb-[6.2rem]">ADD TO CART</button>
+          <button
+            className="mt-[2.4rem] btn-secondary mb-[6.2rem] uppercase"
+            onClick={() =>
+              dispatch(
+                addToCart({
+                  id: productById.id,
+                  img: productById.img,
+                  name: productById.name,
+                  price: productById.price,
+                  quantity: numberInput,
+                }),
+              )
+            }
+          >
+            ADD TO CART
+          </button>
           <span
             className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2rem] cursor-pointer"
             onClick={onClose}

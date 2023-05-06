@@ -2,7 +2,7 @@ import * as React from 'react';
 import heroBannerCategoryFreshBaked from '../../../assets/image/HeroBanner_FreshBaked.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '../../../redux/selectors';
-import { getProducts } from '../../../redux/Slice/ProductsSlice';
+import { getProducts } from '../../../redux/feature/ProductsSlice';
 import FreshBakedItem from './FreshBakedItem/FreshBakedItem';
 import FreshBakedItemDetail from './FreshBakedItemDetail/FreshBakedItemDetail';
 type product = {
@@ -40,7 +40,7 @@ function FreshBaked() {
 
   React.useEffect(() => {
     dispatch(getProducts());
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

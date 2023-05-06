@@ -1,10 +1,16 @@
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../../redux/feature/CartSlice';
+// import { addToCart } from "../../../redux/Slice/CartSlice";
+
 interface Props {
+  id: number;
   img: string;
   name: string;
-  description:string;
-  price:string
+  description: string;
+  price: string;
 }
-function CarouselItem({img,name,description,price}:Props) {
+function CarouselItem({ id, img, name, description, price }: Props) {
+  const dispatch = useDispatch();
   return (
     <div className="w-full h-full bg-white flex flex-col">
       <div className="w-full h-[26.1rem]">
@@ -19,11 +25,16 @@ function CarouselItem({img,name,description,price}:Props) {
         </p>
         <div className="flex justify-between items-end mt-[1rem] self-end w-full mb-[0.8rem]">
           <p className="font-bold text-[2.2rem] leading-[3.7rem] text-394149">${price}</p>
-          <p className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer">Add to cart</p>
+          <p
+            className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer"
+            onClick={() => dispatch(addToCart({ id, img, name, price, quantity: 1 }))}
+          >
+            Add to cart
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default CarouselItem
+export default CarouselItem;

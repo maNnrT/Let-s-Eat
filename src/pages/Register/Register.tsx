@@ -9,7 +9,7 @@ import config from '../../config';
 import { Link } from 'react-router-dom';
 // import * as request from '../../utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
-import { getAccounts, addNewAccounts } from '../../redux/Slice/AccountsSlice';
+import { getAccounts, addNewAccounts } from '../../redux/feature/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector } from '../../redux/selectors';
 

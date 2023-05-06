@@ -59,6 +59,7 @@ export default function CarouselProduct({ products }: Props) {
         {products.map((product) => (
           <SwiperSlide key={product.id}>
             <CarouselItem
+              id={product.id}
               img={product.img}
               name={product.name}
               description={product.description}

@@ -13,9 +13,9 @@ import testimonial from '../../assets/Image/image9.png';
 import { getIsLogin } from '../../redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { filterChange } from '../../redux/Slice/ProductsSlice';
+import { filterChange } from '../../redux/feature/ProductsSlice';
 import { getProductsByFilterSelector } from '../../redux/selectors';
-import { getProducts } from '../../redux/Slice/ProductsSlice';
+import { getProducts } from '../../redux/feature/ProductsSlice';
 import config from '../../config';
 // const cx = classNames.bind(styles);
 function Homepage() {

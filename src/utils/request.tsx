@@ -10,4 +10,7 @@ export const get = async (apiPath:string,options ={})=>{
 export const post = async (apiPath:string,options ={})=>{
   await request.post(apiPath,options)
 }
+export const put = async (apiPath:string,options ={})=>{
+  await request.put(apiPath,options)
+}
 export default request

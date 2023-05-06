@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 type product = {
   id: number | undefined;
   type: string;
+  dish: string;
   img: string;
   name: string;
   description: string;
@@ -11,20 +12,23 @@ type product = {
   price: string;
 };
 
-
-// export const getAccountsLoginSelector = (state: any) => state.login.accounts;
-// export const getAccountsRegisterSelector = (state: any) => state.register.accounts;
-export const getUserCartListSelector = (state: any) => state.userCartList.userCartList;
+export const getUserCartSelector = (state: any) => state.cart.cart;
+export const getTotalPriceSelector = (state: any) => state.cart.totalPrice;
+export const getTotalQuantitySelector = (state: any) => state.cart.totalQuantity;
 export const getAccountsSelector = (state: any) => state.accounts.accounts;
 export const getIsLogin = (state: any) => state.checkLogin.isLogin;
-export const getIdUser = (state: any) => state.checkLogin.idUser;
+export const getIdUserSelector = (state: any) => state.checkLogin.idUser;
 export const getProductsSelector = (state: any) => state.products.products;
 export const getProductsByTypeSelector = (state: any) => state.products.products;
 export const getProductByIdSelector = (state: any) => state.products.productById;
 export const getFilterSelector = (state: any) => state.products.filter;
 
-export const getProductsByFilterSelector = createSelector(getFilterSelector, getProductsSelector,(filter,products)=>{    
+export const getProductsByFilterSelector = createSelector(
+  getFilterSelector,
+  getProductsSelector,
+  (filter, products) => {
     return products.filter((product: product) => {
-      return product.type === filter;
+      return product.dish === filter;
     });
-});
+  },
+);

@@ -1,30 +1,80 @@
 import * as React from 'react';
 import CartItem from './CartItem/CartItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserCart } from '../../../redux/feature/CartSlice';
+import { getIdUserSelector } from '../../../redux/selectors';
 
 type item = {
   id: number;
-  idItem: number;
   img: string;
   name: string;
   price: string;
-  quantity: string;
+  quantity: number;
 };
 interface Props {
   cart: item[];
+  totalPrice: number;
 }
-function CartTable({ cart }: Props): JSX.Element {
-  const [numberInput, setNumberInput] = React.useState<number>(1);
-  const decreaseNumber = (num:number) => {
-    if (num >= 2) return num - 1;
-    else return 1;
+function CartTable({ cart, totalPrice }: Props): JSX.Element {
+  // console.log(cart.length);
+
+  const dispatch = useDispatch();
+  const idUser = useSelector(getIdUserSelector);
+  // console.log(cart);
+  // console.log('totalprice', totalPrice);
+  const updateCartHandle = () => {
+    if (cart.length > 0) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+    }
+    else{
+      dispatch(
+        addUserCart({
+          idUser,
+          cart:[],
+        }),
+      );
+    }
   };
-  const increaseNumber = (num:number) => {
-    if (num >= 1) return num + 1;
-    else return 1;
-  };
-  //  React.useEffect(() => {
-  //    setNumberInput(Number(quantity));
-  //  }, [numberInput]);
+  // const [subTotalArr, setSubTotalArr] = React.useState<number[]>(
+  //   cart.map((item) => (Number(item?.price) || 0) * Number(item.quantity)),
+  // );
+  // const [quantityArr, setQuantityArr] = React.useState<number[]>(cart.map((item) => item.quantity));
+  // console.log(subTotalArr);
+  // const decreaseNumber = (id: number) => {
+  //   setQuantityArr((pre) => {
+  //     const res = [...pre];
+  //     console.log(res);
+
+  //     if (res[id - 1] >= 2 && res[id - 1]<=99) {
+  //       res[id - 1] -= 1;
+  //     }
+  //     return res;
+  //   });
+  //   setSubTotalArr((pre) => {
+  //     const res = [...pre];
+  //     if (quantityArr[id - 1] >= 2 && quantityArr[id - 1] <= 99) res[id - 1] -= Number(cart[id - 1].price);
+  //     return res;
+  //   });
+  // };
+  // const increaseNumber = (id: number) => {
+  //   setQuantityArr((pre) => {
+  //     const res = [...pre];
+  //     if (res[id - 1] >= 1 && res[id - 1] <= 99)
+  //       res[id - 1] += 1;
+  //     return res;
+  //   });
+  //   setSubTotalArr((pre)=>{
+  //     const res = [...pre]
+  //     if (quantityArr[id - 1] >= 1 && quantityArr[id - 1] <= 99) res[id - 1] += Number(cart[id - 1].price);
+  //     return res
+  //   })
+  // };
+  // console.log(subTotalArr, quantityArr);
   return (
     <div className="container mt-[6rem]">
       <div className="w-[82.3%] mx-auto bg-fefefd">
@@ -57,64 +107,9 @@ function CartTable({ cart }: Props): JSX.Element {
             <tbody className="w-full">
               {cart.map((item) => (
                 <React.Fragment key={item.id}>
-                  <CartItem
-                    img={item.img}
-                    name={item.name}
-                    price={item.price}
-                    quantity={item.quantity}
-                    increase={increaseNumber}
-                    decrease={decreaseNumber}
-                  />
+                  <CartItem id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
                 </React.Fragment>
               ))}
-              {/* <tr className="h-fit w-full  ">
-                <td className="pb-[1.8rem] px-[2.4rem] pt-[2.4rem]">
-                  <div className="flex justify-start items-center">
-                    <ImCross size={16} color="rgba(177,174,172,0.5)"></ImCross>
-                    <img
-                      src="http://127.0.0.1:8887/image24.png"
-                      alt=""
-                      className="w-[6.3rem] h-[6.3rem] object-cover ml-[4.2rem]"
-                    />
-                    <p className="ml-[2rem] text-[2rem] font-light text-666565">Ciabata</p>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex justify-end items-center">
-                    <p className="text-[2rem] font-light text-666565">3.60</p>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex justify-center items-center">
-                    <div className="h-[2.8rem] flex justify-start ">
-                      <button
-                        className="w-[2.8rem] h-full bg-e9e9e9 text-[1.6rem] text-aaa9a9"
-                        onClick={decreaseNumber}
-                      >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        className="h-full outline-none w-[5.4rem] text-primary text-center"
-                        min="1"
-                        value={numberInput}
-                        readOnly
-                      />
-                      <button
-                        className="w-[2.8rem] h-full bg-e9e9e9 text-[1.2rem] text-aaa9a9"
-                        onClick={increaseNumber}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex justify-end items-center pr-[8.3rem]">
-                    <p className="text-[2rem] font-normal text-primary">3.60 $</p>
-                  </div>
-                </td>
-              </tr> */}
             </tbody>
           </table>
         </div>
@@ -125,18 +120,22 @@ function CartTable({ cart }: Props): JSX.Element {
             <div className="w-[39.2rem] flex justify-between">
               <p className="font-semibold text-[2.4rem] text-primary uppercase">TOTAL</p>
               <p className="font-semibold text-[2.4rem] text-primary uppercase">
-                {cart
+                {/* {cart
                   .reduce(
                     (accumulator, currentItem) =>
                       accumulator + (Number(currentItem?.price) || 0) * Number(currentItem.quantity),
                     0,
                   )
-                  .toFixed(2)}{' '}
-                $
+                  .toFixed(2)} */}
+                {/* {(subTotalArr.reduce((totalPrice, subTotal) => totalPrice + subTotal, 0)).toFixed(2)} $ */}
+                {totalPrice} $
               </p>
             </div>
             <div className="w-[39.2rem] flex justify-between mt-[1.6rem]">
-              <button className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase">
+              <button
+                className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase"
+                onClick={updateCartHandle}
+              >
                 update cart
               </button>
               <button className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal">
