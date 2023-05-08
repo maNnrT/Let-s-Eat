@@ -1,10 +1,13 @@
 import './App.css';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './routes';
 import { DefaultLayout } from './layouts';
 import { getIsLogin } from './redux/selectors';
 import { useSelector } from 'react-redux';
+interface Props {
+  children: ReactNode;
+}
 function App(): JSX.Element {
   const isLogin = useSelector(getIsLogin);
   return (
@@ -12,7 +15,7 @@ function App(): JSX.Element {
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
-            let Layout: any = DefaultLayout;
+            let Layout:any = DefaultLayout;
             if (route.layout) {
               Layout = route.layout;
             } else if (route.layout === null) {

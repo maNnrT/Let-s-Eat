@@ -19,7 +19,7 @@ type product = {
 function FreshBaked() {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
   const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
-  const handleOpenModal = (id: number): void => {
+  const handleOpenModal = (id: number|undefined): void => {
     setSelectedItem(id);
     setOpenModal(true);
   };
@@ -43,6 +43,7 @@ function FreshBaked() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -73,7 +74,6 @@ function FreshBaked() {
                 {arrayProducts1.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
                     <FreshBakedProduct
-                      id={product.id}
                       name={product.name}
                       img={product.img}
                       ingredient={product.ingredient}
@@ -96,7 +96,6 @@ function FreshBaked() {
                 {arrayProducts2.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
                     <FreshBakedProduct
-                      id={product.id}
                       name={product.name}
                       img={product.img}
                       ingredient={product.ingredient}

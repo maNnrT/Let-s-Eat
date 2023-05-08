@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './GlobalStyles.scss';
-function GlobalStyles({ children }: any) {
+interface Props {
+  children: ReactNode;
+}
+function GlobalStyles({ children }: Props) {
   return children;
 }
 

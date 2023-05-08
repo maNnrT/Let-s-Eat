@@ -14,10 +14,14 @@ import Register from '@/pages/Register';
 import NoMatch from '@/pages/NoMatch';
 import Cart from '@/pages/Cart';
 import CheckOut from '@/pages/CheckOut';
+import { ReactNode } from 'react';
+interface Props {
+  children: ReactNode;
+}
 type pathObject = {
   path: string;
   component: () => JSX.Element;
-  layout?: ({ children }: any) => JSX.Element;
+  layout?: ({ children }: Props) => JSX.Element;
 };
 const publicRoutes: pathObject[] = [
   { path: config.routes.homepage, component: Homepage },
