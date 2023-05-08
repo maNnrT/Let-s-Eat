@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductByIdSelector } from '../../../redux/selectors';
-import { getProductById } from '../../../redux/feature/ProductsSlice';
+import { getProductByIdSelector } from '@/redux/selectors';
+import { getProductById } from '@/redux/feature/ProductsSlice';
 // import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -12,8 +12,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart } from '../../../redux/feature/CartSlice';
-import SmallPopup from '../../../components/Popup/SmallPopup';
+import { addToCart } from '@/redux/feature/CartSlice';
+import SmallPopup from '@/components/Popup/SmallPopup';
 interface Props {
   id: number | undefined;
   onClose: () => void;

@@ -5,13 +5,13 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import config from '../../config';
+import config from '@/config';
 import { Link } from 'react-router-dom';
-// import * as request from '../../utils/request';
+// import * as request from '@/utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
-import { getAccounts, addNewAccounts } from '../../redux/feature/AccountsSlice';
+import { getAccounts, addNewAccounts } from '@/redux/feature/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccountsSelector } from '../../redux/selectors';
+import { getAccountsSelector } from '@/redux/selectors';
 
 function Login(): JSX.Element {
   const schema = yup

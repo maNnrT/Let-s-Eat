@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/feature/CartSlice';
+import { addToCart } from '@/redux/feature/CartSlice';
 import * as React from 'react';
-import SmallPopup from '../../../components/Popup/SmallPopup';
+import SmallPopup from '@/components/Popup/SmallPopup';
 
 interface Props {
   id: number;

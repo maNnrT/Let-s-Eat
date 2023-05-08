@@ -1,5 +1,5 @@
 import * as React from 'react';
-import popupImg from '../../../assets/svg/image_PopUp.svg';
+import popupImg from '@/assets/svg/image_PopUp.svg';
 import { Link } from 'react-router-dom';
 interface Props {
   subtitle: string;
@@ -9,7 +9,7 @@ interface Props {
   btnTitle: string;
   refDialog: React.RefObject<HTMLDialogElement>;
 }
-function BigPopup({subtitle,title,description,to,btnTitle,refDialog}:Props) {
+function BigPopup({ subtitle, title, description, to, btnTitle, refDialog }: Props) {
   return (
     <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" ref={refDialog}>
       <form className="w-full h-full">

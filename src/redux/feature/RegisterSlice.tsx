@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as request from '../../utils/request';
-import config from '../../config';
+import * as request from '@/utils/request';
+import config from '@/config';
 import * as yup from 'yup';
 type account = {
   username: string;
@@ -54,15 +54,15 @@ export const getAccounts = createAsyncThunk('register/getAccounts', async () => 
   }
 });
 export const addNewAccounts = createAsyncThunk('register/addNewAccounts', async (data: FormData) => {
-    try {
-      await request.post(config.api.accounts, {
-        username : data.email,
-        password : data.password,
-        firstName : data.firstName,
-        lastName : data.lastName,
-      });
-    } catch {
-      console.error("Can't add new account");
-    }
+  try {
+    await request.post(config.api.accounts, {
+      username: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+    });
+  } catch {
+    console.error("Can't add new account");
+  }
 });
 export default registerSlice;

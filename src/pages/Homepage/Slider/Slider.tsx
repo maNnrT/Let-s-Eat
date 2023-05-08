@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
 
-import heroBannerHomepage from '../../../assets/Image/HeroBanner_Homepage.png';
-import heroBannerHomepage2 from '../../../assets/Image/HeroBanner_Homepage2.png';
-import heroBannerHomepage3 from '../../../assets/Image/HeroBanner_Homepage3.png';
-import heroBannerHomepage4 from '../../../assets/Image/HeroBanner_Homepage4.png';
+import heroBannerHomepage from '@/assets/Image/HeroBanner_Homepage.png';
+import heroBannerHomepage2 from '@/assets/Image/HeroBanner_Homepage2.png';
+import heroBannerHomepage3 from '@/assets/Image/HeroBanner_Homepage3.png';
+import heroBannerHomepage4 from '@/assets/Image/HeroBanner_Homepage4.png';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import leftArrow from '../../../assets/svg/back_Arrow.svg';
-import rightArrow from '../../../assets/svg/next_Arrow.svg';
+import leftArrow from '@/assets/svg/back_Arrow.svg';
+import rightArrow from '@/assets/svg/next_Arrow.svg';
 import { RxDotFilled } from 'react-icons/rx';
 const cx = classNames.bind(styles);
 //w-[1.2rem] h-[1.2rem] rounded-full bg-71655b

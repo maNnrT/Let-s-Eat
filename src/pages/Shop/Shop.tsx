@@ -1,19 +1,19 @@
 import classNames from 'classnames/bind';
 import styles from './Shop.module.scss';
 
-import heroBannerCategory from '../../assets/image/HeroBanner_Category.png';
-import cookieImg from '../../assets/image/image10.png';
-import coffeeTeaImg from '../../assets/image/image11.png';
-import freshBakedImg from '../../assets/image/image12.png';
-import cheeseCake from '../../assets/image/image13.png';
+import heroBannerCategory from '@/assets/image/HeroBanner_Category.png';
+import cookieImg from '@/assets/image/image10.png';
+import coffeeTeaImg from '@/assets/image/image11.png';
+import freshBakedImg from '@/assets/image/image12.png';
+import cheeseCake from '@/assets/image/image13.png';
 import { Link } from 'react-router-dom';
-import config from '../../config';
+import config from '@/config';
 const cx = classNames.bind(styles);
 const categories = [
-  { title:'Fresh Baked',to: config.routes.shop_freshbaked, img: freshBakedImg },
-  { title:'Cookies',to: config.routes.shop_cookies, img: cookieImg },
-  { title:'Coffee & Tea',to: config.routes.shop_coffeeTea, img: coffeeTeaImg },
-  { title:'Chessecake',to: config.routes.shop_chessecake, img: cheeseCake },
+  { title: 'Fresh Baked', to: config.routes.shop_freshbaked, img: freshBakedImg },
+  { title: 'Cookies', to: config.routes.shop_cookies, img: cookieImg },
+  { title: 'Coffee & Tea', to: config.routes.shop_coffeeTea, img: coffeeTeaImg },
+  { title: 'Chessecake', to: config.routes.shop_chessecake, img: cheeseCake },
 ];
 function Shop() {
   return (

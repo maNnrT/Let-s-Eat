@@ -1,10 +1,10 @@
 import * as React from 'react';
-import heroBannerCart from '../../assets/image/HeroBanner_Cart.png';
+import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalPriceSelector, getUserCartSelector } from '../../redux/selectors';
+import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
 
 import CartTable from './CartTable';
-import { getCartTotal } from '../../redux/feature/CartSlice';
+import { getCartTotal } from '@/redux/feature/CartSlice';
 type item = {
   id: number;
   img: string;

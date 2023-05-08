@@ -5,13 +5,13 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import config from '../../config';
+import config from '@/config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccounts } from '../../redux/feature/AccountsSlice';
-import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '../../redux/feature/CheckLoginSlice';
-import { getAccountsSelector } from '../../redux/selectors';
+import { getAccounts } from '@/redux/feature/AccountsSlice';
+import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/feature/CheckLoginSlice';
+import { getAccountsSelector } from '@/redux/selectors';
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),

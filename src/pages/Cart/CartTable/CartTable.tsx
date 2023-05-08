@@ -1,11 +1,11 @@
 import * as React from 'react';
 import CartItem from './CartItem/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCart } from '../../../redux/feature/CartSlice';
-import { getIdUserSelector } from '../../../redux/selectors';
+import { addUserCart } from '@/redux/feature/CartSlice';
+import { getIdUserSelector } from '@/redux/selectors';
 import { Link } from 'react-router-dom';
-import SmallPopup from '../../../components/Popup/SmallPopup';
-import config from '../../../config';
+import SmallPopup from '@/components/Popup/SmallPopup';
+import config from '@/config';
 
 type item = {
   id: number;

@@ -2,14 +2,14 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import check from '../../assets/svg/check_formCheckOut.svg';
-import flag from '../../assets/image/image33.png';
-import heroBannerCart from '../../assets/image/HeroBanner_Cart.png';
+import check from '@/assets/svg/check_formCheckOut.svg';
+import flag from '@/assets/image/image33.png';
+import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalPriceSelector, getUserCartSelector } from '../../redux/selectors';
-import { getCartTotal } from '../../redux/feature/CartSlice';
-import BigPopup from '../../components/Popup/BigPopup';
-import config from '../../config';
+import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
+import { getCartTotal } from '@/redux/feature/CartSlice';
+import BigPopup from '@/components/Popup/BigPopup';
+import config from '@/config';
 type item = {
   id: number;
   img: string;
@@ -79,9 +79,9 @@ function CheckOut(): JSX.Element {
   const handleDiscountCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDiscountCode(e.target.value);
   };
-  const handelApplyCode = ()=>{
+  const handelApplyCode = () => {
     console.log(discountCode);
-  }
+  };
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -96,12 +96,15 @@ function CheckOut(): JSX.Element {
         <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Cart/Check out</p>
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] pb-[12rem] ">
-        <BigPopup title='for your ordering' subtitle='thank you' 
-        description='Thanks for your purchase. We have feeling this is the beginning of beautiful friendship! Don’t forget follow us on social media and stay
-         up to date with the lastest information' 
-         btnTitle='back to homepage' 
-         to={config.routes.homepage} 
-         refDialog={refDialog}/>
+        <BigPopup
+          title="for your ordering"
+          subtitle="thank you"
+          description="Thanks for your purchase. We have feeling this is the beginning of beautiful friendship! Don’t forget follow us on social media and stay
+         up to date with the lastest information"
+          btnTitle="back to homepage"
+          to={config.routes.homepage}
+          refDialog={refDialog}
+        />
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Check out</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
@@ -331,7 +334,10 @@ function CheckOut(): JSX.Element {
                   </div>
                   <div className="w-full mt-[2.2rem]">
                     {cart.map((item) => (
-                      <div className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0" key={cart.indexOf(item)}>
+                      <div
+                        className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0"
+                        key={cart.indexOf(item)}
+                      >
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.quantity}</p>
                       </div>
@@ -348,8 +354,10 @@ function CheckOut(): JSX.Element {
                         value={discountCode}
                         onChange={handleDiscountCode}
                       />
-                      <p className="font-normal text-[1.6rem] leading-[100%] text-secondary uppercase cursor-pointer ml-[0.5rem]"
-                      onClick={handelApplyCode}>
+                      <p
+                        className="font-normal text-[1.6rem] leading-[100%] text-secondary uppercase cursor-pointer ml-[0.5rem]"
+                        onClick={handelApplyCode}
+                      >
                         apply
                       </p>
                     </div>

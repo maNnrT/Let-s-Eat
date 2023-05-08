@@ -1,8 +1,8 @@
 import * as React from 'react';
-import check from '../../../assets/svg/check_formCheckOut.svg';
+import check from '@/assets/svg/check_formCheckOut.svg';
 interface Props {
   refDialog: React.RefObject<HTMLDialogElement>;
-  title:string;
+  title: string;
 }
 function SmallPopup({ refDialog, title }: Props) {
   return (

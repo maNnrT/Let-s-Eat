@@ -1,10 +1,10 @@
 interface Props {
   img: string;
   name: string;
-  description:string;
-  price:number
+  description: string;
+  price: number;
 }
-import IMG from '../../../assets/image/image8.png'
+import IMG from '@/assets/image/image8.png';
 function CarouselItem() {
   return (
     <div className="w-full h-auto bg-white">
@@ -22,4 +22,4 @@ function CarouselItem() {
   );
 }
 
-export default CarouselItem
+export default CarouselItem;

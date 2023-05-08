@@ -1,19 +1,19 @@
-import config from '../config';
+import config from '@/config';
 
 //Layout
-import { FooterOnly } from '../layouts';
+import { FooterOnly } from '@/layouts';
 
-import Homepage from '../pages/Homepage';
-import AboutUs from '../pages/AboutUs';
-import Contact from '../pages/Contact';
-import MenuCombo from '../pages/MenuCombo';
-import Shop from '../pages/Shop';
-import FreshBaked from '../pages/Shop/FreshBaked';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import NoMatch from '../pages/NoMatch';
-import Cart from '../pages/Cart';
-import CheckOut from '../pages/CheckOut';
+import Homepage from '@/pages/Homepage';
+import AboutUs from '@/pages/AboutUs';
+import Contact from '@/pages/Contact';
+import MenuCombo from '@/pages/MenuCombo';
+import Shop from '@/pages/Shop';
+import FreshBaked from '@/pages/Shop/FreshBaked';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import NoMatch from '@/pages/NoMatch';
+import Cart from '@/pages/Cart';
+import CheckOut from '@/pages/CheckOut';
 type pathObject = {
   path: string;
   component: () => JSX.Element;

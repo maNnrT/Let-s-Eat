@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as request from '../../utils/request';
-import config from '../../config';
+import * as request from '@/utils/request';
+import config from '@/config';
 
 type product = {
   id: number | undefined;
   type: string;
-  dish:string;
+  dish: string;
   img: string;
   name: string;
   description: string;
@@ -18,7 +18,7 @@ interface initialState {
   products: product[];
   status: string;
   productById: product;
-  filter:string;
+  filter: string;
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -29,7 +29,7 @@ const productsSlice = createSlice({
       id: undefined,
       type: '',
       img: '',
-      dish:'',
+      dish: '',
       name: '',
       description: '',
       ingredient: '',
@@ -41,7 +41,7 @@ const productsSlice = createSlice({
   } as initialState,
   reducers: {
     filterChange: (state, action) => {
-      state.filter= action.payload
+      state.filter = action.payload;
     },
   },
   extraReducers: (builder) => {

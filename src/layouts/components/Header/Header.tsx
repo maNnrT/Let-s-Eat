@@ -1,18 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
-import config from '../../../config';
+import config from '@/config';
 // import { useState } from 'react';
-import logo from '../../../assets/svg/Logo.svg';
-import cart from '../../../assets/svg/cart.svg';
+import logo from '@/assets/svg/Logo.svg';
+import cart from '@/assets/svg/cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
 // import { AiOutlineMenu } from 'react-icons/ai';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
-import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '../../../redux/selectors';
+import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginFalse } from '../../../redux/feature/CheckLoginSlice';
+import { setIsLoginFalse } from '@/redux/feature/CheckLoginSlice';
 import * as React from 'react';
-import { getUserCart } from '../../../redux/feature/CartSlice';
+import { getUserCart } from '@/redux/feature/CartSlice';
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
   const dispatch = useDispatch();

@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './NoMatch.module.scss';
-import heroBannerAboutUs from '../../assets/image/HeroBanner_AboutUs.png';
+import heroBannerAboutUs from '@/assets/image/HeroBanner_AboutUs.png';
 import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 function NoMatch() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -15,7 +15,9 @@ function NoMatch() {
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">
           Opps! Can't find page you're looking for
         </p>
-        <button className="btn-secondary mt-[1.8rem]" onClick={()=>navigate(-1)}>Go back</button>
+        <button className="btn-secondary mt-[1.8rem]" onClick={() => navigate(-1)}>
+          Go back
+        </button>
       </div>
     </div>
   );

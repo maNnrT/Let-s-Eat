@@ -1,10 +1,10 @@
 import * as React from 'react';
-import heroBannerCategoryFreshBaked from '../../../assets/image/HeroBanner_FreshBaked.png';
+import heroBannerCategoryFreshBaked from '@/assets/image/HeroBanner_FreshBaked.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsSelector } from '../../../redux/selectors';
-import { getProducts } from '../../../redux/feature/ProductsSlice';
+import { getProductsSelector } from '@/redux/selectors';
+import { getProducts } from '@/redux/feature/ProductsSlice';
 import FreshBakedProduct from './FreshBakedProduct';
-import ProductDetail from '../ProductDetail';
+import ProductDetail from '@/pages/Shop/ProductDetail';
 type product = {
   id: number | undefined;
   type: string;

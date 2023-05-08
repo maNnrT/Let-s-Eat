@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as request from '../../utils/request';
-import config from '../../config';
+import * as request from '@/utils/request';
+import config from '@/config';
 
 type item = {
   id: number;
@@ -51,8 +51,7 @@ const cartSlice = createSlice({
     increaseItemQuantity: (state, action) => {
       state.cart = state.cart.map((item) => {
         if (item.id === action.payload) {
-          if (item.quantity>=1 && item.quantity<=99) 
-          return { ...item, quantity: item.quantity + 1 };
+          if (item.quantity >= 1 && item.quantity <= 99) return { ...item, quantity: item.quantity + 1 };
         }
         return item;
       });
@@ -129,8 +128,8 @@ export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: n
       return found.cart as item[];
     }
   } catch (error) {
-    const cart:item[]= []
-    return cart
+    const cart: item[] = [];
+    return cart;
   }
 });
 export const { addToCart, removeItemFromCart, getCartTotal, increaseItemQuantity, decreaseItemQuantity } =

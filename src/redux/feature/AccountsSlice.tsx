@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as request from '../../utils/request';
-import config from '../../config';
+import * as request from '@/utils/request';
+import config from '@/config';
 import * as yup from 'yup';
 type account = {
   username: string;
