@@ -8,6 +8,8 @@ import heroBannerCart from '../../assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalPriceSelector, getUserCartSelector } from '../../redux/selectors';
 import { getCartTotal } from '../../redux/feature/CartSlice';
+import BigPopup from '../../components/Popup/BigPopup';
+import config from '../../config';
 type item = {
   id: number;
   img: string;
@@ -40,6 +42,7 @@ function CheckOut(): JSX.Element {
   const onSubmit = (data: FormData) => {
     setIsValid(true);
     console.log(data);
+    openModal();
   };
   const dispatch = useDispatch();
   const cart: item[] = useSelector(getUserCartSelector);
@@ -79,6 +82,10 @@ function CheckOut(): JSX.Element {
   const handelApplyCode = ()=>{
     console.log(discountCode);
   }
+  const refDialog = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    refDialog.current?.showModal();
+  };
   return (
     <div className="w-full mb-[-12rem] relative">
       <div
@@ -89,7 +96,12 @@ function CheckOut(): JSX.Element {
         <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Cart/Check out</p>
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] pb-[12rem] ">
-
+        <BigPopup title='for your ordering' subtitle='thank you' 
+        description='Thanks for your purchase. We have feeling this is the beginning of beautiful friendship! Don’t forget follow us on social media and stay
+         up to date with the lastest information' 
+         btnTitle='back to homepage' 
+         to={config.routes.homepage} 
+         refDialog={refDialog}/>
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Check out</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
