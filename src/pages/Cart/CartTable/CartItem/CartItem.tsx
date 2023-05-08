@@ -2,14 +2,6 @@ import * as React from 'react';
 import { ImCross } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
 import { decreaseItemQuantity, increaseItemQuantity, removeItemFromCart } from '../../../../redux/feature/CartSlice';
-type item = {
-  id: number;
-  idItem: number;
-  img: string;
-  name: string;
-  price: string;
-  quantity: number;
-};
 interface Props {
   id: number;
   img: string;
@@ -17,28 +9,16 @@ interface Props {
   price: string;
   quantity: number;
 }
-
 function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
   const dispatch = useDispatch();
 
   const [subTotal, setSubTotal] = React.useState<string>('');
-  // const [numberInput, setNumberInput] = React.useState<number>(quantity);
 
   const decreaseNumber = () => {
-    // setNumberInput((pre: number): number => {
-    //   if (pre >= 2 && pre <= 99) return pre - 1;
-    //   else return 1;
-    // });
     dispatch(decreaseItemQuantity(id));
-    // decrease(id)
   };
   const increaseNumber = () => {
-    // setNumberInput((pre: number): number => {
-    //   if (pre >= 1 && pre <= 99) return pre + 1;
-    //   else return 1;
-    // });
     dispatch(increaseItemQuantity(id));
-    // increase(id)
   };
   const removeItem = () => {
     dispatch(removeItemFromCart(id));
@@ -46,9 +26,6 @@ function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
   React.useEffect(() => {
     setSubTotal((Number(price) * Number(quantity)).toFixed(2));
   }, [quantity, price]);
-  // // React.useEffect(()=>{
-  // //   setNumberInput(quantity)
-  // // },[quantity])
   return (
     <tr className="h-fit w-full">
       <td className="pb-[1.8rem] px-[2.4rem] pt-[2.4rem]">

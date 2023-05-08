@@ -8,7 +8,7 @@ import AboutUs from '../pages/AboutUs';
 import Contact from '../pages/Contact';
 import MenuCombo from '../pages/MenuCombo';
 import Shop from '../pages/Shop';
-import FreshBaked from '../pages/Shop/Fresh Baked';
+import FreshBaked from '../pages/Shop/FreshBaked';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NoMatch from '../pages/NoMatch';

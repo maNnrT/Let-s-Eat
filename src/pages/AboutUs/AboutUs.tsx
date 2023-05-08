@@ -20,16 +20,15 @@ import logoipsum from '../../assets/svg/logoipsum.svg';
 import logoipsum2 from '../../assets/svg/logoipsum2.svg';
 import logoipsum3 from '../../assets/svg/logoipsum3.svg';
 import contactUs from '../../assets/image/image48.png';
-import popupImg from '../../assets/svg/image_PopUp.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AboutUsForm from './AboutUsForm';
 import config from '../../config';
-// import Popup from '../../component/Popup/Popup';
+import BigPopup from '../../components/Popup/BigPopup/';
 function AboutUs() {
   const navigate = useNavigate();
-  const ref = React.useRef<HTMLDialogElement>(null);
+  const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
-    ref.current?.showModal();
+    refDialog.current?.showModal();
   };
   return (
     <div className="w-full">
@@ -264,41 +263,15 @@ function AboutUs() {
         </div>
       </div>
       <div className="w-full h-auto bg-primary relative" id="contact">
-        <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" ref={ref}>
-          <form className="w-full h-full">
-            <div className="flex flex-col items-center h-auto relative pt-[8rem] pb-[12rem] px-[9rem]">
-              <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>
-              <p className="font-normal text-[1.8rem] text-secondary mt-[0.8rem] uppercase">THANK YOU</p>
-              <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
-                FOR SENDING US MESSAGE
-              </h1>
-              <img src={popupImg} alt="" className="mt-[5.2rem]" />
-              <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center mx-[0.5rem]">
-                We will appreciate your opinion. Please keep an eye on your phone and email to receive feedback from us.
-                Don't forget to follow Let's Eat Bakery to receive the latest information. Best regards!
-              </p>
-              <Link to={config.routes.homepage} className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem]">
-                back to homepage
-              </Link>
-              <button
-                type="submit"
-                formMethod="dialog"
-                className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2.4rem] cursor-pointer"
-              >
-                &times;
-              </button>
-            </div>
-          </form>
-        </dialog>
-        {/* <Popup
-          subTitle="thank you"
+        <BigPopup
+          subtitle="thank you"
           title="FOR SENDING US MESSAGE"
           description="We will appreciate your opinion. Please keep an eye on your phone and email to receive feedback from us.
                 Don't forget to follow Let's Eat Bakery to receive the latest information. Best regards!"
           to={config.routes.homepage}
-          btnTitle='back to homepage'
-          open={openModal}
-        ></Popup> */}
+          btnTitle="back to homepage"
+          refDialog={refDialog}
+        ></BigPopup>
         <div className="panel-layer h-auto mt-[-9.2rem] mb-[-13.8rem] z-[1] grid grid-cols-2 gap-x-[3.2rem]">
           <img src={contactUs} alt="" />
           <div className="flex flex-col pt-[6rem] pr-[4rem] pb-[4.9rem]">

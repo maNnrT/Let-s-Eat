@@ -3,8 +3,8 @@ import heroBannerCategoryFreshBaked from '../../../assets/image/HeroBanner_Fresh
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '../../../redux/selectors';
 import { getProducts } from '../../../redux/feature/ProductsSlice';
-import FreshBakedItem from './FreshBakedItem/FreshBakedItem';
-import FreshBakedItemDetail from './FreshBakedItemDetail/FreshBakedItemDetail';
+import FreshBakedProduct from './FreshBakedProduct';
+import ProductDetail from '../ProductDetail';
 type product = {
   id: number | undefined;
   type: string;
@@ -53,7 +53,7 @@ function FreshBaked() {
         <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Shop/Category</p>
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
-        {openModal && <FreshBakedItemDetail id={selectedItem} onClose={handleCloseModal} />}
+        {openModal && <ProductDetail id={selectedItem} onClose={handleCloseModal} />}
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Our menu</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
@@ -72,7 +72,7 @@ function FreshBaked() {
               <div>
                 {arrayProducts1.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
-                    <FreshBakedItem
+                    <FreshBakedProduct
                       id={product.id}
                       name={product.name}
                       img={product.img}
@@ -95,7 +95,7 @@ function FreshBaked() {
               <div className="w-full">
                 {arrayProducts2.map((product) => (
                   <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
-                    <FreshBakedItem
+                    <FreshBakedProduct
                       id={product.id}
                       name={product.name}
                       img={product.img}

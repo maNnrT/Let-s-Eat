@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Footer from '../component/Footer';
+import Footer from '../components/Footer';
 import styles from './FooterOnly.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

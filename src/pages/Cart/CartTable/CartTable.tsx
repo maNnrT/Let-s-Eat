@@ -3,6 +3,9 @@ import CartItem from './CartItem/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserCart } from '../../../redux/feature/CartSlice';
 import { getIdUserSelector } from '../../../redux/selectors';
+import { Link } from 'react-router-dom';
+import SmallPopup from '../../../components/Popup/SmallPopup';
+import config from '../../../config';
 
 type item = {
   id: number;
@@ -16,12 +19,15 @@ interface Props {
   totalPrice: number;
 }
 function CartTable({ cart, totalPrice }: Props): JSX.Element {
-  // console.log(cart.length);
-
   const dispatch = useDispatch();
   const idUser = useSelector(getIdUserSelector);
-  // console.log(cart);
-  // console.log('totalprice', totalPrice);
+  const refDialog = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    refDialog.current?.showModal();
+    setTimeout(() => {
+      refDialog.current?.close();
+    }, 1000);
+  };
   const updateCartHandle = () => {
     if (cart.length > 0) {
       dispatch(
@@ -30,53 +36,19 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
           cart,
         }),
       );
-    }
-    else{
+    } else {
       dispatch(
         addUserCart({
           idUser,
-          cart:[],
+          cart: [],
         }),
       );
     }
+    openModal();
   };
-  // const [subTotalArr, setSubTotalArr] = React.useState<number[]>(
-  //   cart.map((item) => (Number(item?.price) || 0) * Number(item.quantity)),
-  // );
-  // const [quantityArr, setQuantityArr] = React.useState<number[]>(cart.map((item) => item.quantity));
-  // console.log(subTotalArr);
-  // const decreaseNumber = (id: number) => {
-  //   setQuantityArr((pre) => {
-  //     const res = [...pre];
-  //     console.log(res);
-
-  //     if (res[id - 1] >= 2 && res[id - 1]<=99) {
-  //       res[id - 1] -= 1;
-  //     }
-  //     return res;
-  //   });
-  //   setSubTotalArr((pre) => {
-  //     const res = [...pre];
-  //     if (quantityArr[id - 1] >= 2 && quantityArr[id - 1] <= 99) res[id - 1] -= Number(cart[id - 1].price);
-  //     return res;
-  //   });
-  // };
-  // const increaseNumber = (id: number) => {
-  //   setQuantityArr((pre) => {
-  //     const res = [...pre];
-  //     if (res[id - 1] >= 1 && res[id - 1] <= 99)
-  //       res[id - 1] += 1;
-  //     return res;
-  //   });
-  //   setSubTotalArr((pre)=>{
-  //     const res = [...pre]
-  //     if (quantityArr[id - 1] >= 1 && quantityArr[id - 1] <= 99) res[id - 1] += Number(cart[id - 1].price);
-  //     return res
-  //   })
-  // };
-  // console.log(subTotalArr, quantityArr);
   return (
     <div className="container mt-[6rem]">
+      <SmallPopup refDialog={refDialog} title="Cart is updated!" />
       <div className="w-[82.3%] mx-auto bg-fefefd">
         <div className="w-full h-auto shadow-[0_147px_183px_rgba(0,0,0,0.07)] px-[2rem] ">
           <table className="w-full h-auto">
@@ -105,11 +77,34 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
               </tr>
             </thead>
             <tbody className="w-full">
-              {cart.map((item) => (
-                <React.Fragment key={item.id}>
-                  <CartItem id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
-                </React.Fragment>
-              ))}
+              {cart.length !== 0 ? (
+                cart.map((item) => (
+                  <React.Fragment key={item.id}>
+                    <CartItem
+                      id={item.id}
+                      img={item.img}
+                      name={item.name}
+                      price={item.price}
+                      quantity={item.quantity}
+                    />
+                  </React.Fragment>
+                ))
+              ) : (
+                <tr className="h-[40rem]">
+                  <td colSpan={4}>
+                    <div className="flex flex-col justify-center items-center ">
+                      <p className="text-secondary text-center text-[2rem] uppercase">
+                        Cart is empty!
+                        <br />
+                        Add some products
+                      </p>
+                      <Link to="/shop" className="btn-secondary uppercase">
+                        go to shop
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -119,28 +114,22 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
           <div className="pr-[8.3rem]">
             <div className="w-[39.2rem] flex justify-between">
               <p className="font-semibold text-[2.4rem] text-primary uppercase">TOTAL</p>
-              <p className="font-semibold text-[2.4rem] text-primary uppercase">
-                {/* {cart
-                  .reduce(
-                    (accumulator, currentItem) =>
-                      accumulator + (Number(currentItem?.price) || 0) * Number(currentItem.quantity),
-                    0,
-                  )
-                  .toFixed(2)} */}
-                {/* {(subTotalArr.reduce((totalPrice, subTotal) => totalPrice + subTotal, 0)).toFixed(2)} $ */}
-                {totalPrice} $
-              </p>
+              <p className="font-semibold text-[2.4rem] text-primary uppercase">{totalPrice} $</p>
             </div>
             <div className="w-[39.2rem] flex justify-between mt-[1.6rem]">
               <button
-                className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase"
+                className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase
+                          hover:bg-666565 hover:text-white"
                 onClick={updateCartHandle}
               >
                 update cart
               </button>
-              <button className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal">
+              <Link to={config.routes.homepage}
+                className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
+                onClick={updateCartHandle}
+              >
                 PROCESS TO CHECKOUT
-              </button>
+              </Link>
             </div>
           </div>
         </div>

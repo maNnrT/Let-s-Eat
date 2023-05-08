@@ -1,19 +1,12 @@
 import * as React from 'react';
 import heroBannerCart from '../../assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getIdUserSelector,
-  getTotalQuantitySelector,
-  getTotalPriceSelector,
-  getUserCartSelector,
-} from '../../redux/selectors';
+import { getTotalPriceSelector, getTotalQuantitySelector, getUserCartSelector } from '../../redux/selectors';
 
 import CartTable from './CartTable';
-import { getCartTotal, getUserCart } from '../../redux/feature/CartSlice';
-// import { getUserCart } from '../../redux/Slice/CartSlice';
+import { getCartTotal } from '../../redux/feature/CartSlice';
 type item = {
   id: number;
-  idItem: number;
   img: string;
   name: string;
   price: string;
@@ -22,16 +15,10 @@ type item = {
 
 function Cart(): JSX.Element {
   const dispatch = useDispatch();
-  // const idUser: number = useSelector(getIdUserSelector);
-  let cart: item[] = [];
-  cart = useSelector(getUserCartSelector);
+  const cart: item[] = useSelector(getUserCartSelector);
   const totalPrice: number = useSelector(getTotalPriceSelector);
-  // const totalQuantity: number = useSelector(getTotalQuantitySelector);
-
-  // console.log(cart);
   React.useEffect(() => {
     dispatch(getCartTotal());
-    // dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
   return (

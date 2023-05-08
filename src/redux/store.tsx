@@ -34,12 +34,4 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-// const store = configureStore({
-//   reducer: {
-//     login: loginSlice.reducer,
-//     register: registerSlice.reducer,
-//     products: productsSlice.reducer,
-//   },
-// });
-// const persistedReducer = persistReducer(persistConfig, store);
 export default store;

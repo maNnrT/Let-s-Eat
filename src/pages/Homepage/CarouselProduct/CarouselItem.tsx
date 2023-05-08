@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../redux/feature/CartSlice';
-// import { addToCart } from "../../../redux/Slice/CartSlice";
+import * as React from 'react';
+import SmallPopup from '../../../components/Popup/SmallPopup';
 
 interface Props {
   id: number;
@@ -11,8 +12,20 @@ interface Props {
 }
 function CarouselItem({ id, img, name, description, price }: Props) {
   const dispatch = useDispatch();
+  const refDialog = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    refDialog.current?.showModal();
+    setTimeout(() => {
+      refDialog.current?.close();
+    }, 1000);
+  };
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, img, name, price, quantity: 1 }));
+    openModal();
+  };
   return (
     <div className="w-full h-full bg-white flex flex-col">
+      <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem]">
         <img src={img} alt="" className="w-full h-[26.1rem] object-cover" />
       </div>
@@ -25,10 +38,7 @@ function CarouselItem({ id, img, name, description, price }: Props) {
         </p>
         <div className="flex justify-between items-end mt-[1rem] self-end w-full mb-[0.8rem]">
           <p className="font-bold text-[2.2rem] leading-[3.7rem] text-394149">${price}</p>
-          <p
-            className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer"
-            onClick={() => dispatch(addToCart({ id, img, name, price, quantity: 1 }))}
-          >
+          <p className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer" onClick={handleAddToCart}>
             Add to cart
           </p>
         </div>

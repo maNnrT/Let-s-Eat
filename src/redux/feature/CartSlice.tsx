@@ -118,14 +118,17 @@ export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: use
 });
 export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: number) => {
   try {
-    const res = await request.get(config.api.userCarts);
-    const found = res.find((cart: userCart) => {
-      return cart.idUser === idUser;
-    });
-    // console.log(found.cart);
-    return found.cart as item[];
+    const res = localStorage.getItem('persist:root');
+    if (res && idUser === JSON.parse(JSON.parse(res).checkLogin).idUser) {
+      return JSON.parse(JSON.parse(res).cart).cart;
+    } else {
+      const res = await request.get(config.api.userCarts);
+      const found = res.find((cart: userCart) => {
+        return cart.idUser === idUser;
+      });
+      return found.cart as item[];
+    }
   } catch (error) {
-    // console.error('Cant get cart');
     const cart:item[]= []
     return cart
   }

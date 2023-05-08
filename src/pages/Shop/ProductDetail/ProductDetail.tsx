@@ -1,28 +1,45 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductByIdSelector } from '../../../../redux/selectors';
-import { getProductById } from '../../../../redux/feature/ProductsSlice';
+import { getProductByIdSelector } from '../../../redux/selectors';
+import { getProductById } from '../../../redux/feature/ProductsSlice';
 // import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import './FreshBakedItemDetail.module.scss';
+import './ProductDetail.module.scss';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart } from '../../../../redux/feature/CartSlice';
+import { addToCart } from '../../../redux/feature/CartSlice';
+import SmallPopup from '../../../components/Popup/SmallPopup';
 interface Props {
   id: number | undefined;
   onClose: () => void;
 }
-function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
+function ProductDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
   const productById = useSelector(getProductByIdSelector);
-  // const handleAddToCart = (productById:product) => {
-  //   dispatch(addToCart({ productById.id, }));
-  // };
+  const refDialog = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    refDialog.current?.showModal();
+    setTimeout(() => {
+      refDialog.current?.close();
+    }, 1000);
+  };
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: productById.id,
+        img: productById.img,
+        name: productById.name,
+        price: productById.price,
+        quantity: numberInput,
+      }),
+    );
+    openModal();
+  };
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
@@ -36,18 +53,6 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
       else return 1;
     });
   };
-
-  // console.log('check:', typeof productById.detailImg);
-  // let arrImg: string[];
-  // if (productById.detailImg) {
-  //   arrImg = JSON.parse(productById.detailImg);
-  //   arrImg.map((img: string) => {
-  //     console.log(typeof img);
-
-  //     console.log(arrImg.indexOf(img));
-  //   });
-  // }
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = React.useRef<any>();
   const swipeNext = () => {
@@ -63,44 +68,47 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
 
   return (
     <div className="bg-[rgba(0,0,0,0.5)] absolute h-full w-full z-10">
+      <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
       <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
-        <Swiper
-          pagination={true}
-          modules={[Pagination]}
-          slidesPerView={1}
-          className="mySwiper"
-          ref={ref}
-          style={
-            {
-              '--swiper-pagination-color': '#D08C30',
-              '--swiper-pagination-bullet-inactive-color': '#FFFFFF',
-              '--swiper-pagination-bullet-inactive-opacity': '0.3',
-              '--swiper-pagination-bullet-size': '1.2rem',
-              '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
-            } as React.CSSProperties
-          }
-        >
-          {productById.detailImg &&
-            JSON.parse(productById.detailImg).map((img: string) => (
-              <SwiperSlide key={JSON.parse(productById.detailImg).indexOf(img)}>
-                <div className="w-full relative h-full">
-                  <img src={img} alt="" className="w-full h-full object-cover" />
-                  <button
-                    className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] left-[2.6rem]"
-                    onClick={swipePrev}
-                  >
-                    <BsChevronLeft size={30} />
-                  </button>
-                  <button
-                    className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] right-[2.6rem]"
-                    onClick={swipeNext}
-                  >
-                    <BsChevronRight size={30} />
-                  </button>
-                </div>
-              </SwiperSlide>
-            ))}
-        </Swiper>
+        <div className="w-full h-full relative">
+          <Swiper
+            pagination={true}
+            modules={[Pagination]}
+            slidesPerView={1}
+            className="mySwiper"
+            ref={ref}
+            style={
+              {
+                '--swiper-pagination-color': '#D08C30',
+                '--swiper-pagination-bullet-inactive-color': '#FFFFFF',
+                '--swiper-pagination-bullet-inactive-opacity': '0.3',
+                '--swiper-pagination-bullet-size': '1.2rem',
+                '--swiper-pagination-bullet-horizontal-gap': '0.8rem',
+              } as React.CSSProperties
+            }
+          >
+            {productById.detailImg &&
+              JSON.parse(productById.detailImg).map((img: string) => (
+                <SwiperSlide key={JSON.parse(productById.detailImg).indexOf(img)}>
+                  <div className="w-full h-full">
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </div>
+                </SwiperSlide>
+              ))}
+            <button
+              className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] left-[2.6rem] z-[1]"
+              onClick={swipePrev}
+            >
+              <BsChevronLeft size={30} />
+            </button>
+            <button
+              className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] right-[2.6rem] z-[1]"
+              onClick={swipeNext}
+            >
+              <BsChevronRight size={30} />
+            </button>
+          </Swiper>
+        </div>
         <div>
           <div className="mt-[9rem]">
             <span className="text-secondary mr-[0.8rem] text-[3.2rem] ">—</span>
@@ -128,20 +136,7 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
               +
             </button>
           </div>
-          <button
-            className="mt-[2.4rem] btn-secondary mb-[6.2rem] uppercase"
-            onClick={() =>
-              dispatch(
-                addToCart({
-                  id: productById.id,
-                  img: productById.img,
-                  name: productById.name,
-                  price: productById.price,
-                  quantity: numberInput,
-                }),
-              )
-            }
-          >
+          <button className="mt-[2.4rem] btn-secondary mb-[6.2rem] uppercase" onClick={handleAddToCart}>
             ADD TO CART
           </button>
           <span
@@ -156,4 +151,4 @@ function FreshBakedItemDetail({ id, onClose }: Props): JSX.Element {
   );
 }
 
-export default FreshBakedItemDetail;
+export default ProductDetail;

@@ -1,6 +1,6 @@
-// import classNames from 'classnames/bind';
-// import styles from './Header.module.scss';
-// const cx = classNames.bind(styles);
+import classNames from 'classnames/bind';
+import styles from './Header.module.scss';
+const cx = classNames.bind(styles);
 import config from '../../../config';
 // import { useState } from 'react';
 import logo from '../../../assets/svg/Logo.svg';
@@ -13,8 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '../../../redux/feature/CheckLoginSlice';
 import * as React from 'react';
 import { getUserCart } from '../../../redux/feature/CartSlice';
-// import { getUserCart } from '../../../redux/Slice/CartSlice';
-
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -28,15 +26,12 @@ function Header(): JSX.Element {
   };
   const isLogin = useSelector(getIsLogin);
   const idUser = useSelector(getIdUserSelector);
-  // const cart = useSelector(getUserCartSelector);
   const totalQuantity = useSelector(getTotalQuantitySelector);
-  // console.log(totalQuantity);
-
   React.useEffect(() => {
     dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idUser]);
-  // console.log(idUser);
+
   return (
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[2]">
       <div className="h-full container flex items-center justify-between">
@@ -67,27 +62,28 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link
-                to={`${config.routes.cart}`}
-                className='relative mr-[5px]
-                      after:content-["5"]
-                      after:font-normal
-                      after:text-[1.2rem]
-                      after:leading-[2rem]
-                      after:flex
-                      after:justify-center
-                      after:items-center
-                      after:absolute
-                      after:top-0
-                      after:right-0
-                      after:w-4
-                      after:h-4
-                      after:bg-secondary
-                      after:rounded-full 
-                      after:translate-x-[50%]
-                      after:translate-y-[-25%]'
-              >
+              <Link to={`${config.routes.cart}`} className="relative mr-[5px]">
                 <img src={cart} alt="" />
+                <div
+                  className="
+                      font-normal
+                      text-[1.2rem]
+                      leading-[2rem]
+                      flex
+                      justify-center
+                      items-center
+                      absolute
+                      top-0
+                      right-0
+                      w-[1.6rem]
+                      h-[1.6rem]
+                      bg-secondary
+                      rounded-full 
+                      translate-x-[50%]
+                      translate-y-[-50%]"
+                >
+                  {totalQuantity}
+                </div>
               </Link>
             </>
           )}
