@@ -27,6 +27,7 @@ function Header(): JSX.Element {
   const isLogin = useSelector(getIsLogin);
   const idUser = useSelector(getIdUserSelector);
   const totalQuantity = useSelector(getTotalQuantitySelector);
+
   React.useEffect(() => {
     dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +63,7 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link to={`${config.routes.cart}`} className="relative mr-[5px]">
+              <Link to={config.routes.cart} className="relative mr-[5px]">
                 <img src={cart} alt="" />
                 <div
                   className="

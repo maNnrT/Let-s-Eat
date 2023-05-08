@@ -1,7 +1,7 @@
 import config from '../config';
 
 //Layout
-import { HeaderOnly, FooterOnly } from '../layouts';
+import { FooterOnly } from '../layouts';
 
 import Homepage from '../pages/Homepage';
 import AboutUs from '../pages/AboutUs';
@@ -13,12 +13,12 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NoMatch from '../pages/NoMatch';
 import Cart from '../pages/Cart';
+import CheckOut from '../pages/CheckOut';
 type pathObject = {
   path: string;
   component: () => JSX.Element;
-  layout?: ({children}:any) => JSX.Element;
+  layout?: ({ children }: any) => JSX.Element;
 };
-
 const publicRoutes: pathObject[] = [
   { path: config.routes.homepage, component: Homepage },
   { path: config.routes.aboutus, component: AboutUs },
@@ -31,7 +31,14 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.nomatch, component: NoMatch },
 ];
 const privateRoutes: pathObject[] = [
-  {path: `${config.routes.cart}`,component:Cart}
+  {
+    path: config.routes.cart,
+    component: Cart,
+  },
+  {
+    path: config.routes.checkout,
+    component: CheckOut,
+  },
 ];
 
 export { publicRoutes, privateRoutes };

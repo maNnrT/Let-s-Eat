@@ -36,6 +36,7 @@ export default {
         e9e9e9: "#E9E9E9",
         aaa9a9: "#AAA9A9",
         fefefd: "#FEFEFD",
+        726666: "#726666",
       },
       fontFamily: {
         fahkwang: ["Fahkwang", "sans-serif"],

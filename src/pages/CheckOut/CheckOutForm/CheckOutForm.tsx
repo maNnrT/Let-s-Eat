@@ -19,7 +19,7 @@ interface Props {
   openModal: () => void;
 }
 type FormData = yup.InferType<typeof schema>;
-function AboutUsForm({ openModal }: Props): JSX.Element {
+function CheckOutForm({ openModal }: Props): JSX.Element {
   const {
     register,
     handleSubmit,
@@ -27,6 +27,8 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+  const onSubmit = (data: FormData) => openModal();
+
   const [name, setName] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
@@ -43,12 +45,7 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
-  const [isValid, setIsValid] = React.useState<boolean>(false);
-  const onSubmit = (data: FormData) => {
-    setIsValid(true);
-    openModal();
-    console.log(data);
-  };
+
   return (
     <div className="w-full mt-[4rem] flex flex-col">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +68,7 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
               <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>
             ) : (
               <span className="absolute right-[1.2rem] top-[2.4rem]">
-                {isValid ? <img src={check} alt="" /> : null}
+                <img src={check} alt="" />
               </span>
             )}
           </div>
@@ -93,7 +90,7 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
               <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.phone?.message}</p>
             ) : (
               <span className="absolute right-[1.2rem] top-[2.4rem]">
-                {isValid ? <img src={check} alt="" /> : null}
+                <img src={check} alt="" />
               </span>
             )}
           </div>
@@ -118,7 +115,9 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
           {errors.email !== undefined ? (
             <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>
           ) : (
-            <span className="absolute right-[1.2rem] top-[2.4rem]">{isValid ? <img src={check} alt="" /> : null}</span>
+            <span className="absolute right-[1.2rem] top-[2.4rem]">
+              <img src={check} alt="" />
+            </span>
           )}
         </div>
         <label
@@ -142,4 +141,4 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   );
 }
 
-export default AboutUsForm;
+export default CheckOutForm;

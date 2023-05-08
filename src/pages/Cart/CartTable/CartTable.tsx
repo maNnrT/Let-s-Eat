@@ -124,7 +124,8 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
               >
                 update cart
               </button>
-              <Link to={config.routes.homepage}
+              <Link
+                to={config.routes.checkout}
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
                 onClick={updateCartHandle}
               >

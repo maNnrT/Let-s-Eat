@@ -1,7 +1,7 @@
 import * as React from 'react';
 import heroBannerCart from '../../assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalPriceSelector, getTotalQuantitySelector, getUserCartSelector } from '../../redux/selectors';
+import { getTotalPriceSelector, getUserCartSelector } from '../../redux/selectors';
 
 import CartTable from './CartTable';
 import { getCartTotal } from '../../redux/feature/CartSlice';
@@ -32,7 +32,7 @@ function Cart(): JSX.Element {
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] pb-[12rem] ">
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
-        <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Our menu</p>
+        <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">YOUR CART</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
           OUR HONOR
         </h1>
