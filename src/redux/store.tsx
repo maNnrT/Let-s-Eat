@@ -1,6 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import loginSlice from './feature/LoginSlice';
-import registerSlice from './feature/RegisterSlice';
 import productsSlice from './feature/ProductsSlice';
 import checkLogin from './feature/CheckLoginSlice';
 import accountsSlice from './feature/AccountsSlice';
@@ -14,8 +12,6 @@ const persistConfig = {
   whitelist: ['checkLogin','cart'],
 };
 const rootReducer = combineReducers({
-  login: loginSlice.reducer,
-  register: registerSlice.reducer,
   accounts: accountsSlice.reducer,
   products: productsSlice.reducer,
   checkLogin: checkLogin.reducer,

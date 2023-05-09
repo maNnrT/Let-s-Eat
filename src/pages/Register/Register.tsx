@@ -1,13 +1,9 @@
-// import classNames from 'classnames/bind';
-// import styles from './Register.module.scss';
-// const cx = classNames.bind(styles);
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import config from '@/config';
 import { Link } from 'react-router-dom';
-// import * as request from '@/utils/request';
 import RegisterSuccessful from './RegisterSuccessful';
 import { getAccounts, addNewAccounts } from '@/redux/feature/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +26,7 @@ function Login(): JSX.Element {
     .required();
   type FormData = yup.InferType<typeof schema>;
   type account = {
+    id:number|undefined
     username: string;
     password: string;
   };
@@ -41,58 +38,12 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const accountList = useSelector(getAccountsSelector);
+  const accountList:account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    // request
-    //   .get(config.api.accounts)
-    //   .then((res) => {
-    //     const isExist = res.every((account: account) => {
-    //       return account.username !== data.email;
-    //     });
-    //     if (isExist !== false) {
-    //       request
-    //         .post(config.api.accounts, {
-    //           username: data.email,
-    //           password: data.password,
-    //           firstname: data.firstName,
-    //           lastname: data.lastName,
-    //         })
-    //         .then(() => {
-    //           if (ref.current) ref.current.innerHTML = '';
-    //           setIsSignUpSuccess(true);
-    //         })
-    //         .catch(() => {
-    //           console.error("Can't add new account");
-    //           setIsSignUpSuccess(false);
-    //         });
-    //     } else {
-    //       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
-    //       setIsSignUpSuccess(false);
-    //     }
-    //   })
-    //   .catch(() => {
-    //     console.error("Can't get accounts");
-    //     setIsSignUpSuccess(false);
-    //   });
     const isExist = accountList.every((account: account) => {
       return account.username !== data.email;
     });
     if (isExist !== false) {
-      // request
-      //   .post(config.api.accounts, {
-      //     username: data.email,
-      //     password: data.password,
-      //     firstname: data.firstName,
-      //     lastname: data.lastName,
-      //   })
-      //   .then(() => {
-      //     if (ref.current) ref.current.innerHTML = '';
-      //     setIsSignUpSuccess(true);
-      //   })
-      //   .catch(() => {
-      //     console.error("Can't add new account");
-      //     setIsSignUpSuccess(false);
-      //   });
       dispatch(addNewAccounts(data))
         .then(() => {
           if (ref.current) ref.current.innerHTML = '';

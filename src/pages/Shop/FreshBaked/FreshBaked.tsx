@@ -5,9 +5,12 @@ import { getProductsSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/feature/ProductsSlice';
 import FreshBakedProduct from './FreshBakedProduct';
 import ProductDetail from '@/pages/Shop/ProductDetail';
+import freshBakedImg1 from '@/assets/image/image25.png';
+import freshBakedImg2 from '@/assets/image/image18.png';
 type product = {
   id: number | undefined;
   type: string;
+  dish: string;
   img: string;
   name: string;
   description: string;
@@ -36,11 +39,9 @@ function FreshBaked() {
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
   const arrayProducts1 = [...products].reverse().slice(0, 4);
   const arrayProducts2 = [...products].reverse().slice(4, products.length);
-  // console.log('check:', array);
 
   React.useEffect(() => {
     dispatch(getProducts());
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -85,12 +86,12 @@ function FreshBaked() {
               </div>
             </div>
             <div className="w-full  h-auto mt-[3.2rem] mb-[20.1rem] self-end mr-0">
-              <img src="http://127.0.0.1:8887/image25.png" alt="" className="w-full" />
+              <img src={freshBakedImg1} alt="" className="w-full" />
             </div>
           </div>
           <div className="w-full flex flex-col items-start">
             <div className="w-full h-auto mb-[3.2rem]">
-              <img src="http://127.0.0.1:8887/image18.png" alt="" className="w-full" />
+              <img src={freshBakedImg2} alt="" className="w-full" />
             </div>
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="w-full">

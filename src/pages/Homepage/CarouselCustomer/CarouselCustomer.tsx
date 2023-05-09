@@ -7,8 +7,7 @@ import { Swiper, SwiperRef, SwiperSlide,  } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import './Carousel.css';
-import { Pagination, Navigation } from 'swiper';
+import { Pagination } from 'swiper';
 // import required modules
 
 export default function CarouselCustomer() {
@@ -24,7 +23,7 @@ export default function CarouselCustomer() {
     <div className="w-full relative mb-[7.6rem] h-auto ">
       <Swiper
         pagination={true}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination]}
         navigation
         slidesPerView={1}
         className="mySwiper"

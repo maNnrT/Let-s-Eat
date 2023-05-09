@@ -3,6 +3,7 @@ import * as request from '@/utils/request';
 import config from '@/config';
 import * as yup from 'yup';
 type account = {
+  id:number|undefined
   username: string;
   password: string;
 };
@@ -35,7 +36,7 @@ const accountsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getAccounts.fulfilled, (state, action) => {
-        // console.log('check',{action});
+
         if (action.payload) state.accounts = action.payload;
         state.status = 'idle';
       })

@@ -82,7 +82,7 @@ const cartSlice = createSlice({
             totalCount += Number(item.quantity);
             return totalCount;
           }, 0);
-          // localStorage.setItem('cart', JSON.stringify(action.payload));
+
           state.totalPrice = totalPrice.toFixed(2);
           state.totalQuantity = totalCount;
         }
@@ -117,20 +117,30 @@ export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: use
 });
 export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: number) => {
   try {
-    const res = localStorage.getItem('persist:root');
-    if (res && idUser === JSON.parse(JSON.parse(res).checkLogin).idUser) {
-      return JSON.parse(JSON.parse(res).cart).cart;
-    } else {
-      const res = await request.get(config.api.userCarts);
-      const found = res.find((cart: userCart) => {
-        return cart.idUser === idUser;
-      });
-      return found.cart as item[];
-    }
+    const res = await request.get(config.api.userCarts);
+    const found = res.find((cart: userCart) => {
+      return cart.idUser === idUser;
+    });
+    return found.cart as item[];
   } catch (error) {
     const cart: item[] = [];
     return cart;
   }
+  // try {
+  //   const res = localStorage.getItem('persist:root');
+  //   if (res && idUser === JSON.parse(JSON.parse(res).checkLogin).idUser) {
+  //     return JSON.parse(JSON.parse(res).cart).cart;
+  //   } else {
+  //     const res = await request.get(config.api.userCarts);
+  //     const found = res.find((cart: userCart) => {
+  //       return cart.idUser === idUser;
+  //     });
+  //     return found.cart as item[];
+  //   }
+  // } catch (error) {
+  //   const cart: item[] = [];
+  //   return cart;
+  // }
 });
 export const { addToCart, removeItemFromCart, getCartTotal, increaseItemQuantity, decreaseItemQuantity } =
   cartSlice.actions;

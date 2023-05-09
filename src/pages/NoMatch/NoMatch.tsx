@@ -1,9 +1,5 @@
-import classNames from 'classnames/bind';
-import styles from './NoMatch.module.scss';
 import heroBannerAboutUs from '@/assets/image/HeroBanner_AboutUs.png';
 import { useNavigate } from 'react-router-dom';
-
-const cx = classNames.bind(styles);
 function NoMatch() {
   const navigate = useNavigate();
   return (

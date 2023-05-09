@@ -2,25 +2,34 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductByIdSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/feature/ProductsSlice';
-// import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import './ProductDetail.module.scss';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
 import { addToCart } from '@/redux/feature/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
+type product = {
+  id: number | undefined;
+  type: string;
+  dish: string;
+  img: string;
+  name: string;
+  description: string;
+  ingredient: string;
+  detail: string;
+  detailImg: string;
+  price: string;
+};
 interface Props {
   id: number | undefined;
   onClose: () => void;
 }
 function ProductDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
-  const productById = useSelector(getProductByIdSelector);
+  const productById: product = useSelector(getProductByIdSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -74,11 +83,12 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
             pagination={true}
             modules={[Pagination]}
             slidesPerView={1}
-            className="mySwiper"
+            className="h-full"
             ref={ref}
             style={
               {
-                '--swiper-pagination-color': '#D08C30',
+                '--swiper-pagination-color': '#F6F5F4',
+                '--swiper-pagination-bottom': '3.2rem',
                 '--swiper-pagination-bullet-inactive-color': '#FFFFFF',
                 '--swiper-pagination-bullet-inactive-opacity': '0.3',
                 '--swiper-pagination-bullet-size': '1.2rem',

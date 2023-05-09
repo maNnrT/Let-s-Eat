@@ -1,17 +1,11 @@
-import { useState, useEffect } from 'react';
-import classNames from 'classnames';
-import styles from './Slider.module.scss';
-
+import * as React from 'react';
 import heroBannerHomepage from '@/assets/Image/HeroBanner_Homepage.png';
 import heroBannerHomepage2 from '@/assets/Image/HeroBanner_Homepage2.png';
 import heroBannerHomepage3 from '@/assets/Image/HeroBanner_Homepage3.png';
 import heroBannerHomepage4 from '@/assets/Image/HeroBanner_Homepage4.png';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 import leftArrow from '@/assets/svg/back_Arrow.svg';
 import rightArrow from '@/assets/svg/next_Arrow.svg';
-import { RxDotFilled } from 'react-icons/rx';
-const cx = classNames.bind(styles);
-//w-[1.2rem] h-[1.2rem] rounded-full bg-71655b
 function Slider() {
   const slides = [
     {
@@ -31,7 +25,7 @@ function Slider() {
       url: heroBannerHomepage4,
     },
   ];
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = React.useState<number>(0);
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
@@ -69,7 +63,7 @@ function Slider() {
             className="w-[23.2rem] h-full bg-transparent pl-[1.6rem] py-[1.2rem] outline-none  placeholder:text-white"
             placeholder="youremail@gmail.com"
           />
-          <button className="flex items-center justify-center w-[4.8rem] h-full bg-secondary/80 rounded-e-[2px]">
+          <button className="flex items-center justify-center w-[4.8rem] h-full bg-secondary/80 rounded-e-[2px] btn-secondary">
             <IoIosArrowForward size={30} color="#DCDCDC" />
           </button>
         </div>

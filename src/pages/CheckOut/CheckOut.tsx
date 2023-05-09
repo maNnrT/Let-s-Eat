@@ -46,7 +46,7 @@ function CheckOut(): JSX.Element {
   };
   const dispatch = useDispatch();
   const cart: item[] = useSelector(getUserCartSelector);
-  const totalPrice: number = useSelector(getTotalPriceSelector);
+  const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -303,10 +303,10 @@ function CheckOut(): JSX.Element {
                       By cash when received
                     </option>
                     <option
-                      value="Tranfer"
+                      value="Transfer"
                       className="h-[4.4rem] px-[1.6rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 "
                     >
-                      Tranfer
+                      Transfer via bank account
                     </option>
                   </select>
                 </div>

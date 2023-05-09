@@ -1,6 +1,3 @@
-// import classNames from 'classnames/bind';
-// import styles from './Login.module.scss';
-// const cx = classNames.bind(styles);
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,6 +17,7 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 type account = {
+  id:number|undefined
   username: string;
   password: string;
 };
@@ -33,7 +31,7 @@ function Login(): JSX.Element {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accountList = useSelector(getAccountsSelector);
+  const accountList: account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
     const user = accountList.find((account: account) => {
       return account.username === data.email && account.password === data.passwords;

@@ -1,7 +1,4 @@
 import * as React from 'react';
-import classNames from 'classnames/bind';
-import styles from './AboutUs.module.scss';
-const cx = classNames.bind(styles);
 import heroBannerAboutUs from '@/assets/image/HeroBanner_AboutUs.png';
 import ourPassion1 from '@/assets/image/image34.png';
 import ourPassion2 from '@/assets/image/image35.png';

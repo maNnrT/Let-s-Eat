@@ -1,8 +1,5 @@
 import { ReactNode } from 'react';
 import Footer from '@/layouts/components/Footer';
-import styles from './FooterOnly.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
 interface Props {
   children: ReactNode;
 }

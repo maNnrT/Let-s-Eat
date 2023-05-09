@@ -15,7 +15,8 @@
     @apply w-full max-w-[85vw] mx-auto;
   }
   .btn-secondary {
-    @apply flex justify-center items-center w-[17.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary;
+    @apply flex justify-center items-center w-[17.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] text-f6e8d6 
+    hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200;
   }
 }
 @layer utilities {

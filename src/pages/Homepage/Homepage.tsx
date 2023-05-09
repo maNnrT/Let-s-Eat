@@ -1,5 +1,3 @@
-// import classNames from 'classnames/bind';
-// import styles from './Homepage.module.scss';
 import * as React from 'react';
 import Slider from './Slider';
 import CarouselProduct from './CarouselProduct';
@@ -17,12 +15,25 @@ import { filterChange } from '@/redux/feature/ProductsSlice';
 import { getProductsByFilterSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/feature/ProductsSlice';
 import config from '@/config';
-// const cx = classNames.bind(styles);
+import BannerSlide from './BannerSlider/BannerSlider';
+type product = {
+  id: number | undefined;
+  type: string;
+  dish: string;
+  img: string;
+  name: string;
+  description: string;
+  ingredient: string;
+  detail: string;
+  detailImg: string;
+  price: string;
+};
+
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector(getProductsByFilterSelector);
+  const products: product[] = useSelector(getProductsByFilterSelector);
   const filterBtn = [
     { value: 'freshbaked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
@@ -41,7 +52,8 @@ function Homepage() {
   };
   return (
     <div>
-      <Slider />
+      {/* <Slider /> */}
+      <BannerSlide/>
       <div className="w-full h-auto bg-primary">
         <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
           <div className="container">
@@ -220,7 +232,7 @@ function Homepage() {
                     <button
                       value={filter.value}
                       onClick={handleFilterChange}
-                      className="h-full w-[12.7rem] bg-transparent border-[1.5px] border-secondary text-secondary text-[1.8rem] leading-[3rem] focus:bg-secondary focus:text-f6e8d6 focus:border-0 hover:bg-secondary hover:text-f6e8d6 hover:border-0"
+                      className="btn-secondary w-[12.7rem] font-bolds text-[1.8rem] leading-[130%]"
                     >
                       {filter.title}
                     </button>

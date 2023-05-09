@@ -1,13 +1,10 @@
 import Header from '@/layouts/components/Header';
 import Footer from '@/layouts/components/Footer';
-import styles from './DefaultLayout.module.scss';
-import classNames from 'classnames/bind';
 import { ReactNode } from 'react';
-const cx = classNames.bind(styles);
 interface Props {
   children: ReactNode;
 }
-const  DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) =>{
+const DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) => {
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
@@ -15,5 +12,5 @@ const  DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) =>{
       <Footer />
     </div>
   );
-}
+};
 export default DefaultLayout;

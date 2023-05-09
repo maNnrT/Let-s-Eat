@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
 import config from '@/config';
-// import classNames from 'classnames/bind';
-// import styles from './RegisterSuccessful.module.scss';
-// const cx = classNames.bind(styles);
 function RegisterSuccessful() {
   return (
     <div className="flex flex-col items-center w-full shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">

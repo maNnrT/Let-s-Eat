@@ -1,5 +1,5 @@
 import './App.css';
-import { Fragment, ReactElement, ReactNode } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './routes';
 import { DefaultLayout } from './layouts';

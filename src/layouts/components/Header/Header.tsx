@@ -1,18 +1,13 @@
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
-const cx = classNames.bind(styles);
 import config from '@/config';
-// import { useState } from 'react';
 import logo from '@/assets/svg/Logo.svg';
-import cart from '@/assets/svg/cart.svg';
+import cartImg from '@/assets/svg/cart.svg';
 import { Link, useNavigate } from 'react-router-dom';
-// import { AiOutlineMenu } from 'react-icons/ai';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '@/redux/feature/CheckLoginSlice';
 import * as React from 'react';
-import { getUserCart } from '@/redux/feature/CartSlice';
+import { getCartTotal, getUserCart } from '@/redux/feature/CartSlice';
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -24,15 +19,25 @@ function Header(): JSX.Element {
     dispatch(setIsLoginFalse());
     navigate(config.routes.login);
   };
-  const isLogin = useSelector(getIsLogin);
-  const idUser = useSelector(getIdUserSelector);
-  const totalQuantity = useSelector(getTotalQuantitySelector);
-
+  type item = {
+    id: number;
+    img: string;
+    name: string;
+    price: string;
+    quantity: number;
+  };
+  const isLogin: boolean = useSelector(getIsLogin);
+  const idUser: number | undefined = useSelector(getIdUserSelector);
+  const totalQuantity: number = useSelector(getTotalQuantitySelector);
+  const cart: item[] = useSelector(getUserCartSelector);
   React.useEffect(() => {
-    dispatch(getUserCart(idUser));
+    if (idUser) dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idUser]);
-
+  React.useEffect(() => {
+    dispatch(getCartTotal());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
   return (
     <div className="flex justify-center h-[100px] w-full absolute top-0  z-[2]">
       <div className="h-full container flex items-center justify-between">
@@ -63,8 +68,8 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link to={config.routes.cart} className="relative mr-[5px]">
-                <img src={cart} alt="" />
+              <Link to={config.routes.cart} className="relative mr-[5px] hover:scale-150 hover:duration-500">
+                <img src={cartImg} alt="" />
                 <div
                   className="
                       font-normal

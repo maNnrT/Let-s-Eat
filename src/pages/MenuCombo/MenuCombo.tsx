@@ -1,22 +1,15 @@
-import classNames from 'classnames/bind';
-import styles from './MenuCombo.module.scss';
 import * as React from 'react';
 import heroBannerCategory from '@/assets/image/HeroBanner_MenuCombo.png';
 import loveCombo from '@/assets/image/image26.png';
 import loveCombo2 from '@/assets/image/image27.png';
-import { Link } from 'react-router-dom';
-import config from '@/config';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-const cx = classNames.bind(styles);
-
 function MenuCombo() {
-  const ref = React.useRef<SwiperRef|null>(null);
+  const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };
@@ -26,7 +19,7 @@ function MenuCombo() {
   return (
     <div className="w-full mb-[-12rem] relative">
       <div
-        className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center"
+        className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBannerCategory})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">MENU COMBO</p>
@@ -42,7 +35,7 @@ function MenuCombo() {
           A full meal of bread and coffee, or a relaxing afternoon with some sweets and tea. Let’s see what we have!
         </p>
 
-        <Swiper slidesPerView={1} className="mySwiper" ref={ref}>
+        <Swiper slidesPerView={1} className="w-full" ref={ref}>
           <SwiperSlide className="bg-fdf9f5">
             <div className="container  grid grid-cols-3 gap-x-[3.2rem] h-fit mt-[7.4rem] mb-[11.9rem]">
               <div className="grid grid-cols-1 gap-y-[3.2rem]">
@@ -204,7 +197,10 @@ function MenuCombo() {
                   </div>
                 </div>
               </div>
-              <div className="h-full px-[4.4rem] py-[28.6rem]" style={{ backgroundImage: `url(${loveCombo})` }}>
+              <div
+                className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat"
+                style={{ backgroundImage: `url(${loveCombo})` }}
+              >
                 <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For 2 people</p>
                 <p className="font-fahkwang font-normal text-[4rem] leading-[100%] text-center uppercase mt-[1.6rem]">
                   LOVE COMBO
@@ -216,7 +212,7 @@ function MenuCombo() {
                 </div>
               </div>
               <div
-                className="h-full p-[3.2rem] relative"
+                className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat"
                 style={{
                   backgroundImage: `url(${loveCombo2})`,
                 }}
@@ -327,7 +323,10 @@ function MenuCombo() {
                   </div>
                 </div>
               </div>
-              <div className="h-full px-[4.4rem] py-[28.6rem]" style={{ backgroundImage: `url(${loveCombo})` }}>
+              <div
+                className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat"
+                style={{ backgroundImage: `url(${loveCombo})` }}
+              >
                 <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For 2 people</p>
                 <p className="font-fahkwang font-normal text-[4rem] leading-[100%] text-center uppercase mt-[1.6rem]">
                   LOVE COMBO
@@ -339,7 +338,7 @@ function MenuCombo() {
                 </div>
               </div>
               <div
-                className="h-full p-[3.2rem] relative"
+                className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat"
                 style={{
                   backgroundImage: `url(${loveCombo2})`,
                 }}

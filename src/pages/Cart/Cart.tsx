@@ -16,7 +16,7 @@ type item = {
 function Cart(): JSX.Element {
   const dispatch = useDispatch();
   const cart: item[] = useSelector(getUserCartSelector);
-  const totalPrice: number = useSelector(getTotalPriceSelector);
+  const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps

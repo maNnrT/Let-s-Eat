@@ -11,7 +11,7 @@ interface Props {
 }
 function BigPopup({ subtitle, title, description, to, btnTitle, refDialog }: Props) {
   return (
-    <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" ref={refDialog}>
+    <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] duration-500" ref={refDialog}>
       <form className="w-full h-full">
         <div className="flex flex-col items-center h-auto relative pt-[8rem] pb-[12rem] px-[9rem]">
           <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>

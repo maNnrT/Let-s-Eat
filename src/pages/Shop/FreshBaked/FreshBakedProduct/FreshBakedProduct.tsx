@@ -12,10 +12,10 @@ function FreshBakedItem({id, name, img, ingredient, price }: Props) {
     <div className="flex justify-start items-center h-[10rem] mb-[1.2rem] ">
       <div className="w-[10rem] h-[10rem] basis-[10rem] grow-0 shrink-0 relative group ">
         <img src={img} alt="" className=" " />
-        <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full group-hover:bg-[rgba(0,0,0,0.5)] ">
-          <div className="absolute top-0 bottom-0 left-0 right-0 h-[4.8rem] w-[4.8rem] m-auto group-hover:bg-secondary flex justify-center items-center">
-            <div className="hidden  group-hover:block">
-              <img src={cart} alt="" />
+        <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full group-hover:bg-[rgba(0,0,0,0.5)] group-hover:duration-200">
+          <div className="absolute top-0 bottom-0 left-0 right-0 h-[4.8rem] w-[4.8rem] m-auto group-hover:bg-secondary flex justify-center items-center group-hover:duration-200">
+            <div className="hidden group-hover:block group-hover:duration-200">
+              <img src={cart} alt=""  className='duration-200'/>
             </div>
           </div>
         </div>

@@ -16,11 +16,11 @@ type item = {
 };
 interface Props {
   cart: item[];
-  totalPrice: number;
+  totalPrice: string;
 }
 function CartTable({ cart, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
-  const idUser = useSelector(getIdUserSelector);
+  const idUser:number|undefined = useSelector(getIdUserSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -29,14 +29,14 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
     }, 1000);
   };
   const updateCartHandle = () => {
-    if (cart.length > 0) {
+    if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
           idUser,
           cart,
         }),
       );
-    } else {
+    } else if (cart.length <= 0 && idUser) {
       dispatch(
         addUserCart({
           idUser,
@@ -118,8 +118,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
             </div>
             <div className="w-[39.2rem] flex justify-between mt-[1.6rem]">
               <button
-                className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase
-                          hover:bg-666565 hover:text-white"
+                className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase hover:bg-666565 hover:text-white hover:duration-200"
                 onClick={updateCartHandle}
               >
                 update cart

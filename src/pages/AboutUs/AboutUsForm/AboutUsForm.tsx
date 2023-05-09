@@ -1,12 +1,8 @@
-// import classNames from 'classnames/bind';
-// import styles from './Register.module.scss';
-// const cx = classNames.bind(styles);
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import check from '@/assets/svg/check_formCheckOut.svg';
-// import * as request from '@/utils/request';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
