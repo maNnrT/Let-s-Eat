@@ -3,7 +3,7 @@ import CarouselItem from './CarouselItem';
 // import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -22,12 +22,12 @@ interface Props {
   products: product[];
 }
 export default function CarouselProduct({ products }: Props) {
-  const ref = React.useRef<any>();
+  const ref = React.useRef<SwiperRef|null>(null);
   const swipeNext = () => {
-    ref.current.swiper.slideNext();
+    ref.current?.swiper.slideNext();
   };
   const swipePrev = () => {
-    ref.current.swiper.slidePrev();
+    ref.current?.swiper.slidePrev();
   };
   // console.log('check:', products);
 

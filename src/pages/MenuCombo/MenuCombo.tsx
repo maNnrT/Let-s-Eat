@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import config from '@/config';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -16,12 +16,12 @@ import 'swiper/css/navigation';
 const cx = classNames.bind(styles);
 
 function MenuCombo() {
-  const ref = React.useRef<any>();
+  const ref = React.useRef<SwiperRef|null>(null);
   const swipeNext = () => {
-    ref.current.swiper.slideNext();
+    ref.current?.swiper.slideNext();
   };
   const swipePrev = () => {
-    ref.current.swiper.slidePrev();
+    ref.current?.swiper.slidePrev();
   };
   return (
     <div className="w-full mb-[-12rem] relative">

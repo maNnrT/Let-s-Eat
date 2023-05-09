@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 interface Props {
   children: ReactNode;
 }
-function DefaultLayout({ children }: Props): JSX.Element {
+const  DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) =>{
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
