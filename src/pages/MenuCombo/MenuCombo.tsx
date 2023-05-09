@@ -80,7 +80,7 @@ function MenuCombo() {
                   LOVE COMBO
                 </p>
                 <div className="w-[14.5rem] border-b-[1px] border-b-white mt-[4rem] mx-auto">
-                  <p className=" font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
+                  <p className="cursor-pointer font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
                     CHECK THE MENU
                   </p>
                 </div>
@@ -206,7 +206,7 @@ function MenuCombo() {
                   LOVE COMBO
                 </p>
                 <div className="w-[14.5rem] border-b-[1px] border-b-white mt-[4rem] mx-auto">
-                  <p className=" font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
+                  <p className="cursor-pointer font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
                     CHECK THE MENU
                   </p>
                 </div>
@@ -332,7 +332,7 @@ function MenuCombo() {
                   LOVE COMBO
                 </p>
                 <div className="w-[14.5rem] border-b-[1px] border-b-white mt-[4rem] mx-auto">
-                  <p className=" font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
+                  <p className="cursor-pointer font-light text-[1.8rem] leading-[100%] text-center uppercase pb-[0.4rem]">
                     CHECK THE MENU
                   </p>
                 </div>

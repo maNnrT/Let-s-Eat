@@ -1,5 +1,17 @@
 .active{
     color: #D08C30;
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: 0.03em;
+}
+a::before{
+    content: attr(title);
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+}
+a{
+    display: inline-block;
 }

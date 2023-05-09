@@ -12,8 +12,12 @@ function HeaderItem({ title, to }: Props) {
     <NavLink
       to={to}
       className={(navData) =>
-        cx('text-[1.8rem] leading-[3rem] tracking-[0.03em] mr-[32px] font-medium hover:text-secondary hover:font-bold hover:tracking-[0rem] hover:duration-200', { active: navData.isActive })
+        cx(
+          'text-[1.8rem] leading-[3rem] tracking-[0.03em] p-[1.8rem] font-medium hover:text-secondary hover:font-bold hover:tracking-[0em] hover:duration-200',
+          { active: navData.isActive },
+        )
       }
+      title={title}
     >
       <span>{title}</span>
     </NavLink>

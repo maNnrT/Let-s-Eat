@@ -53,7 +53,7 @@ function Homepage() {
   return (
     <div>
       {/* <Slider /> */}
-      <BannerSlide/>
+      <BannerSlide />
       <div className="w-full h-auto bg-primary">
         <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
           <div className="container">
@@ -133,9 +133,10 @@ function Homepage() {
               >
                 <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0] ">—</span>
                 <p className="font-normal text-[1.8rem] text-secondary leading-[100%] inline-block">ABOUT US</p>
-
-                <h3 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[6rem]">Working hours</h3>
-                <p className="font-light text-[1.6rem] text-d2d0cf mt-[1.9rem]">
+                <h3 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[6rem] line-clamp-1">
+                  Working hours
+                </h3>
+                <p className="font-light text-[1.6rem] text-d2d0cf mt-[1.9rem] line-clamp-1">
                   90 Broad St. 90 Broad Street, 2nd floor, New York, NY
                 </p>
                 <button className="mt-[6rem] btn-secondary" onClick={() => navigate('/contact')}>
@@ -143,22 +144,22 @@ function Homepage() {
                 </button>
               </div>
               <div className="flex flex-col items-center pt-[6rem] col-span-5">
-                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center">
+                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center line-clamp-1">
                   On weekend & Holiday
                 </h6>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
-                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center mt-[3.2rem]">
+                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center mt-[3.2rem] line-clamp-1">
                   Weekday
                 </h6>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
-                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
+                <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
               </div>
@@ -177,7 +178,7 @@ function Homepage() {
             <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-f6f4f3 text-center uppercase mb-0">
               Sweet Bakery
             </h1>
-            <p className="font-light text-[1.6rem] mt-[2rem] text-center max-w-[79.4rem]">
+            <p className="font-light text-[1.6rem] mt-[2rem] text-center max-w-[79.4rem] line-clamp-4">
               We believe in making good bread. As we’ve grown, so has our menu and our community, yet our values have
               stayed the same. We take the time to make our bread, pastries, cakes, breakfasts and lunches as we always
               have – with care, by hand and according to the season – so that we don’t need to compromise on what we
@@ -222,7 +223,7 @@ function Homepage() {
               <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
                 Special dishes!
               </h1>
-              <p className="font-light text-[1.6rem] text-666565 mt-[2rem] text-center max-w-[59.4rem]">
+              <p className="font-light text-[1.6rem] text-666565 mt-[2rem] text-center max-w-[59.4rem] line-clamp-3">
                 We bake by hand with natural ingredients, and while we are ordinary people, we want to make
                 extraordinary things. We can’t imagine doing anything more gratifying than baking our, and your, bread.
               </p>
@@ -251,7 +252,7 @@ function Homepage() {
                 <div className="w-full flex flex-col items-center">
                   <span className="text-secondary text-[3.2rem] leading-[0px] mt-[3.4rem]">—</span>
                   <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem]">TESTIMONIALS</p>
-                  <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[1.2rem] text-primary text-center uppercase mb-[5.2rem]">
+                  <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[1.2rem] text-primary text-center uppercase mb-[5.2rem] line-clamp-1">
                     OUR CUSTOMERS!
                   </h1>
                   <div className="w-full">

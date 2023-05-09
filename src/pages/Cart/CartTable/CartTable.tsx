@@ -76,7 +76,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
                 </th>
               </tr>
             </thead>
-            <tbody className="w-full">
+            <tbody className="w-full ">
               {cart.length !== 0 ? (
                 cart.map((item) => (
                   <React.Fragment key={item.id}>

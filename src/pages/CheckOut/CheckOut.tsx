@@ -6,10 +6,11 @@ import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
-import { getCartTotal } from '@/redux/feature/CartSlice';
+import { getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
+import { addUserCart, getCartTotal } from '@/redux/feature/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
+import { log } from 'console';
 type item = {
   id: number;
   img: string;
@@ -46,6 +47,7 @@ function CheckOut(): JSX.Element {
   };
   const dispatch = useDispatch();
   const cart: item[] = useSelector(getUserCartSelector);
+  const idUser: number | undefined = useSelector(getIdUserSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
@@ -85,6 +87,15 @@ function CheckOut(): JSX.Element {
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
+    console.log(idUser);
+    
+    if (idUser)
+      dispatch(
+        addUserCart({
+          idUser,
+          cart:[],
+        }),
+      );
   };
   return (
     <div className="w-full mb-[-12rem] relative">
@@ -314,7 +325,7 @@ function CheckOut(): JSX.Element {
               <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
-                    ORDER SUMMARY
+                    ORDER SUMMARY - #12192409
                   </p>
                   <div className="h-[1.1rem] w-[6rem] border-b-[1px] border-b-secondary"></div>
 

@@ -12,7 +12,7 @@ function CarouselItem() {
         <img src={IMG} alt="" />
       </div>
       <div className="w-full px-[1.6rem] mt-[3rem]">
-        <p className="text-[2rem] leading-[3.3rem] font-light text-3d3535 text-center">
+        <p className="text-[2rem] leading-[3.3rem] font-light text-3d3535 text-center line-clamp-4">
           "I just wanted to let you know how much my family enjoyed the cake you made for my husband's birthday. It was
           truly delicious! Thanks again. I now have a new favorite bakery!”
         </p>

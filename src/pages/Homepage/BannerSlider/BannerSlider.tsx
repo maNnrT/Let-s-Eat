@@ -9,7 +9,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import BannerSliderItem from './BannerSliderItem/BannerSliderItem';
 import { IoIosArrowForward } from 'react-icons/io';
-import './BannerSlider.scss'
+import './BannerSlider.scss';
 const slides = [
   {
     url: heroBannerHomepage,
@@ -53,11 +53,9 @@ function BannerSlide() {
         }
       >
         {slides.map((slide) => (
-          <div key={slides.indexOf(slide)}>
-            <SwiperSlide>
-              <BannerSliderItem img={slide.url} />
-            </SwiperSlide>
-          </div>
+          <SwiperSlide key={slides.indexOf(slide)}>
+            <BannerSliderItem img={slide.url} />
+          </SwiperSlide>
         ))}
         <div className="block absolute top-[34.8rem] left-[3.9rem] cursor-pointer z-[1]" onClick={swipePrev}>
           <img src={leftArrow} alt="" />
@@ -65,11 +63,11 @@ function BannerSlide() {
         <div className="block absolute top-[34.8rem] right-[3.9rem] cursor-pointer z-[1]" onClick={swipeNext}>
           <img src={rightArrow} alt="" />
         </div>
-        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1]">
-          <h1 className="font-fahkwang font-normal text-[6.4rem] leading-[100%] pt-[274px] w-[66.4rem] m-0">
+        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] pt-[27.4rem]">
+          <h1 className="font-fahkwang font-normal text-[6.4rem] leading-[100%] w-[54.2%] m-[0rem] line-clamp-1 overflow-visible">
             Sign up & get baked!
           </h1>
-          <p className=" font-light text-[1.8rem]  text-ededed mt-[2.9rem] w-[66.4rem] ">
+          <p className=" font-light text-[1.8rem] text-ededed mt-[2.9rem] w-[54.2%] line-clamp-3">
             Let’s Eat produces a variety of hand-crafted bakery goods for private label customers, as well as a full
             line of packaged and labeled specialty products. Sign up for our newsletter and be the first to see our
             latest events, exclusive promotions, and new arrivals!

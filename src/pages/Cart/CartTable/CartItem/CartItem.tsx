@@ -25,13 +25,17 @@ function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
     setSubTotal((Number(price) * quantity).toFixed(2));
   }, [quantity, price]);
   return (
-    <tr className="h-fit w-full">
-      <td className="pb-[1.8rem] px-[2.4rem] pt-[2.4rem]">
+    <tr className="h-fit w-full ">
+      <td className="pb-[1.8rem] px-[2.4rem] pt-[1.8rem] ">
         <div className="flex justify-start items-center">
-          <div onClick={removeItem} className="cursor-pointer hover:scale-150 hover:duration-500" >
+          <div onClick={removeItem} className="cursor-pointer hover:scale-150 hover:duration-500">
             <ImCross size={16} color="rgba(177,174,172,0.5)"></ImCross>
           </div>
-          <img src={img} alt="" className="w-[6.3rem] h-[6.3rem] object-cover ml-[4.2rem] hover:scale-125 hover:duration-500" />
+          <img
+            src={img}
+            alt=""
+            className="w-[6.3rem] h-[6.3rem] object-cover ml-[4.2rem] hover:scale-125 hover:duration-500"
+          />
           <p className="ml-[2rem] text-[2rem] font-light text-666565">{name}</p>
         </div>
       </td>

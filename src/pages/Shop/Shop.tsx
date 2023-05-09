@@ -27,7 +27,7 @@ function Shop() {
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
           Our popular dishes
         </h1>
-        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem]">
+        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem] line-clamp-2">
           With creative and love, we baked a lot sweet breads for you, for your family and for New York. Let's see our
           menu and choose the perfect dishes for your meal.
         </p>

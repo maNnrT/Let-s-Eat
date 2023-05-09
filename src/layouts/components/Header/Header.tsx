@@ -43,7 +43,7 @@ function Header(): JSX.Element {
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to={config.routes.homepage}>
-            <img src={logo} alt="logo" className="mr-[6.5rem] " />
+            <img src={logo} alt="logo" className="mr-[4.7rem] " />
           </Link>
           <HeaderMenu>
             <HeaderItem title="Homepage" to={config.routes.homepage}></HeaderItem>
