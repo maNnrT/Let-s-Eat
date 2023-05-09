@@ -4,7 +4,7 @@ import * as React from 'react';
 import SmallPopup from '@/components/Popup/SmallPopup';
 
 interface Props {
-  id: number;
+  id: number|undefined;
   img: string;
   name: string;
   description: string;

@@ -1,12 +1,13 @@
 import React from 'react';
 import cart from '@/assets/svg/cart.svg';
 interface Props {
+  id:number|undefined
   name: string;
   img: string;
   ingredient: string;
   price: string;
 }
-function FreshBakedItem({ name, img, ingredient, price }: Props) {
+function FreshBakedItem({id, name, img, ingredient, price }: Props) {
   return (
     <div className="flex justify-start items-center h-[10rem] mb-[1.2rem] ">
       <div className="w-[10rem] h-[10rem] basis-[10rem] grow-0 shrink-0 relative group ">

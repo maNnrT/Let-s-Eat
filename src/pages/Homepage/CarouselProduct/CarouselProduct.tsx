@@ -11,11 +11,15 @@ import 'swiper/css/navigation';
 import './Carousel.css';
 // import required modules
 type product = {
-  id: number;
+  id: number | undefined;
   type: string;
+  dish: string;
   img: string;
   name: string;
   description: string;
+  ingredient: string;
+  detail: string;
+  detailImg: string;
   price: string;
 };
 interface Props {
