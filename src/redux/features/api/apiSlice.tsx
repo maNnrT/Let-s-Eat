@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
   endpoints: (builder) => ({
-    getAccounts: builder.query<Account, void>({
+    getAccounts: builder.query<Account[], void>({
       query: () => '/accounts',
     }),
   }),

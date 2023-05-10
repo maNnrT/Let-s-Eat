@@ -20,11 +20,12 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 function Login(): JSX.Element {
-  // const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
+  const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
   // if (isLoading) {
   //   console.log('loading');
   // } else if (isSuccess) {
   //   console.log('check:', accounts);
+  //   console.log(isSuccess);
   // } else if (isError) {
   //   console.log(error.toString());
   // }
@@ -38,17 +39,19 @@ function Login(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accountList: Account[] = useSelector(getAccountsSelector);
-  const onSubmit = (data: FormData) => {
-    const user = accountList.find((account: Account) => {
-      return account.username === data.email && account.password === data.passwords;
-    });
-    if (user) {
-      dispatch(setIsLoginTrue());
-      dispatch(setIdUser(user.id));
-      navigate('/');
-    } else {
-      if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
-      dispatch(setIsLoginFalse());
+  const onSubmit = (dataForm: FormData) => {
+    if (isSuccess) {
+      const user = accounts.find((account: Account) => {
+        return account.username === dataForm.email && account.password === dataForm.passwords;
+      });
+      if (user) {
+        dispatch(setIsLoginTrue());
+        dispatch(setIdUser(user.id));
+        navigate('/');
+      } else {
+        if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
+        dispatch(setIsLoginFalse());
+      }
     }
   };
   React.useEffect(() => {
@@ -67,7 +70,7 @@ function Login(): JSX.Element {
   return (
     <div className="w-full mb-[-12rem] ">
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
-        <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
+        <div className="w-[45%] bg-white h-fit flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">
             Login
           </p>

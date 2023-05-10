@@ -22,7 +22,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
       refDialog.current?.close();
     }, 1000);
   };
-  const updateCartHandle = () => {
+  const updateCart =() =>{
     if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
@@ -38,6 +38,9 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
         }),
       );
     }
+  }
+  const updateCartBtnHandle = () => {
+    updateCart();
     openModal();
   };
   return (
@@ -113,14 +116,14 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
             <div className="w-[39.2rem] flex justify-between mt-[1.6rem]">
               <button
                 className="w-[14.5rem] h-[5.2rem] text-666565 border-[1.5px] border-666565 uppercase hover:bg-666565 hover:text-white hover:duration-200"
-                onClick={updateCartHandle}
+                onClick={updateCartBtnHandle}
               >
                 update cart
               </button>
               <Link
                 to={config.routes.checkout}
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
-                onClick={updateCartHandle}
+                onClick={updateCartBtnHandle}
               >
                 PROCESS TO CHECKOUT
               </Link>

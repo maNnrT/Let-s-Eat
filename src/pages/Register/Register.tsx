@@ -9,23 +9,24 @@ import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSl
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector } from '@/redux/selectors';
 import { Account } from '@/types/types';
+import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
+const schema = yup
+  .object({
+    firstName: yup.string().required('First name is required!'),
+    lastName: yup.string().required('Last name is required!'),
+    email: yup.string().required('Email is required!').email('Email is invalid!'),
+    password: yup.string().required('Password is required!').min(8, 'Password must have at least 8 characters '),
+    confirmPassword: yup
+      .string()
+      .required('Confirm password is required!')
+      .min(8, 'Confirm password must have at least 8 characters ')
+      .oneOf([yup.ref('password')], 'Confirm password must be the same with password'),
+    term: yup.bool().oneOf([true], 'You must agree to our term'),
+  })
+  .required();
+type FormData = yup.InferType<typeof schema>;
 function Login(): JSX.Element {
-  const schema = yup
-    .object({
-      firstName: yup.string().required('First name is required!'),
-      lastName: yup.string().required('Last name is required!'),
-      email: yup.string().required('Email is required!').email('Email is invalid!'),
-      password: yup.string().required('Password is required!').min(8, 'Password must have at least 8 characters '),
-      confirmPassword: yup
-        .string()
-        .required('Confirm password is required!')
-        .min(8, 'Confirm password must have at least 8 characters ')
-        .oneOf([yup.ref('password')], 'Confirm password must be the same with password'),
-      term: yup.bool().oneOf([true], 'You must agree to our term'),
-    })
-    .required();
-  type FormData = yup.InferType<typeof schema>;
-
+  const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
   const dispatch = useDispatch();
   const {
     register,
@@ -36,22 +37,24 @@ function Login(): JSX.Element {
   });
   const accountList: Account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    const isExist = accountList.every((account: Account) => {
-      return account.username !== data.email;
-    });
-    if (isExist !== false) {
-      dispatch(addNewAccounts(data))
-        .then(() => {
-          if (ref.current) ref.current.innerHTML = '';
-          setIsSignUpSuccess(true);
-        })
-        .catch(() => {
-          console.error("Can't add new account");
-          setIsSignUpSuccess(false);
-        });
-    } else {
-      if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
-      setIsSignUpSuccess(false);
+    if (isSuccess) {
+      const isExist = accounts.every((account: Account) => {
+        return account.username !== data.email;
+      });
+      if (isExist !== false) {
+        dispatch(addNewAccounts(data))
+          .then(() => {
+            if (ref.current) ref.current.innerHTML = '';
+            setIsSignUpSuccess(true);
+          })
+          .catch(() => {
+            console.error("Can't add new account");
+            setIsSignUpSuccess(false);
+          });
+      } else {
+        if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
+        setIsSignUpSuccess(false);
+      }
     }
   };
   React.useEffect(() => {
