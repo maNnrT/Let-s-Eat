@@ -29,14 +29,14 @@ const publicRoutes: pathObject[] = [
   { path: config.routes.contact, component: Contact },
   { path: config.routes.menucombo, component: MenuCombo },
   { path: config.routes.shop, component: Shop },
-  { path: config.routes.shop_freshbaked, component: FreshBaked },
+  { path: `${config.routes.shop}/freshbaked`, component: FreshBaked },
   { path: config.routes.login, component: Login, layout: FooterOnly },
   { path: config.routes.register, component: Register, layout: FooterOnly },
   { path: config.routes.nomatch, component: NoMatch },
 ];
 const privateRoutes: pathObject[] = [
   {
-    path: config.routes.cart,
+    path: `${config.routes.cart}/:idUser`,
     component: Cart,
   },
   {

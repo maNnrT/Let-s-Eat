@@ -68,7 +68,10 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link to={config.routes.cart} className="relative mr-[5px] hover:scale-150 hover:duration-500">
+              <Link
+                to={`${config.routes.cart}/${idUser}`}
+                className="relative mr-[5px] hover:scale-150 hover:duration-500"
+              >
                 <img src={cartImg} alt="" />
                 <div
                   className="

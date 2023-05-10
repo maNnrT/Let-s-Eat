@@ -11,6 +11,7 @@ type item = {
 };
 
 type userCart = {
+  id: number;
   idUser: number;
   cart: item[];
 };

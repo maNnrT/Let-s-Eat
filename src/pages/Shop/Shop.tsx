@@ -6,10 +6,10 @@ import cheeseCake from '@/assets/image/image13.png';
 import { Link } from 'react-router-dom';
 import config from '@/config';
 const categories = [
-  { title: 'Fresh Baked', to: config.routes.shop_freshbaked, img: freshBakedImg },
-  { title: 'Cookies', to: config.routes.shop_cookies, img: cookieImg },
-  { title: 'Coffee & Tea', to: config.routes.shop_coffeeTea, img: coffeeTeaImg },
-  { title: 'Chessecake', to: config.routes.shop_chessecake, img: cheeseCake },
+  { title: 'Fresh Baked', to: `${config.routes.shop}/freshbaked`, img: freshBakedImg },
+  { title: 'Cookies', to: `${config.routes.shop}/cookies`, img: cookieImg },
+  { title: 'Coffee & Tea', to: `${config.routes.shop}/coffee&tea`, img: coffeeTeaImg },
+  { title: 'Chessecake', to: `${config.routes.shop}/chessecake`, img: cheeseCake },
 ];
 function Shop() {
   return (
