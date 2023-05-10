@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
 
 import CartTable from './CartTable';
-import { getCartTotal } from '@/redux/feature/CartSlice';
+import { getCartTotal } from '@/redux/features/cart/CartSlice';
 type item = {
   id: number;
   img: string;

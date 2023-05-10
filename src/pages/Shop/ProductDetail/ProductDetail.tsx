@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductByIdSelector } from '@/redux/selectors';
-import { getProductById } from '@/redux/feature/ProductsSlice';
+import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
@@ -9,7 +9,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart } from '@/redux/feature/CartSlice';
+import { addToCart } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
 type product = {
   id: number | undefined;

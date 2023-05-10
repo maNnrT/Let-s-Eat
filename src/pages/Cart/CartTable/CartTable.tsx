@@ -1,7 +1,7 @@
 import * as React from 'react';
 import CartItem from './CartItem/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCart } from '@/redux/feature/CartSlice';
+import { addUserCart } from '@/redux/features/cart/CartSlice';
 import { getIdUserSelector } from '@/redux/selectors';
 import { Link } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
@@ -20,7 +20,7 @@ interface Props {
 }
 function CartTable({ cart, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
-  const idUser:number|undefined = useSelector(getIdUserSelector);
+  const idUser: number | undefined = useSelector(getIdUserSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();

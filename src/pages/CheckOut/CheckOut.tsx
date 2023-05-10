@@ -7,7 +7,7 @@ import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
-import { addUserCart, getCartTotal } from '@/redux/feature/CartSlice';
+import { addUserCart, getCartTotal } from '@/redux/features/cart/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
 import { log } from 'console';
@@ -88,12 +88,12 @@ function CheckOut(): JSX.Element {
   const openModal = () => {
     refDialog.current?.showModal();
     console.log(idUser);
-    
+
     if (idUser)
       dispatch(
         addUserCart({
           idUser,
-          cart:[],
+          cart: [],
         }),
       );
   };

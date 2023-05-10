@@ -5,9 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginFalse } from '@/redux/feature/CheckLoginSlice';
+import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
-import { getCartTotal, getUserCart } from '@/redux/feature/CartSlice';
+import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
   const dispatch = useDispatch();

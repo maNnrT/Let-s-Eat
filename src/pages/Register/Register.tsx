@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import config from '@/config';
 import { Link } from 'react-router-dom';
 import RegisterSuccessful from './RegisterSuccessful';
-import { getAccounts, addNewAccounts } from '@/redux/feature/AccountsSlice';
+import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector } from '@/redux/selectors';
 
@@ -26,7 +26,7 @@ function Login(): JSX.Element {
     .required();
   type FormData = yup.InferType<typeof schema>;
   type account = {
-    id:number|undefined
+    id: number | undefined;
     username: string;
     password: string;
   };
@@ -38,7 +38,7 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const accountList:account[] = useSelector(getAccountsSelector);
+  const accountList: account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
     const isExist = accountList.every((account: account) => {
       return account.username !== data.email;

@@ -11,9 +11,9 @@ import testimonial from '@/assets/Image/image9.png';
 import { getIsLogin } from '@/redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { filterChange } from '@/redux/feature/ProductsSlice';
+import { filterChange } from '@/redux/features/products/ProductsSlice';
 import { getProductsByFilterSelector } from '@/redux/selectors';
-import { getProducts } from '@/redux/feature/ProductsSlice';
+import { getProducts } from '@/redux/features/products/ProductsSlice';
 import config from '@/config';
 import BannerSlide from './BannerSlider/BannerSlider';
 type product = {

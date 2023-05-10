@@ -1,15 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import productsSlice from './feature/ProductsSlice';
-import checkLogin from './feature/CheckLoginSlice';
-import accountsSlice from './feature/AccountsSlice';
-import cartSlice from './feature/CartSlice';
+import productsSlice from './features/products/ProductsSlice';
+import checkLogin from './features/checkLogin/CheckLoginSlice';
+import accountsSlice from './features/account/AccountsSlice';
+import cartSlice from './features/cart/CartSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import * as reduxThunk from 'redux-thunk/extend-redux';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['checkLogin','cart'],
+  whitelist: ['checkLogin', 'cart'],
 };
 const rootReducer = combineReducers({
   accounts: accountsSlice.reducer,
@@ -28,6 +28,6 @@ const store = configureStore({
       },
     }),
 });
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 export const persistor = persistStore(store);
 export default store;

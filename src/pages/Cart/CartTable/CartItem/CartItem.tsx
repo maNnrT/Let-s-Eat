@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ImCross } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
-import { decreaseItemQuantity, increaseItemQuantity, removeItemFromCart } from '@/redux/feature/CartSlice';
+import { decreaseItemQuantity, increaseItemQuantity, removeItemFromCart } from '@/redux/features/cart/CartSlice';
 interface Props {
   id: number;
   img: string;

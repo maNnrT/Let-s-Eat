@@ -2,7 +2,7 @@ import * as React from 'react';
 import heroBannerCategoryFreshBaked from '@/assets/image/HeroBanner_FreshBaked.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
-import { getProducts } from '@/redux/feature/ProductsSlice';
+import { getProducts } from '@/redux/features/products/ProductsSlice';
 import FreshBakedProduct from './FreshBakedProduct';
 import ProductDetail from '@/pages/Shop/ProductDetail';
 import freshBakedImg1 from '@/assets/image/image25.png';
