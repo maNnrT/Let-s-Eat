@@ -6,16 +6,10 @@ import { getIdUserSelector } from '@/redux/selectors';
 import { Link } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
+import { Item } from '@/types/types';
 
-type item = {
-  id: number;
-  img: string;
-  name: string;
-  price: string;
-  quantity: number;
-};
 interface Props {
-  cart: item[];
+  cart: Item[];
   totalPrice: string;
 }
 function CartTable({ cart, totalPrice }: Props): JSX.Element {

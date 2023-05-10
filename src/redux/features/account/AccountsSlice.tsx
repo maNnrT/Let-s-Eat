@@ -2,13 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import * as yup from 'yup';
-type account = {
-  id:number|undefined
-  username: string;
-  password: string;
-};
+import { Account } from '@/types/types';
+
 interface initialState {
-  accounts: account[];
+  accounts: Account[];
   status: string;
 }
 const schema = yup
@@ -49,7 +46,7 @@ const accountsSlice = createSlice({
 export const getAccounts = createAsyncThunk('accounts/getAccounts', async () => {
   try {
     const res = await request.get(config.api.accounts);
-    return res as account[];
+    return res as Account[];
   } catch (error) {
     console.error('Cant get accounts');
   }

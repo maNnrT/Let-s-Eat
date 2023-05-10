@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
@@ -10,14 +9,8 @@ import { getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@
 import { addUserCart, getCartTotal } from '@/redux/features/cart/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
-import { log } from 'console';
-type item = {
-  id: number;
-  img: string;
-  name: string;
-  price: string;
-  quantity: number;
-};
+import * as yup from 'yup';
+import { Item } from '@/types/types';
 const schema = yup
   .object({
     name: yup.string(),
@@ -46,7 +39,7 @@ function CheckOut(): JSX.Element {
     openModal();
   };
   const dispatch = useDispatch();
-  const cart: item[] = useSelector(getUserCartSelector);
+  const cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {

@@ -1,23 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
+import { Product } from '@/types/types';
 
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
 interface initialState {
-  products: product[];
+  products: Product[];
   status: string;
-  productById: product;
+  productById: Product;
   filter: string;
 }
 const productsSlice = createSlice({
@@ -71,7 +60,7 @@ const productsSlice = createSlice({
 export const getProducts = createAsyncThunk('products/getProducts', async () => {
   try {
     const res = await request.get(config.api.products);
-    return res as product[];
+    return res as Product[];
   } catch (error) {
     console.error('Cant get products');
   }
@@ -79,7 +68,7 @@ export const getProducts = createAsyncThunk('products/getProducts', async () => 
 export const getProductById = createAsyncThunk('products/getProductByID', async (id: number) => {
   try {
     const res = await request.get(`${config.api.products}/${id}`);
-    return res as product;
+    return res as Product;
   } catch (error) {
     console.error('Cant get product');
   }

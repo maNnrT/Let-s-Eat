@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccounts } from '@/redux/features/account/AccountsSlice';
 import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/features/checkLogin/CheckLoginSlice';
 import { getAccountsSelector } from '@/redux/selectors';
+import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
+import { Account } from '@/types/types';
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),
@@ -16,12 +18,16 @@ const schema = yup
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
-type account = {
-  id: number | undefined;
-  username: string;
-  password: string;
-};
+
 function Login(): JSX.Element {
+  // const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
+  // if (isLoading) {
+  //   console.log('loading');
+  // } else if (isSuccess) {
+  //   console.log('check:', accounts);
+  // } else if (isError) {
+  //   console.log(error.toString());
+  // }
   const {
     register,
     handleSubmit,
@@ -31,9 +37,9 @@ function Login(): JSX.Element {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accountList: account[] = useSelector(getAccountsSelector);
+  const accountList: Account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    const user = accountList.find((account: account) => {
+    const user = accountList.find((account: Account) => {
       return account.username === data.email && account.password === data.passwords;
     });
     if (user) {

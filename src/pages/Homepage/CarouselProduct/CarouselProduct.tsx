@@ -9,23 +9,12 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 // import required modules
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
+import { Product } from '@/types/types';
 interface Props {
-  products: product[];
+  products: Product[];
 }
 export default function CarouselProduct({ products }: Props) {
-  const ref = React.useRef<SwiperRef|null>(null);
+  const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };

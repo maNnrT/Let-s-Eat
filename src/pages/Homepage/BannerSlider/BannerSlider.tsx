@@ -7,7 +7,7 @@ import leftArrow from '@/assets/svg/back_Arrow.svg';
 import rightArrow from '@/assets/svg/next_Arrow.svg';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
-import BannerSliderItem from './BannerSliderItem/BannerSliderItem';
+import BannerSliderItem from './BannerSliderItem';
 import { IoIosArrowForward } from 'react-icons/io';
 import './BannerSlider.scss';
 const slides = [

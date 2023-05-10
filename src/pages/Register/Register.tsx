@@ -8,7 +8,7 @@ import RegisterSuccessful from './RegisterSuccessful';
 import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector } from '@/redux/selectors';
-
+import { Account } from '@/types/types';
 function Login(): JSX.Element {
   const schema = yup
     .object({
@@ -25,11 +25,7 @@ function Login(): JSX.Element {
     })
     .required();
   type FormData = yup.InferType<typeof schema>;
-  type account = {
-    id: number | undefined;
-    username: string;
-    password: string;
-  };
+
   const dispatch = useDispatch();
   const {
     register,
@@ -38,9 +34,9 @@ function Login(): JSX.Element {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-  const accountList: account[] = useSelector(getAccountsSelector);
+  const accountList: Account[] = useSelector(getAccountsSelector);
   const onSubmit = (data: FormData) => {
-    const isExist = accountList.every((account: account) => {
+    const isExist = accountList.every((account: Account) => {
       return account.username !== data.email;
     });
     if (isExist !== false) {

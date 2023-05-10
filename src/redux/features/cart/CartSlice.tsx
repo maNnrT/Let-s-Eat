@@ -1,23 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
-
-type item = {
-  id: number;
-  img: string;
-  name: string;
-  price: string;
-  quantity: number;
-};
-
-type userCart = {
-  id: number;
-  idUser: number;
-  cart: item[];
-};
+import { Item, UserCart } from '@/types/types';
 
 interface initialState {
-  cart: item[];
+  cart: Item[];
   status: string;
   totalPrice: string;
   totalQuantity: number;
@@ -95,10 +82,10 @@ const cartSlice = createSlice({
       });
   },
 });
-export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: userCart) => {
+export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: UserCart) => {
   try {
     const res = await request.get(config.api.userCarts);
-    const found = res.find((cart: userCart) => {
+    const found = res.find((cart: UserCart) => {
       return cart.idUser === data.idUser;
     });
     if (found) {
@@ -119,12 +106,12 @@ export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: use
 export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: number) => {
   try {
     const res = await request.get(config.api.userCarts);
-    const found = res.find((cart: userCart) => {
+    const found = res.find((cart: UserCart) => {
       return cart.idUser === idUser;
     });
-    return found.cart as item[];
+    return found.cart as Item[];
   } catch (error) {
-    const cart: item[] = [];
+    const cart: Item[] = [];
     return cart;
   }
   // try {

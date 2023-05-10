@@ -1,17 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
+import { Product } from '@/types/types';
 
 export const getUserCartSelector = (state: RootState) => state.cart.cart;
 export const getTotalPriceSelector = (state: RootState) => state.cart.totalPrice;
@@ -28,7 +17,7 @@ export const getProductsByFilterSelector = createSelector(
   getFilterSelector,
   getProductsSelector,
   (filter, products) => {
-    return products.filter((product: product) => {
+    return products.filter((product: Product) => {
       return product.dish === filter;
     });
   },

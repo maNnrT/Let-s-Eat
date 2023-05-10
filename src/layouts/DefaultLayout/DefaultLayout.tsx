@@ -1,8 +1,8 @@
+import * as React from 'react';
 import Header from '@/layouts/components/Header';
 import Footer from '@/layouts/components/Footer';
-import { ReactNode } from 'react';
 interface Props {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 const DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) => {
   return (

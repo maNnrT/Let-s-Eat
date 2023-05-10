@@ -16,24 +16,12 @@ import { getProductsByFilterSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import config from '@/config';
 import BannerSlide from './BannerSlider/BannerSlider';
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
-
+import { Product } from '@/types/types';
 function Homepage() {
   const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products: product[] = useSelector(getProductsByFilterSelector);
+  const products: Product[] = useSelector(getProductsByFilterSelector);
   const filterBtn = [
     { value: 'freshbaked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },

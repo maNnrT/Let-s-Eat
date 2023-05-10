@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
+import { Item } from '@/types/types';
+
 function Header(): JSX.Element {
   // const [nav, setNav] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -19,17 +21,10 @@ function Header(): JSX.Element {
     dispatch(setIsLoginFalse());
     navigate(config.routes.login);
   };
-  type item = {
-    id: number;
-    img: string;
-    name: string;
-    price: string;
-    quantity: number;
-  };
   const isLogin: boolean = useSelector(getIsLogin);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const totalQuantity: number = useSelector(getTotalQuantitySelector);
-  const cart: item[] = useSelector(getUserCartSelector);
+  const cart: Item[] = useSelector(getUserCartSelector);
   React.useEffect(() => {
     if (idUser) dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps

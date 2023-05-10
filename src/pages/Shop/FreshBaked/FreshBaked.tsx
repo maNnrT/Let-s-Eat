@@ -7,18 +7,8 @@ import FreshBakedProduct from './FreshBakedProduct';
 import ProductDetail from '@/pages/Shop/ProductDetail';
 import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
+import { Product } from '@/types/types';
+
 function FreshBaked() {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
   const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
@@ -33,7 +23,7 @@ function FreshBaked() {
 
   const dispatch = useDispatch();
   let products = useSelector(getProductsSelector);
-  products = products.filter((product: product) => {
+  products = products.filter((product: Product) => {
     return product.type === 'freshbaked';
   });
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript

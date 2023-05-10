@@ -2,20 +2,13 @@ import * as React from 'react';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
-
+import { Item } from '@/types/types';
 import CartTable from './CartTable';
 import { getCartTotal } from '@/redux/features/cart/CartSlice';
-type item = {
-  id: number;
-  img: string;
-  name: string;
-  price: string;
-  quantity: number;
-};
 
 function Cart(): JSX.Element {
   const dispatch = useDispatch();
-  const cart: item[] = useSelector(getUserCartSelector);
+  const cart: Item[] = useSelector(getUserCartSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());

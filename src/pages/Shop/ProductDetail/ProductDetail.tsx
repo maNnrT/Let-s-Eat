@@ -11,25 +11,15 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
 import { addToCart } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
-type product = {
-  id: number | undefined;
-  type: string;
-  dish: string;
-  img: string;
-  name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-};
+import { Product } from '@/types/types';
+
 interface Props {
   id: number | undefined;
   onClose: () => void;
 }
 function ProductDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
-  const productById: product = useSelector(getProductByIdSelector);
+  const productById: Product = useSelector(getProductByIdSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
