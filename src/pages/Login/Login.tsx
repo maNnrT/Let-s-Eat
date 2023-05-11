@@ -22,7 +22,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 function Login(): JSX.Element {
-  const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
+  const { data: accounts, isSuccess, isError, error } = useGetAccountsQuery();
   // if (isLoading) {
   //   console.log('loading');
   // } else if (isSuccess) {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Slider from './Slider';
+
 import CarouselProduct from './CarouselProduct';
 import CarouselCustomer from './CarouselCustomer';
 import letEatImg from '@/assets/image/image1.png';
