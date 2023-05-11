@@ -41,6 +41,10 @@ export default {
       fontFamily: {
         fahkwang: ["Fahkwang", "sans-serif"],
       },
+      screens: {
+        tablet: "768px",
+        desktop: "1024px",
+      },
     },
   },
   plugins: [],

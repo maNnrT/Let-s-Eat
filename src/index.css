@@ -4,18 +4,18 @@
 
 @layer components {
   .panel-layer {
-    @apply w-full max-w-[90vw] bg-fdf9f5 mx-auto relative
-    after:content-[""] after:w-[85vw] after:h-[2.4rem] after:bg-ac917d after:opacity-50 after:absolute after:top-[-24px] after:left-0 after:right-0 after:my-0 after:mx-auto 
-    before:content-[""] before:w-[85vw] before:h-[2.4rem] before:bg-ac917d before:opacity-50 before:absolute before:bottom-[-24px] before:left-0 before:right-0 before:my-0 before:mx-auto;
+    @apply w-full tablet:max-w-[90vw] max-w-[100vw] bg-fdf9f5 mx-auto relative
+    after:content-[""] after:tablet:w-[85vw] after:w-[87vw] after:tablet:h-[2.4rem] after:h-[1.6rem] after:bg-ac917d after:opacity-50 after:absolute after:tablet:top-[-24px] after:top-[-1.6rem] after:left-0 after:right-0 after:my-0 after:mx-auto 
+    before:content-[""] before:tablet:w-[85vw] before:w-[87vw] before:tablet:h-[2.4rem] before:h-[1.6rem] before:bg-ac917d before:opacity-50 before:absolute before:tablet:bottom-[-24px] before:bottom-[-1.6rem] before:left-0 before:right-0 before:my-0 before:mx-auto;
   }
   .panel-seperate {
-    @apply w-full max-w-[70vw] flex justify-center border-b-4 border-dotted mx-auto;
+    @apply w-full tablet:max-w-[70vw] max-w-[87vw] flex justify-center border-b-4 border-dotted mx-auto;
   }
   .container {
-    @apply w-full max-w-[85vw] mx-auto;
+    @apply w-full tablet:max-w-[85vw] max-w-[87vw] mx-auto;
   }
   .btn-secondary {
-    @apply flex justify-center items-center w-[17.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] text-f6e8d6 
+    @apply flex justify-center items-center tablet:w-[17.6rem] w-[15.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] text-f6e8d6 
     hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200;
   }
 }

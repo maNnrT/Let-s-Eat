@@ -6,7 +6,7 @@ function BannerSliderItem({ img }: Props) {
   return (
     <div
       style={{ backgroundImage: `url(${img})` }}
-      className="w-full h-[90rem] bg-center bg-cover relative duration-500"
+      className="w-full tablet:h-[90rem] h-[32rem] bg-center bg-cover relative duration-500"
     ></div>
   );
 }

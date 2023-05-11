@@ -4,10 +4,29 @@ import { NavLink } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 interface Props {
-  title:string,
-  to:string,
+  title: string;
+  to: string;
+  display?: string;
+  onClick?: ()=> void;
 }
-function HeaderItem({ title, to }: Props) {
+function HeaderItem({ title, to, display,onClick }: Props) {
+  if (display === 'mobile') {
+    return (
+      <NavLink
+        to={to}
+        className={(navData) =>
+          cx(
+            'text-[1.6rem] leading-[100%] mb-[1.6rem] font-medium hover:text-secondary hover:font-bold hover:tracking-[0em] hover:duration-200 w-fit',
+            { active: navData.isActive },
+          )
+        }
+        title={title}
+        onClick={onClick}
+      >
+        <span>{title}</span>
+      </NavLink>
+    );
+  }
   return (
     <NavLink
       to={to}

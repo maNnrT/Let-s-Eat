@@ -34,7 +34,7 @@ function BannerSlide() {
   };
 
   return (
-    <div className="w-full h-[90rem] relative">
+    <div className="w-full tablet:h-[90rem] h-[32rem] relative">
       <Swiper
         pagination={true}
         modules={[Pagination]}
@@ -57,28 +57,38 @@ function BannerSlide() {
             <BannerSliderItem img={slide.url} />
           </SwiperSlide>
         ))}
-        <div className="block absolute top-[34.8rem] left-[3.9rem] cursor-pointer z-[1]" onClick={swipePrev}>
+        <div
+          className="hidden tablet:block absolute top-[34.8rem] left-[3.9rem] cursor-pointer z-[1]"
+          onClick={swipePrev}
+        >
           <img src={leftArrow} alt="" />
         </div>
-        <div className="block absolute top-[34.8rem] right-[3.9rem] cursor-pointer z-[1]" onClick={swipeNext}>
+        <div
+          className="hidden tablet:block absolute top-[34.8rem] right-[3.9rem] cursor-pointer z-[1]"
+          onClick={swipeNext}
+        >
           <img src={rightArrow} alt="" />
         </div>
-        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] pt-[27.4rem]">
-          <h1 className="font-fahkwang font-normal text-[6.4rem] leading-[100%] w-[54.2%] m-[0rem] line-clamp-1 overflow-visible">
+        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] tablet:pt-[27.4rem] pt-[11.2rem]">
+          <p className="font-fahkwang font-normal tablet:text-[6.4rem] text-[2.6rem] leading-[110%] w-[54.2%] m-[0rem] truncate">
             Sign up & get baked!
-          </h1>
-          <p className=" font-light text-[1.8rem] text-ededed mt-[2.9rem] w-[54.2%] line-clamp-3">
+          </p>
+          <p className="tablet:block font-light text-[1.8rem] text-ededed mt-[2.9rem] w-[54.2%] hidden line-clamp-3">
             Let’s Eat produces a variety of hand-crafted bakery goods for private label customers, as well as a full
             line of packaged and labeled specialty products. Sign up for our newsletter and be the first to see our
             latest events, exclusive promotions, and new arrivals!
           </p>
-          <div className="w-[28rem] h-[5.2rem] mt-[64px] border-[2px]  border-767676  flex items-center justify-between">
+          <p className="tablet:hidden font-light text-[1.6rem] leading-[140%] text-ededed mt-[2.9rem] block line-clamp-3 w-full">
+            Sign up for our newsletter and be the first to see our latest events, exclusive promotions, and new
+            arrivals!
+          </p>
+          <div className="w-full tablet:w-[28rem] h-[5.2rem] tablet:mt-[6.4rem] mt-[1.6rem] border-[2px] border-767676  flex items-center justify-between">
             <input
               type="text"
-              className="w-[23.2rem] h-full bg-transparent pl-[1.6rem] py-[1.2rem] outline-none  placeholder:text-white"
+              className="w-[23.2rem] h-full bg-transparent pl-[1.6rem] py-[1.2rem] outline-none  placeholder:text-white flex-1"
               placeholder="youremail@gmail.com"
             />
-            <button className="flex items-center justify-center w-[4.8rem] h-full bg-secondary/80 rounded-e-[2px]">
+            <button className="w-[5.2rem] h-full bg-secondary/80 btn-secondary">
               <IoIosArrowForward size={30} color="#DCDCDC" />
             </button>
           </div>

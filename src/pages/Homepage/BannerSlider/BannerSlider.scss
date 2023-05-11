@@ -1,4 +1,10 @@
 .mySwiper1 > .swiper-pagination {
   width: auto;
   left: 10.5rem;
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .mySwiper1 > .swiper-pagination {
+    display: block;
+  }
 }

@@ -24,7 +24,7 @@ function CarouselItem({ id, img, name, description, price }: Props) {
     openModal();
   };
   return (
-    <div className="w-full h-full bg-white flex flex-col">
+    <div className="w-full h-full bg-white flex flex-col hover:scale-110 duration-500">
       <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem]">
         <img src={img} alt="" className="w-full h-[26.1rem] object-cover" />
