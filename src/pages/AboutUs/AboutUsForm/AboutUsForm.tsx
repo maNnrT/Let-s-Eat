@@ -19,8 +19,10 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    clearErrors,
   } = useForm<FormData>({
+    mode: 'onTouched',
     resolver: yupResolver(schema),
   });
   const [name, setName] = React.useState<string>('');
@@ -29,25 +31,27 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   const [message, setMessage] = React.useState<string>('');
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    clearErrors('name')
   };
   const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
+    clearErrors('phone')
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    clearErrors('email')
   };
   const handleMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
+    clearErrors('message')
   };
-  const [isValid, setIsValid] = React.useState<boolean>(false);
-  const onSubmit = (data: FormData) => {
-    setIsValid(true);
+  const onTouched = (data: FormData) => {
     openModal();
     console.log(data);
   };
   return (
     <div className="w-full mt-[4rem] flex flex-col">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onTouched)}>
         <div className="grid grid-cols-2 gap-x-[3.2rem]">
           <div className="flex flex-col items-start relative">
             <label htmlFor="name" className="block mb-[1.2rem] font-normal text-[1.6rem] leading-[0%] text-primary">
@@ -63,11 +67,10 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
               id="name"
               name="name"
             />
-            {errors.name !== undefined ? (
-              <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>
-            ) : (
+            {errors.name && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>}
+            {touchedFields.name && !errors.name && (
               <span className="absolute right-[1.2rem] top-[2.4rem]">
-                {isValid ? <img src={check} alt="" /> : null}
+                <img src={check} alt="" />
               </span>
             )}
           </div>
@@ -85,11 +88,10 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
               id="phone"
               name="phone"
             />
-            {errors.phone !== undefined ? (
-              <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.phone?.message}</p>
-            ) : (
+            {errors.phone && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.phone?.message}</p>}
+            {touchedFields.phone && !errors.phone && (
               <span className="absolute right-[1.2rem] top-[2.4rem]">
-                {isValid ? <img src={check} alt="" /> : null}
+                <img src={check} alt="" />
               </span>
             )}
           </div>
@@ -111,10 +113,11 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
             id="email"
             name="email"
           />
-          {errors.email !== undefined ? (
-            <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>
-          ) : (
-            <span className="absolute right-[1.2rem] top-[2.4rem]">{isValid ? <img src={check} alt="" /> : null}</span>
+          {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
+          {touchedFields.email && !errors.email && (
+            <span className="absolute right-[1.2rem] top-[2.4rem]">
+              <img src={check} alt="" />
+            </span>
           )}
         </div>
         <label

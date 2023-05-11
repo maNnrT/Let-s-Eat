@@ -13,12 +13,12 @@ import * as yup from 'yup';
 import { Item } from '@/types/types';
 const schema = yup
   .object({
-    name: yup.string(),
+    name: yup.string().required('Name is required!'),
     email: yup.string().required('Email is required!').email('Email is invalid!'),
     phone: yup.string().required('Phone number is required!'),
-    city: yup.string(),
+    city: yup.string().required('City is required!'),
     zipCode: yup.string().required('Zip code is required!'),
-    address: yup.string(),
+    address: yup.string().required('Address is required!'),
     discountCode: yup.string(),
   })
   .required();
@@ -27,14 +27,14 @@ function CheckOut(): JSX.Element {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    clearErrors,
   } = useForm<FormData>({
+    mode: 'onTouched',
     resolver: yupResolver(schema),
-  });
-  const ref = React.useRef<HTMLSpanElement>(null);
-  const [isValid, setIsValid] = React.useState<boolean>(false);
-  const onSubmit = (data: FormData) => {
-    setIsValid(true);
+  })
+
+  const onTouched = (data: FormData) => {
     console.log(data);
     openModal();
   };
@@ -55,21 +55,27 @@ function CheckOut(): JSX.Element {
   const [discountCode, setDiscountCode] = React.useState<string>('');
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    clearErrors('name')
   };
   const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
+    clearErrors('phone')
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    clearErrors('email')
   };
   const handleCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
+    clearErrors('city')
   };
   const handleZipCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setZipCode(e.target.value);
+    clearErrors('zipCode')
   };
   const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value);
+    clearErrors('address')
   };
   const handleDiscountCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDiscountCode(e.target.value);
@@ -119,7 +125,7 @@ function CheckOut(): JSX.Element {
           know each other a little better, we are offering you $10 off an order of $50 or more.
         </p>
         <div className="container h-fit mt-[6rem]">
-          <form onSubmit={handleSubmit(onSubmit)} className="mx-auto h-fit">
+          <form onSubmit={handleSubmit(onTouched)} className="mx-auto h-fit">
             <div className="w-[82.3%] h-fit grid grid-cols-[58.7%_auto] gap-x-[3.2rem] mx-auto">
               <div className="h-fit">
                 <div className="pt-[4.4rem] px-[4rem] pb-[4rem] flex flex-col items-start bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
@@ -140,9 +146,12 @@ function CheckOut(): JSX.Element {
                       id="name"
                       name="name"
                     />
-                    {errors.name !== undefined ? (
-                      <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>
-                    ) : null}
+                    {errors.name && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>}
+                    {touchedFields.name && !errors.name && (
+                      <span className="absolute right-[1.2rem] top-[3.8rem]">
+                        <img src={check} alt="" />
+                      </span>
+                    )}
                   </div>
                   <div className="relative w-full">
                     <label
@@ -161,11 +170,10 @@ function CheckOut(): JSX.Element {
                       id="email"
                       name="email"
                     />
-                    {errors.email !== undefined ? (
-                      <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>
-                    ) : (
-                      <span className="absolute right-[1.2rem] top-[6.75rem]">
-                        {isValid ? <img src={check} alt="" /> : null}
+                    {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
+                    {touchedFields.email && !errors.email && (
+                      <span className="absolute right-[1.2rem] top-[6.8rem]">
+                        <img src={check} alt="" />
                       </span>
                     )}
                   </div>
@@ -187,9 +195,12 @@ function CheckOut(): JSX.Element {
                         id="city"
                         name="city"
                       />
-                      {errors.city !== undefined ? (
-                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.city?.message}</p>
-                      ) : null}
+                      {errors.city && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.city?.message}</p>}
+                      {touchedFields.city && !errors.city && (
+                        <span className="absolute right-[1.2rem] top-[3.8rem]">
+                          <img src={check} alt="" />
+                        </span>
+                      )}
                     </div>
                     <div className="relative w-full">
                       <label
@@ -208,11 +219,12 @@ function CheckOut(): JSX.Element {
                         id="zipCode"
                         name="zipCode"
                       />
-                      {errors.zipCode !== undefined ? (
+                      {errors.zipCode && (
                         <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.zipCode?.message}</p>
-                      ) : (
-                        <span className="absolute right-[1.2rem] top-[4rem]" ref={ref}>
-                          {isValid ? <img src={check} alt="" /> : null}
+                      )}
+                      {touchedFields.zipCode && !errors.zipCode && (
+                        <span className="absolute right-[1.2rem] top-[3.8rem]">
+                          <img src={check} alt="" />
                         </span>
                       )}
                     </div>
@@ -235,9 +247,14 @@ function CheckOut(): JSX.Element {
                         id="address"
                         name="address"
                       />
-                      {errors.address !== undefined ? (
+                      {errors.address && (
                         <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.address?.message}</p>
-                      ) : null}
+                      )}
+                      {touchedFields.address && !errors.address && (
+                        <span className="absolute right-[1.2rem] top-[3.8rem]">
+                          <img src={check} alt="" />
+                        </span>
+                      )}
                     </div>
                     <div className="relative w-full">
                       <label
@@ -256,11 +273,12 @@ function CheckOut(): JSX.Element {
                         id="phone"
                         name="phone"
                       />
-                      {errors.phone !== undefined ? (
+                      {errors.phone && (
                         <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.phone?.message}</p>
-                      ) : (
-                        <span className="absolute right-[1.2rem] top-[4rem]" ref={ref}>
-                          {isValid ? <img src={check} alt="" /> : null}
+                      )}
+                      {touchedFields.phone && !errors.phone && (
+                        <span className="absolute right-[1.2rem] top-[3.8rem]">
+                          <img src={check} alt="" />
                         </span>
                       )}
                     </div>

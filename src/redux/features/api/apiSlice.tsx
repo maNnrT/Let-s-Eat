@@ -8,7 +8,10 @@ export const apiSlice = createApi({
     getAccounts: builder.query<Account[], void>({
       query: () => '/accounts',
     }),
+    getAccount:builder.query<Account,number>({
+      query:(id) => `/account/${id}`
+    })
   }),
 });
 
-export const { useGetAccountsQuery } = apiSlice;
+export const { useGetAccountsQuery, useGetAccountQuery } = apiSlice;

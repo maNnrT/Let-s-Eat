@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector } from '@/redux/selectors';
 import { Account } from '@/types/types';
 import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
+import check from '@/assets/svg/check_formCheckOut.svg';
 const schema = yup
   .object({
     firstName: yup.string().required('First name is required!'),
@@ -21,7 +22,7 @@ const schema = yup
       .required('Confirm password is required!')
       .min(8, 'Confirm password must have at least 8 characters ')
       .oneOf([yup.ref('password')], 'Confirm password must be the same with password'),
-    term: yup.bool().oneOf([true], 'You must agree to our term'),
+    term: yup.boolean().oneOf([true], 'You must agree to our term'),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
@@ -31,16 +32,20 @@ function Login(): JSX.Element {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    clearErrors,
   } = useForm<FormData>({
+    mode: 'onTouched',
     resolver: yupResolver(schema),
   });
   const accountList: Account[] = useSelector(getAccountsSelector);
-  const onSubmit = (data: FormData) => {
+  const onTouched = (data: FormData) => {
     if (isSuccess) {
       const isExist = accounts.every((account: Account) => {
         return account.username !== data.email;
       });
+      console.log('check:', errors.term);
+      
       if (isExist !== false) {
         dispatch(addNewAccounts(data))
           .then(() => {
@@ -72,21 +77,27 @@ function Login(): JSX.Element {
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
+    clearErrors('firstName')
   };
   const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value);
+    clearErrors('lastName')
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    clearErrors('email')
   };
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+    clearErrors('password')
   };
   const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value);
+    clearErrors('confirmPassword')
   };
   const handleTerm = () => {
     setTerm(!term);
+    clearErrors('term')
   };
   return (
     <div className="w-full mb-[-12rem] ">
@@ -97,99 +108,146 @@ function Login(): JSX.Element {
           </p>
           {isSignUpSuccess === false ? (
             <>
-              <div className="font-light text-[1.6rem] text-666565 mt-[1rem] self-center">
-                Already have an account?{' '}
-                <Link to={config.routes.login} className="underline cursor-pointer text-secondary">
-                  Log in
-                </Link>
+              <div className="font-light text-[1.6rem] text-666565 mt-[1rem] self-center flex flex-col items-center">
+                <p>
+                  Already have an account?
+                  <Link to={config.routes.login} className="underline cursor-pointer text-secondary">
+                    Log in
+                  </Link>
+                </p>
+
                 <p className="font-light text-[1.6rem] text-red-600 mt-[1rem] " ref={ref}>
                   {}
                 </p>
               </div>
-              <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-[1rem]">
+              <form onSubmit={handleSubmit(onTouched)} className="w-full mt-[1rem]">
                 <div className="flex w-full justify-between">
                   <div className="flex flex-col grow mr-[3rem]">
-                    <label htmlFor="firstname" className="font-normal text-[1.8rem] text-secondary">
-                      First name
-                    </label>
-                    <input
-                      {...register('firstName')}
-                      type="text"
-                      id="firstname"
-                      placeholder="Enter first name..."
-                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                      value={firstName}
-                      onChange={(e) => handleFirstName(e)}
-                    />
-                    <p className="text-red-600">{errors.firstName?.message}</p>
+                    <div className="flex flex-col items-start relative">
+                      <label htmlFor="firstname" className="font-normal text-[1.8rem] text-secondary">
+                        First name
+                      </label>
+                      <input
+                        {...register('firstName')}
+                        type="text"
+                        id="firstname"
+                        placeholder="Enter first name..."
+                        className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                        value={firstName}
+                        onChange={(e) => handleFirstName(e)}
+                      />
+                      {errors.firstName && (
+                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.firstName?.message}</p>
+                      )}
+                      {touchedFields.firstName && !errors.firstName && (
+                        <span className="absolute right-[1.2rem] top-[3.2rem]">
+                          <img src={check} alt="" />
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className="flex flex-col grow">
-                    <label htmlFor="lastname" className="font-normal text-[1.8rem] text-secondary">
-                      Last name
-                    </label>
-                    <input
-                      {...register('lastName')}
-                      type="text"
-                      id="lastname"
-                      placeholder="Enter last name..."
-                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                      value={lastName}
-                      onChange={(e) => handleLastName(e)}
-                    />
-                    <p className="text-red-600">{errors.lastName?.message}</p>
+                    <div className="flex flex-col items-start relative">
+                      <label htmlFor="lastname" className="font-normal text-[1.8rem] text-secondary">
+                        Last name
+                      </label>
+                      <input
+                        {...register('lastName')}
+                        type="text"
+                        id="lastname"
+                        placeholder="Enter last name..."
+                        className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                        value={lastName}
+                        onChange={(e) => handleLastName(e)}
+                      />
+                      {errors.lastName && (
+                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.lastName?.message}</p>
+                      )}
+                      {touchedFields.lastName && !errors.lastName && (
+                        <span className="absolute right-[1.2rem] top-[3.2rem]">
+                          <img src={check} alt="" />
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                    Email
-                  </label>
-                  <input
-                    {...register('email')}
-                    type="email"
-                    id="email"
-                    placeholder="Enter email..."
-                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                    value={email}
-                    onChange={(e) => handleEmail(e)}
-                  />
-                  <p className="text-red-600">{errors.email?.message}</p>
+                  <div className="flex flex-col items-start relative">
+                    <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
+                      Email
+                    </label>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      placeholder="Enter email..."
+                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                      value={email}
+                      onChange={(e) => handleEmail(e)}
+                    />
+                    {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
+                    {touchedFields.email && !errors.email && (
+                      <span className="absolute right-[1.2rem] top-[5rem]">
+                        <img src={check} alt="" />
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="password" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                    Password
-                  </label>
-                  <input
-                    {...register('password')}
-                    type="password"
-                    id="password"
-                    placeholder="Enter passwords..."
-                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565"
-                    value={password}
-                    onChange={(e) => handlePassword(e)}
-                  />
-                  <p className="text-red-600">{errors.password?.message}</p>
+                  <div className="flex flex-col items-start relative">
+                    <label htmlFor="password" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
+                      Password
+                    </label>
+                    <input
+                      {...register('password')}
+                      type="password"
+                      id="password"
+                      placeholder="Enter passwords..."
+                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565"
+                      value={password}
+                      onChange={(e) => handlePassword(e)}
+                    />
+                    {errors.password && (
+                      <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.password?.message}</p>
+                    )}
+                    {touchedFields.password && !errors.password && (
+                      <span className="absolute right-[1.2rem] top-[5rem]">
+                        <img src={check} alt="" />
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="confirmPassword" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                    Confirm password
-                  </label>
-                  <input
-                    {...register('confirmPassword')}
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Enter confirm password..."
-                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                    value={confirmPassword}
-                    onChange={(e) => handleConfirmPassword(e)}
-                  />
-                  <p className="text-red-600">{errors.confirmPassword?.message}</p>
+                  <div className="flex flex-col items-start relative">
+                    <label htmlFor="confirmPassword" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
+                      Confirm password
+                    </label>
+                    <input
+                      {...register('confirmPassword')}
+                      type="password"
+                      id="confirmPassword"
+                      placeholder="Enter confirm password..."
+                      className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                      value={confirmPassword}
+                      onChange={(e) => handleConfirmPassword(e)}
+                    />
+                    {errors.confirmPassword && (
+                      <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.confirmPassword?.message}</p>
+                    )}
+                    {touchedFields.confirmPassword && !errors.confirmPassword && (
+                      <span className="absolute right-[1.2rem] top-[5rem]">
+                        <img src={check} alt="" />
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="flex justify-center items-center mt-[1.8rem]">
-                  <input type="checkbox" name="" id="term" className="mr-2" onChange={handleTerm} checked={term} />
+                <div className="flex justify-center items-center mt-[1.8rem] relative">
+                  <input type="checkbox" id="term" className="mr-2"  {...register('term')} />
                   <label htmlFor="term" className="font-light text-[1.6rem] text-666565 inline cursor-default mr-2">
                     I agreed with
                   </label>
                   <span className="text-secondary underline cursor-pointer">terms and services</span>
+                  {errors.term && <p className="text-red-600 absolute bottom-[-2rem]">{errors.term?.message}</p>}
                 </div>
                 <button className="btn-secondary mt-[1.8rem] mx-auto">Submit</button>
               </form>
