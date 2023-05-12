@@ -8,7 +8,7 @@ import natureIngredient from '@/assets/svg/ingredients_Feature.svg';
 import workingHoursImg from '@/assets/image/image2.png';
 import sweetBakery from '@/assets/image/image3.png';
 import testimonial from '@/assets/Image/image9.png';
-import { getIsLogin } from '@/redux/selectors';
+import { getIdUserSelector, getIsLogin, getUserCartSelector } from '@/redux/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { filterChange } from '@/redux/features/products/ProductsSlice';
@@ -16,12 +16,15 @@ import { getProductsByFilterSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 // import config from '@/config';
 import BannerSlide from './BannerSlider/BannerSlider';
-import { Product } from '@/types/types';
+import { Item, Product } from '@/types/types';
+import { addUserCart } from '@/redux/features/cart/CartSlice';
 function Homepage() {
   // const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products: Product[] = useSelector(getProductsByFilterSelector);
+  const cart: Item[] = useSelector(getUserCartSelector); 
+  const idUser: number | undefined = useSelector(getIdUserSelector);
   const filterBtn = [
     { value: 'freshbaked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
@@ -38,7 +41,26 @@ function Homepage() {
   const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     dispatch(filterChange((e.target as HTMLButtonElement).value));
   };
-  
+  const updateCart = () => {
+    if (cart.length > 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+    } else if (cart.length <= 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart: [],
+        }),
+      );
+    }
+  };
+  React.useEffect(() => {
+    updateCart();
+  });
   return (
     <div>
       {/* <Slider /> */}
