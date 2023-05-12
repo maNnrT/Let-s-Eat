@@ -1,12 +1,10 @@
-import { ReactNode } from 'react';
 import Footer from '@/layouts/components/Footer';
-interface Props {
-  children: ReactNode;
-}
-function FooterOnly({ children }: Props): JSX.Element {
+import { Outlet } from 'react-router-dom';
+
+function FooterOnly(): JSX.Element {
   return (
     <>
-      <div>{children}</div>
+      <div><Outlet></Outlet></div>
       <Footer />
     </>
   );

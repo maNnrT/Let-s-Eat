@@ -1,16 +1,16 @@
-import * as React from 'react';
 import Header from '@/layouts/components/Header';
 import Footer from '@/layouts/components/Footer';
-interface Props {
-  children: React.ReactNode;
-}
-const DefaultLayout: React.FunctionComponent<Props> = ({ children }: Props) => {
+import { Outlet } from 'react-router-dom';
+
+function DefaultLayout2(): JSX.Element {
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
-      <div className="h-auto w-full">{children}</div>
+      <div className="h-auto w-full">
+        <Outlet></Outlet>
+      </div>
       <Footer />
     </div>
   );
-};
-export default DefaultLayout;
+}
+export default DefaultLayout2;

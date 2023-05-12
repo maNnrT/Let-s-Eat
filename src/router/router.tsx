@@ -1,7 +1,7 @@
-import {createBrowserRouter} from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App.tsx';
 import NoMatch from '@/pages/NoMatch';
-import DefaultLayout2 from '@/layouts/DefaultLayout2/DefaultLayout2.tsx';
+import DefaultLayout2 from '@/layouts/DefaultLayout/DefaultLayout';
 import { FooterOnly2 } from '@/layouts';
 import Homepage from '@/pages/Homepage';
 import AboutUs from '@/pages/AboutUs';

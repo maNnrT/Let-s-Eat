@@ -1,8 +1,7 @@
 import * as React from 'react';
 import CartItem from './CartItem/CartItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
-import { getIdUserSelector } from '@/redux/selectors';
 import { Link } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
@@ -11,9 +10,9 @@ import { Item } from '@/types/types';
 interface Props {
   cart: Item[];
   totalPrice: string;
-  idUser:number
+  idUser: number;
 }
-function CartTable({ cart, totalPrice,idUser }: Props): JSX.Element {
+function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
   const dispatch = useDispatch();
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
@@ -22,7 +21,7 @@ function CartTable({ cart, totalPrice,idUser }: Props): JSX.Element {
       refDialog.current?.close();
     }, 1000);
   };
-  const updateCart =() =>{
+  const updateCart = () => {
     if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
@@ -38,7 +37,7 @@ function CartTable({ cart, totalPrice,idUser }: Props): JSX.Element {
         }),
       );
     }
-  }
+  };
   const updateCartBtnHandle = () => {
     updateCart();
     openModal();

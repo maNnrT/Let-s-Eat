@@ -2,7 +2,7 @@ import config from '@/config';
 import logo from '@/assets/svg/Logo.svg';
 import cartImg from '@/assets/svg/cart.svg';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,6 @@ import { Item } from '@/types/types';
 function Header(): JSX.Element {
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleNav = (): void => {
     setNav(!nav);
   };
@@ -95,11 +94,11 @@ function Header(): JSX.Element {
         <div className="tablet:hidden cursor-pointer" onClick={handleNav}>
           <AiOutlineMenu size={30} />
         </div>
-        <div 
+        <div
           className={
             !nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[8rem] pl-[1.6rem] pb-[4.4rem] ease-in-out duration-500 hidden'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[8rem] pl-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 hidden'
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[8rem] pl-[1.6rem] pb-[4.4rem] ease-in-out duration-500 tablet:hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[8rem] pl-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
           }
         >
           <div className="flex flex-col ">

@@ -1,13 +1,6 @@
 import './App.css';
-import { Fragment, ReactNode } from 'react';
-import { Routes, Route, createBrowserRouter, Outlet } from 'react-router-dom';
-import { privateRoutes, publicRoutes } from './routes';
-import { DefaultLayout } from './layouts';
+import { Outlet } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import PrivateRoutes from './utils/PrivateRoute';
-interface Props {
-  children: ReactNode | undefined;
-}
 
 function App(): JSX.Element {
   return (
@@ -58,7 +51,7 @@ function App(): JSX.Element {
                 })}
             </Route>
           </Routes> */}
-          <Outlet/>
+          <Outlet />
         </ScrollToTop>
       </div>
     </div>

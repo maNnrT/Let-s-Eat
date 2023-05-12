@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import config from '@/config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RegisterSuccessful from './RegisterSuccessful';
 import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 function Login(): JSX.Element {
-  const { data: accounts, isLoading, isSuccess, isError, error } = useGetAccountsQuery();
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const {
     register,
@@ -40,26 +40,25 @@ function Login(): JSX.Element {
   });
   const accountList: Account[] = useSelector(getAccountsSelector);
   const onTouched = (data: FormData) => {
-    if (isSuccess) {
-      const isExist = accounts.every((account: Account) => {
-        return account.username !== data.email;
-      });
-      console.log('check:', errors.term);
-      
-      if (isExist !== false) {
-        dispatch(addNewAccounts(data))
-          .then(() => {
-            if (ref.current) ref.current.innerHTML = '';
-            setIsSignUpSuccess(true);
-          })
-          .catch(() => {
-            console.error("Can't add new account");
-            setIsSignUpSuccess(false);
-          });
-      } else {
-        if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
-        setIsSignUpSuccess(false);
-      }
+    const isExist = accountList.every((account: Account) => {
+      return account.username !== data.email;
+    });
+    console.log('check:', errors.term);
+
+    if (isExist !== false) {
+      dispatch(addNewAccounts(data))
+        .then(() => {
+          if (ref.current) ref.current.innerHTML = '';
+          setIsSignUpSuccess(true);
+        })
+        .catch(() => {
+          console.error("Can't add new account");
+          setIsSignUpSuccess(false);
+        });
+      navigate(config.routes.login)
+    } else {
+      if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
+      setIsSignUpSuccess(false);
     }
   };
   React.useEffect(() => {
@@ -77,27 +76,27 @@ function Login(): JSX.Element {
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
-    clearErrors('firstName')
+    clearErrors('firstName');
   };
   const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastName(e.target.value);
-    clearErrors('lastName')
+    clearErrors('lastName');
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    clearErrors('email')
+    clearErrors('email');
   };
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    clearErrors('password')
+    clearErrors('password');
   };
   const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value);
-    clearErrors('confirmPassword')
+    clearErrors('confirmPassword');
   };
   const handleTerm = () => {
     setTerm(!term);
-    clearErrors('term')
+    clearErrors('term');
   };
   return (
     <div className="w-full mb-[-12rem] ">
@@ -242,7 +241,7 @@ function Login(): JSX.Element {
                   </div>
                 </div>
                 <div className="flex justify-center items-center mt-[1.8rem] relative">
-                  <input type="checkbox" id="term" className="mr-2"  {...register('term')} />
+                  <input type="checkbox" id="term" className="mr-2" {...register('term')} />
                   <label htmlFor="term" className="font-light text-[1.6rem] text-666565 inline cursor-default mr-2">
                     I agreed with
                   </label>
