@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccounts } from '@/redux/features/account/AccountsSlice';
 import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/features/checkLogin/CheckLoginSlice';
-import { getAccountsSelector } from '@/redux/selectors';
+import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
 import { Account } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';

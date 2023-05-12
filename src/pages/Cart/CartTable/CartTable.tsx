@@ -11,10 +11,10 @@ import { Item } from '@/types/types';
 interface Props {
   cart: Item[];
   totalPrice: string;
+  idUser:number
 }
-function CartTable({ cart, totalPrice }: Props): JSX.Element {
+function CartTable({ cart, totalPrice,idUser }: Props): JSX.Element {
   const dispatch = useDispatch();
-  const idUser: number | undefined = useSelector(getIdUserSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -121,7 +121,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
                 update cart
               </button>
               <Link
-                to={config.routes.checkout}
+                to={`${config.routes.checkout}/${idUser}`}
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
                 onClick={updateCartBtnHandle}
               >

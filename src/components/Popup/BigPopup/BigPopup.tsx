@@ -1,6 +1,6 @@
 import * as React from 'react';
 import popupImg from '@/assets/svg/image_PopUp.svg';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 interface Props {
   subtitle: string;
   title: string;
@@ -9,7 +9,12 @@ interface Props {
   btnTitle: string;
   refDialog: React.RefObject<HTMLDialogElement>;
 }
+
 function BigPopup({ subtitle, title, description, to, btnTitle, refDialog }: Props) {
+  const navigate= useNavigate()
+  const handleNavigateBtn=()=>{
+    setTimeout(()=>navigate(to),1000)
+  }
   return (
     <dialog className="w-[80rem] h-fit top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] duration-500" ref={refDialog}>
       <form className="w-full h-full">
@@ -21,9 +26,9 @@ function BigPopup({ subtitle, title, description, to, btnTitle, refDialog }: Pro
           </h1>
           <img src={popupImg} alt="" className="mt-[5.2rem]" />
           <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center mx-[0.5rem]">{description}</p>
-          <Link to={to} className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem]">
+          <div className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem] cursor-pointer" onClick={handleNavigateBtn}>
             {btnTitle}
-          </Link>
+          </div>
           <button
             type="submit"
             formMethod="dialog"

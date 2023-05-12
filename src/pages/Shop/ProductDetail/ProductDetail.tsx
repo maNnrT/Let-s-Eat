@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductByIdSelector } from '@/redux/selectors';
+import { getIdUserSelector, getIsLogin, getProductByIdSelector, getUserCartSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -9,9 +9,11 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart } from '@/redux/features/cart/CartSlice';
+import { addToCart, addUserCart } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
-import { Product } from '@/types/types';
+import { Item, Product } from '@/types/types';
+import { useNavigate } from 'react-router-dom';
+import config from '@/config';
 
 interface Props {
   id: number | undefined;
@@ -19,6 +21,11 @@ interface Props {
 }
 function ProductDetail({ id, onClose }: Props): JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const idUser: number | undefined = useSelector(getIdUserSelector);
+  const isLogin: boolean = useSelector(getIsLogin);
+  const cart: Item[] = useSelector(getUserCartSelector);
+
   const productById: Product = useSelector(getProductByIdSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
@@ -27,18 +34,42 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
       refDialog.current?.close();
     }, 1000);
   };
-  const handleAddToCart = () => {
-    dispatch(
-      addToCart({
-        id: productById.id,
-        img: productById.img,
-        name: productById.name,
-        price: productById.price,
-        quantity: numberInput,
-      }),
-    );
-    openModal();
+  const updateCart = () => {
+    if (cart.length > 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+    } else if (cart.length <= 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart: [],
+        }),
+      );
+    }
   };
+  const handleAddToCart = () => {
+    if (isLogin) {
+      dispatch(
+        addToCart({
+          id: productById.id,
+          img: productById.img,
+          name: productById.name,
+          price: productById.price,
+          quantity: numberInput,
+        }),
+      );
+      openModal();
+    } else {
+      navigate(config.routes.login);
+    }
+  };
+  React.useEffect(() => {
+    updateCart();
+  });
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
@@ -63,14 +94,16 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
     if (id) dispatch(getProductById(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const pagination = {
+    clickable: true,
+  };
   return (
     <div className="bg-[rgba(0,0,0,0.5)] absolute h-full w-full z-10">
       <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
       <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
         <div className="w-full h-full relative">
           <Swiper
-            pagination={true}
+            pagination={pagination}
             modules={[Pagination]}
             slidesPerView={1}
             className="h-full"

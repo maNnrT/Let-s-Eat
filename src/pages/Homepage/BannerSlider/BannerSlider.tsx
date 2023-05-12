@@ -33,10 +33,13 @@ function BannerSlide() {
     ref.current?.swiper.slidePrev();
   };
 
+  const pagination = {
+    clickable: true,
+  }
   return (
     <div className="w-full tablet:h-[90rem] h-[32rem] relative">
       <Swiper
-        pagination={true}
+        pagination={pagination}
         modules={[Pagination]}
         slidesPerView={1}
         className="mySwiper1"

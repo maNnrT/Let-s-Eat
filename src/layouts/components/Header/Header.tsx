@@ -20,7 +20,6 @@ function Header(): JSX.Element {
   };
   const handleLogOut = () => {
     dispatch(setIsLoginFalse());
-    navigate(config.routes.login);
   };
   const isLogin: boolean = useSelector(getIsLogin);
   const idUser: number | undefined = useSelector(getIdUserSelector);
@@ -87,7 +86,7 @@ function Header(): JSX.Element {
                       translate-x-[50%]
                       translate-y-[-50%]"
                 >
-                  {totalQuantity}
+                  {cart.length}
                 </div>
               </Link>
             </>
@@ -96,11 +95,11 @@ function Header(): JSX.Element {
         <div className="tablet:hidden cursor-pointer" onClick={handleNav}>
           <AiOutlineMenu size={30} />
         </div>
-        <div
+        <div 
           className={
             !nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[8rem] pl-[1.6rem] pb-[4.4rem] ease-in-out duration-500'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[8rem] pl-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500'
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[8rem] pl-[1.6rem] pb-[4.4rem] ease-in-out duration-500 hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[8rem] pl-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 hidden'
           }
         >
           <div className="flex flex-col ">

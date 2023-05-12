@@ -14,6 +14,7 @@ interface Props {
   products: Product[];
 }
 export default function CarouselProduct({ products }: Props) {
+  
   const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();

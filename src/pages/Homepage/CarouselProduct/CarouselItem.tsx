@@ -1,7 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '@/redux/features/cart/CartSlice';
 import * as React from 'react';
 import SmallPopup from '@/components/Popup/SmallPopup';
+import { getIsLogin } from '@/redux/selectors';
+import { useNavigate } from 'react-router-dom';
+import config from '@/config';
 
 interface Props {
   id: number | undefined;
@@ -12,6 +15,8 @@ interface Props {
 }
 function CarouselItem({ id, img, name, description, price }: Props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogin: boolean = useSelector(getIsLogin);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -20,14 +25,18 @@ function CarouselItem({ id, img, name, description, price }: Props) {
     }, 1000);
   };
   const handleAddToCart = () => {
-    dispatch(addToCart({ id, img, name, price, quantity: 1 }));
-    openModal();
+     if (isLogin) {
+       dispatch(addToCart({ id, img, name, price, quantity: 1 }));
+       openModal();
+     }else{
+      navigate(config.routes.login);
+     }
   };
   return (
-    <div className="w-full h-full bg-white flex flex-col hover:scale-110 duration-500">
+    <div className="w-full h-full bg-white flex flex-col group ">
       <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
-      <div className="w-full h-[26.1rem]">
-        <img src={img} alt="" className="w-full h-[26.1rem] object-cover" />
+      <div className="w-full h-[26.1rem] overflow-hidden">
+        <img src={img} alt="" className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500" />
       </div>
       <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
         <p className="text-[2.2rem] leading-[2.9rem] font-fahkwang font-semibold text-444546 text-left line-clamp-1">

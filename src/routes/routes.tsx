@@ -23,12 +23,13 @@ type pathObject = {
   component: () => JSX.Element;
   layout?: ({ children }: Props) => JSX.Element;
 };
+
 const publicRoutes: pathObject[] = [
   { path: config.routes.homepage, component: Homepage },
   { path: config.routes.aboutus, component: AboutUs },
   { path: config.routes.contact, component: Contact },
   { path: config.routes.menucombo, component: MenuCombo },
-  { path: config.routes.shop, component: Shop },
+  { path: config.routes.shop, component: Shop},
   { path: `${config.routes.shop}/freshbaked`, component: FreshBaked },
   { path: config.routes.login, component: Login, layout: FooterOnly },
   { path: config.routes.register, component: Register, layout: FooterOnly },
@@ -40,7 +41,7 @@ const privateRoutes: pathObject[] = [
     component: Cart,
   },
   {
-    path: config.routes.checkout,
+    path: `${config.routes.checkout}/:idUser`,
     component: CheckOut,
   },
 ];

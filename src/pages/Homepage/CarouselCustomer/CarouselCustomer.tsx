@@ -2,7 +2,7 @@ import * as React from 'react';
 import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
-import { Swiper, SwiperRef, SwiperSlide,  } from 'swiper/react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -11,18 +11,20 @@ import { Pagination } from 'swiper';
 // import required modules
 
 export default function CarouselCustomer() {
-  const ref = React.useRef<SwiperRef|null>(null);
+  const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };
   const swipePrev = () => {
     ref.current?.swiper.slidePrev();
   };
-
+  const pagination = {
+    clickable: true,
+  };
   return (
     <div className="w-full relative mb-[7.6rem] h-auto ">
       <Swiper
-        pagination={true}
+        pagination={pagination}
         modules={[Pagination]}
         navigation
         slidesPerView={1}

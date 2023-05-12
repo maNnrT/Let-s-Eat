@@ -1,41 +1,21 @@
 import './App.css';
 import { Fragment, ReactNode } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, createBrowserRouter, Outlet } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from './routes';
 import { DefaultLayout } from './layouts';
-import { getIsLogin } from './redux/selectors';
-import { useSelector } from 'react-redux';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import PrivateRoutes from './utils/PrivateRoute';
 interface Props {
   children: ReactNode | undefined;
 }
+
 function App(): JSX.Element {
-  const isLogin = useSelector(getIsLogin);
   return (
     <div>
       <div className="App">
-        <Routes>
-          {publicRoutes.map((route, index) => {
-            let Layout: React.FunctionComponent<Props> = DefaultLayout;
-            if (route.layout) {
-              Layout = route.layout;
-            } else if (route.layout === null) {
-              Layout = Fragment;
-            }
-            const Page = route.component;
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              ></Route>
-            );
-          })}
-          {isLogin &&
-            privateRoutes.map((route, index) => {
+        <ScrollToTop>
+          {/* <Routes>
+            {publicRoutes.map((route, index) => {
               let Layout: React.FunctionComponent<Props> = DefaultLayout;
               if (route.layout) {
                 Layout = route.layout;
@@ -55,7 +35,31 @@ function App(): JSX.Element {
                 ></Route>
               );
             })}
-        </Routes>
+            <Route element={<PrivateRoutes></PrivateRoutes>}>
+              {privateRoutes.map((route, index) => {
+                  let Layout: React.FunctionComponent<Props> = DefaultLayout;
+                  if (route.layout) {
+                    Layout = route.layout;
+                  } else if (route.layout === null) {
+                    Layout = Fragment;
+                  }
+                  const Page = route.component;
+                  return (
+                    <Route
+                      key={index}
+                      path={route.path}
+                      element={
+                        <Layout>
+                          <Page />
+                        </Layout>
+                      }
+                    ></Route>
+                  );
+                })}
+            </Route>
+          </Routes> */}
+          <Outlet/>
+        </ScrollToTop>
       </div>
     </div>
   );

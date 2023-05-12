@@ -14,11 +14,11 @@ import { useNavigate } from 'react-router-dom';
 import { filterChange } from '@/redux/features/products/ProductsSlice';
 import { getProductsByFilterSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
-import config from '@/config';
+// import config from '@/config';
 import BannerSlide from './BannerSlider/BannerSlider';
 import { Product } from '@/types/types';
 function Homepage() {
-  const isLogin = useSelector(getIsLogin);
+  // const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products: Product[] = useSelector(getProductsByFilterSelector);
@@ -29,15 +29,16 @@ function Homepage() {
     { value: 'coffeeTea', title: 'Coffee & Tea' },
   ];
   React.useEffect(() => {
-    if (isLogin === false) {
-      navigate(config.routes.login);
-    }
+    // if (isLogin === false) {
+    //   navigate(config.routes.login);
+    // }
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     dispatch(filterChange((e.target as HTMLButtonElement).value));
   };
+  
   return (
     <div>
       {/* <Slider /> */}
@@ -96,7 +97,7 @@ function Homepage() {
             <div className="grid grid-cols-3 tablet:mt-[4.3rem] mt-[2.8rem] w-full gap-x-[3.2rem] gap-y-[2.4rem]">
               <div className="tablet:col-span-1 col-span-3 tablet:block flex justify-between">
                 <img src={menuFeature} alt="" className="tablet:mx-auto mr-[2.4rem]" />
-                <div className='flex-1'>
+                <div className="flex-1">
                   <p className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] tablet:text-center text-373838 mt-[2rem] line-clamp-1">
                     Menu for every taste
                   </p>
@@ -107,7 +108,7 @@ function Homepage() {
               </div>
               <div className="tablet:col-span-1 col-span-3 tablet:block flex justify-between">
                 <img src={natureIngredient} alt="" className="tablet:mx-auto mr-[2.4rem]" />
-                <div className='flex-1'>
+                <div className="flex-1">
                   <p className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] tablet:text-center text-373838 mt-[2rem] line-clamp-1">
                     Natural ingredients
                   </p>
@@ -118,7 +119,7 @@ function Homepage() {
               </div>
               <div className="tablet:col-span-1 col-span-3 tablet:block flex justify-between">
                 <img src={menuFeature} alt="" className="tablet:mx-auto mr-[2.4rem]" />
-                <div className='flex-1'>
+                <div className="flex-1">
                   <p className="font-fahkwang font-medium text-[2rem] leading-[2.6rem] tablet:text-center text-373838 mt-[2rem] line-clamp-1">
                     Experienced chefs
                   </p>
@@ -130,10 +131,10 @@ function Homepage() {
             </div>
           </div>
           <div className="panel-seperate"></div>
-          <div className="container py-[9.8rem] px-[10.4rem] ">
-            <div className="grid grid-cols-12  bg-white h-auto">
+          <div className="container tablet:py-[9.8rem] tablet:px-[10.4rem] py-[2.4rem] ">
+            <div className="tablet:grid grid-cols-12  bg-white h-auto hidden">
               <div
-                className="bg-no-repeat bg-cover bg-center p-[4rem] col-span-7 h-full"
+                className="bg-no-repeat bg-cover bg-center p-[4rem] col-span-7 h-full "
                 style={{ backgroundImage: `url(${workingHoursImg})` }}
               >
                 <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0] ">—</span>
@@ -148,10 +149,10 @@ function Homepage() {
                   CONTACT US
                 </button>
               </div>
-              <div className="flex flex-col items-center pt-[6rem] col-span-5">
-                <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center line-clamp-1">
+              <div className="flex-col items-center pt-[6rem] col-span-5">
+                <p className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center line-clamp-1">
                   On weekend & Holiday
-                </h6>
+                </p>
                 <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
@@ -165,6 +166,46 @@ function Homepage() {
                   08:00 - 14:00
                 </p>
                 <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
+                  08:00 - 14:00
+                </p>
+              </div>
+            </div>
+            <div className="w-full flex flex-col tablet:hidden ">
+              <div className="tablet:flex flex-col">
+                <span className="text-secondary text-[3.2rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0">—</span>
+                <p className="font-mukta font-normal text-[1.8rem] text-secondary mt-[0.8rem] inline-block tablet:block tablet:mt-[0.8rem] uppercase">
+                  About us
+                </p>
+              </div>
+              <p className="font-fahkwang font-normal tablet:text-[4rem] text-[2rem] tablet:leading-[120%] leading-[140%] mt-[2rem] text-151618 tablet:text-center text-left tablet:max-w-[54.8rem] w-full uppercase ">
+                WORKING HOURS
+              </p>
+              <p className="font-light text-[1.6rem] text-666565 tablet:mt-[1.6rem] mt-[1.2rem] tablet:text-center max-w-[59.4rem] ">
+                90 Broad St. 90 Broad Street, 2nd floor, New York, NY
+              </p>
+              <button className="tablet:mt-[6rem] mt-[2.4rem] btn-secondary" onClick={() => navigate('/contact')}>
+                CONTACT US
+              </button>
+              <div
+                className=" mt-[2.4rem] w-full h-[20rem] py-[2rem] flex flex-col items-center bg-no-repeat bg-cover bg-center"
+                style={{ backgroundImage: `url(${workingHoursImg})` }}
+              >
+                <p className="font-mukta font-normal text-[1.6rem] leading-[150%] text-secondary text-center line-clamp-1">
+                  On weekend & Holiday
+                </p>
+                <p className="font-fahkwang font-bold text-ebe8e7 text-[1.6rem] leading-[2.08rem] text-center mt-[0.4rem] line-clamp-1">
+                  08:00 - 14:00
+                </p>
+                <p className="font-fahkwang font-bold text-ebe8e7 text-[1.6rem] leading-[2.08rem] text-center mt-[0.4rem] line-clamp-1">
+                  08:00 - 14:00
+                </p>
+                <p className="font-mukta font-normal text-[1.6rem] leading-[150%] text-secondary text-center line-clamp-1 mt-[1.6rem]">
+                  Weekday
+                </p>
+                <p className="font-fahkwang font-bold text-ebe8e7 text-[1.6rem] leading-[2.08rem] text-center mt-[0.4rem] line-clamp-1">
+                  08:00 - 14:00
+                </p>
+                <p className="font-fahkwang font-bold text-ebe8e7 text-[1.6rem] leading-[2.08rem] text-center mt-[0.4rem] line-clamp-1">
                   08:00 - 14:00
                 </p>
               </div>

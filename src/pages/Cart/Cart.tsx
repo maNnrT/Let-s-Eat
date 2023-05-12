@@ -5,9 +5,13 @@ import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
 import { Item } from '@/types/types';
 import CartTable from './CartTable';
 import { getCartTotal } from '@/redux/features/cart/CartSlice';
+import { useParams } from 'react-router-dom';
 
 function Cart(): JSX.Element {
   const dispatch = useDispatch();
+  const { idUser } = useParams();
+  
+  
   const cart: Item[] = useSelector(getUserCartSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
@@ -33,7 +37,7 @@ function Cart(): JSX.Element {
           We are honored to bring deliciousness to the table for you and your family. Don't forget to add Let's Eat
           bakery to your list of favorite stores!
         </p>
-        <CartTable cart={cart} totalPrice={totalPrice} />
+        <CartTable cart={cart} totalPrice={totalPrice} idUser={Number(idUser)} />
       </div>
     </div>
   );

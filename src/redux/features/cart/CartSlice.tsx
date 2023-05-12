@@ -120,13 +120,13 @@ export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: n
   //     return JSON.parse(JSON.parse(res).cart).cart;
   //   } else {
   //     const res = await request.get(config.api.userCarts);
-  //     const found = res.find((cart: userCart) => {
+  //     const found = res.find((cart: UserCart) => {
   //       return cart.idUser === idUser;
   //     });
-  //     return found.cart as item[];
+  //     return found.cart as Item[];
   //   }
   // } catch (error) {
-  //   const cart: item[] = [];
+  //   const cart: Item[] = [];
   //   return cart;
   // }
 });

@@ -13,11 +13,7 @@ import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
 import * as yup from 'yup';
 import { Item } from '@/types/types';
-type Option ={
-  value:string,
-  label:string,
-  className?:string,
-}
+
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
