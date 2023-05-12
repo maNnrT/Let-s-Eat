@@ -78,6 +78,26 @@ export const router = createBrowserRouter([
             element: <Homepage />,
           },
           {
+            path: config.routes.aboutus,
+            element: <AboutUs />,
+          },
+          {
+            path: config.routes.contact,
+            element: <Contact />,
+          },
+          {
+            path: config.routes.menucombo,
+            element: <MenuCombo />,
+          },
+          {
+            path: config.routes.shop,
+            element: <Shop />,
+          },
+          {
+            path: `${config.routes.shop}/freshbaked`,
+            element: <FreshBaked />,
+          },
+          {
             path: '/',
             element: <DefaultLayout2 />,
             errorElement: <NoMatch />,
@@ -89,6 +109,21 @@ export const router = createBrowserRouter([
               {
                 path: `${config.routes.checkout}/:idUser`,
                 element: <CheckOut />,
+              },
+            ],
+          },
+          {
+            path: '/',
+            element: <FooterOnly2 />,
+            errorElement: <NoMatch />,
+            children: [
+              {
+                path: config.routes.login,
+                element: <Login />,
+              },
+              {
+                path: config.routes.register,
+                element: <Register />,
               },
             ],
           },

@@ -12,6 +12,7 @@ import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
 import { Account } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
+import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 
 const schema = yup
   .object({
@@ -42,6 +43,7 @@ function Login(): JSX.Element {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLogin: boolean = useSelector(getIsLogin);
   const accountList: Account[] = useSelector(getAccountsSelector);
   const onTouched = (dataForm: FormData) => {
     if (isSuccess) {
@@ -51,7 +53,7 @@ function Login(): JSX.Element {
       if (user) {
         dispatch(setIsLoginTrue());
         dispatch(setIdUser(user.id));
-        navigate('/');
+        openModal();
       } else {
         if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
         dispatch(setIsLoginFalse());
@@ -59,9 +61,19 @@ function Login(): JSX.Element {
     }
   };
   React.useEffect(() => {
-    dispatch(getAccounts());
+    if(!isLogin){dispatch(getAccounts());}
+    else{
+      navigate(config.routes.homepage);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const refDialog = React.useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    refDialog.current?.showModal();
+    setTimeout(() => {
+      navigate(config.routes.homepage);
+    }, 2000);
+  };
   const [email, setEmail] = React.useState<string>('');
   const [passwords, setPasswords] = React.useState<string>('');
   const ref = React.useRef<HTMLParagraphElement>(null);
@@ -75,6 +87,7 @@ function Login(): JSX.Element {
   };
   return (
     <div className="w-full mb-[-12rem] ">
+      <SmallPopup refDialog={refDialog} title="Sign in success!" />
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
         <div className="w-[45%] bg-white h-fit flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">

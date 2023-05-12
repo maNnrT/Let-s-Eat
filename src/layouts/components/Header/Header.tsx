@@ -2,7 +2,7 @@ import config from '@/config';
 import logo from '@/assets/svg/Logo.svg';
 import cartImg from '@/assets/svg/cart.svg';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
 import { Item } from '@/types/types';
 
 function Header(): JSX.Element {
+  const navigate=useNavigate()
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const handleNav = (): void => {
