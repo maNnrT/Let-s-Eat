@@ -5,6 +5,7 @@ import { Product } from '@/types/types';
 export const getUserCartSelector = (state: RootState) => state.cart.cart;
 export const getTotalPriceSelector = (state: RootState) => state.cart.totalPrice;
 export const getTotalQuantitySelector = (state: RootState) => state.cart.totalQuantity;
+export const getDiscountCodeSelector = (state: RootState) => state.cart.discountCode;
 export const getAccountsSelector = (state: RootState) => state.accounts.accounts;
 export const getIsLogin = (state: RootState) => state.checkLogin.isLogin;
 export const getIdUserSelector = (state: RootState) => state.checkLogin.idUser;

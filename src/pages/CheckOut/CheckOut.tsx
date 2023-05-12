@@ -2,17 +2,17 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select'
+import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
-import { addUserCart, getCartTotal } from '@/redux/features/cart/CartSlice';
+import { getDiscountCodeSelector, getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
+import { addUserCart, getCartTotal, getDiscountCode } from '@/redux/features/cart/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
 import * as yup from 'yup';
-import { Item } from '@/types/types';
+import { DiscountCode, Item } from '@/types/types';
 
 const schema = yup
   .object({
@@ -23,8 +23,8 @@ const schema = yup
     zipCode: yup.string().required('Zip code is required!'),
     address: yup.string().required('Address is required!'),
     discountCode: yup.string(),
-    optionCountry:yup.string(),
-    optionPayment:yup.string(),
+    optionCountry: yup.string(),
+    optionPayment: yup.string(),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
@@ -46,11 +46,15 @@ function CheckOut(): JSX.Element {
   const dispatch = useDispatch();
   const cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
+  const discountCodeArray: DiscountCode[] = useSelector(getDiscountCodeSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
+  React.useEffect(()=>{
+    dispatch(getDiscountCode());
+  },[])
   const [name, setName] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
@@ -58,6 +62,7 @@ function CheckOut(): JSX.Element {
   const [zipCode, setZipCode] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
   const [discountCode, setDiscountCode] = React.useState<string>('');
+  const [coupon,setCoupon] = React.useState<number>(0)
   const optionsCountryValue = [
     { value: 'usa', label: `United State of America` },
     { value: 'england', label: 'England' },
@@ -67,7 +72,7 @@ function CheckOut(): JSX.Element {
     { value: 'COD', label: `By cash when receive` },
     { value: 'Transfer', label: 'Transfer via bank account' },
   ];
-  
+
   // const [optionCountry, setOptionCountry] = React.useState<Option>(optionsCountryValue[0]);
   // const [optionPayment, setOptionPayment] = React.useState<Option>(optionsPaymentValue[0]);
   // const handleOptionCountry = (selectOption: SingleValue<Option>) => {
@@ -104,7 +109,8 @@ function CheckOut(): JSX.Element {
     setDiscountCode(e.target.value);
   };
   const handelApplyCode = () => {
-    console.log(discountCode);
+    const foundCode= discountCodeArray.find((code) =>code.code === discountCode)
+    if(foundCode) setCoupon(foundCode.discount)
   };
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
@@ -117,6 +123,8 @@ function CheckOut(): JSX.Element {
         }),
       );
   };
+  const date = new Date();
+
   return (
     <div className="w-full mb-[-12rem] relative">
       <div
@@ -385,17 +393,19 @@ function CheckOut(): JSX.Element {
               <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
-                    ORDER SUMMARY - #12192409
+                    ORDER SUMMARY - #{`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`}
                   </p>
                   <div className="h-[1.1rem] w-[6rem] border-b-[1px] border-b-secondary"></div>
 
                   <div className="flex justify-between mt-[2.9rem] w-full">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Date</p>
-                    <p className="font-light text-[1.6rem] leading-[100%] text-726666">04/01/2022</p>
+                    <p className="font-light text-[1.6rem] leading-[100%] text-726666">{date.toLocaleDateString()}</p>
                   </div>
                   <div className="flex justify-between mt-[1.2rem] w-full">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Time</p>
-                    <p className="font-light text-[1.6rem] leading-[100%] text-726666 uppercase">2:55 PM</p>
+                    <p className="font-light text-[1.6rem] leading-[100%] text-726666 uppercase">
+                      {date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                    </p>
                   </div>
                 </div>
                 <div className="w-full pt-[2.4rem] flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
@@ -439,16 +449,16 @@ function CheckOut(): JSX.Element {
                   </div>
                   <div className="mt-[1.4rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Coupon</p>
-                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">{totalPrice} $</p>
+                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">{coupon} $</p>
                   </div>
                   <div className="mt-[1.4rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Shipping</p>
-                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">{totalPrice} $</p>
+                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">0 $</p>
                   </div>
                 </div>
                 <div className="mt-[2.4rem] w-full flex justify-between">
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">Total</p>
-                  <p className="font-medium text-[2.4rem] leading-[100%] text-primary">$ {totalPrice}</p>
+                  <p className="font-medium text-[2.4rem] leading-[100%] text-primary">$ {(Number(totalPrice) +coupon).toFixed(2)}</p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">
                   <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>

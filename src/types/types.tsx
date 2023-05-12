@@ -26,4 +26,8 @@ export type UserCart = {
   idUser: number;
   cart: Item[];
 };
-  
+export type DiscountCode = {
+  id: number | undefined;
+  code: string;
+  discount: number;
+};

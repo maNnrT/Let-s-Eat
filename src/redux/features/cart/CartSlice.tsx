@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
-import { Item, UserCart } from '@/types/types';
+import { DiscountCode, Item, UserCart } from '@/types/types';
 
 interface initialState {
   cart: Item[];
   status: string;
   totalPrice: string;
   totalQuantity: number;
+  discountCode: DiscountCode[];
 }
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: { cart: [], status: 'idle', totalQuantity: 0, totalPrice: '' } as initialState,
+  initialState: { cart: [], status: 'idle', totalQuantity: 0, totalPrice: '', discountCode: [] } as initialState,
   reducers: {
     addToCart: (state, action) => {
       const find = state.cart.findIndex((item) => item.id === action.payload.id);
@@ -79,6 +80,17 @@ const cartSlice = createSlice({
       .addCase(getUserCart.rejected, (state) => {
         state.status = 'idle';
         console.error('Cant get cart');
+      })
+      .addCase(getDiscountCode.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getDiscountCode.fulfilled, (state, action) => {
+        if (action.payload) state.discountCode = action.payload;
+        state.status = 'idle';
+      })
+      .addCase(getDiscountCode.rejected, (state) => {
+        state.status = 'idle';
+        console.error('Cant get discount Code');
       });
   },
 });
@@ -129,6 +141,14 @@ export const getUserCart = createAsyncThunk('cart/getUserCart', async (idUser: n
   //   const cart: Item[] = [];
   //   return cart;
   // }
+});
+export const getDiscountCode = createAsyncThunk('cart/getDiscountCode', async () => {
+  try {
+    const res = await request.get(config.api.discountCode);
+    return res as DiscountCode[];
+  } catch (error) {
+    console.error('Cant get Discount Code');
+  }
 });
 export const { addToCart, removeItemFromCart, getCartTotal, increaseItemQuantity, decreaseItemQuantity } =
   cartSlice.actions;
