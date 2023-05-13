@@ -35,7 +35,7 @@ function BannerSlide() {
 
   const pagination = {
     clickable: true,
-  }
+  };
   return (
     <div className="w-full tablet:h-[90rem] h-[32rem] relative">
       <Swiper
@@ -76,12 +76,12 @@ function BannerSlide() {
           <p className="font-fahkwang font-normal tablet:text-[6.4rem] text-[2.6rem] leading-[110%] w-[54.2%] m-[0rem] truncate">
             Sign up & get baked!
           </p>
-          <p className="tablet:block font-light text-[1.8rem] text-ededed mt-[2.9rem] w-[54.2%] hidden line-clamp-3">
+          <p className="w-[54.2%] mt-[2.9rem] font-light text-[1.8rem] text-ededed line-clamp-3 tablet:webkit-box hidden ">
             Let’s Eat produces a variety of hand-crafted bakery goods for private label customers, as well as a full
             line of packaged and labeled specialty products. Sign up for our newsletter and be the first to see our
             latest events, exclusive promotions, and new arrivals!
           </p>
-          <p className="tablet:hidden font-light text-[1.6rem] leading-[140%] text-ededed mt-[2.9rem] block line-clamp-3 w-full">
+          <p className="tablet:hidden font-light text-[1.6rem] leading-[140%] text-ededed mt-[2.9rem] webkit-box line-clamp-2 w-full">
             Sign up for our newsletter and be the first to see our latest events, exclusive promotions, and new
             arrivals!
           </p>

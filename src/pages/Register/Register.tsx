@@ -112,7 +112,7 @@ function Login(): JSX.Element {
   };
   return (
     <div className="w-full mb-[-12rem] ">
-      <SmallPopup refDialog={refDialog} title="Sign up success!" />
+      <SmallPopup refDialog={refDialog} img={check} title="Sign up success!" />
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">

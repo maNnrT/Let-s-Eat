@@ -2,11 +2,12 @@ import * as React from 'react';
 import CartItem from './CartItem/CartItem';
 import { useDispatch } from 'react-redux';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
 import { Item } from '@/types/types';
-
+import check from '@/assets/svg/check_formCheckOut.svg';
+import cross from '@/assets/svg/Red_X.svg'
 interface Props {
   cart: Item[];
   totalPrice: string;
@@ -14,11 +15,19 @@ interface Props {
 }
 function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
       refDialog.current?.close();
+    }, 1000);
+  };
+  const refDialog2 = React.useRef<HTMLDialogElement>(null);
+  const openModal2 = () => {
+    refDialog2.current?.showModal();
+    setTimeout(() => {
+      refDialog2.current?.close();
     }, 1000);
   };
   const updateCart = () => {
@@ -42,9 +51,23 @@ function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
     updateCart();
     openModal();
   };
+  const processToCheckOutBtnHandle = () => {
+    if (cart.length > 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+      navigate(config.routes.checkout+'/'+idUser);
+    } else if (cart.length <= 0 && idUser) {
+      openModal2();
+    }
+  };
   return (
     <div className="container mt-[6rem]">
-      <SmallPopup refDialog={refDialog} title="Cart is updated!" />
+      <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
+      <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" />
       <div className="w-[82.3%] mx-auto bg-fefefd">
         <div className="w-full h-auto shadow-[0_147px_183px_rgba(0,0,0,0.07)] px-[2rem] ">
           <table className="w-full h-auto">
@@ -119,13 +142,12 @@ function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
               >
                 update cart
               </button>
-              <Link
-                to={`${config.routes.checkout}/${idUser}`}
+              <button
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
-                onClick={updateCartBtnHandle}
+                onClick={processToCheckOutBtnHandle}
               >
                 PROCESS TO CHECKOUT
-              </Link>
+              </button>
             </div>
           </div>
         </div>

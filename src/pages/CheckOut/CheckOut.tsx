@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
@@ -393,7 +392,7 @@ function CheckOut(): JSX.Element {
               <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
-                    ORDER SUMMARY - #{`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`}
+                    ORDER SUMMARY - #{`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`.substring(0,8)}
                   </p>
                   <div className="h-[1.1rem] w-[6rem] border-b-[1px] border-b-secondary"></div>
 

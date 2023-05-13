@@ -82,14 +82,14 @@ function Homepage() {
                 <p className="font-fahkwang font-normal tablet:text-[4.4rem] text-[2.2rem] tablet:leading-[1] leading-[140%] tablet:mt-[3.6rem] mt-[2rem] text-151618 uppercase line-clamp-1">
                   LET'S EAT!
                 </p>
-                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem] line-clamp-6 tablet:block hidden">
+                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem] line-clamp-6 tablet:webkit-box hidden">
                   Let’s Eat is a big bakery in New York. We’re a wholesale bakery that provides delicious and all
                   natural baked goods to New York neighborhood restaurants, coffee houses and specialty food shops. We
                   offer packaged goods, as well as products for food service and private wholesale label customers. For
                   over 20 years, our dedication has been to provide quality, wholesome, hand crafted and (most
                   importantly) delicious products.
                 </p>
-                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem] leading-[140%] line-clamp-6 tablet:hidden ">
+                <p className="font-light text-[1.6rem] text-666565 mt-[1.6rem] leading-[140%] line-clamp-2 tablet:hidden ">
                   Let’s Eat is a big bakery in New York. We’re a wholesale bakery that provides delicious and all
                   natural baked goods to New York neighborhood restaurants, coffee houses and specialty food shops. We
                   offer packaged goods, as well as products for food service and private wholesale label customers.
@@ -104,7 +104,9 @@ function Homepage() {
           <div className="container tablet:pt-[6rem] tablet:pb-[5.4rem] py-[2.4rem] ">
             <div className=" flex flex-col tablet:items-center items-start ">
               <div className="tablet:flex flex-col">
-                <span className="text-secondary text-[3.2rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0">—</span>
+                <span className="text-secondary text-[3.2rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
+                  —
+                </span>
                 <p className="font-mukta font-normal text-[1.8rem] text-secondary mt-[0.8rem] inline-block tablet:block tablet:mt-[0.8rem]">
                   FEATURE
                 </p>
@@ -179,16 +181,16 @@ function Homepage() {
                   08:00 - 14:00
                 </p>
                 <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
-                  08:00 - 14:00
+                  16:00 - 22:00
                 </p>
                 <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-primary text-center mt-[3.2rem] line-clamp-1">
                   Weekday
                 </h6>
                 <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
-                  08:00 - 14:00
+                  09:00 - 13:00
                 </p>
                 <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
-                  08:00 - 14:00
+                  17:00 - 20:00
                 </p>
               </div>
             </div>

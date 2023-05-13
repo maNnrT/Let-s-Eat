@@ -16,6 +16,7 @@ export type Product = {
   detail: string;
   detailImg: string;
   price: string;
+  quantity: number | undefined;
 };
 export type Account = {
   id: number | undefined;
@@ -30,4 +31,11 @@ export type DiscountCode = {
   id: number | undefined;
   code: string;
   discount: number;
+};
+export type Combo = {
+  id: number | undefined;
+  name: string;
+  img: string;
+  numberPeople: number;
+  dishes: Product[];
 };

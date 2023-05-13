@@ -10,6 +10,7 @@ export const getAccountsSelector = (state: RootState) => state.accounts.accounts
 export const getIsLogin = (state: RootState) => state.checkLogin.isLogin;
 export const getIdUserSelector = (state: RootState) => state.checkLogin.idUser;
 export const getProductsSelector = (state: RootState) => state.products.products;
+export const getCombosSelector = (state: RootState) => state.products.combos;
 export const getProductsByTypeSelector = (state: RootState) => state.products.products;
 export const getProductByIdSelector = (state: RootState) => state.products.productById;
 export const getFilterSelector = (state: RootState) => state.products.filter;

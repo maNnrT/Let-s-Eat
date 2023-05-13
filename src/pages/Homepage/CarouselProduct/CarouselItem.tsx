@@ -5,6 +5,7 @@ import SmallPopup from '@/components/Popup/SmallPopup';
 import { getIsLogin } from '@/redux/selectors';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
+import check from '@/assets/svg/check_formCheckOut.svg';
 
 interface Props {
   id: number | undefined;
@@ -34,7 +35,7 @@ function CarouselItem({ id, img, name, description, price }: Props) {
   };
   return (
     <div className="w-full h-full bg-white flex flex-col group ">
-      <SmallPopup refDialog={refDialog} title="Add to shopping cart!" />
+      <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem] overflow-hidden">
         <img src={img} alt="" className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500" />
       </div>

@@ -3,5 +3,6 @@ enum api {
   products = '/products',
   userCarts = '/userCarts',
   discountCode = '/discountCode',
+  combos = '/combos'
 }
 export default api;
