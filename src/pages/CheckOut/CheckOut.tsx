@@ -63,6 +63,7 @@ function CheckOut(): JSX.Element {
   const [address, setAddress] = React.useState<string>('');
   const [discountCode, setDiscountCode] = React.useState<string>('');
   const [coupon,setCoupon] = React.useState<number>(0)
+  const refDiscount = React.useRef<HTMLSpanElement|null>(null)
   const optionsCountryValue = [
     { value: 'usa', label: `United State of America` },
     { value: 'england', label: 'England' },
@@ -110,7 +111,8 @@ function CheckOut(): JSX.Element {
   };
   const handelApplyCode = () => {
     const foundCode= discountCodeArray.find((code) =>code.code === discountCode)
-    if(foundCode) setCoupon(foundCode.discount)
+    if(foundCode) {setCoupon(foundCode.discount); console.log(coupon<Number(totalPrice))}
+    else{if (refDiscount.current!==null) refDiscount.current.innerHTML = 'This discount code is not exist or expired!';}
   };
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
@@ -124,7 +126,6 @@ function CheckOut(): JSX.Element {
       );
   };
   const date = new Date();
-
   return (
     <div className="w-full mb-[-12rem] relative">
       <div
@@ -443,6 +444,7 @@ function CheckOut(): JSX.Element {
                         apply
                       </p>
                     </div>
+                    <span ref={refDiscount}></span>
                   </div>
                   <div className="mt-[2.5rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Subtotal</p>
@@ -460,7 +462,7 @@ function CheckOut(): JSX.Element {
                 <div className="mt-[2.4rem] w-full flex justify-between">
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">Total</p>
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">
-                    $ {(Number(totalPrice) + coupon).toFixed(2)}
+                    $ {Number(totalPrice) + coupon >0 ? (Number(totalPrice) + coupon).toFixed(2):0.00}
                   </p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">

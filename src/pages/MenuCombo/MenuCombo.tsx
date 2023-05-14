@@ -9,16 +9,18 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCombosSelector } from '@/redux/selectors';
+import { getCombosSelector, getIdUserSelector, getUserCartSelector } from '@/redux/selectors';
 import { getCombos } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
+import { addUserCart } from '@/redux/features/cart/CartSlice';
+import { Item } from '@/types/types';
 function MenuCombo() {
   const dispatch = useDispatch();
   const ref = React.useRef<SwiperRef | null>(null);
   const combos = useSelector(getCombosSelector);
-
-
+  const cart: Item[] = useSelector(getUserCartSelector);
+  const idUser: number | undefined = useSelector(getIdUserSelector);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };
@@ -29,6 +31,26 @@ function MenuCombo() {
   React.useEffect(() => {
     dispatch(getCombos());
   }, []);
+  const updateCart = () => {
+    if (cart.length > 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+    } else if (cart.length <= 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart: [],
+        }),
+      );
+    }
+  };
+  React.useEffect(() => {
+    updateCart();
+  });
   return (
     <div className="w-full mb-[-12rem] relative">
       <div
