@@ -2,6 +2,7 @@ import config from '@/config';
 import logo from '@/assets/svg/Logo.svg';
 import cartImg from '@/assets/svg/cart.svg';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
@@ -10,9 +11,10 @@ import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
 import { Item } from '@/types/types';
+import Search from './Search/Search';
 
 function Header(): JSX.Element {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const handleNav = (): void => {
@@ -48,6 +50,7 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
+        <Search/>
         <div className="hidden tablet:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
@@ -63,10 +66,7 @@ function Header(): JSX.Element {
               <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
-              <Link
-                to={`${config.routes.cart}`}
-                className="relative mr-[5px] hover:scale-150 hover:duration-500"
-              >
+              <Link to={`${config.routes.cart}`} className="relative mr-[5px] hover:scale-150 hover:duration-500">
                 <img src={cartImg} alt="" />
                 <div
                   className="
