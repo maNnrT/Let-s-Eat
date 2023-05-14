@@ -112,7 +112,7 @@ function CheckOut(): JSX.Element {
   const handelApplyCode = () => {
     const foundCode= discountCodeArray.find((code) =>code.code === discountCode)
     if(foundCode) {setCoupon(foundCode.discount); console.log(coupon<Number(totalPrice))}
-    else{if (refDiscount.current!==null) refDiscount.current.innerHTML = 'This discount code is not exist or expired!';}
+    else{if (refDiscount.current!==null) refDiscount.current.innerHTML = 'This discount code is expired or not exist!';}
   };
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
@@ -430,7 +430,7 @@ function CheckOut(): JSX.Element {
                     <p className="font-normal text-[1.6rem] leading-[100%] text-secondary text-center absolute bg-white left-[0.6rem] w-[10.5rem] top-[-1rem]">
                       Discount code
                     </p>
-                    <div className="w-full h-[4rem] p-[1.2rem] border-[1.5px] border-[#ADADAE] flex justify-between">
+                    <div className="w-full h-[4rem] p-[1.2rem] border-[1.5px] border-[#ADADAE] flex justify-between ">
                       <input
                         type="text"
                         className="h-full font-normal text-[1.6rem] leading-[100%] text-primary outline-none flex-1"
@@ -443,8 +443,8 @@ function CheckOut(): JSX.Element {
                       >
                         apply
                       </p>
+                      <span ref={refDiscount} className="text-red-600 absolute bottom-[-2.4rem] left-0"></span>
                     </div>
-                    <span ref={refDiscount}></span>
                   </div>
                   <div className="mt-[2.5rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Subtotal</p>
@@ -462,7 +462,7 @@ function CheckOut(): JSX.Element {
                 <div className="mt-[2.4rem] w-full flex justify-between">
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">Total</p>
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">
-                    $ {Number(totalPrice) + coupon >0 ? (Number(totalPrice) + coupon).toFixed(2):0.00}
+                    $ {Number(totalPrice) + coupon > 0 ? (Number(totalPrice) + coupon).toFixed(2) : 0.0}
                   </p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">
