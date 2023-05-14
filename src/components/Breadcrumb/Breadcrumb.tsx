@@ -8,13 +8,10 @@ function Breadcrumbs() {
     .split('/')
     .filter((crumb) => crumb !== '')
     .map((crumb) => {
-      if (crumb.includes('-')) {
-        crumb = crumb.replace('-', ' ');
-      }
       currentLink += `/${crumb}`;
       return (
         <div className="inline-block" key={crumb}>
-          <Link to={currentLink}>{'/' + crumb}</Link>
+          <Link to={currentLink}>{ crumb.includes('-')? crumb = '/'+crumb.replace('-', ' '):'/'+crumb}</Link>
         </div>
       );
     });
