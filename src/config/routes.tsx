@@ -2,12 +2,12 @@ enum routes {
   login = '/login',
   register = '/register',
   homepage = '/',
-  aboutus = '/aboutus',
+  aboutus = '/about-us',
   contact = '/contact',
-  menucombo = '/menucombo',
+  menucombo = '/menu-combo',
   shop = '/shop',
   cart = '/cart',
-  checkout = '/checkout',
+  checkout = '/check-out',
   nomatch = '*',
 }
 

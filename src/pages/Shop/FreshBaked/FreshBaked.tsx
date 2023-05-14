@@ -8,6 +8,7 @@ import ProductDetail from '@/pages/Shop/ProductDetail';
 import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
+import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 
 function FreshBaked() {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
@@ -42,7 +43,7 @@ function FreshBaked() {
         style={{ backgroundImage: `url(${heroBannerCategoryFreshBaked})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Fresh baked</p>
-        <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Shop/Category</p>
+        <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
         {openModal && <ProductDetail id={selectedItem} onClose={handleCloseModal} />}

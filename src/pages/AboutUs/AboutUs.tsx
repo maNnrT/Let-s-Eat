@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import AboutUsForm from './AboutUsForm';
 import config from '@/config';
 import BigPopup from '@/components/Popup/BigPopup/';
+import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 function AboutUs() {
   const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
@@ -34,7 +35,7 @@ function AboutUs() {
         style={{ backgroundImage: `url(${heroBannerAboutUs})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">About us</p>
-        <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/About us</p>
+        <Breadcrumbs/>
       </div>
       <div className="w-full h-fit px-[11.2rem] py-[10rem] bg-fdf9f5 ">
         <div className="container grid grid-cols-[40.1%_auto] gap-x-[3.2rem]">

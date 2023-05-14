@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
             element: <Shop />,
           },
           {
-            path: `${config.routes.shop}/freshbaked`,
+            path: `${config.routes.shop}/fresh-baked`,
             element: <FreshBaked />,
           },
         ],
@@ -103,11 +103,11 @@ export const router = createBrowserRouter([
             errorElement: <NoMatch />,
             children: [
               {
-                path: `${config.routes.cart}/:idUser`,
+                path: `${config.routes.cart}`,
                 element: <Cart />,
               },
               {
-                path: `${config.routes.checkout}/:idUser`,
+                path: `${config.routes.cart}${config.routes.checkout}`,
                 element: <CheckOut />,
               },
             ],

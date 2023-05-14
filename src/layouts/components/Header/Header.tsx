@@ -64,7 +64,7 @@ function Header(): JSX.Element {
                 Log out
               </button>
               <Link
-                to={`${config.routes.cart}/${idUser}`}
+                to={`${config.routes.cart}`}
                 className="relative mr-[5px] hover:scale-150 hover:duration-500"
               >
                 <img src={cartImg} alt="" />

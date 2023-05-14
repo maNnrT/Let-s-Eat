@@ -5,8 +5,9 @@ import freshBakedImg from '@/assets/image/image12.png';
 import cheeseCake from '@/assets/image/image13.png';
 import { Link } from 'react-router-dom';
 import config from '@/config';
+import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 const categories = [
-  { title: 'Fresh Baked', to: `${config.routes.shop}/freshbaked`, img: freshBakedImg },
+  { title: 'Fresh Baked', to: `${config.routes.shop}/fresh-baked`, img: freshBakedImg },
   { title: 'Cookies', to: `${config.routes.shop}/cookies`, img: cookieImg },
   { title: 'Coffee & Tea', to: `${config.routes.shop}/coffee&tea`, img: coffeeTeaImg },
   { title: 'Chessecake', to: `${config.routes.shop}/chessecake`, img: cheeseCake },
@@ -19,7 +20,7 @@ function Shop() {
         style={{ backgroundImage: `url(${heroBannerCategory})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Category</p>
-        <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Shop</p>
+        <Breadcrumbs />
       </div>
       <div className="w-full h-fit flex flex-col items-center bg-fdf9f5 relative z-[1] ">
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>

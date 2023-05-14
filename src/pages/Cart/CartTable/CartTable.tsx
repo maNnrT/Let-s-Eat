@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CartItem from './CartItem/CartItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
@@ -8,14 +8,15 @@ import config from '@/config';
 import { Item } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import cross from '@/assets/svg/Red_X.svg'
+import { getIdUserSelector } from '@/redux/selectors';
 interface Props {
   cart: Item[];
   totalPrice: string;
-  idUser: number;
 }
-function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
+function CartTable({ cart, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const idUser = useSelector(getIdUserSelector)
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -59,7 +60,8 @@ function CartTable({ cart, totalPrice, idUser }: Props): JSX.Element {
           cart,
         }),
       );
-      navigate(config.routes.checkout+'/'+idUser);
+      
+      navigate(config.routes.cart+config.routes.checkout);
     } else if (cart.length <= 0 && idUser) {
       openModal2();
     }

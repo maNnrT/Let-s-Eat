@@ -12,6 +12,7 @@ import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
 import * as yup from 'yup';
 import { DiscountCode, Item } from '@/types/types';
+import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 
 const schema = yup
   .object({
@@ -131,7 +132,7 @@ function CheckOut(): JSX.Element {
         style={{ backgroundImage: `url(${heroBannerCart})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Food delivery</p>
-        <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Cart/Check out</p>
+        <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] pb-[12rem] ">
         <BigPopup
@@ -392,7 +393,8 @@ function CheckOut(): JSX.Element {
               <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
-                    ORDER SUMMARY - #{`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`.substring(0,8)}
+                    ORDER SUMMARY - #
+                    {`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`.substring(0, 8)}
                   </p>
                   <div className="h-[1.1rem] w-[6rem] border-b-[1px] border-b-secondary"></div>
 
@@ -457,7 +459,9 @@ function CheckOut(): JSX.Element {
                 </div>
                 <div className="mt-[2.4rem] w-full flex justify-between">
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">Total</p>
-                  <p className="font-medium text-[2.4rem] leading-[100%] text-primary">$ {(Number(totalPrice) +coupon).toFixed(2)}</p>
+                  <p className="font-medium text-[2.4rem] leading-[100%] text-primary">
+                    $ {(Number(totalPrice) + coupon).toFixed(2)}
+                  </p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">
                   <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>

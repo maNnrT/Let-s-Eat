@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCombosSelector } from '@/redux/selectors';
 import { getCombos } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
+import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 function MenuCombo() {
   const dispatch = useDispatch();
   const ref = React.useRef<SwiperRef | null>(null);
@@ -35,7 +36,7 @@ function MenuCombo() {
         style={{ backgroundImage: `url(${heroBannerCategory})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">MENU COMBO</p>
-        <p className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9">Home/Menu Combo</p>
+        <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
@@ -50,7 +51,13 @@ function MenuCombo() {
         <Swiper slidesPerView={1} className="w-full" ref={ref}>
           {combos.map((combo) => (
             <SwiperSlide className="bg-fdf9f5" key={combo.id}>
-              <MenuComboItem id={combo.id} name={combo.name} img={combo.img} numberPeople={combo.numberPeople} dishes={combo.dishes} />
+              <MenuComboItem
+                id={combo.id}
+                name={combo.name}
+                img={combo.img}
+                numberPeople={combo.numberPeople}
+                dishes={combo.dishes}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
