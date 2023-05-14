@@ -34,7 +34,7 @@ function Header(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
   return (
-    <div className="flex justify-center h-[100px] w-full fixed top-0 z-[2] bg-primary">
+    <div className="flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] bg-primary">
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to={config.routes.homepage}>

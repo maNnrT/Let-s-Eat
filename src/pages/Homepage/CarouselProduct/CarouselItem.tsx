@@ -6,6 +6,7 @@ import { getIsLogin } from '@/redux/selectors';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
+import ProductDetail from '@/pages/Shop/ProductDetail/ProductDetail';
 
 interface Props {
   id: number | undefined;
@@ -13,8 +14,9 @@ interface Props {
   name: string;
   description: string;
   price: string;
+  onOpen: (id:number|undefined) => void;
 }
-function CarouselItem({ id, img, name, description, price }: Props) {
+function CarouselItem({ id, img, name, description, price, onOpen }: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin: boolean = useSelector(getIsLogin);
@@ -26,18 +28,23 @@ function CarouselItem({ id, img, name, description, price }: Props) {
     }, 1000);
   };
   const handleAddToCart = () => {
-     if (isLogin) {
-       dispatch(addToCart({ id, img, name, price, quantity: 1 }));
-       openModal();
-     }else{
+    if (isLogin) {
+      dispatch(addToCart({ id, img, name, price, quantity: 1 }));
+      openModal();
+    } else {
       navigate(config.routes.login);
-     }
+    }
   };
   return (
     <div className="w-full h-full bg-white flex flex-col group ">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem] overflow-hidden">
-        <img src={img} alt="" className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500" />
+        <img
+          src={img}
+          alt=""
+          className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"
+          onClick={() => onOpen(id)}
+        />
       </div>
       <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
         <p className="text-[2.2rem] leading-[2.9rem] font-fahkwang font-semibold text-444546 text-left line-clamp-1">

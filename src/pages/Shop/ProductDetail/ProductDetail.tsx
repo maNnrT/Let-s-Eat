@@ -99,9 +99,9 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
     clickable: true,
   };
   return (
-    <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-10 top-0 left-0 right-0 bottom-0">
+    <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-10 top-[7.5rem] left-0 right-0 bottom-0">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
-      <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
+      <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[2.5rem] bg-fdf9f5">
         <div className="w-full h-full relative">
           <Swiper
             pagination={pagination}
@@ -124,18 +124,18 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
               JSON.parse(productById.detailImg).map((img: string) => (
                 <SwiperSlide key={JSON.parse(productById.detailImg).indexOf(img)}>
                   <div className="w-full h-full">
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" className="w-full h-full max-h-[55.7rem] object-cover" />
                   </div>
                 </SwiperSlide>
               ))}
             <button
-              className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] left-[2.6rem] z-[1]"
+              className="w-auto h-auto text-white flex justify-center items-center absolute top-[50%] left-[4.3%] z-[1]"
               onClick={swipePrev}
             >
               <BsChevronLeft size={30} />
             </button>
             <button
-              className="w-auto h-auto text-white flex justify-center items-center absolute top-[31rem] right-[2.6rem] z-[1]"
+              className="w-auto h-auto text-white flex justify-center items-center absolute top-[50%] right-[4.3%] z-[1]"
               onClick={swipeNext}
             >
               <BsChevronRight size={30} />
@@ -143,7 +143,7 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
           </Swiper>
         </div>
         <div>
-          <div className="mt-[9rem]">
+          <div className="mt-[2rem]">
             <span className="text-secondary mr-[0.8rem] text-[3.2rem] ">—</span>
             <p className="font-normal text-[1.8rem] text-secondary inline-block uppercase">Dish detail</p>
           </div>
@@ -169,7 +169,7 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
               +
             </button>
           </div>
-          <button className="mt-[2.4rem] btn-secondary mb-[6.2rem] uppercase" onClick={handleAddToCart}>
+          <button className="mt-[2.4rem] btn-secondary mb-[2rem] uppercase" onClick={handleAddToCart}>
             ADD TO CART
           </button>
           <span

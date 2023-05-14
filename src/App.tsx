@@ -7,7 +7,7 @@ function App(): JSX.Element {
     <div>
       <div className="App">
         <ScrollToTop>
-          <div className='h-[10rem]'></div>
+          <div className='h-[7.5rem]'></div>
           {/* <Routes>
             {publicRoutes.map((route, index) => {
               let Layout: React.FunctionComponent<Props> = DefaultLayout;
