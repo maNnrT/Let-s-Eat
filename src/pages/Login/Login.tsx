@@ -23,7 +23,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 function Login(): JSX.Element {
-  const { data: accounts, isSuccess} = useGetAccountsQuery();
+  const { data: accounts, isSuccess } = useGetAccountsQuery();
   // if (isLoading) {
   //   console.log('loading');
   // } else if (isSuccess) {
@@ -61,8 +61,9 @@ function Login(): JSX.Element {
     }
   };
   React.useEffect(() => {
-    if(!isLogin){dispatch(getAccounts());}
-    else{
+    if (!isLogin) {
+      dispatch(getAccounts());
+    } else {
       navigate(config.routes.homepage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,11 +120,6 @@ function Login(): JSX.Element {
                   onChange={(e) => handleEmail(e)}
                 />
                 {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
-                {touchedFields.email && !errors.email && (
-                  <span className="absolute right-[1.2rem] top-[3.2rem]">
-                    <img src={check} alt="" />
-                  </span>
-                )}
               </div>
             </div>
             <div className="flex flex-col">
@@ -142,11 +138,6 @@ function Login(): JSX.Element {
                 />
                 {errors.passwords && (
                   <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.passwords?.message}</p>
-                )}
-                {touchedFields.passwords && !errors.passwords && (
-                  <span className="absolute right-[1.2rem] top-[5rem]">
-                    <img src={check} alt="" />
-                  </span>
                 )}
               </div>
             </div>
