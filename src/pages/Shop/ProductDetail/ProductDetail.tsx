@@ -99,7 +99,7 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
     clickable: true,
   };
   return (
-    <div className="bg-[rgba(0,0,0,0.5)] absolute h-full w-full z-10">
+    <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-10 top-0 left-0 right-0 bottom-0">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[36.1rem] bg-fdf9f5">
         <div className="w-full h-full relative">
