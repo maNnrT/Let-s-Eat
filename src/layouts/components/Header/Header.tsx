@@ -50,7 +50,7 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
-        <Search/>
+        {/* <Search/> */}
         <div className="hidden tablet:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
@@ -86,7 +86,7 @@ function Header(): JSX.Element {
                       translate-x-[50%]
                       translate-y-[-50%]"
                 >
-                  {cart.length}
+                  {totalQuantity}
                 </div>
               </Link>
             </>

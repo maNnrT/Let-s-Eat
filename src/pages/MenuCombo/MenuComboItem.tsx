@@ -1,12 +1,12 @@
-import { Item, Product } from '@/types/types';
+import { Product } from '@/types/types';
 import loveCombo from '@/assets/image/image26.png';
 import loveCombo2 from '@/assets/image/image27.png';
 import React from 'react';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdUserSelector, getIsLogin, getUserCartSelector } from '@/redux/selectors';
-import { addToCart, addUserCart } from '@/redux/features/cart/CartSlice';
+import { getIsLogin } from '@/redux/selectors';
+import { addToCart } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 import check from '@/assets/svg/check_formCheckOut.svg';
 
@@ -14,15 +14,13 @@ interface Props {
   id: number | undefined;
   name: string;
   img: string;
-  numberPeople: number;
-  dishes: Product[];
+  numberPeople?: number;
+  dishes?: Product[];
 }
-function MenuComboItem({ id, name, img,numberPeople, dishes }: Props) {
+function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const idUser: number | undefined = useSelector(getIdUserSelector);
   const isLogin: boolean = useSelector(getIsLogin);
-  const cart: Item[] = useSelector(getUserCartSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -30,25 +28,9 @@ function MenuComboItem({ id, name, img,numberPeople, dishes }: Props) {
       refDialog.current?.close();
     }, 1000);
   };
-  const updateCart = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-    } else if (cart.length <= 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
-    }
-  };
+
   const handleAddToCart = () => {
-    if (isLogin) {
+    if (isLogin && dishes) {
       dispatch(
         addToCart({
           id: id,
@@ -67,9 +49,6 @@ function MenuComboItem({ id, name, img,numberPeople, dishes }: Props) {
       navigate(config.routes.login);
     }
   };
-  React.useEffect(() => {
-    updateCart();
-  });
   return (
     <div className="container grid grid-cols-3 gap-x-[3.2rem] h-fit mt-[7.4rem] mb-[11.9rem]">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
@@ -132,32 +111,35 @@ function MenuComboItem({ id, name, img,numberPeople, dishes }: Props) {
               RELAXING AFTERNOON
             </p>
             <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[6rem]">
-              {dishes.reduce((total, dish) => {
-                return (total += dish.quantity ? dish.quantity : 0);
-              }, 0)}{' '}
+              {dishes &&
+                dishes.reduce((total, dish) => {
+                  return (total += dish.quantity ? dish.quantity : 0);
+                }, 0)}{' '}
               DISHES - ${' '}
-              {dishes
-                .reduce((total, dish) => {
-                  return (total += dish.quantity ? Number(dish.price) * dish.quantity : Number(dish.price) * 0);
-                }, 0)
-                .toFixed(2)}
+              {dishes &&
+                dishes
+                  .reduce((total, dish) => {
+                    return (total += dish.quantity ? Number(dish.price) * dish.quantity : Number(dish.price) * 0);
+                  }, 0)
+                  .toFixed(2)}
             </p>
-            {dishes.map((dish) => (
-              <div className="w-full h-fit mt-[2.4rem]" key={dish.id}>
-                <div className="flex justify-between">
-                  <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
-                    {dish.quantity}x {dish.name}
+            {dishes &&
+              dishes.map((dish) => (
+                <div className="w-full h-fit mt-[2.4rem]" key={dish.id}>
+                  <div className="flex justify-between">
+                    <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
+                      {dish.quantity}x {dish.name}
+                    </div>
+                    <div className="border-b-[4px] border-dotted border-white flex-1 h-[1.8rem] mx-[0.7rem]"></div>
+                    <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
+                      ${dish.quantity && (Number(dish.price) * dish.quantity).toFixed(2)}
+                    </div>
                   </div>
-                  <div className="border-b-[4px] border-dotted border-white flex-1 h-[1.8rem] mx-[0.7rem]"></div>
-                  <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
-                    ${dish.quantity && (Number(dish.price) * dish.quantity).toFixed(2)}
+                  <div className="mt-[0.8rem] ">
+                    <p className="font-light text-[1.4rem] leading-[130%] text-b5b6b6 line-clamp-3">{dish.detail}</p>
                   </div>
                 </div>
-                <div className="mt-[0.8rem] ">
-                  <p className="font-light text-[1.4rem] leading-[130%] text-b5b6b6 line-clamp-3">{dish.detail}</p>
-                </div>
-              </div>
-            ))}
+              ))}
             <div className="absolute w-[14.5rem] border-b-[1.25px] border-secondary bottom-[2rem] left-[50%] translate-x-[-50%] cursor-pointer flex justify-center">
               <button
                 className="font-light text-[1.8rem] leading-[100%] text-secondary uppercase"

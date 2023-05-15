@@ -6,7 +6,12 @@ import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDiscountCodeSelector, getIdUserSelector, getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
+import {
+  getDiscountCodeSelector,
+  getIdUserSelector,
+  getTotalPriceSelector,
+  getUserCartSelector,
+} from '@/redux/selectors';
 import { addUserCart, getCartTotal, getDiscountCode } from '@/redux/features/cart/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
@@ -41,10 +46,30 @@ function CheckOut(): JSX.Element {
 
   const onTouched = (data: FormData) => {
     console.log(data);
+    // if (idUser) {
+    //   dispatch(
+    //     addUserCart({
+    //       idUser,
+    //       cart,
+    //     }),
+    //   );
+    // }
     openModal();
   };
+  const handleConfirmOrder = () => {
+    if (idUser) {
+      cart = []
+      dispatch(
+        addUserCart({
+          idUser,
+          cart:cart,
+        }),
+      );
+      
+    }
+  };
   const dispatch = useDispatch();
-  const cart: Item[] = useSelector(getUserCartSelector);
+  let cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const discountCodeArray: DiscountCode[] = useSelector(getDiscountCodeSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
@@ -52,9 +77,9 @@ function CheckOut(): JSX.Element {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
-  React.useEffect(()=>{
+  React.useEffect(() => {
     dispatch(getDiscountCode());
-  },[])
+  }, []);
   const [name, setName] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
@@ -62,8 +87,8 @@ function CheckOut(): JSX.Element {
   const [zipCode, setZipCode] = React.useState<string>('');
   const [address, setAddress] = React.useState<string>('');
   const [discountCode, setDiscountCode] = React.useState<string>('');
-  const [coupon,setCoupon] = React.useState<number>(0)
-  const refDiscount = React.useRef<HTMLSpanElement|null>(null)
+  const [coupon, setCoupon] = React.useState<number>(0);
+  const refDiscount = React.useRef<HTMLSpanElement | null>(null);
   const optionsCountryValue = [
     { value: 'usa', label: `United State of America` },
     { value: 'england', label: 'England' },
@@ -110,21 +135,38 @@ function CheckOut(): JSX.Element {
     setDiscountCode(e.target.value);
   };
   const handelApplyCode = () => {
-    const foundCode= discountCodeArray.find((code) =>code.code === discountCode)
-    if(foundCode) {setCoupon(foundCode.discount); console.log(coupon<Number(totalPrice))}
-    else{if (refDiscount.current!==null) refDiscount.current.innerHTML = 'This discount code is expired or not exist!';}
+    const foundCode = discountCodeArray.find((code) => code.code === discountCode);
+    if (foundCode) {
+      setCoupon(foundCode.discount);
+      console.log(coupon < Number(totalPrice));
+    } else {
+      if (refDiscount.current !== null) refDiscount.current.innerHTML = 'This discount code is expired or not exist!';
+    }
   };
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
-    if (idUser)
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
   };
+  // const updateCart = () => {
+  //   if (cart.length > 0 && idUser) {
+  //     dispatch(
+  //       addUserCart({
+  //         idUser,
+  //         cart,
+  //       }),
+  //     );
+  //   } else if (cart.length <= 0 && idUser) {
+  //     dispatch(
+  //       addUserCart({
+  //         idUser,
+  //         cart: [],
+  //       }),
+  //     );
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   updateCart();
+  // });
   const date = new Date();
   return (
     <div className="w-full mb-[-12rem] relative">
@@ -466,7 +508,9 @@ function CheckOut(): JSX.Element {
                   </p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">
-                  <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>
+                  <button className="btn-secondary w-full uppercase text-f6e8d6" onClick={handleConfirmOrder}>
+                    confirm order
+                  </button>
                 </div>
               </div>
             </div>

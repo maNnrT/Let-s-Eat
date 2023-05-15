@@ -7,16 +7,18 @@ export type Item = {
 };
 export type Product = {
   id: number | undefined;
-  type: string;
-  dish: string;
+  type?: string;
+  dish?: string;
   img: string;
   name: string;
-  description: string;
-  ingredient: string;
-  detail: string;
-  detailImg: string;
-  price: string;
-  quantity: number | undefined;
+  description?: string;
+  ingredient?: string;
+  detail?: string;
+  detailImg?: string;
+  price?: string;
+  quantity?: number | undefined;
+  numberPeople?: number;
+  dishes?: Product[];
 };
 export type Account = {
   id: number | undefined;
@@ -31,11 +33,4 @@ export type DiscountCode = {
   id: number | undefined;
   code: string;
   discount: number;
-};
-export type Combo = {
-  id: number | undefined;
-  name: string;
-  img: string;
-  numberPeople: number;
-  dishes: Product[];
 };

@@ -57,7 +57,7 @@ function Homepage() {
   };
   React.useEffect(() => {
     updateCart();
-  });
+  },[cart]);
   return (
     <div>
       {/* <Slider /> */}

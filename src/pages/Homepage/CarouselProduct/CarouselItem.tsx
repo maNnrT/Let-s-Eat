@@ -12,8 +12,8 @@ interface Props {
   id: number | undefined;
   img: string;
   name: string;
-  description: string;
-  price: string;
+  description?: string;
+  price?: string;
   onOpen: (id:number|undefined) => void;
 }
 function CarouselItem({ id, img, name, description, price, onOpen }: Props) {

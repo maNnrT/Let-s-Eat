@@ -70,7 +70,7 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
   };
   React.useEffect(() => {
     updateCart();
-  });
+  },[cart]);
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
@@ -122,7 +122,7 @@ function ProductDetail({ id, onClose }: Props): JSX.Element {
           >
             {productById.detailImg &&
               JSON.parse(productById.detailImg).map((img: string) => (
-                <SwiperSlide key={JSON.parse(productById.detailImg).indexOf(img)}>
+                <SwiperSlide key={JSON.parse(productById.detailImg?productById.detailImg:'').indexOf(img)}>
                   <div className="w-full h-full">
                     <img src={img} alt="" className="w-full h-full max-h-[55.7rem] object-cover" />
                   </div>

@@ -23,7 +23,6 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 function Login(): JSX.Element {
-  const { data: accounts, isSuccess } = useGetAccountsQuery();
   // if (isLoading) {
   //   console.log('loading');
   // } else if (isSuccess) {
@@ -46,18 +45,16 @@ function Login(): JSX.Element {
   const isLogin: boolean = useSelector(getIsLogin);
   const accountList: Account[] = useSelector(getAccountsSelector);
   const onTouched = (dataForm: FormData) => {
-    if (isSuccess) {
-      const user = accounts.find((account: Account) => {
-        return account.username === dataForm.email && account.password === dataForm.passwords;
-      });
-      if (user) {
-        dispatch(setIsLoginTrue());
-        dispatch(setIdUser(user.id));
-        openModal();
-      } else {
-        if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
-        dispatch(setIsLoginFalse());
-      }
+    const user = accountList.find((account: Account) => {
+      return account.username === dataForm.email && account.password === dataForm.passwords;
+    });
+    if (user) {
+      dispatch(setIsLoginTrue());
+      dispatch(setIdUser(user.id));
+      openModal();
+    } else {
+      if (ref.current) ref.current.innerHTML = 'Email or password is wrong! Please check your email and password';
+      dispatch(setIsLoginFalse());
     }
   };
   React.useEffect(() => {

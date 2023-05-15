@@ -13,6 +13,7 @@ export const getProductsSelector = (state: RootState) => state.products.products
 export const getCombosSelector = (state: RootState) => state.products.combos;
 export const getProductsByTypeSelector = (state: RootState) => state.products.products;
 export const getProductByIdSelector = (state: RootState) => state.products.productById;
+export const getProductsByNameSelector = (state: RootState) => state.products.productByName;
 export const getFilterSelector = (state: RootState) => state.products.filter;
 
 export const getProductsByFilterSelector = createSelector(

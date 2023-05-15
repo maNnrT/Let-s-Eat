@@ -1,7 +1,5 @@
 import * as React from 'react';
 import heroBannerCategory from '@/assets/image/HeroBanner_MenuCombo.png';
-import loveCombo from '@/assets/image/image26.png';
-import loveCombo2 from '@/assets/image/image27.png';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
@@ -9,29 +7,30 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCombosSelector, getIdUserSelector, getUserCartSelector } from '@/redux/selectors';
-import { getCombos } from '@/redux/features/products/ProductsSlice';
+import { getCombosSelector, getIdUserSelector, getProductsSelector, getUserCartSelector } from '@/redux/selectors';
+import {  getProducts } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
-import { Item } from '@/types/types';
+import { Item, Product } from '@/types/types';
+import Cart from '../Cart/Cart';
 function MenuCombo() {
   const dispatch = useDispatch();
   const ref = React.useRef<SwiperRef | null>(null);
-  const combos = useSelector(getCombosSelector);
+  const products: Product[] = useSelector(getProductsSelector);
+  // console.log(products);
+
+  const combos = products.filter((product) => {
+    return product.numberPeople !== undefined;
+  });
+  // console.log(combos);
+
   const cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
-  const swipeNext = () => {
-    ref.current?.swiper.slideNext();
-  };
-  const swipePrev = () => {
-    ref.current?.swiper.slidePrev();
-  };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(() => {
-    dispatch(getCombos());
-  }, []);
   const updateCart = () => {
+    // console.log('vaaaa');
+    // console.log(cart);
+
     if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
@@ -50,7 +49,18 @@ function MenuCombo() {
   };
   React.useEffect(() => {
     updateCart();
-  });
+  },[cart]);
+  const swipeNext = () => {
+    ref.current?.swiper.slideNext();
+  };
+  const swipePrev = () => {
+    ref.current?.swiper.slidePrev();
+  };
+
+  React.useEffect(() => {
+    dispatch(getProducts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="w-full mb-[-12rem] relative">
       <div

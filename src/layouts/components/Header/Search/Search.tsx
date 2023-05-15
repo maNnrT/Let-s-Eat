@@ -4,23 +4,30 @@ import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react/headless';
 import PopperItem from '@/components/Popper/PopperItem/PopperItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts, getProductsByName } from '@/redux/features/products/ProductsSlice';
+import { getProductsSelector } from '@/redux/selectors';
+import { Product } from '@/types/types';
+import request from '@/utils/request';
 
 function Search() {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = React.useState<string>('');
-  const [searchResult, setSearchResult] = React.useState<number[]>([]);
+  const [searchResult, setSearchResult] = React.useState<Product[]>([]);
   const [showResult, setShowResult] = React.useState<boolean>(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
+  let products: Product[] = useSelector(getProductsSelector);
   React.useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1]);
-    }, 3000);
-  }, []);
+    products = products.filter((product)=>{
+      return 
+    })
+  }, [searchValue,dispatch]);
   const handleHideResult = () => {
     setShowResult(false);
   };
   const handleClear = () => {
     setSearchValue('');
-    setSearchResult([])
+    setSearchResult([]);
     inputRef.current?.focus();
   };
   return (
@@ -31,15 +38,10 @@ function Search() {
         <div tabIndex={-1} {...attrs} className="w-[30rem]">
           <PopperWrapper>
             <p className="text-secondary ml-[1rem] capitalize">dish</p>
-            <PopperItem />
-            <PopperItem />
-            <PopperItem />
-            <PopperItem />
-            <p className="text-secondary ml-[1rem] capitalize">category</p>
-            <PopperItem />
-            <PopperItem />
-            <PopperItem />
-            <PopperItem />
+            {searchResult.map((result) => (
+              <PopperItem key={result.id} id={result.id} name={result.name} />
+            ))}
+            <p className="text-secondary ml-[1rem] capitalize">category</p> 
           </PopperWrapper>
         </div>
       )}

@@ -14,7 +14,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: { cart: [], status: 'idle', totalQuantity: 0, totalPrice: '', discountCode: [] } as initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: (state, action) => {      
       const find = state.cart.findIndex((item) => item.id === action.payload.id);
       if (find >= 0) {
         state.cart[find].quantity += action.payload.quantity;
@@ -27,10 +27,7 @@ const cartSlice = createSlice({
         totalPrice += Number(item.price) * item.quantity;
         return totalPrice;
       }, 0);
-      const totalQuantity = state.cart.reduce((totalQuantity, item) => {
-        totalQuantity += item.quantity;
-        return totalQuantity;
-      }, 0);
+      const totalQuantity = state.cart.length;
       state.totalPrice = totalPrice.toFixed(2);
       state.totalQuantity = totalQuantity;
     },
@@ -67,11 +64,7 @@ const cartSlice = createSlice({
             return totalPrice;
           }, 0);
 
-          const totalCount = state.cart.reduce((totalCount, item) => {
-            totalCount += Number(item.quantity);
-            return totalCount;
-          }, 0);
-
+          const totalCount = state.cart.length;
           state.totalPrice = totalPrice.toFixed(2);
           state.totalQuantity = totalCount;
         }
@@ -101,10 +94,11 @@ export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: Use
       return cart.idUser === data.idUser;
     });
     if (found) {
-      await request.put(`${config.api.userCarts}/${found.id}`, {
+      const res = await request.put(`${config.api.userCarts}/${found.id}`, {
         idUser: data.idUser,
         cart: data.cart,
       });
+      console.log(res);
     } else {
       await request.post(config.api.userCarts, {
         idUser: data.idUser,

@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
-import { Combo, Product } from '@/types/types';
+import {Product } from '@/types/types';
 
 interface initialState {
   products: Product[];
   status: string;
   productById: Product;
+  productByName: Product[];
   filter: string;
-  combos: Combo[]
+
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -26,9 +27,10 @@ const productsSlice = createSlice({
       detail: '',
       detailImg: '',
       price: '',
-      quantity:undefined,
+      quantity: undefined,
     },
-    combos:[],
+    productByName: [],
+    combos: [],
     filter: 'freshbaked',
   } as initialState,
   reducers: {
@@ -58,14 +60,14 @@ const productsSlice = createSlice({
       .addCase(getProductById.rejected, (state) => {
         state.status = 'idle';
       })
-      .addCase(getCombos.pending, (state) => {
+      .addCase(getProductsByName.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getCombos.fulfilled, (state, action) => {
-        if (action.payload) state.combos = action.payload;
+      .addCase(getProductsByName.fulfilled, (state, action) => {
+        if (action.payload) state.productByName = action.payload;
         state.status = 'idle';
       })
-      .addCase(getCombos.rejected, (state) => {
+      .addCase(getProductsByName.rejected, (state) => {
         state.status = 'idle';
       });
   },
@@ -78,18 +80,24 @@ export const getProducts = createAsyncThunk('products/getProducts', async () => 
     console.error('Cant get products');
   }
 });
-export const getCombos = createAsyncThunk('products/getCombos', async () => {
-  try {
-    const res = await request.get(config.api.combos);
-    return res as Combo[];
-  } catch (error) {
-    console.error('Cant get combos');
-  }
-});
 export const getProductById = createAsyncThunk('products/getProductByID', async (id: number) => {
   try {
     const res = await request.get(`${config.api.products}/${id}`);
     return res as Product;
+  } catch (error) {
+    console.error('Cant get product');
+  }
+});
+export const getProductsByName = createAsyncThunk('products/getProductByName', async (name: string) => {
+  try {
+    const res = await request.get(config.api.products);
+    const result = res.filter((product: Product) => {
+      if(name!=='')
+      return product.name.includes(name);
+      else if(name==='')
+      return []
+    });
+    return result as Product[];
   } catch (error) {
     console.error('Cant get product');
   }
