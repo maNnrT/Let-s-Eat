@@ -116,13 +116,13 @@ function Search() {
                 : null}
               {searchTypeResult.length > 0
                 ? searchTypeResult.map((result) => (
-                    <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result}/>
+                    <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
                   ))
                 : null}
-              {isSearchValueEmpty ? (
+              {isSearchValueEmpty && searchDishResult.length === 0 && searchTypeResult.length === 0 ? (
                 <p className="text-secondary py-[0.8rem] px-[2rem]">Type in dish's name or category</p>
               ) : null}
-              {isSearchResultEmpty ? (
+              {isSearchResultEmpty && searchDishResult.length === 0 && searchTypeResult.length === 0 ? (
                 <p className="text-secondary py-[0.8rem] px-[2rem]">No dish or category found</p>
               ) : null}
             </PopperWrapper>
