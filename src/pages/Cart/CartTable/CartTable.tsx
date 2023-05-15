@@ -7,7 +7,7 @@ import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
 import { Item } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg'
+import cross from '@/assets/svg/Red_X.svg';
 import { getIdUserSelector } from '@/redux/selectors';
 interface Props {
   cart: Item[];
@@ -16,7 +16,7 @@ interface Props {
 function CartTable({ cart, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser = useSelector(getIdUserSelector)
+  const idUser = useSelector(getIdUserSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -32,6 +32,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
     }, 1000);
   };
   const updateCart = () => {
+    console.log('vaoday');
     if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
@@ -60,8 +61,8 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
           cart,
         }),
       );
-      
-      navigate(config.routes.cart+config.routes.checkout);
+
+      navigate(config.routes.cart + config.routes.checkout);
     } else if (cart.length <= 0 && idUser) {
       openModal2();
     }

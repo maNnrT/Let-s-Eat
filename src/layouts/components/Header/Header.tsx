@@ -12,6 +12,7 @@ import * as React from 'react';
 import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
 import { Item } from '@/types/types';
 import Search from './Search/Search';
+import { getProducts } from '@/redux/features/products/ProductsSlice';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
@@ -35,6 +36,9 @@ function Header(): JSX.Element {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
+  React.useEffect(()=>{
+    dispatch(getProducts())
+  },[])
   return (
     <div className="flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] bg-primary">
       <div className="h-full container flex items-center justify-between">
@@ -50,7 +54,7 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
-        {/* <Search/> */}
+        <Search/>
         <div className="hidden tablet:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>

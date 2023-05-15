@@ -94,11 +94,10 @@ export const addUserCart = createAsyncThunk('cart/addUserCart', async (data: Use
       return cart.idUser === data.idUser;
     });
     if (found) {
-      const res = await request.put(`${config.api.userCarts}/${found.id}`, {
+      await request.put(`${config.api.userCarts}/${found.id}`, {
         idUser: data.idUser,
         cart: data.cart,
       });
-      console.log(res);
     } else {
       await request.post(config.api.userCarts, {
         idUser: data.idUser,

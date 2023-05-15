@@ -25,7 +25,7 @@ function FreshBaked() {
   const dispatch = useDispatch();
   let products = useSelector(getProductsSelector);
   products = products.filter((product: Product) => {
-    return product.type === 'freshbaked';
+    return product.type === 'fresh-baked';
   });
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
   const arrayProducts1 = [...products].reverse().slice(0, 4);

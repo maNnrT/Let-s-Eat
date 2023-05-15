@@ -8,11 +8,17 @@ function Breadcrumbs() {
     .split('/')
     .filter((crumb) => crumb !== '')
     .map((crumb) => {
+      let newCrumb = crumb;
+      if (crumb.includes('-')) {
+        newCrumb = crumb.replace('-', ' ');
+      } else if (crumb.includes('&')) {
+        newCrumb = crumb.replace('&', ' & ');
+      }
       currentLink += `/${crumb}`;
       return (
         <div className="inline-block " key={crumb}>
           <Link to={currentLink}>
-            /<p className="hover:text-secondary inline-block">{crumb.includes('-') ? (crumb = crumb.replace('-', ' ')) : crumb}</p>
+            /<p className="hover:text-secondary inline-block">{crumb === newCrumb ? crumb : newCrumb}</p>
           </Link>
         </div>
       );

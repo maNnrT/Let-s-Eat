@@ -4,8 +4,8 @@ interface Props {
   id:number|undefined
   name: string;
   img: string;
-  ingredient: string;
-  price: string;
+  ingredient?: string;
+  price?: string;
 }
 function FreshBakedItem({id, name, img, ingredient, price }: Props) {
   return (

@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCombosSelector, getIdUserSelector, getProductsSelector, getUserCartSelector } from '@/redux/selectors';
-import {  getProducts } from '@/redux/features/products/ProductsSlice';
+import { getProducts } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
@@ -28,9 +28,6 @@ function MenuCombo() {
   const cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const updateCart = () => {
-    // console.log('vaaaa');
-    // console.log(cart);
-
     if (cart.length > 0 && idUser) {
       dispatch(
         addUserCart({
@@ -49,7 +46,7 @@ function MenuCombo() {
   };
   React.useEffect(() => {
     updateCart();
-  },[cart]);
+  }, [cart]);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };

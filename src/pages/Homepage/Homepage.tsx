@@ -23,10 +23,10 @@ function Homepage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products: Product[] = useSelector(getProductsByFilterSelector);
-  const cart: Item[] = useSelector(getUserCartSelector); 
+  const cart: Item[] = useSelector(getUserCartSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const filterBtn = [
-    { value: 'freshbaked', title: 'Fresh Baked' },
+    { value: 'fresh-baked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
     { value: 'breakfast', title: 'Breakfast' },
     { value: 'coffeeTea', title: 'Coffee & Tea' },
@@ -57,7 +57,7 @@ function Homepage() {
   };
   React.useEffect(() => {
     updateCart();
-  },[cart]);
+  }, [cart]);
   return (
     <div>
       {/* <Slider /> */}
