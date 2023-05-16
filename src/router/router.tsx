@@ -1,8 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App.tsx';
 import NoMatch from '@/pages/NoMatch';
-import DefaultLayout2 from '@/layouts/DefaultLayout/DefaultLayout';
-import { FooterOnly2 } from '@/layouts';
+import { DefaultLayout, FooterOnly } from '@/layouts';
 import Homepage from '@/pages/Homepage';
 import AboutUs from '@/pages/AboutUs';
 import Contact from '@/pages/Contact';
@@ -24,7 +23,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <DefaultLayout2 />,
+        element: <DefaultLayout />,
         errorElement: <NoMatch />,
         children: [
           {
@@ -55,7 +54,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/',
-        element: <FooterOnly2 />,
+        element: <FooterOnly />,
         errorElement: <NoMatch />,
         children: [
           {
@@ -99,7 +98,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/',
-            element: <DefaultLayout2 />,
+            element: <DefaultLayout />,
             errorElement: <NoMatch />,
             children: [
               {
@@ -114,7 +113,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/',
-            element: <FooterOnly2 />,
+            element: <FooterOnly />,
             errorElement: <NoMatch />,
             children: [
               {

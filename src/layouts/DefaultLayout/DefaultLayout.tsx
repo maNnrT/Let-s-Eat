@@ -2,7 +2,7 @@ import Header from '@/layouts/components/Header';
 import Footer from '@/layouts/components/Footer';
 import { Outlet } from 'react-router-dom';
 
-function DefaultLayout2(): JSX.Element {
+function DefaultLayout(): JSX.Element {
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
@@ -13,4 +13,4 @@ function DefaultLayout2(): JSX.Element {
     </div>
   );
 }
-export default DefaultLayout2;
+export default DefaultLayout;
