@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 import { Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
-import ProductDetail from '@/pages/Shop/ProductDetail/ProductDetail';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 
 function Search() {
@@ -22,7 +21,6 @@ function Search() {
   const [isSearchValueEmpty, setIsSearchValueEmpty] = React.useState<boolean>(true);
   const [isSearchResultEmpty, setIsSearchResultEmpty] = React.useState<boolean>(false);
   React.useEffect(() => {
-
     const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
     if (searchValue === '') {
       setSearchDishResult([]);
@@ -30,7 +28,7 @@ function Search() {
       setIsSearchResultEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+        return product.name.trim().toLowerCase().includes(searchValue);
       }).length === 0
     ) {
       setSearchDishResult([]);
@@ -38,12 +36,12 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+        return product.name.trim().toLowerCase().includes(searchValue);
       }).length !== 0
     ) {
       setSearchDishResult(
         products.filter((product) => {
-          return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+          return product.name.trim().toLowerCase().includes(searchValue);
         }),
       );
       setIsSearchValueEmpty(false);
@@ -83,23 +81,12 @@ function Search() {
   const handleClear = () => {
     setSearchValue('');
     setSearchDishResult([]);
+    setIsSearchValueEmpty(true);
+    setIsSearchResultEmpty(false);
     inputRef.current?.focus();
   };
-
-  const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
-  const handleOpenModal = (id: number | undefined): void => {
-    setSelectedItem(id);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
   return (
     <>
-      {openModal && <ProductDetail id={selectedItem} onClose={handleCloseModal} />}
       <Tippy
         visible={showResult}
         interactive
@@ -108,7 +95,7 @@ function Search() {
             <PopperWrapper>
               {searchDishResult.length > 0
                 ? searchDishResult.map((result) => (
-                    <SearchDishItem key={result.id} id={result.id} name={result.name} onOpen={handleOpenModal} />
+                    <SearchDishItem key={result.id} id={result.id} name={result.name}  />
                   ))
                 : null}
               {searchTypeResult.length > 0

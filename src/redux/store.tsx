@@ -3,10 +3,11 @@ import productsSlice from './features/products/ProductsSlice';
 import checkLogin from './features/checkLogin/CheckLoginSlice';
 import accountsSlice from './features/account/AccountsSlice';
 import cartSlice from './features/cart/CartSlice';
+import modalSlice from './features/modalSlice/modalSlice';
+import { apiSlice } from './features/api/apiSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import * as reduxThunk from 'redux-thunk/extend-redux';
-import { apiSlice } from './features/api/apiSlice';
 const persistConfig = {
   key: 'root',
   storage,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   checkLogin: checkLogin.reducer,
   cart: cartSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
+  modal:modalSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -4,16 +4,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTotalPriceSelector, getUserCartSelector } from '@/redux/selectors';
 import { Item } from '@/types/types';
 import CartTable from './CartTable';
-import { getCartTotal } from '@/redux/features/cart/CartSlice';
+import { addUserCart, getCartTotal } from '@/redux/features/cart/CartSlice';
+import { getIdUserSelector } from '@/redux/selectors';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 function Cart(): JSX.Element {
   const dispatch = useDispatch();
-  
-
   const cart: Item[] = useSelector(getUserCartSelector);
+  const idUser = useSelector(getIdUserSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
+    console.log(cart);
+  const updateCart = () => {
+    console.log('vaoday', cart);
+    if (cart.length > 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart,
+        }),
+      );
+    } else if (cart.length <= 0 && idUser) {
+      dispatch(
+        addUserCart({
+          idUser,
+          cart: [],
+        }),
+      );
+    }
+  };
   React.useEffect(() => {
     dispatch(getCartTotal());
+    updateCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
   return (
@@ -35,7 +55,7 @@ function Cart(): JSX.Element {
           We are honored to bring deliciousness to the table for you and your family. Don't forget to add Let's Eat
           bakery to your list of favorite stores!
         </p>
-        <CartTable cart={cart} totalPrice={totalPrice} />
+        <CartTable cart={cart} totalPrice={totalPrice} updateCart={updateCart} />
       </div>
     </div>
   );

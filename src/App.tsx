@@ -1,57 +1,20 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import { useSelector } from 'react-redux';
+import { getIdProductModal, getIsOpenModal } from './redux/selectors';
+import ProductDetail from '@/components/ProductDetail';
 
 function App(): JSX.Element {
+  const idProduct = useSelector(getIdProductModal)
+  const isOpen = useSelector(getIsOpenModal)
   return (
     <div>
+      {isOpen && <ProductDetail id={idProduct} />}
       <div className="App">
         <ScrollToTop>
+          <div id="portal"></div>
           <div className="h-[7.5rem] bg-fdf9f5"></div>
-          {/* <Routes>
-            {publicRoutes.map((route, index) => {
-              let Layout: React.FunctionComponent<Props> = DefaultLayout;
-              if (route.layout) {
-                Layout = route.layout;
-              } else if (route.layout === null) {
-                Layout = Fragment;
-              }
-              const Page = route.component;
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <Layout>
-                      <Page />
-                    </Layout>
-                  }
-                ></Route>
-              );
-            })}
-            <Route element={<PrivateRoutes></PrivateRoutes>}>
-              {privateRoutes.map((route, index) => {
-                  let Layout: React.FunctionComponent<Props> = DefaultLayout;
-                  if (route.layout) {
-                    Layout = route.layout;
-                  } else if (route.layout === null) {
-                    Layout = Fragment;
-                  }
-                  const Page = route.component;
-                  return (
-                    <Route
-                      key={index}
-                      path={route.path}
-                      element={
-                        <Layout>
-                          <Page />
-                        </Layout>
-                      }
-                    ></Route>
-                  );
-                })}
-            </Route>
-          </Routes> */}
           <Outlet />
         </ScrollToTop>
       </div>

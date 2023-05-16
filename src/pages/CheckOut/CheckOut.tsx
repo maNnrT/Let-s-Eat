@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { v4 as uuidv4 } from 'uuid';
 import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import flag from '@/assets/image/image33.png';
@@ -46,27 +47,16 @@ function CheckOut(): JSX.Element {
 
   const onTouched = (data: FormData) => {
     console.log(data);
-    // if (idUser) {
-    //   dispatch(
-    //     addUserCart({
-    //       idUser,
-    //       cart,
-    //     }),
-    //   );
-    // }
-    openModal();
-  };
-  const handleConfirmOrder = () => {
     if (idUser) {
-      cart = []
+      cart = [];
       dispatch(
         addUserCart({
           idUser,
-          cart:cart,
+          cart: cart,
         }),
       );
-      
     }
+    openModal();
   };
   const dispatch = useDispatch();
   let cart: Item[] = useSelector(getUserCartSelector);
@@ -88,6 +78,7 @@ function CheckOut(): JSX.Element {
   const [address, setAddress] = React.useState<string>('');
   const [discountCode, setDiscountCode] = React.useState<string>('');
   const [coupon, setCoupon] = React.useState<number>(0);
+  const [billId, setBillId] = React.useState<string>('');
   const refDiscount = React.useRef<HTMLSpanElement | null>(null);
   const optionsCountryValue = [
     { value: 'usa', label: `United State of America` },
@@ -147,6 +138,9 @@ function CheckOut(): JSX.Element {
   const openModal = () => {
     refDialog.current?.showModal();
   };
+  React.useEffect(()=>{
+    setBillId(uuidv4().substring(0,8))
+  },[])
   // const updateCart = () => {
   //   if (cart.length > 0 && idUser) {
   //     dispatch(
@@ -436,8 +430,7 @@ function CheckOut(): JSX.Element {
               <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
-                    ORDER SUMMARY - #
-                    {`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}`.substring(0, 8)}
+                    ORDER SUMMARY - #{billId}
                   </p>
                   <div className="h-[1.1rem] w-[6rem] border-b-[1px] border-b-secondary"></div>
 
@@ -494,7 +487,7 @@ function CheckOut(): JSX.Element {
                   </div>
                   <div className="mt-[1.4rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Coupon</p>
-                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">{coupon} $</p>
+                    <p className="font-normal text-[1.8rem] leading-[100%] text-primary">{coupon.toFixed(2)} $</p>
                   </div>
                   <div className="mt-[1.4rem] w-full flex justify-between">
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666">Shipping</p>
@@ -508,9 +501,7 @@ function CheckOut(): JSX.Element {
                   </p>
                 </div>
                 <div className="w-full px-[1.2rem] mt-[4rem]">
-                  <button className="btn-secondary w-full uppercase text-f6e8d6" onClick={handleConfirmOrder}>
-                    confirm order
-                  </button>
+                  <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>
                 </div>
               </div>
             </div>

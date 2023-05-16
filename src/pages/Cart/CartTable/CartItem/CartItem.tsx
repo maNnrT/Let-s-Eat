@@ -8,14 +8,17 @@ interface Props {
   name: string;
   price: string;
   quantity: number;
+  updateCart: () => void;
 }
-function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
+function CartItem({ id, img, name, price, quantity, updateCart }: Props): JSX.Element {
   const dispatch = useDispatch();
   const [subTotal, setSubTotal] = React.useState<string>('');
   const decreaseNumber = () => {
+    updateCart();
     dispatch(decreaseItemQuantity(id));
   };
   const increaseNumber = () => {
+    updateCart();
     dispatch(increaseItemQuantity(id));
   };
   const removeItem = () => {

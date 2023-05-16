@@ -12,12 +12,15 @@ import { getIdUserSelector } from '@/redux/selectors';
 interface Props {
   cart: Item[];
   totalPrice: string;
+  updateCart:()=>void
 }
-function CartTable({ cart, totalPrice }: Props): JSX.Element {
+function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser = useSelector(getIdUserSelector);
   const refDialog = React.useRef<HTMLDialogElement>(null);
+  const idUser = useSelector(getIdUserSelector);
+
+  
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
@@ -31,24 +34,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
       refDialog2.current?.close();
     }, 1000);
   };
-  const updateCart = () => {
-    console.log('vaoday');
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-    } else if (cart.length <= 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
-    }
-  };
+  
   const updateCartBtnHandle = () => {
     updateCart();
     openModal();
@@ -108,6 +94,7 @@ function CartTable({ cart, totalPrice }: Props): JSX.Element {
                       name={item.name}
                       price={item.price}
                       quantity={item.quantity}
+                      updateCart={updateCart}
                     />
                   </React.Fragment>
                 ))

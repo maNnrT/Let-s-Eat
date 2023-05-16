@@ -10,21 +10,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 // import required modules
 import { Product } from '@/types/types';
-import ProductDetail from '@/pages/Shop/ProductDetail/ProductDetail';
+import { useDispatch } from 'react-redux';
 interface Props {
   products: Product[];
 }
 export default function CarouselProduct({ products }: Props) {
-  const [openProductDetail, setOpenProductDetail] = React.useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
-  const handleOpenProductDetail = (id: number | undefined): void => {
-    setSelectedItem(id);
-    setOpenProductDetail(true);
-  };
 
-  const handleCloseProductDetail = () => {
-    setOpenProductDetail(false);
-  };
   const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
@@ -34,7 +25,7 @@ export default function CarouselProduct({ products }: Props) {
   };
   return (
     <>
-      {openProductDetail && <ProductDetail id={selectedItem} onClose={handleCloseProductDetail} />}
+
       <Swiper
         className="mySwiper"
         ref={ref}
@@ -66,7 +57,6 @@ export default function CarouselProduct({ products }: Props) {
               name={product.name}
               description={product.description}
               price={product.price}
-              onOpen={handleOpenProductDetail}
             />
           </SwiperSlide>
         ))}

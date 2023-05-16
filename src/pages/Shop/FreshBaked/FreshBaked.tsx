@@ -4,24 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import FreshBakedProduct from './FreshBakedProduct';
-import ProductDetail from '@/pages/Shop/ProductDetail';
 import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
+import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
 
 function FreshBaked() {
-  const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = React.useState<number | undefined>();
-  const handleOpenModal = (id: number | undefined): void => {
-    setSelectedItem(id);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
   const dispatch = useDispatch();
   let products = useSelector(getProductsSelector);
   products = products.filter((product: Product) => {
@@ -46,7 +35,6 @@ function FreshBaked() {
         <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
-        {openModal && <ProductDetail id={selectedItem} onClose={handleCloseModal} />}
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Our menu</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
@@ -64,7 +52,11 @@ function FreshBaked() {
               </p>
               <div>
                 {arrayProducts1.map((product) => (
-                  <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
+                  <div
+                    key={product.id}
+                    onClick={() => dispatch(setOpenModalTrue(product.id))}
+                    className="cursor-pointer"
+                  >
                     <FreshBakedProduct
                       id={product.id}
                       name={product.name}
@@ -87,7 +79,11 @@ function FreshBaked() {
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="w-full">
                 {arrayProducts2.map((product) => (
-                  <div key={product.id} onClick={() => handleOpenModal(product.id)} className="cursor-pointer">
+                  <div
+                    key={product.id}
+                    onClick={() => dispatch(setOpenModalTrue(product.id))}
+                    className="cursor-pointer"
+                  >
                     <FreshBakedProduct
                       id={product.id}
                       name={product.name}

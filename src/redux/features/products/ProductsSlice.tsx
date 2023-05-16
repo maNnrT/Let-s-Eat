@@ -31,7 +31,7 @@ const productsSlice = createSlice({
     },
     productByName: [],
     combos: [],
-    filter: 'freshbaked',
+    filter: 'fresh-baked',
   } as initialState,
   reducers: {
     filterChange: (state, action) => {

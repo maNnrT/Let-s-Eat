@@ -93,7 +93,7 @@ export const router = createBrowserRouter([
             element: <Shop />,
           },
           {
-            path: `${config.routes.shop}/freshbaked`,
+            path: `${config.routes.shop}/fresh-baked`,
             element: <FreshBaked />,
           },
           {
