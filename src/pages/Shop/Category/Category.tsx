@@ -3,18 +3,21 @@ import heroBannerCategoryFreshBaked from '@/assets/image/HeroBanner_FreshBaked.p
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
-import FreshBakedProduct from './FreshBakedProduct';
+import CategoryProduct from './CategoryProduct';
 import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
-
-function FreshBaked() {
+interface Props {
+  category: string;
+  description:string
+}
+function Category({ category,description }: Props) {
   const dispatch = useDispatch();
   let products = useSelector(getProductsSelector);
   products = products.filter((product: Product) => {
-    return product.type === 'fresh-baked';
+    return product.type === category;
   });
   // cần phải spread để tránh TypeError: Cannot assign to read only property '0' of object '[object Array]' in typescript
   const arrayProducts1 = [...products].reverse().slice(0, 4);
@@ -24,31 +27,35 @@ function FreshBaked() {
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  let newName = category;
+  if (category.includes('-')) {
+    newName = category.replace('-', ' ');
+  } else if (category.includes('&')) {
+    newName = category.replace('&', ' & ');
+  }
   return (
     <div className="w-full mb-[-12rem]">
       <div
         className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center"
         style={{ backgroundImage: `url(${heroBannerCategoryFreshBaked})` }}
       >
-        <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Fresh baked</p>
+        <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium first-letter:capitalize">
+          {newName}
+        </p>
         <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] ">
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Our menu</p>
         <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
-          Fresh Baked!
+          {newName}!
         </h1>
-        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem]">
-          Freshly baked bread. Natural, crusty, straight from the oven: our fresh bread. Always fresh? Of course! A wide
-          choice?
-        </p>
+        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem]">{description}</p>
         <div className="container grid grid-cols-2 gap-x-[3.2rem] h-auto mt-[8.8rem] ">
           <div className="w-full pt-[1.6rem] flex flex-col items-end">
             <div className="w-[82.7%] h-[47.6rem] border-[1.5px] border-secondary p-[2rem] relative mt-[7.9rem]">
               <p className="font-fahkwang font-semibold text-[2.4rem] leading-[130%] text-center uppercase text-secondary absolute top-[-4.8rem] right-[50%] translate-x-[50%]">
-                Fresh Baked
+                {newName}
               </p>
               <div>
                 {arrayProducts1.map((product) => (
@@ -57,7 +64,7 @@ function FreshBaked() {
                     onClick={() => dispatch(setOpenModalTrue(product.id))}
                     className="cursor-pointer"
                   >
-                    <FreshBakedProduct
+                    <CategoryProduct
                       id={product.id}
                       name={product.name}
                       img={product.img}
@@ -84,7 +91,7 @@ function FreshBaked() {
                     onClick={() => dispatch(setOpenModalTrue(product.id))}
                     className="cursor-pointer"
                   >
-                    <FreshBakedProduct
+                    <CategoryProduct
                       id={product.id}
                       name={product.name}
                       img={product.img}
@@ -102,4 +109,4 @@ function FreshBaked() {
   );
 }
 
-export default FreshBaked;
+export default Category;

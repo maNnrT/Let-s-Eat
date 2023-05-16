@@ -18,14 +18,14 @@ function Breadcrumbs() {
       return (
         <div className="inline-block " key={crumb}>
           <Link to={currentLink}>
-            /<p className="hover:text-secondary inline-block">{crumb === newCrumb ? crumb : newCrumb}</p>
+            /<p className="hover:text-secondary inline-block first-letter:capitalize">{crumb === newCrumb ? crumb : newCrumb}</p>
           </Link>
         </div>
       );
     });
 
   return (
-    <div className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9 capitalize ">
+    <div className="font-normal text-[2.2rem] leading-[3.7rem] text-center text-cbcac9  ">
       <Link to={config.routes.homepage} className="hover:text-secondary">
         Home
       </Link>
