@@ -4,7 +4,7 @@ import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react/headless';
 import SearchDishItem from '@/components/Popper/SearchDishItem/SearchDishItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 import { Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
@@ -12,7 +12,6 @@ import ProductDetail from '@/pages/Shop/ProductDetail/ProductDetail';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 
 function Search() {
-  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);
@@ -23,9 +22,7 @@ function Search() {
   const [isSearchValueEmpty, setIsSearchValueEmpty] = React.useState<boolean>(true);
   const [isSearchResultEmpty, setIsSearchResultEmpty] = React.useState<boolean>(false);
   React.useEffect(() => {
-    const productMatch: Product[] = products.filter((product) => {
-      return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
-    });
+
     const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
     if (searchValue === '') {
       setSearchDishResult([]);
