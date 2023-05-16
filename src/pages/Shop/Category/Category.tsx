@@ -9,6 +9,7 @@ import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
+import { Link } from 'react-router-dom';
 interface Props {
   category: string;
   description:string
@@ -57,22 +58,31 @@ function Category({ category,description }: Props) {
               <p className="font-fahkwang font-semibold text-[2.4rem] leading-[130%] text-center uppercase text-secondary absolute top-[-4.8rem] right-[50%] translate-x-[50%]">
                 {newName}
               </p>
-              <div>
-                {arrayProducts1.map((product) => (
-                  <div
-                    key={product.id}
-                    onClick={() => dispatch(setOpenModalTrue(product.id))}
-                    className="cursor-pointer"
-                  >
-                    <CategoryProduct
-                      id={product.id}
-                      name={product.name}
-                      img={product.img}
-                      ingredient={product.ingredient}
-                      price={product.price}
-                    />
+              <div className="flex flex-col h-full">
+                {arrayProducts1.length > 0 ? (
+                  arrayProducts1.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => dispatch(setOpenModalTrue(product.id))}
+                      className="cursor-pointer w-full"
+                    >
+                      <CategoryProduct
+                        id={product.id}
+                        name={product.name}
+                        img={product.img}
+                        ingredient={product.ingredient}
+                        price={product.price}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex flex-col justify-center items-center h-full">
+                    <p className="text-secondary text-center text-[2rem] first-letter:capitalize">{newName} is out!</p>
+                    <Link to="/shop" className="btn-secondary uppercase">
+                      go to shop
+                    </Link>
                   </div>
-                ))}
+                )}
               </div>
             </div>
             <div className="w-full  h-auto mt-[3.2rem] mb-[20.1rem] self-end mr-0">
@@ -84,22 +94,31 @@ function Category({ category,description }: Props) {
               <img src={freshBakedImg2} alt="" className="w-full" />
             </div>
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
-              <div className="w-full">
-                {arrayProducts2.map((product) => (
-                  <div
-                    key={product.id}
-                    onClick={() => dispatch(setOpenModalTrue(product.id))}
-                    className="cursor-pointer"
-                  >
-                    <CategoryProduct
-                      id={product.id}
-                      name={product.name}
-                      img={product.img}
-                      ingredient={product.ingredient}
-                      price={product.price}
-                    />
+              <div className="flex flex-col w-full h-full">
+                {arrayProducts2.length > 0 ? (
+                  arrayProducts2.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => dispatch(setOpenModalTrue(product.id))}
+                      className="cursor-pointer w-full"
+                    >
+                      <CategoryProduct
+                        id={product.id}
+                        name={product.name}
+                        img={product.img}
+                        ingredient={product.ingredient}
+                        price={product.price}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="flex flex-col justify-center items-center h-full">
+                    <p className="text-secondary text-center text-[2rem] first-letter:capitalize">{newName} is out!</p>
+                    <Link to="/shop" className="btn-secondary uppercase">
+                      go to shop
+                    </Link>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>

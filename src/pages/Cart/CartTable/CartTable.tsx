@@ -7,8 +7,10 @@ import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
 import { Item } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
+import cartImg from '@/assets/svg/cart-secondary.svg';
 import cross from '@/assets/svg/Red_X.svg';
 import { getIdUserSelector } from '@/redux/selectors';
+import {BsCart} from 'react-icons/bs'
 interface Props {
   cart: Item[];
   totalPrice: string;
@@ -102,7 +104,9 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
                 <tr className="h-[40rem]">
                   <td colSpan={4}>
                     <div className="flex flex-col justify-center items-center ">
-                      <p className="text-secondary text-center text-[2rem] uppercase">
+                      {/* <img src={cartImg} alt="" className="object-cover w-[6rem] text-secondary" /> */}
+                      <BsCart color="#D08C30" size={60}/>
+                      <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">
                         Cart is empty!
                         <br />
                         Add some products

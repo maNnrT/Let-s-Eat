@@ -29,7 +29,7 @@ function Homepage() {
     { value: 'fresh-baked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
     { value: 'breakfast', title: 'Breakfast' },
-    { value: 'coffeeTea', title: 'Coffee & Tea' },
+    { value: 'coffee&tea', title: 'Coffee & Tea' },
   ];
   React.useEffect(() => {
     dispatch(getProducts());
