@@ -9,6 +9,7 @@ import { getProductsSelector } from '@/redux/selectors';
 import { Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
+import useScrollDirection from '@/hooks/useScrollDirection';
 
 function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
@@ -21,6 +22,7 @@ function Search() {
   const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
   const [isSearchValueEmpty, setIsSearchValueEmpty] = React.useState<boolean>(true);
   const [isSearchResultEmpty, setIsSearchResultEmpty] = React.useState<boolean>(false);
+  const [scrollDirection, transparent] = useScrollDirection();
   React.useEffect(() => {
     const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
     if (searchValue === '') {
@@ -111,6 +113,12 @@ function Search() {
     setIsSearchResultEmpty(false);
     inputRef.current?.focus();
   };
+  React.useEffect(()=>{
+    if(scrollDirection==='down'){
+      setShowResult(false);
+      inputRef.current?.blur();
+    }
+  },[scrollDirection ])
   return (
     <>
       <Tippy
@@ -122,24 +130,30 @@ function Search() {
               {searchDishResult.length > 0 ? (
                 <>
                   <p className="text-secondary ml-[2rem]">Dish</p>
-                  {searchDishResult.map((result) => (
-                    <SearchDishItem key={result.id} id={result.id} name={result.name} />
+                  {searchDishResult.slice(0, 3).map((result) => (
+                    <div onClick={() => setShowResult(false)}>
+                      <SearchDishItem key={result.id} id={result.id} name={result.name} />
+                    </div>
                   ))}
                 </>
               ) : null}
               {searchComboResult.length > 0 ? (
                 <>
                   <p className="text-secondary ml-[2rem]">Combo</p>
-                  {searchComboResult.map((result) => (
-                    <SearchTypeItem key={result.id} id={result.id} name={result.name} />
+                  {searchComboResult.slice(0, 3).map((result) => (
+                    <div onClick={() => setShowResult(false)}>
+                      <SearchTypeItem key={result.id} id={result.id} name={result.name} />
+                    </div>
                   ))}
                 </>
               ) : null}
               {searchTypeResult.length > 0 ? (
                 <>
                   <p className="text-secondary ml-[2rem]">Category</p>
-                  {searchTypeResult.map((result) => (
-                    <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
+                  {searchTypeResult.slice(0, 3).map((result) => (
+                    <div onClick={() => setShowResult(false)}>
+                      <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
+                    </div>
                   ))}
                 </>
               ) : null}
@@ -161,7 +175,7 @@ function Search() {
         onClickOutside={handleHideResult}
       >
         <div className="flex items-center h-[4rem] bg-white rounded-full relative ml-[2rem] mr-[3rem] w-[30rem]">
-          <span className="w-[3.5rem] h-full flex justify-center items-center">
+          <span className="w-[3.5rem] h-fit flex justify-center items-center">
             <IoMdSearch size={20} color={'#D08C30'} />
           </span>
           <input
@@ -172,7 +186,7 @@ function Search() {
             }}
             ref={inputRef}
             placeholder="Search dish or category"
-            className="text-primary h-full outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 text-[1.4rem]"
+            className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 text-[1.4rem"
             spellCheck={false}
             onFocus={() => setShowResult(true)}
           />

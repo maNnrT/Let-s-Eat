@@ -17,7 +17,7 @@ import useScrollDirection from '@/hooks/useScrollDirection';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
-  const [scrollDirection,transparent] = useScrollDirection()
+  const [scrollDirection, transparent] = useScrollDirection();
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const handleNav = (): void => {
@@ -38,14 +38,13 @@ function Header(): JSX.Element {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
-  React.useEffect(()=>{
-    dispatch(getProducts())
-  },[])
+  React.useEffect(() => {
+    dispatch(getProducts());
+  }, []);
   return (
     <div
-      className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all ${
-        scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'
-      }
+      className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
+      ${scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'}
       ${transparent ? 'bg-transparent' : 'bg-primary'}`}
     >
       <div className="h-full container flex items-center justify-between">
