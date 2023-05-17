@@ -13,6 +13,7 @@ import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
+  const [searchComboResult, setSearchComboResult] = React.useState<Product[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);
   const [showResult, setShowResult] = React.useState<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -28,7 +29,7 @@ function Search() {
       setIsSearchResultEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue);
+        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
       }).length === 0
     ) {
       setSearchDishResult([]);
@@ -36,19 +37,44 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue);
+        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
       }).length !== 0
     ) {
       setSearchDishResult(
         products.filter((product) => {
-          return product.name.trim().toLowerCase().includes(searchValue);
+          return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
         }),
       );
       setIsSearchValueEmpty(false);
       setIsSearchResultEmpty(false);
     }
 
-    
+    if (searchValue === '') {
+      setSearchComboResult([]);
+      setIsSearchValueEmpty(true);
+      setIsSearchResultEmpty(false);
+    } else if (
+      products.filter((product) => {
+        return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+      }).length === 0
+    ) {
+      setSearchComboResult([]);
+      setIsSearchResultEmpty(true);
+      setIsSearchValueEmpty(false);
+    } else if (
+      products.filter((product) => {
+        return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+      }).length !== 0
+    ) {
+      setSearchComboResult(
+        products.filter((product) => {
+          return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+        }),
+      );
+      setIsSearchValueEmpty(false);
+      setIsSearchResultEmpty(false);
+    }
+
     if (searchValue === '') {
       setSearchTypeResult([]);
       setIsSearchValueEmpty(true);
@@ -93,21 +119,41 @@ function Search() {
         render={(attrs) => (
           <div tabIndex={-1} {...attrs} className="w-[30rem]">
             <PopperWrapper>
-              {searchDishResult.length > 0
-                ? searchDishResult.map((result) => (
-                    <SearchDishItem key={result.id} id={result.id} name={result.name}  />
-                  ))
-                : null}
-              {searchTypeResult.length > 0
-                ? searchTypeResult.map((result) => (
-                    <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
-                  ))
-                : null}
-              {isSearchValueEmpty && searchDishResult.length === 0 && searchTypeResult.length === 0 ? (
-                <p className="text-secondary py-[0.8rem] px-[2rem]">Type in dish's name or category</p>
+              {searchDishResult.length > 0 ? (
+                <>
+                  <p className="text-secondary ml-[2rem]">Dish</p>
+                  {searchDishResult.map((result) => (
+                    <SearchDishItem key={result.id} id={result.id} name={result.name} />
+                  ))}
+                </>
               ) : null}
-              {isSearchResultEmpty && searchDishResult.length === 0 && searchTypeResult.length === 0 ? (
-                <p className="text-secondary py-[0.8rem] px-[2rem]">No dish or category found</p>
+              {searchComboResult.length > 0 ? (
+                <>
+                  <p className="text-secondary ml-[2rem]">Combo</p>
+                  {searchComboResult.map((result) => (
+                    <SearchTypeItem key={result.id} id={result.id} name={result.name} />
+                  ))}
+                </>
+              ) : null}
+              {searchTypeResult.length > 0 ? (
+                <>
+                  <p className="text-secondary ml-[2rem]">Category</p>
+                  {searchTypeResult.map((result) => (
+                    <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
+                  ))}
+                </>
+              ) : null}
+              {isSearchValueEmpty &&
+              searchDishResult.length === 0 &&
+              searchTypeResult.length === 0 &&
+              searchComboResult.length === 0 ? (
+                <p className="text-secondary py-[0.8rem] px-[2rem]">Type in dish's name, category or combo</p>
+              ) : null}
+              {isSearchResultEmpty &&
+              searchDishResult.length === 0 &&
+              searchTypeResult.length === 0 &&
+              searchComboResult.length === 0 ? (
+                <p className="text-secondary py-[0.8rem] px-[2rem]">No dish,category or combo found</p>
               ) : null}
             </PopperWrapper>
           </div>

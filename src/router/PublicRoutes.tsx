@@ -33,6 +33,10 @@ export const PublicRoutes = [
         element: <MenuCombo />,
       },
       {
+        path: `${config.routes.menucombo}/:id`,
+        element: <MenuCombo />,
+      },
+      {
         path: config.routes.shop,
         element: <Shop />,
       },

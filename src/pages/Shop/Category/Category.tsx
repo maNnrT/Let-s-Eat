@@ -59,7 +59,7 @@ function Category({ category,description }: Props) {
                 {newName}
               </p>
               <div className="flex flex-col h-full">
-                {arrayProducts1.length > 0 ? (
+                {products.length > 0 ? (
                   arrayProducts1.map((product) => (
                     <div
                       key={product.id}
@@ -95,7 +95,7 @@ function Category({ category,description }: Props) {
             </div>
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="flex flex-col w-full h-full">
-                {arrayProducts2.length > 0 ? (
+                {products.length > 0 ? (
                   arrayProducts2.map((product) => (
                     <div
                       key={product.id}
