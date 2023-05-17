@@ -102,9 +102,9 @@ function ProductDetail({ id }: Props): JSX.Element|null {
   const el = document.getElementById('portal')
   if (el)
     return ReactDOM.createPortal(
-      <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-[99999] top-[7.5rem] left-0 right-0 bottom-0">
+      <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-[99999] top-0 left-0 right-0 bottom-0">
         <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
-        <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[2.5rem] bg-fdf9f5">
+        <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[10rem] bg-fdf9f5">
           <div className="w-full h-full relative">
             <Swiper
               pagination={pagination}

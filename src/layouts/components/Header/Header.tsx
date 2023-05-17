@@ -13,9 +13,11 @@ import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
 import { Item } from '@/types/types';
 import Search from './Search/Search';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
+import useScrollDirection from '@/hooks/useScrollDirection';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
+  const [scrollDirection,transparent] = useScrollDirection()
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
   const handleNav = (): void => {
@@ -40,7 +42,12 @@ function Header(): JSX.Element {
     dispatch(getProducts())
   },[])
   return (
-    <div className="flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] bg-primary">
+    <div
+      className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all ${
+        scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'
+      }
+      ${transparent ? 'bg-transparent' : 'bg-primary'}`}
+    >
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to={config.routes.homepage}>
@@ -54,7 +61,7 @@ function Header(): JSX.Element {
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>
         </div>
-        <Search/>
+        <Search />
         <div className="hidden tablet:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
