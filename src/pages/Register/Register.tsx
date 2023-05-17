@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
-import RegisterSuccessful from './RegisterSuccessful';
 import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
@@ -12,6 +11,7 @@ import { Account } from '@/types/types';
 import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
+import Input from '@/components/Form/Input';
 const schema = yup
   .object({
     firstName: yup.string().required('First name is required!'),
@@ -45,22 +45,18 @@ function Login(): JSX.Element {
     const isExist = accountList.every((account: Account) => {
       return account.username !== data.email;
     });
-    console.log('check:', errors.term);
 
     if (isExist !== false) {
       dispatch(addNewAccounts(data))
         .then(() => {
           if (ref.current) ref.current.innerHTML = '';
-          setIsSignUpSuccess(true);
         })
         .catch(() => {
           console.error("Can't add new account");
-          setIsSignUpSuccess(false);
         });
       openModal();
     } else {
       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
-      setIsSignUpSuccess(false);
     }
   };
   React.useEffect(() => {
@@ -84,7 +80,6 @@ function Login(): JSX.Element {
   const [password, setPassword] = React.useState<string>('');
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [term, setTerm] = React.useState<boolean>(false);
-  const [isSignUpSuccess, setIsSignUpSuccess] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value);
@@ -133,125 +128,81 @@ function Login(): JSX.Element {
           </div>
           <form onSubmit={handleSubmit(onTouched)} className="w-full mt-[1rem]">
             <div className="flex w-full justify-between">
-              <div className="flex flex-col grow mr-[3rem]">
-                <div className="flex flex-col items-start relative">
-                  <label htmlFor="firstname" className="font-normal text-[1.8rem] text-secondary">
-                    First name
-                  </label>
-                  <input
-                    {...register('firstName')}
-                    type="text"
-                    id="firstname"
-                    placeholder="Enter first name..."
-                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                    value={firstName}
-                    onChange={(e) => handleFirstName(e)}
-                  />
-                  {errors.firstName && (
-                    <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.firstName?.message}</p>
-                  )}
-                  {touchedFields.firstName && !errors.firstName && (
-                    <span className="absolute right-[1.2rem] top-[3.2rem]">
-                      <img src={check} alt="" />
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col grow">
-                <div className="flex flex-col items-start relative">
-                  <label htmlFor="lastname" className="font-normal text-[1.8rem] text-secondary">
-                    Last name
-                  </label>
-                  <input
-                    {...register('lastName')}
-                    type="text"
-                    id="lastname"
-                    placeholder="Enter last name..."
-                    className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                    value={lastName}
-                    onChange={(e) => handleLastName(e)}
-                  />
-                  {errors.lastName && (
-                    <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.lastName?.message}</p>
-                  )}
-                  {touchedFields.lastName && !errors.lastName && (
-                    <span className="absolute right-[1.2rem] top-[3.2rem]">
-                      <img src={check} alt="" />
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex flex-col items-start relative">
-                <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                  Email
-                </label>
-                <input
-                  {...register('email')}
-                  type="email"
-                  id="email"
-                  placeholder="Enter email..."
-                  className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                  value={email}
-                  onChange={(e) => handleEmail(e)}
+              <div className="flex flex-col flex-1 mr-[3rem]">
+                <Input
+                  name="firstName"
+                  type="text"
+                  label="First name"
+                  placeholder="Enter first name..."
+                  classNameWrapper="flex flex-col items-start relative"
+                  classNameLabel="font-normal text-[1.8rem] text-secondary"
+                  classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                  classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                  classNameSuccess="absolute right-[1.2rem] top-[3.2rem]"
+                  register={register}
+                  touchedFields={touchedFields.firstName}
+                  error={errors.firstName?.message}
                 />
-                {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
-                {touchedFields.email && !errors.email && (
-                  <span className="absolute right-[1.2rem] top-[5rem]">
-                    <img src={check} alt="" />
-                  </span>
-                )}
               </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex flex-col items-start relative">
-                <label htmlFor="password" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                  Password
-                </label>
-                <input
-                  {...register('password')}
-                  type="password"
-                  id="password"
-                  placeholder="Enter passwords..."
-                  className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565"
-                  value={password}
-                  onChange={(e) => handlePassword(e)}
+              <div className="flex flex-col flex-1">
+                <Input
+                  name="lastName"
+                  type="text"
+                  label="Last name"
+                  placeholder="Enter last name..."
+                  classNameWrapper="flex flex-col items-start relative"
+                  classNameLabel="font-normal text-[1.8rem] text-secondary"
+                  classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+                  classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                  classNameSuccess="absolute right-[1.2rem] top-[3.2rem]"
+                  register={register}
+                  touchedFields={touchedFields.lastName}
+                  error={errors.lastName?.message}
                 />
-                {errors.password && (
-                  <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.password?.message}</p>
-                )}
-                {touchedFields.password && !errors.password && (
-                  <span className="absolute right-[1.2rem] top-[5rem]">
-                    <img src={check} alt="" />
-                  </span>
-                )}
               </div>
             </div>
-            <div className="flex flex-col">
-              <div className="flex flex-col items-start relative">
-                <label htmlFor="confirmPassword" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem]">
-                  Confirm password
-                </label>
-                <input
-                  {...register('confirmPassword')}
-                  type="password"
-                  id="confirmPassword"
-                  placeholder="Enter confirm password..."
-                  className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                  value={confirmPassword}
-                  onChange={(e) => handleConfirmPassword(e)}
-                />
-                {errors.confirmPassword && (
-                  <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.confirmPassword?.message}</p>
-                )}
-                {touchedFields.confirmPassword && !errors.confirmPassword && (
-                  <span className="absolute right-[1.2rem] top-[5rem]">
-                    <img src={check} alt="" />
-                  </span>
-                )}
-              </div>
-            </div>
+            <Input
+              name="email"
+              type="text"
+              label="Email"
+              placeholder="Enter email..."
+              classNameWrapper="flex flex-col items-start relative"
+              classNameLabel="font-normal text-[1.8rem] text-secondary mt-[1.8rem]"
+              classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+              classNameError="text-red-600 absolute bottom-[-2.4rem]"
+              classNameSuccess="absolute right-[1.2rem] top-[5rem]"
+              register={register}
+              touchedFields={touchedFields.email}
+              error={errors.email?.message}
+            />
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Enter password..."
+              classNameWrapper="flex flex-col items-start relative"
+              classNameLabel="font-normal text-[1.8rem] text-secondary mt-[1.8rem]"
+              classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+              classNameError="text-red-600 absolute bottom-[-2.4rem]"
+              classNameSuccess="absolute right-[1.2rem] top-[5rem]"
+              register={register}
+              touchedFields={touchedFields.password}
+              error={errors.password?.message}
+            />
+            <Input
+              name="confirmPassword"
+              type="password"
+              label="Confirm password"
+              placeholder="Enter confirm password..."
+              classNameWrapper="flex flex-col items-start relative"
+              classNameLabel="font-normal text-[1.8rem] text-secondary mt-[1.8rem]"
+              classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+              classNameError="text-red-600 absolute bottom-[-2.4rem]"
+              classNameSuccess="absolute right-[1.2rem] top-[5rem]"
+              register={register}
+              touchedFields={touchedFields.confirmPassword}
+              error={errors.confirmPassword?.message}
+            />
             <div className="flex justify-center items-center mt-[1.8rem] relative">
               <input type="checkbox" id="term" className="mr-2" {...register('term')} />
               <label htmlFor="term" className="font-light text-[1.6rem] text-666565 inline cursor-default mr-2">

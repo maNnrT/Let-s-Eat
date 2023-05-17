@@ -19,6 +19,7 @@ import config from '@/config';
 import * as yup from 'yup';
 import { DiscountCode, Item } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
+import Input from '@/components/Form/Input';
 
 const schema = yup
   .object({
@@ -138,9 +139,9 @@ function CheckOut(): JSX.Element {
   const openModal = () => {
     refDialog.current?.showModal();
   };
-  React.useEffect(()=>{
-    setBillId(uuidv4().substring(0,8))
-  },[])
+  React.useEffect(() => {
+    setBillId(uuidv4().substring(0, 8));
+  }, []);
   // const updateCart = () => {
   //   if (cart.length > 0 && idUser) {
   //     dispatch(
@@ -195,159 +196,93 @@ function CheckOut(): JSX.Element {
             <div className="w-[82.3%] h-fit grid grid-cols-[58.7%_auto] gap-x-[3.2rem] mx-auto">
               <div className="h-fit">
                 <div className="pt-[4.4rem] px-[4rem] pb-[4rem] flex flex-col items-start bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
-                  <div className="relative w-full">
-                    <label
-                      htmlFor="name"
-                      className="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                    >
-                      Name
-                    </label>
-                    <input
-                      {...register('name')}
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Name"
+                    placeholder="Enter name..."
+                    classNameWrapper="relative w-full"
+                    classNameLabel="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
+                    classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                    classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                    classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                    register={register}
+                    touchedFields={touchedFields.name}
+                    error={errors.name?.message}
+                  />
+                  <Input
+                    name="email"
+                    type="text"
+                    label="Email"
+                    placeholder="Enter email..."
+                    classNameWrapper="relative w-full"
+                    classNameLabel="font-normal block mb-[1.2rem] mt-[2.8rem] text-[1.6rem] leading-[100%] text-primary"
+                    classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                    classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                    classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                    register={register}
+                    touchedFields={touchedFields.email}
+                    error={errors.email?.message}
+                  />
+                  <div className="grid grid-cols-2 gap-x-[2rem] w-full mt-[2.8rem]">
+                    <Input
+                      name="city"
                       type="text"
-                      className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                      onChange={handleName}
-                      value={name}
-                      placeholder="Enter name..."
-                      id="name"
-                      name="name"
+                      label="City"
+                      placeholder="Enter city..."
+                      classNameWrapper="relative w-full"
+                      classNameLabel="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
+                      classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                      classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                      classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                      register={register}
+                      touchedFields={touchedFields.city}
+                      error={errors.city?.message}
                     />
-                    {errors.name && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.name?.message}</p>}
-                    {touchedFields.name && !errors.name && (
-                      <span className="absolute right-[1.2rem] top-[3.8rem]">
-                        <img src={check} alt="" />
-                      </span>
-                    )}
-                  </div>
-                  <div className="relative w-full">
-                    <label
-                      htmlFor="email"
-                      className="font-normal block mt-[2.8rem] mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                    >
-                      Email
-                    </label>
-                    <input
-                      {...register('email')}
+                    <Input
+                      name="zipCode"
                       type="text"
-                      className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                      onChange={handleEmail}
-                      value={email}
-                      placeholder="Enter email..."
-                      id="email"
-                      name="email"
+                      label="Zip code"
+                      placeholder="Enter zip code..."
+                      classNameWrapper="relative w-full"
+                      classNameLabel="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
+                      classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                      classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                      classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                      register={register}
+                      touchedFields={touchedFields.zipCode}
+                      error={errors.zipCode?.message}
                     />
-                    {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
-                    {touchedFields.email && !errors.email && (
-                      <span className="absolute right-[1.2rem] top-[6.8rem]">
-                        <img src={check} alt="" />
-                      </span>
-                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-x-[2rem] w-full mt-[2.8rem]">
-                    <div className="relative w-full">
-                      <label
-                        htmlFor="city"
-                        className="font-normal block  mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                      >
-                        City
-                      </label>
-                      <input
-                        {...register('city')}
-                        type="text"
-                        className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                        onChange={handleCity}
-                        value={city}
-                        placeholder="Enter city..."
-                        id="city"
-                        name="city"
-                      />
-                      {errors.city && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.city?.message}</p>}
-                      {touchedFields.city && !errors.city && (
-                        <span className="absolute right-[1.2rem] top-[3.8rem]">
-                          <img src={check} alt="" />
-                        </span>
-                      )}
-                    </div>
-                    <div className="relative w-full">
-                      <label
-                        htmlFor="zipCode"
-                        className="font-normal block  mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                      >
-                        Zip code
-                      </label>
-                      <input
-                        {...register('zipCode')}
-                        type="text"
-                        className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                        onChange={handleZipCode}
-                        value={zipCode}
-                        placeholder="Enter Zip code..."
-                        id="zipCode"
-                        name="zipCode"
-                      />
-                      {errors.zipCode && (
-                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.zipCode?.message}</p>
-                      )}
-                      {touchedFields.zipCode && !errors.zipCode && (
-                        <span className="absolute right-[1.2rem] top-[3.8rem]">
-                          <img src={check} alt="" />
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-[2rem] w-full mt-[2.8rem]">
-                    <div className="relative w-full">
-                      <label
-                        htmlFor="address"
-                        className="font-normal block  mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                      >
-                        Address
-                      </label>
-                      <input
-                        {...register('address')}
-                        type="text"
-                        className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                        onChange={handleAddress}
-                        value={address}
-                        placeholder="Enter address..."
-                        id="address"
-                        name="address"
-                      />
-                      {errors.address && (
-                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.address?.message}</p>
-                      )}
-                      {touchedFields.address && !errors.address && (
-                        <span className="absolute right-[1.2rem] top-[3.8rem]">
-                          <img src={check} alt="" />
-                        </span>
-                      )}
-                    </div>
-                    <div className="relative w-full">
-                      <label
-                        htmlFor="phone"
-                        className="font-normal block  mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
-                      >
-                        Phone number
-                      </label>
-                      <input
-                        {...register('phone')}
-                        type="text"
-                        className="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
-                        onChange={handlePhone}
-                        value={phone}
-                        placeholder="Enter Zip code..."
-                        id="phone"
-                        name="phone"
-                      />
-                      {errors.phone && (
-                        <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.phone?.message}</p>
-                      )}
-                      {touchedFields.phone && !errors.phone && (
-                        <span className="absolute right-[1.2rem] top-[3.8rem]">
-                          <img src={check} alt="" />
-                        </span>
-                      )}
-                    </div>
+                    <Input
+                      name="address"
+                      type="text"
+                      label="Address"
+                      placeholder="Enter address..."
+                      classNameWrapper="relative w-full"
+                      classNameLabel="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
+                      classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                      classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                      classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                      register={register}
+                      touchedFields={touchedFields.address}
+                      error={errors.address?.message}
+                    />
+                    <Input
+                      name="phone"
+                      type="text"
+                      label="Phone number"
+                      placeholder="Enter phone..."
+                      classNameWrapper="relative w-full"
+                      classNameLabel="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
+                      classNameInput="w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none "
+                      classNameError="text-red-600 absolute bottom-[-2.4rem]"
+                      classNameSuccess="absolute right-[1.2rem] top-[3.8rem]"
+                      register={register}
+                      touchedFields={touchedFields.phone}
+                      error={errors.phone?.message}
+                    />
                   </div>
                   <label
                     htmlFor="country"

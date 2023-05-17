@@ -9,33 +9,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccounts } from '@/redux/features/account/AccountsSlice';
 import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/features/checkLogin/CheckLoginSlice';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
-import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
 import { Account } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
+import Input from '@/components/Form/Input';
 
 const schema = yup
   .object({
     email: yup.string().required('Email is required!').email('Email is invalid!'),
-    passwords: yup.string().required('Password is required!'),
+    password: yup.string().required('Password is required!'),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
 
 function Login(): JSX.Element {
-  // if (isLoading) {
-  //   console.log('loading');
-  // } else if (isSuccess) {
-  //   console.log('check:', accounts);
-  //   console.log(isSuccess);
-  // } else if (isError) {
-  //   console.log(error.toString());
-  // }
   const {
     register,
     handleSubmit,
-    formState: { errors, touchedFields },
-    clearErrors,
+    formState: { errors },
+    // clearErrors,
   } = useForm<FormData>({
     mode: 'onTouched',
     resolver: yupResolver(schema),
@@ -46,7 +38,7 @@ function Login(): JSX.Element {
   const accountList: Account[] = useSelector(getAccountsSelector);
   const onTouched = (dataForm: FormData) => {
     const user = accountList.find((account: Account) => {
-      return account.username === dataForm.email && account.password === dataForm.passwords;
+      return account.username === dataForm.email && account.password === dataForm.password;
     });
     if (user) {
       dispatch(setIsLoginTrue());
@@ -72,17 +64,17 @@ function Login(): JSX.Element {
       navigate(config.routes.homepage);
     }, 2000);
   };
-  const [email, setEmail] = React.useState<string>('');
-  const [passwords, setPasswords] = React.useState<string>('');
+  // const [email, setEmail] = React.useState<string>('');
+  // const [passwords, setPasswords] = React.useState<string>('');
   const ref = React.useRef<HTMLParagraphElement>(null);
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    clearErrors('email');
-  };
-  const handlePasswords = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswords(e.target.value);
-    clearErrors('passwords');
-  };
+  // const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  //   clearErrors('email');
+  // };
+  // const handlePasswords = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPasswords(e.target.value);
+  //   clearErrors('passwords');
+  // };
   return (
     <div className="w-full mb-[-12rem] ">
       <SmallPopup refDialog={refDialog} img={check} title="Sign in success!" />
@@ -101,43 +93,31 @@ function Login(): JSX.Element {
             {}
           </p>
           <form onSubmit={handleSubmit(onTouched)} className="w-full mt-[1rem]">
-            <div className="flex flex-col">
-              <div className="flex flex-col items-start relative">
-                <label htmlFor="email" className="font-normal text-[1.8rem] text-secondary">
-                  Email
-                </label>
+            <Input
+              name="email"
+              type="text"
+              label="Email"
+              placeholder="Enter email..."
+              classNameWrapper="flex flex-col items-start relative"
+              classNameLabel="font-normal text-[1.8rem] text-secondary"
+              classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+              classNameError="text-red-600 absolute bottom-[-2.4rem]"
+              register={register}
+              error={errors.email?.message}
+            />
 
-                <input
-                  {...register('email')}
-                  type="email"
-                  id="email"
-                  placeholder="Enter email..."
-                  className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                  value={email}
-                  onChange={(e) => handleEmail(e)}
-                />
-                {errors.email && <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.email?.message}</p>}
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex flex-col items-start relative">
-                <label htmlFor="passwords" className="font-normal text-[1.8rem] text-secondary mt-[1.8rem] ">
-                  Passwords
-                </label>
-                <input
-                  {...register('passwords')}
-                  type="password"
-                  id="passwords"
-                  placeholder="Enter passwords..."
-                  className="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
-                  value={passwords}
-                  onChange={(e) => handlePasswords(e)}
-                />
-                {errors.passwords && (
-                  <p className="text-red-600 absolute bottom-[-2.4rem]">{errors.passwords?.message}</p>
-                )}
-              </div>
-            </div>
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Enter password..."
+              classNameWrapper="flex flex-col items-start relative"
+              classNameLabel="font-normal text-[1.8rem] text-secondary mt-[1.8rem]"
+              classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
+              classNameError="text-red-600 absolute bottom-[-2.4rem]"
+              register={register}
+              error={errors.password?.message}
+            />
             <button className="btn-secondary mt-[1.8rem] mx-auto">Login</button>
           </form>
         </div>
