@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { ImCross } from 'react-icons/im';
-import { useDispatch } from 'react-redux';
-import { decreaseItemQuantity, increaseItemQuantity, removeItemFromCart } from '@/redux/features/cart/CartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { decreaseItemQuantity, getUserCart, increaseItemQuantity, removeItemFromCart } from '@/redux/features/cart/CartSlice';
 interface Props {
   id: number;
   img: string;
   name: string;
   price: string;
   quantity: number;
-  updateCart: () => void;
 }
-function CartItem({ id, img, name, price, quantity, updateCart }: Props): JSX.Element {
+function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
   const dispatch = useDispatch();
   const [subTotal, setSubTotal] = React.useState<string>('');
   const decreaseNumber = () => {
-    updateCart();
     dispatch(decreaseItemQuantity(id));
   };
   const increaseNumber = () => {
-    updateCart();
     dispatch(increaseItemQuantity(id));
   };
   const removeItem = () => {
@@ -54,7 +51,7 @@ function CartItem({ id, img, name, price, quantity, updateCart }: Props): JSX.El
               -
             </button>
             <input
-              type="number"
+              type="text"
               className="h-full outline-none w-[5.4rem] text-primary text-center"
               min="1"
               value={quantity}

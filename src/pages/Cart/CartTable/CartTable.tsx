@@ -96,7 +96,6 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
                       name={item.name}
                       price={item.price}
                       quantity={item.quantity}
-                      updateCart={updateCart}
                     />
                   </React.Fragment>
                 ))

@@ -6,8 +6,8 @@ import { getIdProductModal, getIsOpenModal } from './redux/selectors';
 import ProductDetail from '@/components/ProductDetail';
 
 function App(): JSX.Element {
-  const idProduct = useSelector(getIdProductModal)
-  const isOpen = useSelector(getIsOpenModal)
+  const idProduct = useSelector(getIdProductModal);
+  const isOpen = useSelector(getIsOpenModal);
   return (
     <div>
       {isOpen && <ProductDetail id={idProduct} />}
