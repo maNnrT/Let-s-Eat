@@ -131,8 +131,8 @@ function Search() {
                 <>
                   <p className="text-secondary ml-[2rem]">Dish</p>
                   {searchDishResult.slice(0, 3).map((result) => (
-                    <div onClick={() => setShowResult(false)}>
-                      <SearchDishItem key={result.id} id={result.id} name={result.name} />
+                    <div onClick={() => setShowResult(false)} key={result.id}>
+                      <SearchDishItem id={result.id} name={result.name} />
                     </div>
                   ))}
                 </>
@@ -141,8 +141,8 @@ function Search() {
                 <>
                   <p className="text-secondary ml-[2rem]">Combo</p>
                   {searchComboResult.slice(0, 3).map((result) => (
-                    <div onClick={() => setShowResult(false)}>
-                      <SearchTypeItem key={result.id} id={result.id} name={result.name} />
+                    <div onClick={() => setShowResult(false)} key={result.id}>
+                      <SearchTypeItem id={result.id} name={result.name} />
                     </div>
                   ))}
                 </>
@@ -151,8 +151,8 @@ function Search() {
                 <>
                   <p className="text-secondary ml-[2rem]">Category</p>
                   {searchTypeResult.slice(0, 3).map((result) => (
-                    <div onClick={() => setShowResult(false)}>
-                      <SearchTypeItem key={searchTypeResult.indexOf(result)} name={result} />
+                    <div onClick={() => setShowResult(false)} key={searchTypeResult.indexOf(result)}>
+                      <SearchTypeItem name={result} />
                     </div>
                   ))}
                 </>

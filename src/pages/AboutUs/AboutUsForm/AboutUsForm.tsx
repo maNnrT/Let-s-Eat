@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Input from '@/components/Form/Input';
 import InputTextarea from '@/components/Form/InputTextarea';
+import React from 'react';
+import formatPhoneNumber from '@/utils/formatPhoneNumber';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
@@ -27,6 +29,11 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   const onTouched = (data: FormData) => {
     openModal();
     console.log(data);
+  };
+  const [phone, setPhone] = React.useState<string>('');
+  const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatedPhoneNumber = formatPhoneNumber(e.target.value)
+    setPhone(formatedPhoneNumber);
   };
   return (
     <div className="w-full mt-[4rem] flex flex-col">
@@ -59,6 +66,8 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
             register={register}
             error={errors.phone?.message}
             touchedFields={touchedFields.phone}
+            value={phone}
+            onChange={handlePhone}
           />
         </div>
         <Input

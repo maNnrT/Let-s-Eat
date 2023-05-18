@@ -20,6 +20,7 @@ import * as yup from 'yup';
 import { DiscountCode, Item } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import Input from '@/components/Form/Input';
+import formatPhoneNumber from '@/utils/formatPhoneNumber';
 
 const schema = yup
   .object({
@@ -104,8 +105,8 @@ function CheckOut(): JSX.Element {
     clearErrors('name');
   };
   const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(e.target.value);
-    clearErrors('phone');
+    const formatedPhoneNumber = formatPhoneNumber(e.target.value);
+    setPhone(formatedPhoneNumber);
   };
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -282,6 +283,8 @@ function CheckOut(): JSX.Element {
                       register={register}
                       touchedFields={touchedFields.phone}
                       error={errors.phone?.message}
+                      value={phone}
+                      onChange={handlePhone}
                     />
                   </div>
                   <label
