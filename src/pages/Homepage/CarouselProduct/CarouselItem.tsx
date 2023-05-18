@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-
+import {LazyLoadImage} from 'react-lazy-load-image-component'
 import * as React from 'react';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import check from '@/assets/svg/check_formCheckOut.svg';
@@ -16,10 +16,10 @@ function CarouselItem({ id, img, name, description, price}: Props) {
   const dispatch = useDispatch();
   const refDialog = React.useRef<HTMLDialogElement>(null);
   return (
-    <div className="w-full h-full bg-white flex flex-col group ">
+    <div className="w-[full] h-full bg-white flex flex-col group ">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem] overflow-hidden">
-        <img
+        <LazyLoadImage
           src={img}
           alt=""
           className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"

@@ -8,6 +8,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import './CarouselProduct.scss'
 // import required modules
 import { Product } from '@/types/types';
 import cross from '@/assets/svg/Red_X.svg';
@@ -27,25 +28,22 @@ export default function CarouselProduct({ products }: Props) {
   return (
     <>
       <Swiper
-        className="mySwiper"
+        className="swiperProduct"
+        spaceBetween={32}
         ref={ref}
         breakpoints={{
           // when window width is >= 320px
           320: {
             slidesPerView: 2,
-            spaceBetween: 32,
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 32,
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 32,
           },
           1536: {
             slidesPerView: 5,
-            spaceBetween: 32,
           },
         }}
       >
