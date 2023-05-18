@@ -23,8 +23,8 @@ function Search() {
   const [isSearchValueEmpty, setIsSearchValueEmpty] = React.useState<boolean>(true);
   const [isSearchResultEmpty, setIsSearchResultEmpty] = React.useState<boolean>(false);
   const [scrollDirection, transparent] = useScrollDirection();
+  const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
   React.useEffect(() => {
-    const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
     if (searchValue === '') {
       setSearchDishResult([]);
       setIsSearchValueEmpty(true);

@@ -10,6 +10,7 @@ import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
   category: string;
   description:string
@@ -86,12 +87,12 @@ function Category({ category,description }: Props) {
               </div>
             </div>
             <div className="w-full  h-auto mt-[3.2rem] mb-[20.1rem] self-end mr-0">
-              <img src={freshBakedImg1} alt="" className="w-full" />
+              <LazyLoadImage src={freshBakedImg1} alt="" className="w-full" />
             </div>
           </div>
           <div className="w-full flex flex-col items-start">
             <div className="w-full h-auto mb-[3.2rem]">
-              <img src={freshBakedImg2} alt="" className="w-full" />
+              <LazyLoadImage src={freshBakedImg2} alt="" className="w-full" />
             </div>
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
               <div className="flex flex-col w-full h-full">

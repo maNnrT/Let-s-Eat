@@ -22,6 +22,8 @@ import AboutUsForm from './AboutUsForm';
 import config from '@/config';
 import BigPopup from '@/components/Popup/BigPopup/';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 function AboutUs() {
   const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
@@ -35,7 +37,7 @@ function AboutUs() {
         style={{ backgroundImage: `url(${heroBannerAboutUs})` }}
       >
         <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">About us</p>
-        <Breadcrumbs/>
+        <Breadcrumbs />
       </div>
       <div className="w-full h-fit px-[11.2rem] py-[10rem] bg-fdf9f5 ">
         <div className="container grid grid-cols-[40.1%_auto] gap-x-[3.2rem]">
@@ -65,7 +67,7 @@ function AboutUs() {
           <div className="grid grid-cols-[40.2%_auto] gap-x-[3.2rem]">
             <div className="h-auto">
               <div className="relative w-full h-auto">
-                <img src={ourPassion1} alt="" className="w-full h-auto" />
+                <LazyLoadImage src={ourPassion1} alt="" className="w-full h-auto" />
                 <p className="font-fahkwang font-normal text-[1.6rem] leading-[100%] text-right uppercase text-secondary mt-[0.8rem]">
                   Extraordinary things
                 </p>
@@ -73,13 +75,13 @@ function AboutUs() {
             </div>
             <div className="flex flex-col ">
               <div className="relative">
-                <img src={ourPassion2} alt="" className="w-full mb-[3.2rem]" />
+                <LazyLoadImage src={ourPassion2} alt="" className="w-full mb-[3.2rem]" />
                 <p className="absolute top-[-2.4rem] right-0 font-fahkwang font-normal text-[1.6rem] leading-[100%] text-right uppercase text-secondary">
                   for the perfect MEAL
                 </p>
               </div>
               <div className="relative">
-                <img src={ourPassion3} alt="" className="w-[72.9%]" />
+                <LazyLoadImage src={ourPassion3} alt="" className="w-[72.9%]" />
                 <p
                   className="absolute top-0 left-[calc(72.9%+0.8rem)] font-fahkwang font-normal text-[1.6rem] leading-[100%] text-right uppercase text-secondary"
                   style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
@@ -151,15 +153,15 @@ function AboutUs() {
           </p>
           <div className="container mt-[6.9rem] grid grid-cols-[57.2%_auto] gap-x-[3.2rem]">
             <div className="flex flex-col">
-              <img src={gallery1} alt="" className="w-full h-auto mb-[3.2rem]" />
+              <LazyLoadImage src={gallery1} alt="" className="w-full h-auto mb-[3.2rem]" />
               <div className="grid grid-cols-[40.2%_auto] gap-x-[3.2rem]">
-                <img src={gallery3} alt="" className="w-full h-auto" />
-                <img src={gallery4} alt="" className="w-full h-auto" />
+                <LazyLoadImage src={gallery3} alt="" className="w-full h-auto" />
+                <LazyLoadImage src={gallery4} alt="" className="w-full h-auto" />
               </div>
             </div>
             <div>
-              <img src={gallery2} alt="" className="w-full h-auto mb-[3.2rem]" />
-              <img src={gallery5} alt="" className="w-full h-auto" />
+              <LazyLoadImage src={gallery2} alt="" className="w-full h-auto mb-[3.2rem]" />
+              <LazyLoadImage src={gallery5} alt="" className="w-full h-auto" />
             </div>
           </div>
         </div>
@@ -178,7 +180,7 @@ function AboutUs() {
       </div>
       <div className="w-full h-auto bg-primary pt-[10rem] pb-[21.6rem] relative">
         <div className="container grid grid-cols-2 gap-x-[3.2rem] ">
-          <img src={aboutUs1} alt="" className="w-auto h-auto" />
+          <LazyLoadImage src={aboutUs1} alt="" className="w-auto h-auto" />
           <div className="flex flex-col">
             <div>
               <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0%]">—</span>
@@ -233,11 +235,11 @@ function AboutUs() {
             </button>
           </div>
           <div className="flex justify-end">
-            <img src={aboutUs2} alt="" className="w-auto h-auto " />
+            <LazyLoadImage src={aboutUs2} alt="" className="w-auto h-auto " />
           </div>
         </div>
         <div className="container grid grid-cols-2 gap-x-[3.2rem] mt-[10rem] ">
-          <img src={aboutUs3} alt="" className="w-auto h-auto" />
+          <LazyLoadImage src={aboutUs3} alt="" className="w-auto h-auto" />
           <div className="flex flex-col">
             <div>
               <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0%]">—</span>
@@ -271,7 +273,7 @@ function AboutUs() {
           refDialog={refDialog}
         ></BigPopup>
         <div className="panel-layer h-auto mt-[-9.2rem] mb-[-13.8rem] z-[1] grid grid-cols-2 gap-x-[3.2rem]">
-          <img src={contactUs} alt="" />
+          <LazyLoadImage src={contactUs} alt="" />
           <div className="flex flex-col pt-[6rem] pr-[4rem] pb-[4.9rem]">
             <div>
               <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0%]">—</span>

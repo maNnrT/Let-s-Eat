@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import CarouselProduct from './CarouselProduct';
+// import CarouselProduct from './CarouselProduct';
+const CarouselProduct = React.lazy(() => import('./CarouselProduct'));
 import CarouselCustomer from './CarouselCustomer';
 import letEatImg from '@/assets/image/image1.png';
 import menuFeature from '@/assets/svg/menu_Feature.svg';
@@ -18,6 +20,8 @@ import { getProducts } from '@/redux/features/products/ProductsSlice';
 import BannerSlide from './BannerSlider/BannerSlider';
 import { Item, Product } from '@/types/types';
 import { addUserCart } from '@/redux/features/cart/CartSlice';
+import LoadingFallback from '@/components/LoadingFallback/LoadingFallback';
+
 function Homepage() {
   // const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
@@ -60,14 +64,13 @@ function Homepage() {
   }, [cart]);
   return (
     <div>
-      {/* <Slider /> */}
       <BannerSlide />
       <div className="w-full h-auto bg-primary">
         <div className="panel-layer tablet:mt-[-9.2rem] tablet:mb-[-13.8rem] z-[1] mt-0 mb-0">
           <div className="container tablet:py-[7.2rem] tablet:px-[10.3rem] pt-[2rem] pb-[2.4rem]">
             <div className="grid grid-cols-2  w-full gap-x-[3.2rem] gap-y-[2.4rem] tablet:gap-y-0 ">
               <div className="order-2 tablet:order-1 col-span-2 tablet:col-span-1">
-                <img src={letEatImg} alt="letEat" className="w-full " />
+                <LazyLoadImage src={letEatImg} alt="letEat" className="w-full " />
               </div>
               <div className="flex flex-col order-1 tablet:order-2 col-span-2 tablet:col-span-1">
                 <div>
@@ -308,7 +311,9 @@ function Homepage() {
                 ))}
               </div>
               <div className="mt-[4rem] mb-[12.8rem] container h-fit">
-                <CarouselProduct products={products} />
+                <React.Suspense fallback={<LoadingFallback />}>
+                  <CarouselProduct products={products} />
+                </React.Suspense>
               </div>
             </div>
           </div>

@@ -9,7 +9,6 @@ import { getIsLogin } from '@/redux/selectors';
 import { addToCart } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 import check from '@/assets/svg/check_formCheckOut.svg';
-
 interface Props {
   id: number | undefined;
   name: string;
@@ -62,22 +61,22 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
         <div className="w-full border-[1.5px] border-secondary px-[8.7rem] py-[4.4rem] flex flex-col items-center h-fit">
           <div className="flex flex-col items-center">
-            <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-secondary text-center">
+            <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-secondary text-center line-clamp-1">
               On weekend & Holiday
             </h6>
-            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
+            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
               08:00 - 14:00
             </p>
-            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
+            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
               16:00 - 22:00
             </p>
-            <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-secondary text-center mt-[3.2rem]">
+            <h6 className="font-mukta font-normal text-[18px] leading-[150%] text-secondary text-center mt-[3.2rem] line-clamp-1">
               Weekday
             </h6>
-            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem]">
+            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.9rem] line-clamp-1">
               09:00 - 13:00
             </p>
-            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem]">
+            <p className="font-fahkwang font-bold text-[#565758] text-[28px] leading-[36px] text-center mt-[0.4rem] line-clamp-1">
               17:00 - 20:00
             </p>
           </div>

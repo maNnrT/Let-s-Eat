@@ -1,6 +1,6 @@
 import config from '@/config';
 import { Link, useLocation } from 'react-router-dom';
-
+import {memo} from 'react'
 function Breadcrumbs() {
   const location = useLocation();
   let currentLink = '';
@@ -33,4 +33,4 @@ function Breadcrumbs() {
     </div>
   );
 }
-export default Breadcrumbs;
+export default memo(Breadcrumbs);

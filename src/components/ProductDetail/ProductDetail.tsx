@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import { setOpenModalFalse } from '@/redux/features/modalSlice/modalSlice';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
   id: number | undefined;
 }
@@ -127,7 +127,7 @@ function ProductDetail({ id }: Props): JSX.Element|null {
                 JSON.parse(productById.detailImg).map((img: string) => (
                   <SwiperSlide key={JSON.parse(productById.detailImg ? productById.detailImg : '').indexOf(img)}>
                     <div className="w-full h-full">
-                      <img src={img} alt="" className="w-full h-full max-h-[55.7rem] object-cover" />
+                      <LazyLoadImage src={img} alt="" className="w-full h-full max-h-[55.7rem] object-cover" />
                     </div>
                   </SwiperSlide>
                 ))}
@@ -177,14 +177,14 @@ function ProductDetail({ id }: Props): JSX.Element|null {
             </button>
             <span
               className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2rem] cursor-pointer"
-              onClick={()=>dispatch(setOpenModalFalse())}
+              onClick={() => dispatch(setOpenModalFalse())}
             >
               &times;
             </span>
           </div>
         </div>
       </div>,
-      el
+      el,
     );
   else{
     return null
