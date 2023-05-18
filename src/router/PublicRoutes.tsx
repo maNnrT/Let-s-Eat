@@ -19,7 +19,6 @@ const Shop = lazy(() => import('@/pages/Shop'));
 const Category = lazy(() => import('@/pages/Shop/Category'));
 const Login = lazy(() => import('@/pages/Login'));
 const Register = lazy(() => import('@/pages/Register'));
-console.log(Homepage);
 
 export const PublicRoutes = [
   {

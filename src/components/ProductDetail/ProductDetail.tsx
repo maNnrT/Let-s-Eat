@@ -64,14 +64,15 @@ function ProductDetail({ id }: Props): JSX.Element|null {
           quantity: numberInput,
         }),
       );
+      updateCart();
       openModal();
     } else {
       navigate(config.routes.login);
     }
   };
-  React.useEffect(() => {
-    updateCart();
-  }, [cart]);
+  // React.useEffect(() => {
+  //   updateCart();
+  // }, [cart]);
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
