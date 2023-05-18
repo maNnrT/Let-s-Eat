@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Product } from '@/types/types';
 import cross from '@/assets/svg/Red_X.svg';
+import { BsCart } from 'react-icons/bs';
 interface Props {
   products: Product[];
 }
@@ -62,8 +63,13 @@ export default function CarouselProduct({ products }: Props) {
           ))
         ) : (
           <div className="h-[41.2rem] flex flex-col items-center justify-center">
-            <img src={cross} alt="" className="object-cover w-[6rem]" />
-            <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">This special dish is out!<br />Please choose a different dish</p>
+            {/* <img src={cross} alt="" className="object-cover w-[6rem]" /> */}
+            <BsCart color="#D08C30" size={60} />
+            <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">
+              This special dish is out!
+              <br />
+              Please choose a different dish
+            </p>
           </div>
         )}
       </Swiper>
