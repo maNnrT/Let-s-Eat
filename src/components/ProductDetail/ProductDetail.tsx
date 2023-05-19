@@ -53,7 +53,7 @@ function ProductDetail({ id }: Props): JSX.Element | null {
   // }
   const handleAddToCart = () => {
     if (isLogin) {
-      if (numberInput > 0) {
+      // if (numberInput > 0) {
         dispatch(
           addToCartProduct({
             // id: productById.id,
@@ -76,14 +76,14 @@ function ProductDetail({ id }: Props): JSX.Element | null {
           }),
         );
         openModal();
-      } else {
-        openModal2();
-      }
+      // } else {
+      //   openModal2();
+      // }
     } else {
       navigate(config.routes.login);
     }
   };
-  const [numberInput, setNumberInput] = React.useState<number>(0);
+  const [numberInput, setNumberInput] = React.useState<number>(1);
   // const decreaseNumber = () => {
   //   setNumberInput((pre: number): number => {
   //     if (pre >= 1 && pre <= productById.dishLeft) return pre - 1;
@@ -98,14 +98,14 @@ function ProductDetail({ id }: Props): JSX.Element | null {
   // };
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 1 && pre <= 99) return pre - 1;
-      else return 0;
+      if (pre >= 2 && pre <= 99) return pre - 1;
+      else return 1;
     });
   };
   const increaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 0 && pre <= 99) return pre + 1;
-      else return productById.dishLeft;
+      if (pre >= 1 && pre < 99) return pre + 1;
+      else return pre;
     });
   };
   const ref = React.useRef<SwiperRef | null>(null);
