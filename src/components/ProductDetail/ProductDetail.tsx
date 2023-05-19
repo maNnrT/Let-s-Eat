@@ -46,11 +46,11 @@ function ProductDetail({ id }: Props): JSX.Element | null {
       refDialog2.current?.close();
     }, 1000);
   };
-  if (productById.dishLeft === 0) {
-    if (refBtn.current !== null) refBtn.current.disabled = true;
-    if (refBtnIncrease.current !== null) refBtnIncrease.current.disabled = true;
-    if (refBtnDecrease.current !== null) refBtnDecrease.current.disabled = true;
-  }
+  // if (productById.dishLeft === 0) {
+  //   if (refBtn.current !== null) refBtn.current.disabled = true;
+  //   if (refBtnIncrease.current !== null) refBtnIncrease.current.disabled = true;
+  //   if (refBtnDecrease.current !== null) refBtnDecrease.current.disabled = true;
+  // }
   const handleAddToCart = () => {
     if (isLogin) {
       if (numberInput > 0) {
@@ -84,15 +84,27 @@ function ProductDetail({ id }: Props): JSX.Element | null {
     }
   };
   const [numberInput, setNumberInput] = React.useState<number>(0);
+  // const decreaseNumber = () => {
+  //   setNumberInput((pre: number): number => {
+  //     if (pre >= 1 && pre <= productById.dishLeft) return pre - 1;
+  //     else return 0;
+  //   });
+  // };
+  // const increaseNumber = () => {
+  //   setNumberInput((pre: number): number => {
+  //     if (pre >= 0 && pre < productById.dishLeft) return pre + 1;
+  //     else return productById.dishLeft;
+  //   });
+  // };
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 1 && pre <= productById.dishLeft) return pre - 1;
+      if (pre >= 1 && pre <= 99) return pre - 1;
       else return 0;
     });
   };
   const increaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 0 && pre < productById.dishLeft) return pre + 1;
+      if (pre >= 0 && pre <= 99) return pre + 1;
       else return productById.dishLeft;
     });
   };
@@ -168,9 +180,9 @@ function ProductDetail({ id }: Props): JSX.Element | null {
             <p className="mt-[2.4rem] font-fahkwang font-normal text-[3.2rem] leading-[100%] text-2d2d2d">
               ${productById.price}
             </p>
-            <p className="mt-[2.4rem] font-fahkwang font-normal text-[1.8rem] leading-[100%] text-2d2d2d">
+            {/* <p className="mt-[2.4rem] font-fahkwang font-normal text-[1.8rem] leading-[100%] text-2d2d2d">
               Remaining: {productById.dishLeft}
-            </p>
+            </p> */}
             <p className="font-light text-[1.6rem] text-666565 mt-[2.8rem]">{productById.detail}</p>
             <div className="mt-[5.7rem] h-[2.8rem] flex justify-start ">
               <button

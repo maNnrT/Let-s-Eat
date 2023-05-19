@@ -42,24 +42,24 @@ function Header(): JSX.Element {
   const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
   const products: Product[] = useSelector(getProductsSelector);
   const combos: Combo[] = useSelector(getCombosSelector);
-  const newCombos: Combo[] = JSON.parse(JSON.stringify(combos));
-  const newCartProduct: ProductItem[] = JSON.parse(JSON.stringify(cartProduct));
-  const newCartCombo: ComboItem[] = JSON.parse(JSON.stringify(cartCombo));
-  products.forEach((products) => {
-    newCartProduct.forEach((item) => {
-      if (products.id === item.id) item.dishLeft = products.dishLeft;
-    });
-    newCartCombo.forEach((item) => {
-      item.dishes.forEach((dish) => {
-        if(products.id===dish.id) dish.dishLeft = products.dishLeft;
-      });
-    });
-    newCombos.forEach((combo) => {
-      combo.dishes.forEach((dish) => {
-        if(products.id===dish.id) dish.dishLeft = products.dishLeft;
-      });
-    });
-  });
+  // const newCombos: Combo[] = JSON.parse(JSON.stringify(combos));
+  // const newCartProduct: ProductItem[] = JSON.parse(JSON.stringify(cartProduct));
+  // const newCartCombo: ComboItem[] = JSON.parse(JSON.stringify(cartCombo));
+  // products.forEach((products) => {
+  //   newCartProduct.forEach((item) => {
+  //     if (products.id === item.id) item.dishLeft = products.dishLeft;
+  //   });
+  //   newCartCombo.forEach((item) => {
+  //     item.dishes.forEach((dish) => {
+  //       if(products.id===dish.id) dish.dishLeft = products.dishLeft;
+  //     });
+  //   });
+  //   newCombos.forEach((combo) => {
+  //     combo.dishes.forEach((dish) => {
+  //       if(products.id===dish.id) dish.dishLeft = products.dishLeft;
+  //     });
+  //   });
+  // });
   React.useEffect(() => {
     if (idUser) dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,9 +68,12 @@ function Header(): JSX.Element {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartProduct, cartCombo]);
+  // React.useEffect(() => {
+  //   dispatch(updateCart({ id: idUser, cartCombo: newCartCombo, cartProduct: newCartProduct }));
+  // }, [cartProduct, cartCombo, newCartProduct, newCartCombo]);
   React.useEffect(() => {
-    dispatch(updateCart({ id: idUser, cartCombo: newCartCombo, cartProduct: newCartProduct }));
-  }, [cartProduct, cartCombo, newCartProduct, newCartCombo]);
+    dispatch(updateCart({ id: idUser, cartCombo, cartProduct  }));
+  }, [cartProduct, cartCombo ]);
   React.useEffect(() => {
     dispatch(getProducts());
     dispatch(getCombos());

@@ -52,22 +52,22 @@ function CheckOut(): JSX.Element {
     console.log(data);
     console.log(cartProduct);
     
-    cartProduct.map((item) => {
-      if (item.quantity <= item.dishLeft)
-        request.put(`${config.api.products}/${item.id}`, {
-          id: item.id,
-          type: item.type,
-          dish: item.dish,
-          img: item.img,
-          name: item.name,
-          description: item.description,
-          ingredient: item.ingredient,
-          detail: item.detail,
-          detailImg: item.detailImg,
-          price: item.price,
-          dishLeft: item.dishLeft - item.quantity,
-        });
-    });
+    // cartProduct.map((item) => {
+    //   if (item.quantity <= item.dishLeft)
+    //     request.put(`${config.api.products}/${item.id}`, {
+    //       id: item.id,
+    //       type: item.type,
+    //       dish: item.dish,
+    //       img: item.img,
+    //       name: item.name,
+    //       description: item.description,
+    //       ingredient: item.ingredient,
+    //       detail: item.detail,
+    //       detailImg: item.detailImg,
+    //       price: item.price,
+    //       dishLeft: item.dishLeft - item.quantity,
+    //     });
+    // });
     dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo:[] }));
     openModal();
   };

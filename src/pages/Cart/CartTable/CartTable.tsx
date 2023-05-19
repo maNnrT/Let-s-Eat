@@ -42,26 +42,26 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
     openModal();
   };
-  const isAvailable= cartProduct.every(item=>{
-    return item.quantity <=item.dishLeft
-  })
+  // const isAvailable= cartProduct.every(item=>{
+  //   return item.quantity <=item.dishLeft
+  // })
   // console.log(isAvailable);
   
   const processToCheckOutBtnHandle = () => {
     
     if (cartProduct.length + cartCombo.length > 0) {
-      if (isAvailable){
+      // if (isAvailable){
         dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
         navigate(config.routes.cart + config.routes.checkout);
-      }else {
-        const res = cartProduct.filter((item) => {
-          return item.quantity > item.dishLeft;
-        });
-        if (refPara.current !== null)
-          refPara.current.innerHTML = `You take too many of ${res.map(
-            (item) => item.name +','
-          )}!<br /> please adjust the number of these products or remove them from cart `;
-      }
+      // }else {
+      //   const res = cartProduct.filter((item) => {
+      //     return item.quantity > item.dishLeft;
+      //   });
+      //   if (refPara.current !== null)
+      //     refPara.current.innerHTML = `You take too many of ${res.map(
+      //       (item) => item.name +','
+      //     )}!<br /> please adjust the number of these products or remove them from cart `;
+      // }
     } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();
     }
