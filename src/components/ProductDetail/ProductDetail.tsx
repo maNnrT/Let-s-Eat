@@ -53,7 +53,7 @@ function ProductDetail({ id }: Props): JSX.Element | null {
   }
   const handleAddToCart = () => {
     if (isLogin) {
-      if (numberInput>0)
+      if (numberInput > 0) {
         dispatch(
           addToCartProduct({
             // id: productById.id,
@@ -75,10 +75,10 @@ function ProductDetail({ id }: Props): JSX.Element | null {
             quantity: numberInput,
           }),
         );
-      else{
-        openModal2()
+        openModal();
+      } else {
+        openModal2();
       }
-      openModal();
     } else {
       navigate(config.routes.login);
     }

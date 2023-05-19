@@ -59,8 +59,8 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
         });
         if (refPara.current !== null)
           refPara.current.innerHTML = `You take too many of ${res.map(
-            (item) => item.name,
-          )}!<br /> Please adjust the number of these products or remove them from cart `;
+            (item) => item.name +','
+          )}!<br /> please adjust the number of these products or remove them from cart `;
       }
     } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();
