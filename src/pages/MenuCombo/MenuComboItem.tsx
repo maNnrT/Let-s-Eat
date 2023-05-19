@@ -5,10 +5,12 @@ import React from 'react';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin, } from '@/redux/selectors';
+import { getIsLogin } from '@/redux/selectors';
 import { addToCartCombo } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 import check from '@/assets/svg/check_formCheckOut.svg';
+import cross from '@/assets/svg/Red_X.svg';
+
 interface Props {
   id: number | undefined;
   name: string;
@@ -27,22 +29,63 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
       refDialog.current?.close();
     }, 1000);
   };
+  const refDialog2 = React.useRef<HTMLDialogElement>(null);
+  const openModal2 = () => {
+    refDialog2.current?.showModal();
+    setTimeout(() => {
+      refDialog2.current?.close();
+    }, 1000);
+  };
+  // console.log("check",dishes);
+  // dishes.forEach((dish)=>{
+  //   console.log('start-----------------');
+  //   console.log(dish.name,dish.dishLeft);
+  //   console.log('end-----------------');
+  // })
+  const [isAvailable, setIsAvailable] = React.useState<boolean>(
+    dishes.every((dish) => {
+      if (dish.numberOfDish) {
+        // console.log(dish.name, dish.numberOfDish, dish.dishLeft, dish.numberOfDish < dish.dishLeft);
+        return dish.dishLeft > dish.numberOfDish * 1;
+      }
+    }),
+  );
+  React.useEffect(() => {
+    setIsAvailable(
+      dishes.every((dish) => {
+        if (dish.numberOfDish) return dish.dishLeft > dish.numberOfDish * 1;
+      }),
+    );
+  }, [isAvailable]);
+  // console.log("-----------------");
+  // console.log(isAvailable);
+  // console.log("-----------------");
+
   const handleAddToCart = () => {
-    if (isLogin && dishes) {
-      dispatch(
-        addToCartCombo({
-          id: id,
-          img: img,
-          name: name,
-          price: dishes
-            .reduce((total, dish) => {
-              return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
-            }, 0)
-            .toFixed(2),
-          quantity: 1,
-        }),
-      );
-      openModal();
+    // console.log('-----------------');
+    // console.log(isAvailable);
+    // console.log('-----------------');
+
+    if (isLogin) {
+      if (isAvailable === true) {
+        dispatch(
+          addToCartCombo({
+            id: id,
+            img: img,
+            name: name,
+            price: dishes
+              .reduce((total, dish) => {
+                return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
+              }, 0)
+              .toFixed(2),
+            dishes: dishes,
+            quantity: 1,
+          }),
+        );
+        openModal();
+      } else if (isAvailable === false) {
+        openModal2();
+      }
     } else {
       navigate(config.routes.login);
     }
@@ -50,6 +93,8 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   return (
     <div className="container grid grid-cols-3 gap-x-[3.2rem] h-fit mt-[7.4rem] mb-[11.9rem]">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
+      <SmallPopup refDialog={refDialog2} img={cross} title="This combo is out!" />
+
       <div className="grid grid-cols-1 gap-y-[3.2rem]">
         <div className="w-full bg-333236 px-[3.8rem] py-[9.7rem] flex flex-col items-center h-fit">
           <p className="font-fahkwang font-normal text-[2.4rem] leading-[100%] text-center uppercase">FIND US HERE</p>
@@ -117,7 +162,9 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
               {dishes &&
                 dishes
                   .reduce((total, dish) => {
-                    return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
+                    return (total += dish.numberOfDish
+                      ? Number(dish.price) * dish.numberOfDish
+                      : Number(dish.price) * 0);
                   }, 0)
                   .toFixed(2)}
             </p>

@@ -19,8 +19,10 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
+  const refPara = React.useRef<HTMLParagraphElement>(null);
   const idUser = useSelector(getIdUserSelector);
-  console.log(cartProduct);
+  // console.log(cartProduct);
+  // console.log(cartCombo);
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
@@ -40,10 +42,24 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
     openModal();
   };
+  const isAvailable= cartProduct.every(item=>{
+    return item.quantity <item.dishLeft
+  })
+  // console.log(isAvailable);
+  
   const processToCheckOutBtnHandle = () => {
+    
     if (cartProduct.length + cartCombo.length > 0) {
-      dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
-      navigate(config.routes.cart + config.routes.checkout);
+      if (isAvailable){
+        dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
+        navigate(config.routes.cart + config.routes.checkout);
+      }else {
+        const res = cartProduct.filter((item) => {
+          return item.quantity > item.dishLeft;
+        });
+        if (refPara.current !== null)
+          refPara.current.innerHTML = `You take too many of ${res.map((item) => item.name)}!<br /> Please check number of each product`;
+      }
     } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();
     }
@@ -127,7 +143,10 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
         </div>
       </div>
       <div className="w-[82.3%] mx-auto h-[14.8rem] bg-fefefd ">
-        <div className="px-[2rem] w-full text-secondary pt-[1.6rem] pb-[2.8rem] flex justify-end">
+        <div className="px-[2rem] w-full text-secondary pt-[1.6rem] pb-[2.8rem] flex justify-between items-center">
+          <div className="pl-[8.3rem]">
+            <p className=" text-secondary text-[1.6rem]" ref={refPara}></p>
+          </div>
           <div className="pr-[8.3rem]">
             <div className="w-[39.2rem] flex justify-between">
               <p className="font-semibold text-[2.4rem] text-primary uppercase">TOTAL</p>
@@ -140,6 +159,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
               >
                 update cart
               </button>
+
               <button
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
                 onClick={processToCheckOutBtnHandle}

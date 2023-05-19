@@ -14,8 +14,10 @@ export type ProductItem = {
 };
 export type ComboItem = {
   id: number;
-  img: string;
   name: string;
+  img: string;
+  numberPeople: number;
+  dishes: Product[];
   price: string;
   quantity: number;
 };
@@ -33,16 +35,16 @@ export type Product = {
   dishLeft: number;
   numberOfDish?:number
 };
-export type DishesInCombo = {
-  id: number;
-  numberOfDish: number;
-};
 export type Combo = {
   id: number | undefined;
   name: string;
   img: string;
   numberPeople: number;
   dishes: Product[];
+};
+export type DishesInCombo = {
+  id: number;
+  numberOfDish: number;
 };
 export type Account = {
   id: number | undefined;
