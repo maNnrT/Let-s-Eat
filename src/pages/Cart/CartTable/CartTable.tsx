@@ -58,7 +58,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
           return item.quantity > item.dishLeft;
         });
         if (refPara.current !== null)
-          refPara.current.innerHTML = `You take too many of ${res.map((item) => item.name)}!<br /> Please check number of each product`;
+          refPara.current.innerHTML = `You take too many of ${res.map((item) => item.name)}!<br /> Please remove these products from cart`;
       }
     } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();

@@ -37,7 +37,7 @@ const cartSlice = createSlice({
     increaseProductItemQuantity: (state, action) => {
       state.cartProduct = state.cartProduct.map((item) => {
         if (item.id === action.payload) {
-          if (item.quantity >= 1 && item.quantity < item.dishLeft) return { ...item, quantity: item.quantity + 1 };
+          if (item.quantity >= 1 && item.quantity < 99) return { ...item, quantity: item.quantity + 1 };
         }
         return item;
       });
@@ -45,7 +45,7 @@ const cartSlice = createSlice({
     decreaseProductItemQuantity: (state, action) => {
       state.cartProduct = state.cartProduct.map((item) => {
         if (item.id === action.payload) {
-          if (item.quantity >= 2 && item.quantity < item.dishLeft) return { ...item, quantity: item.quantity - 1 };
+          if (item.quantity >= 2 && item.quantity < 99) return { ...item, quantity: item.quantity - 1 };
         }
         return item;
       });
