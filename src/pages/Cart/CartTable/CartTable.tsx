@@ -1,28 +1,28 @@
 import * as React from 'react';
-import CartItem from './CartItem/CartItem';
+import { CartProductItem, CartComboItem } from './CartItem/';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCart } from '@/redux/features/cart/CartSlice';
+import { updateCart } from '@/redux/features/cart/CartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
-import { Item } from '@/types/types';
+import { ComboItem, ProductItem } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
-import cartImg from '@/assets/svg/cart-secondary.svg';
 import cross from '@/assets/svg/Red_X.svg';
 import { getIdUserSelector } from '@/redux/selectors';
-import {BsCart} from 'react-icons/bs'
+import { BsCart } from 'react-icons/bs';
 interface Props {
-  cart: Item[];
+  cartProduct: ProductItem[];
+  cartCombo: ComboItem[];
   totalPrice: string;
-  updateCart:()=>void
 }
-function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
+function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
+  const refPara = React.useRef<HTMLParagraphElement>(null);
   const idUser = useSelector(getIdUserSelector);
-
-  
+  // console.log(cartProduct);
+  // console.log(cartCombo);
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
@@ -36,22 +36,33 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
       refDialog2.current?.close();
     }, 1000);
   };
-  
+
+
   const updateCartBtnHandle = () => {
-    updateCart();
+    dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
     openModal();
   };
+  const isAvailable= cartProduct.every(item=>{
+    return item.quantity <=item.dishLeft
+  })
+  // console.log(isAvailable);
+  
   const processToCheckOutBtnHandle = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-
-      navigate(config.routes.cart + config.routes.checkout);
-    } else if (cart.length <= 0 && idUser) {
+    
+    if (cartProduct.length + cartCombo.length > 0) {
+      if (isAvailable){
+        dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
+        navigate(config.routes.cart + config.routes.checkout);
+      }else {
+        const res = cartProduct.filter((item) => {
+          return item.quantity > item.dishLeft;
+        });
+        if (refPara.current !== null)
+          refPara.current.innerHTML = `You take too many of ${res.map(
+            (item) => item.name +','
+          )}!<br /> please adjust the number of these products or remove them from cart `;
+      }
+    } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();
     }
   };
@@ -87,10 +98,10 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
               </tr>
             </thead>
             <tbody className="w-full ">
-              {cart.length !== 0 ? (
-                cart.map((item) => (
+              {cartProduct.length !== 0 &&
+                cartProduct.map((item) => (
                   <React.Fragment key={item.id}>
-                    <CartItem
+                    <CartProductItem
                       id={item.id}
                       img={item.img}
                       name={item.name}
@@ -98,13 +109,25 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
                       quantity={item.quantity}
                     />
                   </React.Fragment>
-                ))
-              ) : (
+                ))}
+              {cartCombo.length !== 0 &&
+                cartCombo.map((item) => (
+                  <React.Fragment key={item.id}>
+                    <CartComboItem
+                      id={item.id}
+                      img={item.img}
+                      name={item.name}
+                      price={item.price}
+                      quantity={item.quantity}
+                    />
+                  </React.Fragment>
+                ))}
+              {cartCombo.length === 0 && cartProduct.length === 0 && (
                 <tr className="h-[40rem]">
                   <td colSpan={4}>
                     <div className="flex flex-col justify-center items-center ">
                       {/* <img src={cartImg} alt="" className="object-cover w-[6rem] text-secondary" /> */}
-                      <BsCart color="#D08C30" size={60}/>
+                      <BsCart color="#D08C30" size={60} />
                       <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">
                         Cart is empty!
                         <br />
@@ -122,7 +145,10 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
         </div>
       </div>
       <div className="w-[82.3%] mx-auto h-[14.8rem] bg-fefefd ">
-        <div className="px-[2rem] w-full text-secondary pt-[1.6rem] pb-[2.8rem] flex justify-end">
+        <div className="px-[2rem] w-full text-secondary pt-[1.6rem] pb-[2.8rem] flex justify-between items-center">
+          <div className="pl-[8.3rem]">
+            <p className=" text-secondary text-[1.6rem]" ref={refPara}></p>
+          </div>
           <div className="pr-[8.3rem]">
             <div className="w-[39.2rem] flex justify-between">
               <p className="font-semibold text-[2.4rem] text-primary uppercase">TOTAL</p>
@@ -135,6 +161,7 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
               >
                 update cart
               </button>
+
               <button
                 className="w-[22.7rem] h-[5.2rem] text-white btn-secondary uppercase font-normal"
                 onClick={processToCheckOutBtnHandle}

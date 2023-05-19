@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdUserSelector, getIsLogin, getProductByIdSelector, getUserCartSelector } from '@/redux/selectors';
+import { getIsLogin, getProductByIdSelector, getCartProductSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -10,80 +10,90 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart, addUserCart } from '@/redux/features/cart/CartSlice';
+import { addToCartProduct } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
-import { Item, Product } from '@/types/types';
+import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
+import cross from '@/assets/svg/Red_X.svg';
+
 import { setOpenModalFalse } from '@/redux/features/modalSlice/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
   id: number | undefined;
 }
-function ProductDetail({ id }: Props): JSX.Element|null {
+function ProductDetail({ id }: Props): JSX.Element | null {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser: number | undefined = useSelector(getIdUserSelector);
   const isLogin: boolean = useSelector(getIsLogin);
-  const cart: Item[] = useSelector(getUserCartSelector);
-
   const productById: Product = useSelector(getProductByIdSelector);
+  // console.log('check:' ,productById);
   const refDialog = React.useRef<HTMLDialogElement>(null);
+  const refDialog2 = React.useRef<HTMLDialogElement>(null);
+  const refBtn = React.useRef<HTMLButtonElement>(null);
+  const refBtnIncrease = React.useRef<HTMLButtonElement>(null);
+  const refBtnDecrease = React.useRef<HTMLButtonElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
       refDialog.current?.close();
     }, 1000);
   };
-  const updateCart = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-    } else if (cart.length <= 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
-    }
+  const openModal2 = () => {
+    refDialog2.current?.showModal();
+    setTimeout(() => {
+      refDialog2.current?.close();
+    }, 1000);
   };
+  if (productById.dishLeft === 0) {
+    if (refBtn.current !== null) refBtn.current.disabled = true;
+    if (refBtnIncrease.current !== null) refBtnIncrease.current.disabled = true;
+    if (refBtnDecrease.current !== null) refBtnDecrease.current.disabled = true;
+  }
   const handleAddToCart = () => {
     if (isLogin) {
-      dispatch(
-        addToCart({
-          id: productById.id,
-          img: productById.img,
-          name: productById.name,
-          price: productById.price,
-          quantity: numberInput,
-        }),
-      );
-      updateCart();
-      openModal();
+      if (numberInput > 0) {
+        dispatch(
+          addToCartProduct({
+            // id: productById.id,
+            // img: productById.img,
+            // name: productById.name,
+            // price: productById.price,
+            // quantity: numberInput,
+            id: productById.id,
+            type: productById.type,
+            dish: productById.dish,
+            img: productById.img,
+            name: productById.name,
+            description: productById.description,
+            ingredient: productById.ingredient,
+            detail: productById.detail,
+            detailImg: productById.detailImg,
+            price: productById.price,
+            dishLeft: productById.dishLeft,
+            quantity: numberInput,
+          }),
+        );
+        openModal();
+      } else {
+        openModal2();
+      }
     } else {
       navigate(config.routes.login);
     }
   };
-  // React.useEffect(() => {
-  //   updateCart();
-  // }, [cart]);
-  const [numberInput, setNumberInput] = React.useState<number>(1);
+  const [numberInput, setNumberInput] = React.useState<number>(0);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 2) return pre - 1;
-      else return 1;
+      if (pre >= 1 && pre <= productById.dishLeft) return pre - 1;
+      else return 0;
     });
   };
   const increaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 1) return pre + 1;
-      else return 1;
+      if (pre >= 0 && pre < productById.dishLeft) return pre + 1;
+      else return productById.dishLeft;
     });
   };
   const ref = React.useRef<SwiperRef | null>(null);
@@ -100,11 +110,12 @@ function ProductDetail({ id }: Props): JSX.Element|null {
   const pagination = {
     clickable: true,
   };
-  const el = document.getElementById('portal')
+  const el = document.getElementById('portal');
   if (el)
     return ReactDOM.createPortal(
       <div className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-[99999] top-0 left-0 right-0 bottom-0">
         <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
+        <SmallPopup refDialog={refDialog2} img={cross} title="Add at least 1 product" />
         <div className="container grid grid-cols-2 gap-x-[3.2rem] h-fit min-w-[65.6rem] m-auto absolute right-0 left-0 top-[10rem] bg-fdf9f5">
           <div className="w-full h-full relative">
             <Swiper
@@ -157,9 +168,16 @@ function ProductDetail({ id }: Props): JSX.Element|null {
             <p className="mt-[2.4rem] font-fahkwang font-normal text-[3.2rem] leading-[100%] text-2d2d2d">
               ${productById.price}
             </p>
+            <p className="mt-[2.4rem] font-fahkwang font-normal text-[1.8rem] leading-[100%] text-2d2d2d">
+              Remaining: {productById.dishLeft}
+            </p>
             <p className="font-light text-[1.6rem] text-666565 mt-[2.8rem]">{productById.detail}</p>
             <div className="mt-[5.7rem] h-[2.8rem] flex justify-start ">
-              <button className="w-[2.8rem] h-full bg-e9e9e9 text-[1.6rem] text-aaa9a9" onClick={decreaseNumber}>
+              <button
+                className="w-[2.8rem] h-full bg-e9e9e9 text-[1.6rem] text-aaa9a9 cursor-pointer disabled:cursor-default disabled:opacity-50"
+                onClick={decreaseNumber}
+                ref={refBtnDecrease}
+              >
                 -
               </button>
               <input
@@ -167,13 +185,16 @@ function ProductDetail({ id }: Props): JSX.Element|null {
                 className="h-full outline-none w-[5.4rem] text-primary text-center"
                 min="1"
                 value={numberInput}
-                readOnly
               />
-              <button className="w-[2.8rem] h-full bg-e9e9e9 text-[1.2rem] text-aaa9a9" onClick={increaseNumber}>
+              <button
+                className="w-[2.8rem] h-full bg-e9e9e9 text-[1.2rem] text-aaa9a9 cursor-pointer disabled:cursor-default disabled:opacity-50"
+                onClick={increaseNumber}
+                ref={refBtnIncrease}
+              >
                 +
               </button>
             </div>
-            <button className="mt-[2.4rem] btn-secondary mb-[2rem] uppercase" onClick={handleAddToCart}>
+            <button className="mt-[2.4rem] btn-secondary mb-[2rem] uppercase " onClick={handleAddToCart} ref={refBtn}>
               ADD TO CART
             </button>
             <span
@@ -187,8 +208,8 @@ function ProductDetail({ id }: Props): JSX.Element|null {
       </div>,
       el,
     );
-  else{
-    return null
+  else {
+    return null;
   }
 }
 

@@ -1,20 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
-import {Product } from '@/types/types';
+import { Combo, Product } from '@/types/types';
 
 interface initialState {
   products: Product[];
+  productsByIdArray: Product[];
+  combos:  Combo[]
   status: string;
   productById: Product;
-  productByName: Product[];
+  productsByName: Product[];
   filter: string;
-
 }
 const productsSlice = createSlice({
   name: 'products',
   initialState: {
     products: [],
+    productsByIdArray: [],
     status: 'idle',
     productById: {
       id: undefined,
@@ -27,9 +29,9 @@ const productsSlice = createSlice({
       detail: '',
       detailImg: '',
       price: '',
-      quantity: undefined,
+      dishLeft: 0,
     },
-    productByName: [],
+    productsByName: [],
     combos: [],
     filter: 'fresh-baked',
   } as initialState,
@@ -50,6 +52,7 @@ const productsSlice = createSlice({
       .addCase(getProducts.rejected, (state) => {
         state.status = 'idle';
       })
+
       .addCase(getProductById.pending, (state) => {
         state.status = 'loading';
       })
@@ -60,11 +63,23 @@ const productsSlice = createSlice({
       .addCase(getProductById.rejected, (state) => {
         state.status = 'idle';
       })
+
+      .addCase(getProductsByIdArray.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getProductsByIdArray.fulfilled, (state, action) => {
+        if (action.payload) state.productsByIdArray = action.payload;
+        state.status = 'idle';
+      })
+      .addCase(getProductsByIdArray.rejected, (state) => {
+        state.status = 'idle';
+      })
+
       .addCase(getProductsByName.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(getProductsByName.fulfilled, (state, action) => {
-        if (action.payload) state.productByName = action.payload;
+        if (action.payload) state.productsByName = action.payload;
         state.status = 'idle';
       })
       .addCase(getProductsByName.rejected, (state) => {
@@ -85,21 +100,37 @@ export const getProductById = createAsyncThunk('products/getProductByID', async 
     const res = await request.get(`${config.api.products}/${id}`);
     return res as Product;
   } catch (error) {
-    console.error('Cant get product');
+    console.error('Cant get product by id');
   }
 });
-export const getProductsByName = createAsyncThunk('products/getProductByName', async (name: string) => {
+export const getProductsByIdArray = createAsyncThunk('products/getProductsByIdArray', async (data: number[]) => {
+  const arrayOfProduct:Product[] = []
+  const getProduct =(id:number)=>{
+    request.get(`${config.api.products}/${id}`)
+    .then((res)=>{
+      arrayOfProduct.push(res)
+    }).catch(()=>console.error(`Cant get ${id} product`))
+  }
+
+  try {
+    data.forEach((id) => {
+      getProduct(id)
+    });
+    console.log(arrayOfProduct);
+    return arrayOfProduct as Product[]
+  } catch (error) {
+    console.error('Cant get products by id');
+  }
+});
+export const getProductsByName = createAsyncThunk('products/getProductsByName', async (name: string) => {
   try {
     const res = await request.get(config.api.products);
     const result = res.filter((product: Product) => {
-      if(name!=='')
       return product.name.includes(name);
-      else if(name==='')
-      return []
     });
     return result as Product[];
   } catch (error) {
-    console.error('Cant get product');
+    console.error('Cant get products by name');
   }
 });
 export const { filterChange } = productsSlice.actions;

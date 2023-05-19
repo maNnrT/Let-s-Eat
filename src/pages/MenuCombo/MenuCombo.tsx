@@ -7,49 +7,17 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdUserSelector, getProductsSelector, getUserCartSelector } from '@/redux/selectors';
+import { getCombosSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
-import { addUserCart } from '@/redux/features/cart/CartSlice';
-import { Item, Product } from '@/types/types';
-import Cart from '../Cart/Cart';
+import { Combo } from '@/types/types';
 import { useParams } from 'react-router-dom';
-
 function MenuCombo() {
   const {id} = useParams()
   const dispatch = useDispatch();
   const ref = React.useRef<SwiperRef | null>(null);
-  const products: Product[] = useSelector(getProductsSelector);
-  // console.log(products);
-
-  const combos = products.filter((product) => {
-    return product.numberPeople !== undefined;
-  });
-  // console.log(combos);
-
-  const cart: Item[] = useSelector(getUserCartSelector);
-  const idUser: number | undefined = useSelector(getIdUserSelector);
-  const updateCart = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-    } else if (cart.length <= 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
-    }
-  };
-  React.useEffect(() => {
-    updateCart();
-  }, [cart]);
+  const combos: Combo[] = useSelector(getCombosSelector);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };
@@ -80,7 +48,7 @@ function MenuCombo() {
           A full meal of bread and coffee, or a relaxing afternoon with some sweets and tea. Let’s see what we have!
         </p>
 
-        <Swiper slidesPerView={1} className="w-full" ref={ref} initialSlide={1}>
+        <Swiper slidesPerView={1} className="w-full" ref={ref} initialSlide={id?Number(id)-1:0}>
           {combos.map((combo) => (
             <SwiperSlide className="bg-fdf9f5" key={combos.indexOf(combo)}>
               <MenuComboItem
