@@ -8,10 +8,10 @@ import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSl
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { Account } from '@/types/types';
-import { useGetAccountsQuery } from '@/redux/features/api/apiSlice';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 import Input from '@/components/Form/Input';
+import { addNewUserCart } from '@/redux/features/cart/CartSlice';
 const schema = yup
   .object({
     firstName: yup.string().required('First name is required!'),
@@ -34,7 +34,7 @@ function Login(): JSX.Element {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-    clearErrors,
+    // clearErrors,
   } = useForm<FormData>({
     mode: 'onTouched',
     resolver: yupResolver(schema),
@@ -54,6 +54,7 @@ function Login(): JSX.Element {
         .catch(() => {
           console.error("Can't add new account");
         });
+      dispatch(addNewUserCart())
       openModal();
     } else {
       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
@@ -74,37 +75,37 @@ function Login(): JSX.Element {
       navigate(config.routes.login);
     }, 2000);
   };
-  const [firstName, setFirstName] = React.useState<string>('');
-  const [lastName, setLastName] = React.useState<string>('');
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [confirmPassword, setConfirmPassword] = React.useState<string>('');
+  // const [firstName, setFirstName] = React.useState<string>('');
+  // const [lastName, setLastName] = React.useState<string>('');
+  // const [email, setEmail] = React.useState<string>('');
+  // const [password, setPassword] = React.useState<string>('');
+  // const [confirmPassword, setConfirmPassword] = React.useState<string>('');
   const [term, setTerm] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
-  const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstName(e.target.value);
-    clearErrors('firstName');
-  };
-  const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(e.target.value);
-    clearErrors('lastName');
-  };
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    clearErrors('email');
-  };
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    clearErrors('password');
-  };
-  const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value);
-    clearErrors('confirmPassword');
-  };
-  const handleTerm = () => {
-    setTerm(!term);
-    clearErrors('term');
-  };
+  // const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFirstName(e.target.value);
+  //   clearErrors('firstName');
+  // };
+  // const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setLastName(e.target.value);
+  //   clearErrors('lastName');
+  // };
+  // const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  //   clearErrors('email');
+  // };
+  // const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPassword(e.target.value);
+  //   clearErrors('password');
+  // };
+  // const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setConfirmPassword(e.target.value);
+  //   clearErrors('confirmPassword');
+  // };
+  // const handleTerm = () => {
+  //   setTerm(!term);
+  //   clearErrors('term');
+  // };
   return (
     <div className="w-full mb-[-12rem] ">
       <SmallPopup refDialog={refDialog} img={check} title="Sign up success!" />

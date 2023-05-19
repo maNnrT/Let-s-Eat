@@ -4,7 +4,7 @@ import checkLogin from './features/checkLogin/CheckLoginSlice';
 import accountsSlice from './features/account/AccountsSlice';
 import cartSlice from './features/cart/CartSlice';
 import modalSlice from './features/modalSlice/modalSlice';
-import { apiSlice } from './features/api/apiSlice';
+import combosSlice from './features/combos/CombosSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import * as reduxThunk from 'redux-thunk/extend-redux';
@@ -16,10 +16,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
   accounts: accountsSlice.reducer,
   products: productsSlice.reducer,
+  combos: combosSlice.reducer,
   checkLogin: checkLogin.reducer,
   cart: cartSlice.reducer,
-  [apiSlice.reducerPath]: apiSlice.reducer,
-  modal:modalSlice.reducer,
+  modal: modalSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -30,7 +30,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware),
+    }),
 });
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

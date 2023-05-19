@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIdUserSelector, getIsLogin, getProductByIdSelector, getUserCartSelector } from '@/redux/selectors';
+import { getIsLogin, getProductByIdSelector, getCartProductSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -10,9 +10,9 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import { addToCart, addUserCart } from '@/redux/features/cart/CartSlice';
+import { addToCartProduct } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup';
-import { Item, Product } from '@/types/types';
+import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
@@ -24,11 +24,9 @@ interface Props {
 function ProductDetail({ id }: Props): JSX.Element|null {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser: number | undefined = useSelector(getIdUserSelector);
   const isLogin: boolean = useSelector(getIsLogin);
-  const cart: Item[] = useSelector(getUserCartSelector);
-
   const productById: Product = useSelector(getProductByIdSelector);
+  // console.log('check:' ,productById);
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
     refDialog.current?.showModal();
@@ -36,54 +34,46 @@ function ProductDetail({ id }: Props): JSX.Element|null {
       refDialog.current?.close();
     }, 1000);
   };
-  const updateCart = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-    } else if (cart.length <= 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: [],
-        }),
-      );
-    }
-  };
+
   const handleAddToCart = () => {
     if (isLogin) {
       dispatch(
-        addToCart({
+        addToCartProduct({
+          // id: productById.id,
+          // img: productById.img,
+          // name: productById.name,
+          // price: productById.price,
+          // quantity: numberInput,
           id: productById.id,
+          type: productById.type,
+          dish: productById.dish,
           img: productById.img,
           name: productById.name,
+          description: productById.description,
+          ingredient: productById.ingredient,
+          detail: productById.detail,
+          detailImg: productById.detailImg,
           price: productById.price,
+          dishLeft: productById.dishLeft,
           quantity: numberInput,
         }),
       );
-      updateCart();
       openModal();
     } else {
       navigate(config.routes.login);
     }
   };
-  // React.useEffect(() => {
-  //   updateCart();
-  // }, [cart]);
   const [numberInput, setNumberInput] = React.useState<number>(1);
   const decreaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 2) return pre - 1;
+      if (pre >= 2 && pre <= productById.dishLeft) return pre - 1;
       else return 1;
     });
   };
   const increaseNumber = () => {
     setNumberInput((pre: number): number => {
-      if (pre >= 1) return pre + 1;
-      else return 1;
+      if (pre >= 1 && pre < productById.dishLeft) return pre + 1;
+      else return productById.dishLeft;
     });
   };
   const ref = React.useRef<SwiperRef | null>(null);
@@ -156,6 +146,9 @@ function ProductDetail({ id }: Props): JSX.Element|null {
             </h2>
             <p className="mt-[2.4rem] font-fahkwang font-normal text-[3.2rem] leading-[100%] text-2d2d2d">
               ${productById.price}
+            </p>
+            <p className="mt-[2.4rem] font-fahkwang font-normal text-[1.8rem] leading-[100%] text-2d2d2d">
+              Remaining: {productById.dishLeft}
             </p>
             <p className="font-light text-[1.6rem] text-666565 mt-[2.8rem]">{productById.detail}</p>
             <div className="mt-[5.7rem] h-[2.8rem] flex justify-start ">

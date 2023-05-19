@@ -1,28 +1,26 @@
 import * as React from 'react';
-import CartItem from './CartItem/CartItem';
+import { CartProductItem, CartComboItem } from './CartItem/';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCart } from '@/redux/features/cart/CartSlice';
+import { updateCart } from '@/redux/features/cart/CartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import SmallPopup from '@/components/Popup/SmallPopup';
 import config from '@/config';
-import { Item } from '@/types/types';
+import { ComboItem, ProductItem } from '@/types/types';
 import check from '@/assets/svg/check_formCheckOut.svg';
-import cartImg from '@/assets/svg/cart-secondary.svg';
 import cross from '@/assets/svg/Red_X.svg';
 import { getIdUserSelector } from '@/redux/selectors';
-import {BsCart} from 'react-icons/bs'
+import { BsCart } from 'react-icons/bs';
 interface Props {
-  cart: Item[];
+  cartProduct: ProductItem[];
+  cartCombo: ComboItem[];
   totalPrice: string;
-  updateCart:()=>void
 }
-function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
+function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const refDialog = React.useRef<HTMLDialogElement>(null);
   const idUser = useSelector(getIdUserSelector);
-
-  
+  console.log(cartProduct);
   const openModal = () => {
     refDialog.current?.showModal();
     setTimeout(() => {
@@ -36,22 +34,17 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
       refDialog2.current?.close();
     }, 1000);
   };
-  
+
+
   const updateCartBtnHandle = () => {
-    updateCart();
+    dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
     openModal();
   };
   const processToCheckOutBtnHandle = () => {
-    if (cart.length > 0 && idUser) {
-      dispatch(
-        addUserCart({
-          idUser,
-          cart,
-        }),
-      );
-
+    if (cartProduct.length + cartCombo.length > 0) {
+      dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
       navigate(config.routes.cart + config.routes.checkout);
-    } else if (cart.length <= 0 && idUser) {
+    } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();
     }
   };
@@ -87,10 +80,10 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
               </tr>
             </thead>
             <tbody className="w-full ">
-              {cart.length !== 0 ? (
-                cart.map((item) => (
+              {cartProduct.length !== 0 &&
+                cartProduct.map((item) => (
                   <React.Fragment key={item.id}>
-                    <CartItem
+                    <CartProductItem
                       id={item.id}
                       img={item.img}
                       name={item.name}
@@ -98,13 +91,25 @@ function CartTable({ cart, totalPrice,updateCart }: Props): JSX.Element {
                       quantity={item.quantity}
                     />
                   </React.Fragment>
-                ))
-              ) : (
+                ))}
+              {cartCombo.length !== 0 &&
+                cartCombo.map((item) => (
+                  <React.Fragment key={item.id}>
+                    <CartComboItem
+                      id={item.id}
+                      img={item.img}
+                      name={item.name}
+                      price={item.price}
+                      quantity={item.quantity}
+                    />
+                  </React.Fragment>
+                ))}
+              {cartCombo.length === 0 && cartProduct.length === 0 && (
                 <tr className="h-[40rem]">
                   <td colSpan={4}>
                     <div className="flex flex-col justify-center items-center ">
                       {/* <img src={cartImg} alt="" className="object-cover w-[6rem] text-secondary" /> */}
-                      <BsCart color="#D08C30" size={60}/>
+                      <BsCart color="#D08C30" size={60} />
                       <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">
                         Cart is empty!
                         <br />

@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { ImCross } from 'react-icons/im';
-import { useDispatch, useSelector } from 'react-redux';
-import { decreaseItemQuantity, getUserCart, increaseItemQuantity, removeItemFromCart } from '@/redux/features/cart/CartSlice';
+import { useDispatch } from 'react-redux';
+import {
+  decreaseProductItemQuantity,
+  increaseProductItemQuantity,
+  removeProductItemFromCart,
+} from '@/redux/features/cart/CartSlice';
 interface Props {
   id: number;
   img: string;
@@ -9,17 +13,17 @@ interface Props {
   price: string;
   quantity: number;
 }
-function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
+function CartProductItem({ id, img, name, price, quantity }: Props): JSX.Element {
   const dispatch = useDispatch();
   const [subTotal, setSubTotal] = React.useState<string>('');
   const decreaseNumber = () => {
-    dispatch(decreaseItemQuantity(id));
+    dispatch(decreaseProductItemQuantity(id));
   };
   const increaseNumber = () => {
-    dispatch(increaseItemQuantity(id));
+    dispatch(increaseProductItemQuantity(id));
   };
   const removeItem = () => {
-    dispatch(removeItemFromCart(id));
+    dispatch(removeProductItemFromCart(id));
   };
   React.useEffect(() => {
     setSubTotal((Number(price) * quantity).toFixed(2));
@@ -72,4 +76,4 @@ function CartItem({ id, img, name, price, quantity }: Props): JSX.Element {
   );
 }
 
-export default CartItem;
+export default CartProductItem;

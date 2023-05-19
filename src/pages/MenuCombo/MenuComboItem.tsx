@@ -5,16 +5,16 @@ import React from 'react';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin } from '@/redux/selectors';
-import { addToCart } from '@/redux/features/cart/CartSlice';
+import { getIsLogin, } from '@/redux/selectors';
+import { addToCartCombo } from '@/redux/features/cart/CartSlice';
 import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
 import check from '@/assets/svg/check_formCheckOut.svg';
 interface Props {
   id: number | undefined;
   name: string;
   img: string;
-  numberPeople?: number;
-  dishes?: Product[];
+  numberPeople: number;
+  dishes: Product[];
 }
 function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   const navigate = useNavigate();
@@ -27,17 +27,16 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
       refDialog.current?.close();
     }, 1000);
   };
-
   const handleAddToCart = () => {
     if (isLogin && dishes) {
       dispatch(
-        addToCart({
+        addToCartCombo({
           id: id,
           img: img,
           name: name,
           price: dishes
             .reduce((total, dish) => {
-              return (total += dish.quantity ? Number(dish.price) * dish.quantity : Number(dish.price) * 0);
+              return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
             }, 0)
             .toFixed(2),
           quantity: 1,
@@ -112,13 +111,13 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
             <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[6rem]">
               {dishes &&
                 dishes.reduce((total, dish) => {
-                  return (total += dish.quantity ? dish.quantity : 0);
+                  return (total += dish.numberOfDish ? dish.numberOfDish : 0);
                 }, 0)}{' '}
               DISHES - ${' '}
               {dishes &&
                 dishes
                   .reduce((total, dish) => {
-                    return (total += dish.quantity ? Number(dish.price) * dish.quantity : Number(dish.price) * 0);
+                    return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
                   }, 0)
                   .toFixed(2)}
             </p>
@@ -127,11 +126,11 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
                 <div className="w-full h-fit mt-[2.4rem]" key={dish.id}>
                   <div className="flex justify-between">
                     <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
-                      {dish.quantity}x {dish.name}
+                      {dish.numberOfDish}x {dish.name}
                     </div>
                     <div className="border-b-[4px] border-dotted border-white flex-1 h-[1.8rem] mx-[0.7rem]"></div>
                     <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
-                      ${dish.quantity && (Number(dish.price) * dish.quantity).toFixed(2)}
+                      ${dish.numberOfDish && (Number(dish.price) * dish.numberOfDish).toFixed(2)}
                     </div>
                   </div>
                   <div className="mt-[0.8rem] ">

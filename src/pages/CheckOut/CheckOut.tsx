@@ -11,17 +11,19 @@ import {
   getDiscountCodeSelector,
   getIdUserSelector,
   getTotalPriceSelector,
-  getUserCartSelector,
+  getCartProductSelector,
+  getCartComboSelector,
 } from '@/redux/selectors';
-import { addUserCart, getCartTotal, getDiscountCode } from '@/redux/features/cart/CartSlice';
+import { getCartTotal, getDiscountCode, updateCart } from '@/redux/features/cart/CartSlice';
 import BigPopup from '@/components/Popup/BigPopup';
 import config from '@/config';
 import * as yup from 'yup';
-import { DiscountCode, Item } from '@/types/types';
+import { ComboItem, DiscountCode, ProductItem } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import Input from '@/components/Form/Input';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
-
+import * as request from '@/utils/request';
+import { type } from 'os';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
@@ -46,29 +48,40 @@ function CheckOut(): JSX.Element {
     mode: 'onTouched',
     resolver: yupResolver(schema),
   });
-
   const onTouched = (data: FormData) => {
     console.log(data);
-    if (idUser) {
-      cart = [];
-      dispatch(
-        addUserCart({
-          idUser,
-          cart: cart,
-        }),
-      );
-    }
+    console.log(cartProduct);
+    
+    cartProduct.map((item) => {
+      if (item.quantity < item.dishLeft)
+        request.put(`${config.api.products}/${item.id}`, {
+          id: item.id,
+          type: item.type,
+          dish: item.dish,
+          img: item.img,
+          name: item.name,
+          description: item.description,
+          ingredient: item.ingredient,
+          detail: item.detail,
+          detailImg: item.detailImg,
+          price: item.price,
+          dishLeft: item.dishLeft - item.quantity,
+        });
+    });
+    dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo:[] }));
     openModal();
   };
   const dispatch = useDispatch();
-  let cart: Item[] = useSelector(getUserCartSelector);
+  const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
+  console.log("sdfsdf",cartProduct);
+  const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const discountCodeArray: DiscountCode[] = useSelector(getDiscountCodeSelector);
   const totalPrice: string = useSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
+  }, [cartProduct, cartCombo]);
   React.useEffect(() => {
     dispatch(getDiscountCode());
   }, []);
@@ -143,26 +156,6 @@ function CheckOut(): JSX.Element {
   React.useEffect(() => {
     setBillId(uuidv4().substring(0, 8));
   }, []);
-  // const updateCart = () => {
-  //   if (cart.length > 0 && idUser) {
-  //     dispatch(
-  //       addUserCart({
-  //         idUser,
-  //         cart,
-  //       }),
-  //     );
-  //   } else if (cart.length <= 0 && idUser) {
-  //     dispatch(
-  //       addUserCart({
-  //         idUser,
-  //         cart: [],
-  //       }),
-  //     );
-  //   }
-  // };
-  // React.useEffect(() => {
-  //   updateCart();
-  // });
   const date = new Date();
   return (
     <div className="w-full mb-[-12rem] relative">
@@ -389,10 +382,19 @@ function CheckOut(): JSX.Element {
                     <p className="font-light text-[1.6rem] leading-[100%] text-726666 ">Quantity</p>
                   </div>
                   <div className="w-full mt-[2.2rem]">
-                    {cart.map((item) => (
+                    {cartProduct.map((item) => (
                       <div
                         className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0"
-                        key={cart.indexOf(item)}
+                        key={cartProduct.indexOf(item)}
+                      >
+                        <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
+                        <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.quantity}</p>
+                      </div>
+                    ))}
+                    {cartCombo.map((item) => (
+                      <div
+                        className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0"
+                        key={cartCombo.indexOf(item)}
                       >
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.quantity}</p>

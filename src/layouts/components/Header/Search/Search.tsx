@@ -5,8 +5,8 @@ import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react/headless';
 import SearchDishItem from '@/components/Popper/SearchDishItem/SearchDishItem';
 import { useSelector } from 'react-redux';
-import { getProductsSelector } from '@/redux/selectors';
-import { Product } from '@/types/types';
+import { getCombosSelector, getProductsSelector } from '@/redux/selectors';
+import { Combo, Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
@@ -14,15 +14,17 @@ import useScrollDirection from '@/hooks/useScrollDirection';
 function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
-  const [searchComboResult, setSearchComboResult] = React.useState<Product[]>([]);
+  const [searchComboResult, setSearchComboResult] = React.useState<Combo[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);
   const [showResult, setShowResult] = React.useState<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const products: Product[] = useSelector(getProductsSelector);
+  const combos: Combo[] = useSelector(getCombosSelector);
   const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
   const [isSearchValueEmpty, setIsSearchValueEmpty] = React.useState<boolean>(true);
   const [isSearchResultEmpty, setIsSearchResultEmpty] = React.useState<boolean>(false);
-  const [scrollDirection, transparent] = useScrollDirection();
+  const [scrollDirection] = useScrollDirection();
+  // console.log(searchDishResult);
   const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
   React.useEffect(() => {
     if (searchValue === '') {
@@ -31,7 +33,7 @@ function Search() {
       setIsSearchResultEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+        return product.name.trim().toLowerCase().includes(searchValue);
       }).length === 0
     ) {
       setSearchDishResult([]);
@@ -39,12 +41,12 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+        return product.name.trim().toLowerCase().includes(searchValue);
       }).length !== 0
     ) {
       setSearchDishResult(
         products.filter((product) => {
-          return product.name.trim().toLowerCase().includes(searchValue) && !product.dishes;
+          return product.name.trim().toLowerCase().includes(searchValue);
         }),
       );
       setIsSearchValueEmpty(false);
@@ -56,21 +58,21 @@ function Search() {
       setIsSearchValueEmpty(true);
       setIsSearchResultEmpty(false);
     } else if (
-      products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+      combos.filter((combo) => {
+        return combo.name.trim().toLowerCase().includes(searchValue);
       }).length === 0
     ) {
       setSearchComboResult([]);
       setIsSearchResultEmpty(true);
       setIsSearchValueEmpty(false);
     } else if (
-      products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+      combos.filter((combo) => {
+        return combo.name.trim().toLowerCase().includes(searchValue);
       }).length !== 0
     ) {
       setSearchComboResult(
-        products.filter((product) => {
-          return product.name.trim().toLowerCase().includes(searchValue) && product.dishes;
+        combos.filter((combo) => {
+          return combo.name.trim().toLowerCase().includes(searchValue);
         }),
       );
       setIsSearchValueEmpty(false);

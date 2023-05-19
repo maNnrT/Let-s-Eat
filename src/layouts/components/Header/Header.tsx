@@ -5,15 +5,16 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
-import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getUserCartSelector } from '@/redux/selectors';
+import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getCartProductSelector, getCartComboSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
-import { getCartTotal, getUserCart } from '@/redux/features/cart/CartSlice';
-import { Item } from '@/types/types';
+import { getCartTotal, getUserCart, updateCart } from '@/redux/features/cart/CartSlice';
+import { ProductItem, ComboItem } from '@/types/types';
 import Search from './Search/Search';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import useScrollDirection from '@/hooks/useScrollDirection';
+import { getCombos } from '@/redux/features/combos/CombosSlice';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
@@ -29,7 +30,10 @@ function Header(): JSX.Element {
   const isLogin: boolean = useSelector(getIsLogin);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const totalQuantity: number = useSelector(getTotalQuantitySelector);
-  const cart: Item[] = useSelector(getUserCartSelector);
+  const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
+  const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
+  // console.log('check:', cart);
+  
   React.useEffect(() => {
     if (idUser) dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,9 +41,13 @@ function Header(): JSX.Element {
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
+  }, [cartProduct,cartCombo]);
+  React.useEffect(() => {
+    dispatch(updateCart({ id: idUser, cartCombo, cartProduct }));
+  }, [cartProduct, cartCombo]);
   React.useEffect(() => {
     dispatch(getProducts());
+    dispatch(getCombos())
   }, []);
   return (
     <div
