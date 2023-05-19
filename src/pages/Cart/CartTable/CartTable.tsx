@@ -43,7 +43,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     openModal();
   };
   const isAvailable= cartProduct.every(item=>{
-    return item.quantity <item.dishLeft
+    return item.quantity <=item.dishLeft
   })
   // console.log(isAvailable);
   
@@ -58,7 +58,9 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
           return item.quantity > item.dishLeft;
         });
         if (refPara.current !== null)
-          refPara.current.innerHTML = `You take too many of ${res.map((item) => item.name)}!<br /> Please remove these products from cart`;
+          refPara.current.innerHTML = `You take too many of ${res.map(
+            (item) => item.name,
+          )}!<br /> Please adjust the number of these products or remove them from cart `;
       }
     } else if (cartProduct.length + cartCombo.length <= 0) {
       openModal2();

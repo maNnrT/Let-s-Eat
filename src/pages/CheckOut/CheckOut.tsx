@@ -53,7 +53,7 @@ function CheckOut(): JSX.Element {
     console.log(cartProduct);
     
     cartProduct.map((item) => {
-      if (item.quantity < item.dishLeft)
+      if (item.quantity <= item.dishLeft)
         request.put(`${config.api.products}/${item.id}`, {
           id: item.id,
           type: item.type,

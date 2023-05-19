@@ -16,7 +16,8 @@
   }
   .btn-secondary {
     @apply flex justify-center items-center tablet:w-[17.6rem] w-[15.6rem] h-[5.2rem] bg-secondary font-semibold text-[1.8rem] leading-[3rem] text-f6e8d6 
-    hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200;
+    hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200
+    disabled:cursor-default disabled:opacity-50 disabled:bg-secondary disabled:text-f6e8d6;
   }
 }
 @layer utilities {
