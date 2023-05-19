@@ -5,12 +5,12 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
-import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getCartProductSelector, getCartComboSelector } from '@/redux/selectors';
+import { getIsLogin, getIdUserSelector, getTotalQuantitySelector, getCartProductSelector, getCartComboSelector, getProductsSelector, getCombosSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart, updateCart } from '@/redux/features/cart/CartSlice';
-import { ProductItem, ComboItem } from '@/types/types';
+import { ProductItem, ComboItem, Product, Combo } from '@/types/types';
 import Search from './Search/Search';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import useScrollDirection from '@/hooks/useScrollDirection';
@@ -32,8 +32,16 @@ function Header(): JSX.Element {
   const totalQuantity: number = useSelector(getTotalQuantitySelector);
   const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
   const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
-  // console.log('check:', cart);
-  
+  const products: Product[] = useSelector(getProductsSelector);
+  const combos: Combo[] = useSelector(getCombosSelector);
+  const newCartProduct: ProductItem[] = JSON.parse(JSON.stringify(cartProduct));
+  const newCartCombo: ComboItem[] = JSON.parse(JSON.stringify(cartCombo));
+  products.forEach(products=>{
+    newCartProduct.forEach((item) => {
+      if (products.id === item.id) item.dishLeft = products.dishLeft;
+    });
+  })
+  // console.log(newCartProduct);
   React.useEffect(() => {
     if (idUser) dispatch(getUserCart(idUser));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +51,7 @@ function Header(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartProduct,cartCombo]);
   React.useEffect(() => {
-    dispatch(updateCart({ id: idUser, cartCombo, cartProduct }));
+    dispatch(updateCart({ id: idUser, cartCombo:newCartCombo, cartProduct:newCartProduct }));
   }, [cartProduct, cartCombo]);
   React.useEffect(() => {
     dispatch(getProducts());
