@@ -8,7 +8,7 @@ import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
-import { setOpenProductDetailModal } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
@@ -64,7 +64,7 @@ function Category({ category, description }: Props) {
                   arrayProducts1.map((product) => (
                     <div
                       key={product.id}
-                      onClick={() => dispatch(setOpenProductDetailModal(product.id))}
+                      onClick={() => dispatch(setOpenModalTrue(product.id))}
                       className="cursor-pointer w-full"
                     >
                       <CategoryProduct
@@ -100,7 +100,7 @@ function Category({ category, description }: Props) {
                   arrayProducts2.map((product) => (
                     <div
                       key={product.id}
-                      onClick={() => dispatch(setOpenProductDetailModal(product.id))}
+                      onClick={() => dispatch(setOpenModalTrue(product.id))}
                       className="cursor-pointer w-full"
                     >
                       <CategoryProduct
