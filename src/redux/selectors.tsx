@@ -17,7 +17,7 @@ export const getProductsSelector = (state: RootState) => state.products.products
 export const getProductByIdSelector = (state: RootState) => state.products.productById;
 export const getProductsByIdArraySelector = (state: RootState) => state.products.productsByIdArray;
 export const getProductsByNameSelector = (state: RootState) => state.products.productsByName;
-export const getFilterSelector = (state: RootState) => state.products.filter;
+export const getFilterSelector = (state: RootState) => state.products.dishFilter;
 
 export const getCombosSelector = (state: RootState) => state.combos.combos;
 export const getComboByIdSelector = (state: RootState) => state.combos.comboById;
@@ -25,12 +25,8 @@ export const getCombosByNameSelector = (state: RootState) => state.combos.combos
 
 export const getIdProductModal = (state: RootState) => state.modal.id;
 export const getIsOpenModal = (state: RootState) => state.modal.openModal;
-export const getProductsByFilterSelector = createSelector(
-  getFilterSelector,
-  getProductsSelector,
-  (filter, products) => {
-    return products.filter((product: Product) => {
-      return product.dish === filter;
-    });
-  },
-);
+export const getProductsByDishSelector = createSelector(getFilterSelector, getProductsSelector, (dishFilter, products) => {
+  return products.filter((product: Product) => {
+    return product.dish === dishFilter;
+  });
+});

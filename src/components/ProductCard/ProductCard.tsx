@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
-import { setOpenProductDetailModal } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
 
 interface Props {
   id: number | undefined;
@@ -19,7 +19,7 @@ function ProductCard({ id, img, name, description, price }: Props) {
           src={img}
           alt=""
           className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"
-          onClick={() => dispatch(setOpenProductDetailModal(id))}
+          onClick={() => dispatch(setOpenModalTrue(id))}
         />
       </div>
       <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
@@ -33,7 +33,7 @@ function ProductCard({ id, img, name, description, price }: Props) {
           <p className="font-bold text-[2.2rem] leading-[3.7rem] text-394149">${price}</p>
           <p
             className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer"
-            onClick={() => dispatch(setOpenProductDetailModal(id))}
+            onClick={() => dispatch(setOpenModalTrue(id))}
           >
             Add to cart
           </p>

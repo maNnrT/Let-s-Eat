@@ -193,10 +193,11 @@ function ProductDetail({ id }: Props): JSX.Element | null {
                 -
               </button>
               <input
-                type="number"
+                type="text"
                 className="h-full outline-none w-[5.4rem] text-primary text-center"
                 min="1"
                 value={numberInput}
+                readOnly
               />
               <button
                 className="w-[2.8rem] h-full bg-e9e9e9 text-[1.2rem] text-aaa9a9 cursor-pointer disabled:cursor-default disabled:opacity-50"
