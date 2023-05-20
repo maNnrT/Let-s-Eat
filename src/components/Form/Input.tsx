@@ -36,7 +36,14 @@ const Input: FC<InputProps> = ({
           {label}
         </label>
       )}
-      <input type={type} id={name} name={name} {...register(name)} {...rest} className={classNameInput} />
+      <input
+        type={type}
+        id={name}
+        name={name}
+        {...register(name)}
+        {...rest}
+        className={`${classNameInput}`}
+      />
       {error && <p className={classNameError}>{error}</p>}
       {touchedFields && !error && (
         <span className={classNameSuccess}>

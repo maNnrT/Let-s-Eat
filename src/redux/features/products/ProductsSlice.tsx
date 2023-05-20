@@ -10,7 +10,7 @@ interface initialState {
   status: string;
   productById: Product;
   productsByName: Product[];
-  filter: string;
+  dishFilter: string;
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -33,11 +33,11 @@ const productsSlice = createSlice({
     },
     productsByName: [],
     combos: [],
-    filter: 'fresh-baked',
+    dishFilter: 'fresh-baked',
   } as initialState,
   reducers: {
-    filterChange: (state, action) => {
-      state.filter = action.payload;
+    dishFilterChange: (state, action) => {
+      state.dishFilter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -133,5 +133,5 @@ export const getProductsByName = createAsyncThunk('products/getProductsByName', 
     console.error('Cant get products by name');
   }
 });
-export const { filterChange } = productsSlice.actions;
+export const { dishFilterChange } = productsSlice.actions;
 export default productsSlice;

@@ -22,8 +22,6 @@ import { ComboItem, DiscountCode, ProductItem } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import Input from '@/components/Form/Input';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
-import * as request from '@/utils/request';
-import { type } from 'os';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),

@@ -10,6 +10,8 @@ import { Combo, Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
+import config from '@/config';
+import { Link } from 'react-router-dom';
 
 function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
@@ -115,12 +117,12 @@ function Search() {
     setIsSearchResultEmpty(false);
     inputRef.current?.focus();
   };
-  React.useEffect(()=>{
-    if(scrollDirection==='down'){
+  React.useEffect(() => {
+    if (scrollDirection === 'down') {
       setShowResult(false);
       inputRef.current?.blur();
     }
-  },[scrollDirection ])
+  }, [scrollDirection]);
   return (
     <>
       <Tippy
@@ -170,6 +172,15 @@ function Search() {
               searchTypeResult.length === 0 &&
               searchComboResult.length === 0 ? (
                 <p className="text-secondary py-[0.8rem] px-[2rem]">No dish,category or combo found</p>
+              ) : null}
+              {searchDishResult.length !== 0 || searchTypeResult.length !== 0 || searchComboResult.length !== 0 ? (
+                <Link
+                  to={`${config.routes.shop}/search`}
+                  className="text-secondary py-[0.8rem] px-[2rem] text-center cursor-pointer w-full"
+                  onClick={() => setShowResult(false)}
+                >
+                  See all result
+                </Link>
               ) : null}
             </PopperWrapper>
           </div>

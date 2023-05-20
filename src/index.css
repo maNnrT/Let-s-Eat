@@ -19,6 +19,17 @@
     hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200
     disabled:cursor-default disabled:opacity-50 disabled:bg-secondary disabled:text-f6e8d6;
   }
+  .checkbox {
+    @apply absolute top-[50%] translate-y-[-50%] right-0 h-[20px] w-[20px] border-[1px] border-secondary 
+          after:content-[''] after:absolute after:hidden after:left-[50%] after:top-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:w-[5px] after:h-[10px] after:border-l-transparent after:border-r-white after:border-t-transparent after:border-b-white 
+          after:border-l-0 after:border-r-[3px]  after:border-t-0 after:border-b-[3px] after:rotate-45
+          peer-checked:bg-secondary peer-checked:after:block;
+  }
+  .paginationBtn {
+    @apply w-[4rem] h-[4rem] bg-white text-[#B7B5B3] flex justify-center items-center
+          focus:bg-secondary focus:text-[#F8F4F1] focus:duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.12)]
+          disabled:opacity-40 disabled:cursor-pointer 
+  }
 }
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
@@ -30,7 +41,7 @@
   .scrollbar::-webkit-scrollbar-track {
     background-color: #fdf9f5;
   }
-  .webkit-box{
+  .webkit-box {
     display: -webkit-box;
   }
 }

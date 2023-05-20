@@ -1,5 +1,5 @@
-import { setOpenModalTrue } from "@/redux/features/modalSlice/modalSlice";
-import { useDispatch } from "react-redux";
+import { setOpenProductDetailModal } from '@/redux/features/modalSlice/modalSlice';
+import { useDispatch } from 'react-redux';
 
 interface Props {
   id?: number | undefined;
@@ -7,12 +7,12 @@ interface Props {
   // onOpen: (id: number | undefined) => void;
 }
 function SearchDishItem({ id, name }: Props) {
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className="">
       <div
-        className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100"
-        onClick={() => dispatch(setOpenModalTrue(id))}
+        className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 duration-200"
+        onClick={() => dispatch(setOpenProductDetailModal(id))}
       >
         <div className="text-primary text-[1.6rem]">{name}</div>
       </div>

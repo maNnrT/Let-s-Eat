@@ -17,7 +17,7 @@ function SearchTypeItem({ id, name }: Props) {
       <div className="w-full">
         <Link
           to={`${config.routes.shop}/${name}`}
-          className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 w-full"
+          className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 w-full duration-200"
         >
           <div className="text-primary text-[1.6rem] capitalize">{name === newName ? name : newName}</div>
         </Link>
@@ -28,7 +28,7 @@ function SearchTypeItem({ id, name }: Props) {
       <div className="w-full">
         <Link
           to={`${config.routes.menucombo}/${id}`}
-          className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 w-full"
+          className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 w-full duration-200"
         >
           <div className="text-primary text-[1.6rem] capitalize">{name === newName ? name : newName}</div>
         </Link>

@@ -19,7 +19,7 @@ const Shop = lazy(() => import('@/pages/Shop'));
 const Category = lazy(() => import('@/pages/Shop/Category'));
 const Login = lazy(() => import('@/pages/Login'));
 const Register = lazy(() => import('@/pages/Register'));
-
+const SearchResult = lazy(() => import('@/pages/Shop/SearchResult'));
 export const PublicRoutes = [
   {
     path: '',
@@ -115,6 +115,14 @@ export const PublicRoutes = [
               description="Freshly chessecake. Natural, crusty, straight from the oven: our chessecake. Always fresh? Of course! A wide
             choice?"
             />
+          </Suspense>
+        ),
+      },
+      {
+        path: `${config.routes.shop}/search`,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <SearchResult />
           </Suspense>
         ),
       },

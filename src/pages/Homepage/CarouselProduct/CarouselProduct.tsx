@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CarouselItem from './CarouselItem';
+import ProductCard from '@/components/ProductCard/ProductCard';
 // import CarouselItem from './CarouselItem';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -8,16 +8,14 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import './CarouselProduct.scss'
+import './CarouselProduct.scss';
 // import required modules
 import { Product } from '@/types/types';
-import cross from '@/assets/svg/Red_X.svg';
 import { BsCart } from 'react-icons/bs';
 interface Props {
   products: Product[];
 }
 export default function CarouselProduct({ products }: Props) {
-
   const ref = React.useRef<SwiperRef | null>(null);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
@@ -50,7 +48,7 @@ export default function CarouselProduct({ products }: Props) {
         {products.length > 0 ? (
           products.map((product) => (
             <SwiperSlide key={product.id}>
-              <CarouselItem
+              <ProductCard
                 id={product.id}
                 img={product.img}
                 name={product.name}
@@ -73,13 +71,13 @@ export default function CarouselProduct({ products }: Props) {
       </Swiper>
       <div className="w-[8.8rem] flex justify-between mx-auto mt-[2.8rem]">
         <button
-          className="w-[4rem] h-[4rem] bg-white text-[#B7B5B3] flex justify-center items-center focus:bg-secondary focus:text-[#F8F4F1] focus:duration-200"
+          className="paginationBtn"
           onClick={swipePrev}
         >
           <BsChevronLeft size={20} />
         </button>
         <button
-          className="w-[4rem] h-[4rem] bg-white text-[#B7B5B3] flex justify-center items-center focus:bg-secondary focus:text-[#F8F4F1] focus:duration-200"
+          className="paginationBtn"
           onClick={swipeNext}
         >
           <BsChevronRight size={20} />

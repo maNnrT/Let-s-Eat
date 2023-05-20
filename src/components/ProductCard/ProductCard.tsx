@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {LazyLoadImage} from 'react-lazy-load-image-component'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
-import SmallPopup from '@/components/Popup/SmallPopup';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenProductDetailModal } from '@/redux/features/modalSlice/modalSlice';
 
 interface Props {
   id: number | undefined;
@@ -12,18 +10,16 @@ interface Props {
   description?: string;
   price?: string;
 }
-function CarouselItem({ id, img, name, description, price}: Props) {
+function ProductCard({ id, img, name, description, price }: Props) {
   const dispatch = useDispatch();
-  const refDialog = React.useRef<HTMLDialogElement>(null);
   return (
-    <div className="w-[full] h-full bg-white flex flex-col group ">
-      <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
+    <div className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] ">
       <div className="w-full h-[26.1rem] overflow-hidden">
         <LazyLoadImage
           src={img}
           alt=""
           className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"
-          onClick={() => dispatch(setOpenModalTrue(id))}
+          onClick={() => dispatch(setOpenProductDetailModal(id))}
         />
       </div>
       <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
@@ -37,7 +33,7 @@ function CarouselItem({ id, img, name, description, price}: Props) {
           <p className="font-bold text-[2.2rem] leading-[3.7rem] text-394149">${price}</p>
           <p
             className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer"
-            onClick={() => dispatch(setOpenModalTrue(id))}
+            onClick={() => dispatch(setOpenProductDetailModal(id))}
           >
             Add to cart
           </p>
@@ -47,4 +43,4 @@ function CarouselItem({ id, img, name, description, price}: Props) {
   );
 }
 
-export default CarouselItem;
+export default ProductCard;

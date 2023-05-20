@@ -12,8 +12,8 @@ import sweetBakery from '@/assets/image/image3.png';
 import testimonial from '@/assets/Image/image9.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { filterChange } from '@/redux/features/products/ProductsSlice';
-import { getProductsByFilterSelector } from '@/redux/selectors';
+import { dishFilterChange } from '@/redux/features/products/ProductsSlice';
+import { getProductsByDishSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 // import config from '@/config';
 import BannerSlide from './BannerSlider/BannerSlider';
@@ -23,7 +23,7 @@ function Homepage() {
   // const isLogin = useSelector(getIsLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products: Product[] = useSelector(getProductsByFilterSelector);
+  const products: Product[] = useSelector(getProductsByDishSelector);
   const filterBtn = [
     { value: 'fresh-baked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },
@@ -35,7 +35,7 @@ function Homepage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(filterChange((e.target as HTMLButtonElement).value));
+    dispatch(dishFilterChange((e.target as HTMLButtonElement).value));
   };
 
   return (
