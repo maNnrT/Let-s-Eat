@@ -28,7 +28,7 @@
   .paginationBtn {
     @apply w-[4rem] h-[4rem] bg-white text-[#B7B5B3] flex justify-center items-center
           focus:bg-secondary focus:text-[#F8F4F1] focus:duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.12)]
-          disabled:opacity-40 disabled:cursor-pointer 
+          disabled:opacity-40 disabled:cursor-default 
   }
 }
 @layer utilities {

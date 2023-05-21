@@ -2,15 +2,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import { Combo, Product } from '@/types/types';
+import { PriceSlider } from '@/enum/enum';
 
 interface initialState {
   products: Product[];
   productsByIdArray: Product[];
-  combos:  Combo[]
+  combos: Combo[];
   status: string;
   productById: Product;
   productsByName: Product[];
   dishFilter: string;
+  typeFilter: string;
+  priceFilter: number[];
+  comboFilter: boolean;
+  priceOrder:string;
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -34,10 +39,28 @@ const productsSlice = createSlice({
     productsByName: [],
     combos: [],
     dishFilter: 'fresh-baked',
+    typeFilter: '',
+    priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
+    comboFilter: false,
+    priceOrder: 'default',
   } as initialState,
   reducers: {
     dishFilterChange: (state, action) => {
       state.dishFilter = action.payload;
+    },
+    typeFilterChange: (state, action) => {
+      state.typeFilter = action.payload;
+    },
+    priceFilterChange: (state, action) => {
+      state.priceFilter = action.payload;
+    },
+    comboFilterChange: (state, action) => {
+      state.comboFilter = action.payload;
+    },
+    priceOrderChange: (state, action) => {
+      console.log(action.payload);
+      
+      state.priceOrder = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -104,20 +127,22 @@ export const getProductById = createAsyncThunk('products/getProductByID', async 
   }
 });
 export const getProductsByIdArray = createAsyncThunk('products/getProductsByIdArray', async (data: number[]) => {
-  const arrayOfProduct:Product[] = []
-  const getProduct =(id:number)=>{
-    request.get(`${config.api.products}/${id}`)
-    .then((res)=>{
-      arrayOfProduct.push(res)
-    }).catch(()=>console.error(`Cant get ${id} product`))
-  }
+  const arrayOfProduct: Product[] = [];
+  const getProduct = (id: number) => {
+    request
+      .get(`${config.api.products}/${id}`)
+      .then((res) => {
+        arrayOfProduct.push(res);
+      })
+      .catch(() => console.error(`Cant get ${id} product`));
+  };
 
   try {
     data.forEach((id) => {
-      getProduct(id)
+      getProduct(id);
     });
     console.log(arrayOfProduct);
-    return arrayOfProduct as Product[]
+    return arrayOfProduct as Product[];
   } catch (error) {
     console.error('Cant get products by id');
   }
@@ -133,5 +158,5 @@ export const getProductsByName = createAsyncThunk('products/getProductsByName', 
     console.error('Cant get products by name');
   }
 });
-export const { dishFilterChange } = productsSlice.actions;
+export const { dishFilterChange, typeFilterChange, priceFilterChange, comboFilterChange,priceOrderChange } = productsSlice.actions;
 export default productsSlice;

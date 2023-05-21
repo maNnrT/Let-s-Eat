@@ -11,24 +11,19 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@/components/Checkbox/Checkbox';
 import { BsChevronDown, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Tippy from '@tippyjs/react';
-import { SwiperRef } from 'swiper/react';
-import CarouselItem from '@/components/ProductCard/ProductCard';
 import { Product } from '@/types/types';
-import { getProductsSelector } from '@/redux/selectors';
-import { useSelector } from 'react-redux';
+import { getProductsByFiltersSelector } from '@/redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 import ResultPaginate from './ResultPaginate/ResultPaginate';
-
+import { comboFilterChange, priceFilterChange, priceOrderChange, typeFilterChange } from '@/redux/features/products/ProductsSlice';
+import { PriceSlider } from '@/enum/enum';
 const categories = [
-  { title: 'Fresh Baked', to: `${config.routes.shop}/fresh-baked`, img: freshBakedImg },
-  { title: 'Cookies', to: `${config.routes.shop}/cookies`, img: cookieImg },
-  { title: 'Coffee & Tea', to: `${config.routes.shop}/coffee&tea`, img: coffeeTeaImg },
-  { title: 'Chessecake', to: `${config.routes.shop}/chessecake`, img: cheeseCake },
+  { title: 'Fresh Baked', value: 'fresh-baked' },
+  { title: 'Cookies', value: 'cookies' },
+  { title: 'Coffee & Tea', value: 'coffee&tea' },
+  { title: 'Chessecake', value: 'chessecake' },
 ];
-enum PriceSlider {
-  MIN = 0.01,
-  MAX = 100,
-  minDistance = 10,
-}
+
 const CustomSlider = styled(Slider)({
   color: '#D08C30',
   '& .MuiSlider-thumb': {
@@ -45,8 +40,8 @@ const CustomSlider = styled(Slider)({
   },
 });
 function SearchResult() {
-  const products: Product[] = useSelector(getProductsSelector);
-
+  const products: Product[] = useSelector(getProductsByFiltersSelector);
+  const dispatch = useDispatch();
   const [showPriceOrder, setShowPriceOrder] = React.useState<boolean>(false);
   const [priceOrder, setPriceOrder] = React.useState<string>('Price');
   const [range, setRange] = React.useState<number[]>([PriceSlider.MIN, PriceSlider.MAX]);
@@ -60,13 +55,18 @@ function SearchResult() {
       setRange([range[0], Math.max(newValue[1], range[0] + PriceSlider.minDistance)]);
     }
   }
+  const applyPrice = () => {
+    // console.log(range);
+    dispatch(priceFilterChange(range));
+  };
   const [isComboChecked, setIsComboChecked] = React.useState<boolean>(false);
   const handleComboCheck = () => {
     setIsComboChecked(!isComboChecked);
+    dispatch(comboFilterChange(!isComboChecked));
   };
-  // const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-  //   dispatch(filterChange((e.target as HTMLButtonElement).value));
-  // };
+  const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    dispatch(typeFilterChange((e.target as HTMLButtonElement).value));
+  };
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -87,12 +87,16 @@ function SearchResult() {
             <div className="w-full">
               <p className="text-secondary text-[2rem]">Category</p>
               {categories.map((category) => (
-                <div
-                  className="px-[1rem] pt-[0.7rem] pb-[0.2rem] border-b-[1px] border-secondary hover:bg-gray-100 cursor-pointer duration-200 last-of-type:border-0"
+                <button
+                  className="block w-full text-left text-666565 px-[1rem] pt-[0.7rem] pb-[0.2rem] 
+                  border-b-[1px] border-secondary hover:bg-gray-100 cursor-pointer duration-200 last-of-type:border-0
+                  active:bg-gray-100"
                   key={categories.indexOf(category)}
+                  onClick={handleCategoryChange}
+                  value={category.value}
                 >
-                  <p className="text-666565 ">{category.title}</p>
-                </div>
+                  {category.title}
+                </button>
               ))}
             </div>
             <div className="mt-[4rem] w-full">
@@ -102,7 +106,9 @@ function SearchResult() {
                 <div className="text-666565">
                   <span>{range[0].toFixed(2)}$</span> - <span>{range[1].toFixed(2)}$</span>
                 </div>
-                <button className="btn-secondary w-[8rem] h-[3rem]">Apply</button>
+                <button className="btn-secondary w-[8rem] h-[3rem]" onClick={applyPrice}>
+                  Apply
+                </button>
               </div>
             </div>
             <Checkbox
@@ -122,8 +128,8 @@ function SearchResult() {
             >
               <div className="flex justify-between items-center">
                 <p className="text-666565 text-[2rem]">Order by</p>
-                <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Newest</button>
-                <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Best seller</button>
+                {/* <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Newest</button> */}
+                {/* <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Best seller</button> */}
                 <Tippy
                   visible={showPriceOrder}
                   placement="bottom"
@@ -137,6 +143,7 @@ function SearchResult() {
                         onClick={() => {
                           setPriceOrder('Default');
                           setShowPriceOrder(false);
+                          dispatch(priceOrderChange('default'))
                         }}
                       >
                         Default
@@ -146,6 +153,8 @@ function SearchResult() {
                         onClick={() => {
                           setPriceOrder('From high to low');
                           setShowPriceOrder(false);
+                          dispatch(priceOrderChange('highToLow'));
+
                         }}
                       >
                         From high to low
@@ -155,6 +164,8 @@ function SearchResult() {
                         onClick={() => {
                           setPriceOrder('From low to high');
                           setShowPriceOrder(false);
+                          dispatch(priceOrderChange('lowToHigh'));
+
                         }}
                       >
                         From low to high
@@ -183,7 +194,7 @@ function SearchResult() {
               </div> */}
             </div>
             <div className="  gap-[1.6rem] pt-[2rem] px-[3rem] pb-[2rem] bg-white h-fit">
-              <ResultPaginate />
+              <ResultPaginate products={products} />
             </div>
           </div>
         </div>

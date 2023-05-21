@@ -12,7 +12,6 @@ interface Props {
 const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, pageSize }: Props) => {
   const refPrev = React.useRef<HTMLButtonElement>(null);
   const refNext = React.useRef<HTMLButtonElement>(null);
-  const refPage = React.useRef<HTMLButtonElement>(null);
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -32,6 +31,20 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     //   if (refPrev.current) refPrev.current.disabled = false;
     //   if (refNext.current) refNext.current.disabled = false;
     // }
+    if(refPrev.current) {
+      if(currentPage === 1){
+        refPrev.current.disabled = true;
+      }else{
+        refPrev.current.disabled = false;
+      }
+    }
+    if(refNext.current) {
+      if (currentPage === lastPage) {
+        refNext.current.disabled = true;
+      } else {
+        refNext.current.disabled = false;
+      }
+    }
     const onNext = () => {
       if (currentPage < Math.ceil(totalCount / pageSize)) onPageChange(currentPage + 1);
     };
@@ -41,7 +54,7 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     };
 
     return (
-      <div className="text-secondary mt-[4rem]">
+      <div className="text-secondary mt-[4rem] mb-[4rem]">
         <ul className="flex justify-center items-center">
           <li className="mr-[2rem]">
             <button className="paginationBtn" ref={refPrev} onClick={onPrevious}>
@@ -59,7 +72,6 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
                   {pageNumber !== currentPage ? (
                     <button
                       className="text-[2rem]  w-[4rem] h-[4rem] cursor-pointer mx-[2rem] "
-                      ref={refPage}
                       onClick={() => onPageChange(pageNumber)}
                     >
                       {pageNumber}
@@ -67,7 +79,6 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
                   ) : (
                     <button
                       className="text-[2rem] w-[4rem] h-[4rem] cursor-pointer bg-secondary text-white mx-[2rem] duration-200"
-                      ref={refPage}
                       onClick={() => onPageChange(pageNumber)}
                     >
                       {pageNumber}
