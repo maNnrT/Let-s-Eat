@@ -1,23 +1,27 @@
 import * as React from 'react';
 import heroBannerCategory from '@/assets/image/HeroBanner_Category.png';
-import cookieImg from '@/assets/image/image10.png';
-import coffeeTeaImg from '@/assets/image/image11.png';
-import freshBakedImg from '@/assets/image/image12.png';
-import cheeseCake from '@/assets/image/image13.png';
-import config from '@/config';
+import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
+import { BsChevronDown, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Slider from '@mui/material/Slider';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { styled } from '@mui/material/styles';
 import Checkbox from '@/components/Checkbox/Checkbox';
-import { BsChevronDown, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Tippy from '@tippyjs/react';
 import { Product } from '@/types/types';
 import { getProductsByFiltersSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultPaginate from './ResultPaginate/ResultPaginate';
-import { comboFilterChange, priceFilterChange, priceOrderChange, typeFilterChange } from '@/redux/features/products/ProductsSlice';
+import {
+  comboFilterChange,
+  priceFilterChange,
+  priceOrderChange,
+  searchFilterChange,
+  typeFilterChange,
+} from '@/redux/features/products/ProductsSlice';
 import { PriceSlider } from '@/enum/enum';
+import useDebounce from '@/hooks/useDebounce';
 const categories = [
+  { title: 'All', value: 'all' },
   { title: 'Fresh Baked', value: 'fresh-baked' },
   { title: 'Cookies', value: 'cookies' },
   { title: 'Coffee & Tea', value: 'coffee&tea' },
@@ -41,6 +45,9 @@ const CustomSlider = styled(Slider)({
 });
 function SearchResult() {
   const products: Product[] = useSelector(getProductsByFiltersSelector);
+  const [searchValue, setSearchValue] = React.useState<string>('');
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
   const dispatch = useDispatch();
   const [showPriceOrder, setShowPriceOrder] = React.useState<boolean>(false);
   const [priceOrder, setPriceOrder] = React.useState<string>('Price');
@@ -67,6 +74,19 @@ function SearchResult() {
   const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     dispatch(typeFilterChange((e.target as HTMLButtonElement).value));
   };
+  const handleSearch = (): void => {
+    dispatch(searchFilterChange(searchValue));
+  };
+  const handleClear = () => {
+    setSearchValue('');
+    dispatch(searchFilterChange(''));
+    inputRef.current?.focus();
+  };
+  React.useEffect(() => {
+    if (debouncedSearchValue === '') {
+      dispatch(searchFilterChange(''));
+    }
+  }, [debouncedSearchValue]);
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -143,7 +163,7 @@ function SearchResult() {
                         onClick={() => {
                           setPriceOrder('Default');
                           setShowPriceOrder(false);
-                          dispatch(priceOrderChange('default'))
+                          dispatch(priceOrderChange('default'));
                         }}
                       >
                         Default
@@ -154,7 +174,6 @@ function SearchResult() {
                           setPriceOrder('From high to low');
                           setShowPriceOrder(false);
                           dispatch(priceOrderChange('highToLow'));
-
                         }}
                       >
                         From high to low
@@ -165,7 +184,6 @@ function SearchResult() {
                           setPriceOrder('From low to high');
                           setShowPriceOrder(false);
                           dispatch(priceOrderChange('lowToHigh'));
-
                         }}
                       >
                         From low to high
@@ -192,6 +210,36 @@ function SearchResult() {
                   <BsChevronRight size={20} />
                 </button>
               </div> */}
+              <div
+                className="flex items-center h-[4rem] bg-white relative ml-[2rem] mr-[3rem] w-[30rem] pl-[1.5rem]
+              shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
+              >
+                <input
+                  type="text"
+                  value={searchValue}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                  }}
+                  ref={inputRef}
+                  placeholder="Search dish or category"
+                  className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 "
+                  spellCheck={false}
+                />
+                {!!searchValue && (
+                  <button className="absolute top-[50%] translate-y-[-50%] right-[6rem]" onClick={handleClear}>
+                    <IoMdCloseCircle size={19} color={'#D08C30'} />
+                  </button>
+                )}
+                <button
+                  className="w-fit h-full flex justify-center items-center px-[1.5rem] hover:bg-gray-50 duration-200 border-l-[1px] border-gray-200"
+                  onClick={handleSearch}
+                >
+                  <IoMdSearch size={20} color={'#D08C30'} />
+                </button>
+                {/* <div className="absolute top-[50%] translate-y-[-50%] right-[1.5rem]">
+                      <ImSpinner8 color={'#D08C30'} />
+                    </div> */}
+              </div>
             </div>
             <div className="  gap-[1.6rem] pt-[2rem] px-[3rem] pb-[2rem] bg-white h-fit">
               <ResultPaginate products={products} />

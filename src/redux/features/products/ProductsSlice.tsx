@@ -15,7 +15,8 @@ interface initialState {
   typeFilter: string;
   priceFilter: number[];
   comboFilter: boolean;
-  priceOrder:string;
+  priceOrder: string;
+  searchFilter: string;
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -39,10 +40,11 @@ const productsSlice = createSlice({
     productsByName: [],
     combos: [],
     dishFilter: 'fresh-baked',
-    typeFilter: '',
+    typeFilter: 'all',
     priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
     comboFilter: false,
     priceOrder: 'default',
+    searchFilter: '',
   } as initialState,
   reducers: {
     dishFilterChange: (state, action) => {
@@ -58,9 +60,10 @@ const productsSlice = createSlice({
       state.comboFilter = action.payload;
     },
     priceOrderChange: (state, action) => {
-      console.log(action.payload);
-      
       state.priceOrder = action.payload;
+    },
+    searchFilterChange: (state, action) => {
+      state.searchFilter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -158,5 +161,12 @@ export const getProductsByName = createAsyncThunk('products/getProductsByName', 
     console.error('Cant get products by name');
   }
 });
-export const { dishFilterChange, typeFilterChange, priceFilterChange, comboFilterChange,priceOrderChange } = productsSlice.actions;
+export const {
+  dishFilterChange,
+  typeFilterChange,
+  priceFilterChange,
+  comboFilterChange,
+  priceOrderChange,
+  searchFilterChange,
+} = productsSlice.actions;
 export default productsSlice;

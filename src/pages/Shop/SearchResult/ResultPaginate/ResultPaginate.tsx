@@ -20,7 +20,7 @@ function ResultPaginate({ products }:Props) {
     const firstPageIndex = (currentPage - 1) * itemsPerPage;
     const lastPageIndex = firstPageIndex + itemsPerPage;
     return products.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, products,itemsPerPage]);
+  }, [currentPage, products, itemsPerPage]);
   return (
     <div>
       {/* <Items currentItems={currentItems} />

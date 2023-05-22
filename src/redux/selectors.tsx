@@ -23,6 +23,7 @@ export const getTypeFilterSelector = (state: RootState) => state.products.typeFi
 export const getPriceFilterSelector = (state: RootState) => state.products.priceFilter;
 export const getComboFilterSelector = (state: RootState) => state.products.comboFilter;
 export const getPriceOrderSelector = (state: RootState) => state.products.priceOrder;
+export const getSearchFilterSelector = (state: RootState) => state.products.searchFilter;
 
 export const getCombosSelector = (state: RootState) => state.combos.combos;
 export const getComboByIdSelector = (state: RootState) => state.combos.comboById;
@@ -45,11 +46,13 @@ export const getProductsByFiltersSelector = createSelector(
   getProductsSelector,
   getComboFilterSelector,
   getPriceOrderSelector,
-  (typeFilter, priceFilter, products, comboFilter, priceOrder) => {
-    if (typeFilter === '') {
+  getSearchFilterSelector,
+  (typeFilter, priceFilter, products, comboFilter, priceOrder, searchFilter) => {
+    if (typeFilter === 'all') {
       const res = products.filter((product: Product) => {
         return Number(product.price) <= priceFilter[1] &&
           Number(product.price) >= priceFilter[0] &&
+          product.name.trim().toLowerCase().includes(searchFilter) &&
           comboFilter === false
           ? !product.numberOfDish
           : product.numberOfDish;
@@ -72,6 +75,7 @@ export const getProductsByFiltersSelector = createSelector(
       return product.type === typeFilter &&
         Number(product.price) <= priceFilter[1] &&
         Number(product.price) >= priceFilter[0] &&
+        product.name.trim().toLowerCase().includes(searchFilter) &&
         comboFilter === false
         ? !product.numberOfDish
         : product.numberOfDish;
@@ -88,6 +92,6 @@ export const getProductsByFiltersSelector = createSelector(
       default:
         break;
     }
-    return res
+    return res;
   },
 );

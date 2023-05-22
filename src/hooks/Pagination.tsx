@@ -18,27 +18,21 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     siblingCount,
     pageSize,
   });
+  React.useEffect(() => {onPageChange(1)}, [totalCount]);
   if (paginationRange) {
     const lastPage = paginationRange[paginationRange.length - 1];
-    if (currentPage === 0 || paginationRange.length < 2) {
-      return null;
-    }
-    // if (currentPage === 1) {
-    //   if (refPrev.current) refPrev.current.disabled = true;
-    // } else if (currentPage === lastPage) {
-    //   if (refNext.current) refNext.current.disabled = true;
-    // } else {
-    //   if (refPrev.current) refPrev.current.disabled = false;
-    //   if (refNext.current) refNext.current.disabled = false;
+    // if (currentPage === 0 || paginationRange.length < 2) {
+    //   return null;
     // }
-    if(refPrev.current) {
-      if(currentPage === 1){
+
+    if (refPrev.current) {
+      if (currentPage === 1) {
         refPrev.current.disabled = true;
-      }else{
+      } else {
         refPrev.current.disabled = false;
       }
     }
-    if(refNext.current) {
+    if (refNext.current) {
       if (currentPage === lastPage) {
         refNext.current.disabled = true;
       } else {
@@ -48,11 +42,9 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     const onNext = () => {
       if (currentPage < Math.ceil(totalCount / pageSize)) onPageChange(currentPage + 1);
     };
-
     const onPrevious = () => {
       if (currentPage > 1) onPageChange(currentPage - 1);
     };
-
     return (
       <div className="text-secondary mt-[4rem] mb-[4rem]">
         <ul className="flex justify-center items-center">
@@ -63,12 +55,14 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
           </li>
           {paginationRange.map((pageNumber) => {
             if (pageNumber === DOTS) {
-              return <li className="text-[2rem] p-[1rem] cursor-default">&#8230;</li>;
-            } else {
-              //   if (pageNumber === currentPage) {
-              //     if (refPage.current) refPage.current.classList.add('bg-secondary');
               return (
-                <div key={pageNumber} className="flex justify-center items-center">
+                <li key={Math.random()} className="text-[2rem] p-[1rem] cursor-default">
+                  &#8230;
+                </li>
+              );
+            } else {
+              return (
+                <li key={pageNumber} className="flex justify-center items-center">
                   {pageNumber !== currentPage ? (
                     <button
                       className="text-[2rem]  w-[4rem] h-[4rem] cursor-pointer mx-[2rem] "
@@ -84,9 +78,8 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
                       {pageNumber}
                     </button>
                   )}
-                </div>
+                </li>
               );
-              //   }
             }
           })}
           <li className="ml-[2rem]">
