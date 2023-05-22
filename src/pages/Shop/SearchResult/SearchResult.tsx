@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@/components/Checkbox/Checkbox';
 import Tippy from '@tippyjs/react';
 import { Product } from '@/types/types';
-import { getProductsByFiltersSelector } from '@/redux/selectors';
+import { getProductsByFiltersSelector, getSearchValueSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultPaginate from './ResultPaginate/ResultPaginate';
 import {
@@ -45,7 +45,7 @@ const CustomSlider = styled(Slider)({
 });
 function SearchResult() {
   const products: Product[] = useSelector(getProductsByFiltersSelector);
-  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [searchValue, setSearchValue] = React.useState<string>(useSelector(getSearchValueSelector));
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
   const dispatch = useDispatch();
@@ -87,6 +87,9 @@ function SearchResult() {
       dispatch(searchFilterChange(''));
     }
   }, [debouncedSearchValue]);
+  React.useEffect(()=>{
+    dispatch(searchFilterChange(searchValue));
+  },[])
   return (
     <div className="w-full mb-[-12rem]">
       <div

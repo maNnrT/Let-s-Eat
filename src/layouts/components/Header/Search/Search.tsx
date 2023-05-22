@@ -4,17 +4,20 @@ import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react/headless';
 import SearchDishItem from '@/components/Popper/SearchDishItem/SearchDishItem';
-import { useSelector } from 'react-redux';
-import { getCombosSelector, getProductsSelector } from '@/redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCombosSelector, getProductsSelector, getSearchValueSelector } from '@/redux/selectors';
 import { Combo, Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import config from '@/config';
 import { Link } from 'react-router-dom';
+import { setSearchValue } from '@/redux/features/search/searchSlice';
 
 function Search() {
-  const [searchValue, setSearchValue] = React.useState<string>('');
+  // const [searchValue, setSearchValue] = React.useState<string>('');
+  const searchValue = useSelector(getSearchValueSelector)
+  const dispatch = useDispatch()
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
   const [searchComboResult, setSearchComboResult] = React.useState<Combo[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);
@@ -111,7 +114,7 @@ function Search() {
     setShowResult(false);
   };
   const handleClear = () => {
-    setSearchValue('');
+    dispatch(setSearchValue(''));
     setSearchDishResult([]);
     setIsSearchValueEmpty(true);
     setIsSearchResultEmpty(false);
@@ -195,7 +198,7 @@ function Search() {
             type="text"
             value={searchValue}
             onChange={(e) => {
-              setSearchValue(e.target.value);
+              dispatch(setSearchValue(e.target.value));
             }}
             ref={inputRef}
             placeholder="Search dish or category"

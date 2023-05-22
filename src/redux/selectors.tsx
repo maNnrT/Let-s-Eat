@@ -31,6 +31,8 @@ export const getCombosByNameSelector = (state: RootState) => state.combos.combos
 
 export const getIdProductModal = (state: RootState) => state.modal.id;
 export const getIsOpenModal = (state: RootState) => state.modal.openModal;
+
+export const getSearchValueSelector = (state:RootState) => state.search.searchValue
 export const getProductsByDishSelector = createSelector(
   getDishFilterSelector,
   getProductsSelector,

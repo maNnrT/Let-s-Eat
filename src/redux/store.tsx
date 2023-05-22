@@ -8,6 +8,7 @@ import combosSlice from './features/combos/CombosSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import * as reduxThunk from 'redux-thunk/extend-redux';
+import searchSlice from './features/search/searchSlice';
 const persistConfig = {
   key: 'root',
   storage,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   checkLogin: checkLogin.reducer,
   cart: cartSlice.reducer,
   modal: modalSlice.reducer,
+  search: searchSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
