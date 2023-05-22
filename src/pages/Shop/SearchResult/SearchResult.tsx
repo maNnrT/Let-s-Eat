@@ -135,7 +135,7 @@ function SearchResult() {
             </div>
             <div className="mt-[4rem] w-full">
               <p className="text-secondary text-[2rem]">Price</p>
-              <CustomSlider value={range} onChange={handleChanges} valueLabelDisplay="off" disableSwap />
+              <CustomSlider value={range} onChange={handleChanges} valueLabelDisplay="off" disableSwap max={50}/>
               <div className="flex justify-between items-center">
                 <div className="text-666565">
                   <span>{range[0].toFixed(2)}$</span> - <span>{range[1].toFixed(2)}$</span>
