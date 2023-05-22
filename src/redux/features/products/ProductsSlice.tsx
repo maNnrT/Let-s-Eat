@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import { Combo, Product } from '@/types/types';
-import { PriceSlider } from '@/enum/enum';
+import { PriceSlider,PriceOrder } from '@/enum/enum';
 
 interface initialState {
   products: Product[];
@@ -43,7 +43,7 @@ const productsSlice = createSlice({
     typeFilter: 'all',
     priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
     comboFilter: false,
-    priceOrder: 'default',
+    priceOrder: PriceOrder.DEFAULT,
     searchFilter: '',
   } as initialState,
   reducers: {

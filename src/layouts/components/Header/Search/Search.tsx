@@ -32,13 +32,13 @@ function Search() {
   // console.log(searchDishResult);
   const types = ['fresh-baked', 'cookies', 'coffee&tea', 'chessecake'];
   React.useEffect(() => {
-    if (searchValue === '') {
+    if (debouncedSearchValue === '') {
       setSearchDishResult([]);
       setIsSearchValueEmpty(true);
       setIsSearchResultEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue);
+        return product.name.trim().toLowerCase().includes(debouncedSearchValue);
       }).length === 0
     ) {
       setSearchDishResult([]);
@@ -46,25 +46,25 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       products.filter((product) => {
-        return product.name.trim().toLowerCase().includes(searchValue);
+        return product.name.trim().toLowerCase().includes(debouncedSearchValue);
       }).length !== 0
     ) {
       setSearchDishResult(
         products.filter((product) => {
-          return product.name.trim().toLowerCase().includes(searchValue);
+          return product.name.trim().toLowerCase().includes(debouncedSearchValue);
         }),
       );
       setIsSearchValueEmpty(false);
       setIsSearchResultEmpty(false);
     }
 
-    if (searchValue === '') {
+    if (debouncedSearchValue === '') {
       setSearchComboResult([]);
       setIsSearchValueEmpty(true);
       setIsSearchResultEmpty(false);
     } else if (
       combos.filter((combo) => {
-        return combo.name.trim().toLowerCase().includes(searchValue);
+        return combo.name.trim().toLowerCase().includes(debouncedSearchValue);
       }).length === 0
     ) {
       setSearchComboResult([]);
@@ -72,25 +72,25 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       combos.filter((combo) => {
-        return combo.name.trim().toLowerCase().includes(searchValue);
+        return combo.name.trim().toLowerCase().includes(debouncedSearchValue);
       }).length !== 0
     ) {
       setSearchComboResult(
         combos.filter((combo) => {
-          return combo.name.trim().toLowerCase().includes(searchValue);
+          return combo.name.trim().toLowerCase().includes(debouncedSearchValue);
         }),
       );
       setIsSearchValueEmpty(false);
       setIsSearchResultEmpty(false);
     }
 
-    if (searchValue === '') {
+    if (debouncedSearchValue === '') {
       setSearchTypeResult([]);
       setIsSearchValueEmpty(true);
       setIsSearchResultEmpty(false);
     } else if (
       types.filter((type) => {
-        return type.trim().toLowerCase().includes(searchValue);
+        return type.trim().toLowerCase().includes(debouncedSearchValue);
       }).length === 0
     ) {
       setSearchTypeResult([]);
@@ -98,12 +98,12 @@ function Search() {
       setIsSearchValueEmpty(false);
     } else if (
       types.filter((type) => {
-        return type.trim().toLowerCase().includes(searchValue);
+        return type.trim().toLowerCase().includes(debouncedSearchValue);
       }).length !== 0
     ) {
       setSearchTypeResult(
         types.filter((type) => {
-          return type.trim().toLowerCase().includes(searchValue);
+          return type.trim().toLowerCase().includes(debouncedSearchValue);
         }),
       );
       setIsSearchValueEmpty(false);

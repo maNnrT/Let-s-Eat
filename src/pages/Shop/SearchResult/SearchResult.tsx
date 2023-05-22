@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@/components/Checkbox/Checkbox';
 import Tippy from '@tippyjs/react';
 import { Product } from '@/types/types';
-import { getProductsByFiltersSelector, getSearchValueSelector } from '@/redux/selectors';
+import { getComboFilterSelector, getPriceFilterSelector, getPriceOrderSelector, getProductsByFiltersSelector, getSearchValueSelector } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultPaginate from './ResultPaginate/ResultPaginate';
 import {
@@ -18,7 +18,7 @@ import {
   searchFilterChange,
   typeFilterChange,
 } from '@/redux/features/products/ProductsSlice';
-import { PriceSlider } from '@/enum/enum';
+import { PriceSlider,PriceOrder } from '@/enum/enum';
 import useDebounce from '@/hooks/useDebounce';
 const categories = [
   { title: 'All', value: 'all' },
@@ -44,14 +44,35 @@ const CustomSlider = styled(Slider)({
   },
 });
 function SearchResult() {
+  const dispatch = useDispatch();
   const products: Product[] = useSelector(getProductsByFiltersSelector);
+
   const [searchValue, setSearchValue] = React.useState<string>(useSelector(getSearchValueSelector));
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
-  const dispatch = useDispatch();
-  const [showPriceOrder, setShowPriceOrder] = React.useState<boolean>(false);
-  const [priceOrder, setPriceOrder] = React.useState<string>('Price');
-  const [range, setRange] = React.useState<number[]>([PriceSlider.MIN, PriceSlider.MAX]);
+  const handleSearch = (): void => {
+    setSearchValue(searchValue);
+    dispatch(searchFilterChange(searchValue));
+  };
+  const handleClear = () => {
+    setSearchValue('');
+    dispatch(searchFilterChange(''));
+    inputRef.current?.focus();
+  };
+  React.useEffect(() => {
+    if (debouncedSearchValue === '') {
+      dispatch(searchFilterChange(''));
+    }
+  }, [debouncedSearchValue]);
+  React.useEffect(() => {
+    dispatch(searchFilterChange(searchValue));
+  }, []);
+
+  const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    dispatch(typeFilterChange((e.target as HTMLButtonElement).value));
+  };
+
+  const [range, setRange] = React.useState<number[]>([...useSelector(getPriceFilterSelector)]);
   function handleChanges(_: Event, newValue: number | number[], activeThumb: number) {
     if (!Array.isArray(newValue)) {
       return;
@@ -66,30 +87,20 @@ function SearchResult() {
     // console.log(range);
     dispatch(priceFilterChange(range));
   };
-  const [isComboChecked, setIsComboChecked] = React.useState<boolean>(false);
+  
+  const priceOrder = useSelector(getPriceOrderSelector)
+  const [showPriceOrder, setShowPriceOrder] = React.useState<boolean>(false);
+  const handlePriceOrder = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    setShowPriceOrder(false)
+    dispatch(priceOrderChange((e.target as HTMLButtonElement).value));
+  };
+
+  const isComboChecked =useSelector(getComboFilterSelector)
   const handleComboCheck = () => {
-    setIsComboChecked(!isComboChecked);
     dispatch(comboFilterChange(!isComboChecked));
   };
-  const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(typeFilterChange((e.target as HTMLButtonElement).value));
-  };
-  const handleSearch = (): void => {
-    dispatch(searchFilterChange(searchValue));
-  };
-  const handleClear = () => {
-    setSearchValue('');
-    dispatch(searchFilterChange(''));
-    inputRef.current?.focus();
-  };
-  React.useEffect(() => {
-    if (debouncedSearchValue === '') {
-      dispatch(searchFilterChange(''));
-    }
-  }, [debouncedSearchValue]);
-  React.useEffect(()=>{
-    dispatch(searchFilterChange(searchValue));
-  },[])
+  
+  
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -161,36 +172,27 @@ function SearchResult() {
                   offset={[0, 3]}
                   content={
                     <div className="w-[20rem] h-fit text-666565 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.12)]  ">
-                      <p
-                        className="text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
-                        onClick={() => {
-                          setPriceOrder('Default');
-                          setShowPriceOrder(false);
-                          dispatch(priceOrderChange('default'));
-                        }}
+                      <button
+                        className=" w-full h-[4rem] text-left text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
+                        onClick={handlePriceOrder}
+                        value={PriceOrder.DEFAULT}
                       >
-                        Default
-                      </p>
-                      <p
-                        className="text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
-                        onClick={() => {
-                          setPriceOrder('From high to low');
-                          setShowPriceOrder(false);
-                          dispatch(priceOrderChange('highToLow'));
-                        }}
+                        {PriceOrder.DEFAULT}
+                      </button>
+                      <button
+                        className=" w-full h-[4rem] text-left text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
+                        onClick={handlePriceOrder}
+                        value={PriceOrder.HIGHTOLOW}
                       >
-                        From high to low
-                      </p>
-                      <p
-                        className="text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
-                        onClick={() => {
-                          setPriceOrder('From low to high');
-                          setShowPriceOrder(false);
-                          dispatch(priceOrderChange('lowToHigh'));
-                        }}
+                        {PriceOrder.HIGHTOLOW}
+                      </button>
+                      <button
+                        className=" w-full h-[4rem] text-left text-666565 py-[0.7rem] hover:bg-gray-100 px-[1.5rem] cursor-pointer duration-200"
+                        onClick={handlePriceOrder}
+                        value={PriceOrder.LOWTOHIGH}
                       >
-                        From low to high
-                      </p>
+                        {PriceOrder.LOWTOHIGH}
+                      </button>
                     </div>
                   }
                   onClickOutside={() => setShowPriceOrder(false)}

@@ -1,6 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { Product } from '@/types/types';
+import { PriceOrder } from '@/enum/enum';
+
 
 export const getCartProductSelector = (state: RootState) => state.cart.cartProduct;
 export const getCartComboSelector = (state: RootState) => state.cart.cartCombo;
@@ -60,12 +62,12 @@ export const getProductsByFiltersSelector = createSelector(
           : product.numberOfDish;
       });
       switch (priceOrder) {
-        case 'default':
+        case PriceOrder.DEFAULT:
           break;
-        case 'lowToHigh':
+        case PriceOrder.LOWTOHIGH:
           res.sort((a, b) => Number(a.price) - Number(b.price));
           break;
-        case 'highToLow':
+        case PriceOrder.HIGHTOLOW:
           res.sort((a, b) => Number(b.price) - Number(a.price));
           break;
         default:
@@ -83,12 +85,12 @@ export const getProductsByFiltersSelector = createSelector(
         : product.numberOfDish;
     });
     switch (priceOrder) {
-      case 'default':
+      case PriceOrder.DEFAULT:
         break;
-      case 'lowToHigh':
+      case PriceOrder.LOWTOHIGH:
         res.sort((a, b) => Number(a.price) - Number(b.price));
         break;
-      case 'highToLow':
+      case PriceOrder.HIGHTOLOW:
         res.sort((a, b) => Number(b.price) - Number(a.price));
         break;
       default:
