@@ -7,18 +7,27 @@ import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { styled } from '@mui/material/styles';
 import Checkbox from '@/components/Checkbox/Checkbox';
 import Tippy from '@tippyjs/react';
-import { Product } from '@/types/types';
-import { getComboFilterSelector, getPriceFilterSelector, getPriceOrderSelector, getProductsByFiltersSelector, getSearchValueSelector } from '@/redux/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import ResultPaginate from './ResultPaginate/ResultPaginate';
+import { Combo, Product } from '@/types/types';
+import {
+  getComboFilterSelector,
+  getProductFilterSelector,
+  getPriceFilterSelector,
+  getPriceOrderSelector,
+  getSearchValueSelector,
+  getItemsByFilterSelector,
+} from '@/redux/selectors';
 import {
   comboFilterChange,
   priceFilterChange,
   priceOrderChange,
+  productFilterChange,
   searchFilterChange,
-  typeFilterChange,
-} from '@/redux/features/products/ProductsSlice';
-import { PriceSlider,PriceOrder } from '@/enum/enum';
+  typeProductFilterChange,
+} from '@/redux/features/filter/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import ResultPaginate from './ResultPaginate/ResultPaginate';
+
+import { PriceSlider, PriceOrder } from '@/enum/enum';
 import useDebounce from '@/hooks/useDebounce';
 const categories = [
   { title: 'All', value: 'all' },
@@ -45,8 +54,7 @@ const CustomSlider = styled(Slider)({
 });
 function SearchResult() {
   const dispatch = useDispatch();
-  const products: Product[] = useSelector(getProductsByFiltersSelector);
-
+  const items: (Product|Combo)[] = useSelector(getItemsByFilterSelector)
   const [searchValue, setSearchValue] = React.useState<string>(useSelector(getSearchValueSelector));
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
@@ -69,7 +77,7 @@ function SearchResult() {
   }, []);
 
   const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(typeFilterChange((e.target as HTMLButtonElement).value));
+    dispatch(typeProductFilterChange((e.target as HTMLButtonElement).value));
   };
 
   const [range, setRange] = React.useState<number[]>([...useSelector(getPriceFilterSelector)]);
@@ -87,20 +95,23 @@ function SearchResult() {
     // console.log(range);
     dispatch(priceFilterChange(range));
   };
-  
-  const priceOrder = useSelector(getPriceOrderSelector)
+
+  const priceOrder = useSelector(getPriceOrderSelector);
   const [showPriceOrder, setShowPriceOrder] = React.useState<boolean>(false);
   const handlePriceOrder = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    setShowPriceOrder(false)
+    setShowPriceOrder(false);
     dispatch(priceOrderChange((e.target as HTMLButtonElement).value));
   };
 
-  const isComboChecked =useSelector(getComboFilterSelector)
+  const isComboChecked: boolean = useSelector(getComboFilterSelector);
   const handleComboCheck = () => {
     dispatch(comboFilterChange(!isComboChecked));
   };
-  
-  
+  const isProductChecked: boolean = useSelector(getProductFilterSelector);
+  const handleProductCheck = () => {
+    dispatch(productFilterChange(!isProductChecked));
+  };
+
   return (
     <div className="w-full mb-[-12rem]">
       <div
@@ -135,7 +146,7 @@ function SearchResult() {
             </div>
             <div className="mt-[4rem] w-full">
               <p className="text-secondary text-[2rem]">Price</p>
-              <CustomSlider value={range} onChange={handleChanges} valueLabelDisplay="off" disableSwap max={50}/>
+              <CustomSlider value={range} onChange={handleChanges} valueLabelDisplay="off" disableSwap max={50} />
               <div className="flex justify-between items-center">
                 <div className="text-666565">
                   <span>{range[0].toFixed(2)}$</span> - <span>{range[1].toFixed(2)}$</span>
@@ -153,6 +164,15 @@ function SearchResult() {
               classNameLabel="relative text-secondary text-[2rem] flex justify-between w-full items-center cursor-pointer"
               classNameInput="checkbox"
               classNameWrapper="mt-[4rem] w-full"
+            />
+            <Checkbox
+              label="Product"
+              checked={isProductChecked}
+              onChange={handleProductCheck}
+              name="product"
+              classNameLabel="relative text-secondary text-[2rem] flex justify-between w-full items-center cursor-pointer"
+              classNameInput="checkbox"
+              classNameWrapper="mt-[2rem] w-full"
             />
           </div>
           <div className="h-fit flex flex-col gap-y-[3.2rem] justify-start">
@@ -226,7 +246,7 @@ function SearchResult() {
                     setSearchValue(e.target.value);
                   }}
                   ref={inputRef}
-                  placeholder="Search dish or category"
+                  placeholder="Search dish or combo"
                   className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 "
                   spellCheck={false}
                 />
@@ -247,7 +267,7 @@ function SearchResult() {
               </div>
             </div>
             <div className="  gap-[1.6rem] pt-[2rem] px-[3rem] pb-[2rem] bg-white h-fit">
-              <ResultPaginate products={products} />
+              <ResultPaginate items={items} />
             </div>
           </div>
         </div>

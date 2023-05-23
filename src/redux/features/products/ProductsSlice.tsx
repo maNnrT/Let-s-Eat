@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import { Combo, Product } from '@/types/types';
-import { PriceSlider,PriceOrder } from '@/enum/enum';
+import { PriceSlider, PriceOrder } from '@/enum/enum';
 
 interface initialState {
   products: Product[];
@@ -47,22 +47,22 @@ const productsSlice = createSlice({
     searchFilter: '',
   } as initialState,
   reducers: {
-    dishFilterChange: (state, action) => {
+    dishFilterProductChange: (state, action) => {
       state.dishFilter = action.payload;
     },
     typeFilterChange: (state, action) => {
       state.typeFilter = action.payload;
     },
-    priceFilterChange: (state, action) => {
+    priceFilterProductChange: (state, action) => {
       state.priceFilter = action.payload;
     },
     comboFilterChange: (state, action) => {
       state.comboFilter = action.payload;
     },
-    priceOrderChange: (state, action) => {
+    priceOrderProductChange: (state, action) => {
       state.priceOrder = action.payload;
     },
-    searchFilterChange: (state, action) => {
+    searchFilterProductChange: (state, action) => {
       state.searchFilter = action.payload;
     },
   },
@@ -162,11 +162,11 @@ export const getProductsByName = createAsyncThunk('products/getProductsByName', 
   }
 });
 export const {
-  dishFilterChange,
+  dishFilterProductChange,
   typeFilterChange,
-  priceFilterChange,
+  priceFilterProductChange,
   comboFilterChange,
-  priceOrderChange,
-  searchFilterChange,
+  priceOrderProductChange,
+  searchFilterProductChange,
 } = productsSlice.actions;
 export default productsSlice;

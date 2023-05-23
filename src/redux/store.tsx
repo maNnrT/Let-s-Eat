@@ -9,6 +9,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import * as reduxThunk from 'redux-thunk/extend-redux';
 import searchSlice from './features/search/searchSlice';
+import filterSlice from './features/filter/filterSlice';
 const persistConfig = {
   key: 'root',
   storage,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   cart: cartSlice.reducer,
   modal: modalSlice.reducer,
   search: searchSlice.reducer,
+  filters: filterSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

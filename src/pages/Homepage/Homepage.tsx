@@ -12,7 +12,7 @@ import sweetBakery from '@/assets/image/image3.png';
 import testimonial from '@/assets/Image/image9.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { dishFilterChange } from '@/redux/features/products/ProductsSlice';
+import { dishFilterProductChange } from '@/redux/features/products/ProductsSlice';
 import { getProductsByDishSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 // import config from '@/config';
@@ -35,7 +35,7 @@ function Homepage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(dishFilterChange((e.target as HTMLButtonElement).value));
+    dispatch(dishFilterProductChange((e.target as HTMLButtonElement).value));
   };
 
   return (

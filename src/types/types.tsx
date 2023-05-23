@@ -33,13 +33,17 @@ export type Product = {
   detailImg: string;
   price: string;
   dishLeft: number;
-  numberOfDish?:number
+  dishes?: Product[];
+  numberPeople?:number
+  numberOfDish?: number;
 };
 export type Combo = {
   id: number | undefined;
   name: string;
   img: string;
   numberPeople: number;
+  description?:string;
+  price?:string
   dishes: Product[];
 };
 export type DishesInCombo = {
