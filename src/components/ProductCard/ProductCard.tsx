@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
 import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
-
 interface Props {
   id: number | undefined;
   img: string;
@@ -13,12 +12,15 @@ interface Props {
 function ProductCard({ id, img, name, description, price }: Props) {
   const dispatch = useDispatch();
   return (
-    <div className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] ">
+    <div
+      className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] animate-slide_in"
+      key={id}
+    >
       <div className="w-full h-[26.1rem] overflow-hidden">
         <LazyLoadImage
           src={img}
           alt=""
-          className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"
+          className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer transition-all"
           onClick={() => dispatch(setOpenModalTrue(id))}
         />
       </div>

@@ -46,6 +46,22 @@ export default {
         tablet: "768px",
         desktop: "1024px",
       },
+      keyframes: {
+        grow: {
+          "0%": {opacity:0.6, transform: "translateY(8px)" },
+          "10%": {opacity:0.65, transform: "translateY(7px)" },
+          "25%": {opacity:0.7, transform: "translateY(6px)" },
+          "50%": {opacity:0.75, transform: "translateY(5px)" },
+          "60%": {opacity:0.8, transform: "translateY(4px)" },
+          "70%": {opacity:0.85, transform: "translateY(3px)" },
+          "80%": {opacity:0.9, transform: "translateY(2px)" },
+          "90%": {opacity:0.95, transform: "translateY(1px)" },
+          "100%": {opacity:1, transform: "translateY(0px)" },
+        },
+      },
+      animation: {
+        slide_in: ".5s linear .1s grow",
+      },
     },
   },
   plugins: [],

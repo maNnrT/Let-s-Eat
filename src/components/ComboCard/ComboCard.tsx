@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
 import { Product } from '@/types/types';
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import { getIsLogin } from '@/redux/selectors';
@@ -50,7 +49,10 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
     }
   };
   return (
-    <div className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] ">
+    <div
+      className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] animate-slide_in "
+      key={id}
+    >
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <div className="w-full h-[26.1rem] overflow-hidden">
         <LazyLoadImage

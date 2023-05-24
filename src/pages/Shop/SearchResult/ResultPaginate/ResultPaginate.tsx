@@ -3,13 +3,15 @@ import { Combo, Product } from '@/types/types';
 import { useSelector } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 
-import Items from './Items';
+// import Items from './Items';
+const Items = React.lazy(() => wait(1000).then(() => import('./Items')));
 import Paginationn from './Pagination';
 import Pagination from '@/hooks/Pagination';
+import LoadingFallback from '@/components/LoadingFallback/LoadingFallback';
 interface Props {
-  items:(Product|Combo)[]
+  items: (Product | Combo)[];
 }
-function ResultPaginate({items }:Props) {
+function ResultPaginate({ items }: Props) {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [itemsPerPage, setItemPerPage] = React.useState<number>(8);
   // const lastItemIndex = currentPage * itemsPerPage;
@@ -19,7 +21,7 @@ function ResultPaginate({items }:Props) {
     const firstPageIndex = (currentPage - 1) * itemsPerPage;
     const lastPageIndex = firstPageIndex + itemsPerPage;
     return items.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, itemsPerPage,items]);
+  }, [currentPage, itemsPerPage, items]);
   return (
     <div>
       {/* <Items currentItems={currentItems} />
@@ -36,7 +38,9 @@ function ResultPaginate({items }:Props) {
         siblingCount={1}
         totalCount={items.length}
       />
-      <Items currentItems={currentData} />
+      <React.Suspense fallback={<LoadingFallback />}>
+        <Items currentItems={currentData} />
+      </React.Suspense>
       <Pagination
         currentPage={currentPage}
         onPageChange={(page: number) => setCurrentPage(page)}
@@ -47,5 +51,9 @@ function ResultPaginate({items }:Props) {
     </div>
   );
 }
-
+function wait(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
 export default ResultPaginate;

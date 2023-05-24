@@ -8,15 +8,12 @@ interface Props {
 }
 function Items({ currentItems }: Props) {
   return (
-    <div className="grid grid-cols-12 gap-[1.6rem]">
+    <div className="grid grid-cols-12 gap-[1.6rem]" key={currentItems.length}>
       {currentItems.length > 0 ? (
         currentItems.map((item) => {
           if (item.description !== undefined && item.price !== undefined) {
             return (
-              <div
-                className=" col-span-3 w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
-                key={currentItems.indexOf(item)}
-              >
+              <div className="col-span-3" key={currentItems.indexOf(item)}>
                 <ProductCard
                   id={item.id}
                   name={item.name}
@@ -34,10 +31,7 @@ function Items({ currentItems }: Props) {
             item.numberPeople !== undefined
           ) {
             return (
-              <div
-                className=" col-span-3 w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
-                key={currentItems.indexOf(item)}
-              >
+              <div className="col-span-3" key={currentItems.indexOf(item)}>
                 <ComboCard
                   id={item.id}
                   name={item.name}
