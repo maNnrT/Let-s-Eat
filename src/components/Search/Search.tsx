@@ -18,7 +18,6 @@ function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
   // const searchValue = useSelector(getSearchValueSelector)
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
   const [searchComboResult, setSearchComboResult] = React.useState<Combo[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);

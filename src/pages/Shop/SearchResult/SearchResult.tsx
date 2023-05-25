@@ -30,7 +30,7 @@ import ResultPaginate from './ResultPaginate/ResultPaginate';
 
 import { PriceSlider, PriceOrder } from '@/enum/enum';
 import useDebounce from '@/hooks/useDebounce';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 const categories = [
   { title: 'All', value: 'all' },
   { title: 'Fresh Baked', value: 'fresh-baked' },
@@ -56,19 +56,24 @@ const CustomSlider = styled(Slider)({
 });
 function SearchResult() {
   const dispatch = useDispatch();
-  const { searchValue } = useParams();
-  console.log(searchValue);
-  const location = useLocation()
-  console.log(location.search.slice());
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+  // React.useEffect(() => {
+  //   // read the params on component load and when any changes occur
+  //   const currentParams = Object.fromEntries([...searchParams]);
+  //   // get new values on change
+  //   console.log('useEffect:', currentParams);
+  //   // update the search params programmatically
+  //   setSearchParams(currentParams);
+  // }, [searchParams]);
   const items: (Product | Combo)[] = useSelector(getItemsByFilterSelector);
 
-  const [keyword, setSearchValue] = React.useState<string>(searchValue ? searchValue : '');
+  const keyword = searchParams.get('keyword')
+  const [searchValue, setSearchValue] = React.useState(keyword!==null ? keyword:'');
   const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const debouncedSearchValue: string = useDebounce<string>(keyword, 500);
+  const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
   const handleSearch = (): void => {
-    setSearchValue(keyword);
-    dispatch(searchFilterChange(keyword));
+    setSearchValue(searchValue);
+    dispatch(searchFilterChange(searchValue));
   };
   const handleClear = () => {
     setSearchValue('');
@@ -81,7 +86,7 @@ function SearchResult() {
     }
   }, [debouncedSearchValue]);
   React.useEffect(() => {
-    dispatch(searchFilterChange(keyword));
+    dispatch(searchFilterChange(searchValue));
     window.scrollTo(0, 700);
   }, []);
   const type = useSelector(getTypeSelector);
@@ -249,7 +254,7 @@ function SearchResult() {
               >
                 <input
                   type="text"
-                  value={keyword}
+                  value={searchValue}
                   onChange={(e) => {
                     setSearchValue(e.target.value);
                   }}
@@ -258,7 +263,7 @@ function SearchResult() {
                   className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 "
                   spellCheck={false}
                 />
-                {!!keyword && (
+                {!!searchValue && (
                   <button className="absolute top-[50%] translate-y-[-50%] right-[6rem]" onClick={handleClear}>
                     <IoMdCloseCircle size={19} color={'#D08C30'} />
                   </button>

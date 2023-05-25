@@ -90,7 +90,7 @@ function Header(): JSX.Element {
   }
   return (
     <div
-      className={`flex justify-center h-[7.5rem] w-[100vh] fixed top-0 z-[2] duration-500 ease-in-out transition-all 
+      className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
       ${scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'}
       ${transparent ? 'bg-transparent' : 'bg-primary'}`}
     >

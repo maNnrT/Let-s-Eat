@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
 import config from '@/config';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, createSearchParams, useNavigate } from 'react-router-dom';
 // import { setSearchValue } from '@/redux/features/search/searchSlice';
 
 function Search() {
@@ -30,7 +30,10 @@ function Search() {
           spellCheck={false}
         />
         {!!searchValue && (
-          <button className="absolute top-[50%] translate-y-[-50%] tablet:right-[1.5rem] hidden tablet:block " onClick={handleClear}>
+          <button
+            className="absolute top-[50%] translate-y-[-50%] tablet:right-[1.5rem] hidden tablet:block "
+            onClick={handleClear}
+          >
             <IoMdCloseCircle size={19} color={'#D08C30'} />
           </button>
         )}
@@ -48,7 +51,12 @@ function Search() {
         <button
           className="w-[4rem] h-full flex justify-center items-center hover:bg-gray-100"
           onClick={() => {
-            navigate(`${config.routes.shop}/search`, { state: { q: searchValue } });
+            navigate({
+              pathname: config.routes.search,
+              search: `?${createSearchParams({
+                keyword: searchValue,
+              })}`,
+            });
           }}
         >
           <IoMdSearch size={20} color={'#D08C30'} />
