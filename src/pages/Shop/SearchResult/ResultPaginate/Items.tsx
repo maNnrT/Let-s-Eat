@@ -1,10 +1,16 @@
+import * as React from 'react';
 import { Combo, Product } from '@/types/types';
 import ProductCard from '@/components/ProductCard/ProductCard';
-import { BsCart } from 'react-icons/bs';
 import ComboCard from '@/components/ComboCard/ComboCard';
+import { BsCart } from 'react-icons/bs';
 
 interface Props {
   currentItems: (Product | Combo)[];
+}
+function wait(time: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
 }
 function Items({ currentItems }: Props) {
   return (
@@ -45,7 +51,7 @@ function Items({ currentItems }: Props) {
           }
         })
       ) : (
-        <div className=" col-span-12 w-full h-[20rem] flex flex-col justify-center items-center">
+        <div className=" col-span-12 w-full h-[41.2rem] flex flex-col justify-center items-center">
           <BsCart color="#D08C30" size={60} />
           <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">No product match!</p>
         </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import cart from '@/assets/svg/cart.svg';
 interface Props {
-  id:number|undefined
+  id: number | undefined;
   name: string;
   img: string;
   ingredient?: string;
   price?: string;
 }
-function CategoryProduct({id, name, img, ingredient, price }: Props) {
+function CategoryProduct({ id, name, img, ingredient, price }: Props) {
   return (
     <div className="flex justify-start items-center h-[10rem] mb-[1.2rem] ">
       <div className="w-[10rem] h-[10rem] basis-[10rem] grow-0 shrink-0 relative group ">
@@ -15,7 +15,7 @@ function CategoryProduct({id, name, img, ingredient, price }: Props) {
         <div className="absolute top-0 bottom-0 left-0 right-0 h-full w-full group-hover:bg-[rgba(0,0,0,0.5)] group-hover:duration-200">
           <div className="absolute top-0 bottom-0 left-0 right-0 h-[4.8rem] w-[4.8rem] m-auto group-hover:bg-secondary flex justify-center items-center group-hover:duration-200">
             <div className="hidden group-hover:block group-hover:duration-200">
-              <img src={cart} alt=""  className='duration-200'/>
+              <img src={cart} alt="" className="duration-200" />
             </div>
           </div>
         </div>

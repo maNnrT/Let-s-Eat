@@ -28,6 +28,7 @@ function MenuCombo() {
   React.useEffect(() => {
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.scrollTo(0,550)
   }, []);
   return (
     <div className="w-full mb-[-12rem] relative">

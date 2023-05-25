@@ -119,7 +119,7 @@ export const PublicRoutes = [
         ),
       },
       {
-        path: `${config.routes.shop}/search`,
+        path: config.routes.search,
         element: (
           <Suspense fallback={<LoadingFallback />}>
             <SearchResult />

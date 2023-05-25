@@ -19,6 +19,12 @@
     hover:bg-transparent hover:text-secondary hover:border-[1.5px] hover:border-secondary hover:duration-200
     disabled:cursor-default disabled:opacity-50 disabled:bg-secondary disabled:text-f6e8d6;
   }
+  .btn-secondary-reverse {
+    @apply flex justify-center items-center tablet:w-[17.6rem] w-[15.6rem] h-[5.2rem] cursor-pointer
+    hover:bg-secondary hover:text-f6e8d6 font-semibold text-[1.8rem] leading-[3rem] 
+    bg-transparent text-secondary border-[1.5px] border-secondary hover:duration-200
+    disabled:cursor-default disabled:opacity-50 disabled:bg-secondary disabled:text-f6e8d6;
+  }
   .checkbox {
     @apply absolute top-[50%] translate-y-[-50%] right-0 h-[20px] w-[20px] border-[1px] border-secondary 
           after:content-[''] after:absolute after:hidden after:left-[50%] after:top-[50%] after:translate-x-[-50%] after:translate-y-[-50%] after:w-[5px] after:h-[10px] after:border-l-transparent after:border-r-white after:border-t-transparent after:border-b-white 
@@ -28,7 +34,10 @@
   .paginationBtn {
     @apply w-[4rem] h-[4rem] bg-white text-[#B7B5B3] flex justify-center items-center
           focus:bg-secondary focus:text-[#F8F4F1] focus:duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.12)]
-          disabled:opacity-40 disabled:cursor-default 
+          disabled:opacity-40 disabled:cursor-default;
+  }
+  .loading_circle {
+    @apply  border-[1rem] border-[#EAF0F6] rounded-[50%] border-t-[1rem] border-t-secondary w-[10rem] h-[10rem]
   }
 }
 @layer utilities {
@@ -43,5 +52,15 @@
   }
   .webkit-box {
     display: -webkit-box;
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

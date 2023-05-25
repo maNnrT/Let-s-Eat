@@ -19,7 +19,8 @@ import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart, updateCart } from '@/redux/features/cart/CartSlice';
 import { ProductItem, ComboItem, Product, Combo } from '@/types/types';
-import Search from './Search/Search';
+import Search from '@/components/Search';
+import SearchMobile from '@/components/SearchMobile';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import { getCombos } from '@/redux/features/combos/CombosSlice';
@@ -77,10 +78,19 @@ function Header(): JSX.Element {
   React.useEffect(() => {
     dispatch(getProducts());
     dispatch(getCombos());
+    document.addEventListener("click", handleClickOutside, true)
   }, []);
+  const refNavMobile = React.useRef<HTMLDivElement|null>(null) 
+  const handleClickOutside = (e:any) => {
+    if (refNavMobile.current && !refNavMobile.current.contains(e.target)) {
+      setNav(false)
+    } else {
+      return
+    }
+  }
   return (
     <div
-      className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
+      className={`flex justify-center h-[7.5rem] w-[100vh] fixed top-0 z-[2] duration-500 ease-in-out transition-all 
       ${scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'}
       ${transparent ? 'bg-transparent' : 'bg-primary'}`}
     >
@@ -99,6 +109,7 @@ function Header(): JSX.Element {
         </div>
         <Search />
         <div className="hidden tablet:flex items-center justify-end w-auto ">
+          
           {!isLogin ? (
             <>
               <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem] mr-[2rem]">
@@ -144,15 +155,17 @@ function Header(): JSX.Element {
         </div>
         <div
           className={
-            !nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[8rem] pl-[1.6rem] pb-[4.4rem] ease-in-out duration-500 tablet:hidden'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[8rem] pl-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
+            nav
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[4rem] pl-[1.6rem] pr-[1.6rem] pb-[4.4rem] ease-in-out duration-500 tablet:hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[4rem] pl-[1.6rem] pr-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
           }
+          ref={refNavMobile}
         >
-          <div className="flex flex-col ">
-            <div className="tablet:hidden cursor-pointer" onClick={handleNav}>
+          <div className="flex flex-col">
+            {/* <div className="tablet:hidden cursor-pointer self-end" onClick={handleNav}>
               <AiOutlineClose size={30} />
-            </div>
+            </div> */}
+            <SearchMobile/>
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>

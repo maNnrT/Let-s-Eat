@@ -8,6 +8,7 @@ enum routes {
   shop = '/shop',
   cart = '/cart',
   checkout = '/check-out',
+  search = '/search',
   nomatch = '*',
 }
 

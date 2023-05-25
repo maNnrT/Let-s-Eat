@@ -6,7 +6,7 @@ function DefaultLayout(): JSX.Element {
   return (
     <div className="flex flex-col items-center w-full">
       <Header />
-      <div className="h-auto w-full">
+      <div className="h-auto w-full min-h-[50rem] flex justify-center items-center">
         <Outlet></Outlet>
       </div>
       <Footer />

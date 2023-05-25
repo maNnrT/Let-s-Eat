@@ -11,13 +11,14 @@ import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import config from '@/config';
-import { Link } from 'react-router-dom';
-import { setSearchValue } from '@/redux/features/search/searchSlice';
+import { Link, createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+// import { setSearchValue } from '@/redux/features/search/searchSlice';
 
 function Search() {
-  // const [searchValue, setSearchValue] = React.useState<string>('');
-  const searchValue = useSelector(getSearchValueSelector)
-  const dispatch = useDispatch()
+  const [searchValue, setSearchValue] = React.useState<string>('');
+  // const searchValue = useSelector(getSearchValueSelector)
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
   const [searchComboResult, setSearchComboResult] = React.useState<Combo[]>([]);
   const [searchTypeResult, setSearchTypeResult] = React.useState<string[]>([]);
@@ -114,7 +115,7 @@ function Search() {
     setShowResult(false);
   };
   const handleClear = () => {
-    dispatch(setSearchValue(''));
+    setSearchValue('');
     setSearchDishResult([]);
     setIsSearchValueEmpty(true);
     setIsSearchResultEmpty(false);
@@ -177,20 +178,27 @@ function Search() {
                 <p className="text-secondary py-[0.8rem] px-[2rem]">No dish,category or combo found</p>
               ) : null}
               {searchDishResult.length !== 0 || searchTypeResult.length !== 0 || searchComboResult.length !== 0 ? (
-                <Link
-                  to={`${config.routes.shop}/search`}
+                <button
                   className="text-secondary py-[0.8rem] px-[2rem] text-center cursor-pointer w-full"
-                  onClick={() => setShowResult(false)}
+                  onClick={() => {
+                    setShowResult(false);
+                    navigate({
+                      pathname: config.routes.search,
+                      search: `?${createSearchParams({
+                        keyword: searchValue,
+                      })}`,
+                    });
+                  }}
                 >
                   See all result
-                </Link>
+                </button>
               ) : null}
             </PopperWrapper>
           </div>
         )}
         onClickOutside={handleHideResult}
       >
-        <div className="flex items-center h-[4rem] bg-white rounded-full relative ml-[2rem] mr-[3rem] w-[30rem]">
+        <div className="hidden items-center h-[4rem] bg-white rounded-full relative ml-[2rem] mr-[3rem] w-[30rem] tablet:flex">
           <span className="w-[3.5rem] h-fit flex justify-center items-center">
             <IoMdSearch size={20} color={'#D08C30'} />
           </span>
@@ -198,7 +206,7 @@ function Search() {
             type="text"
             value={searchValue}
             onChange={(e) => {
-              dispatch(setSearchValue(e.target.value));
+              setSearchValue(e.target.value);
             }}
             ref={inputRef}
             placeholder="Search dish or category"

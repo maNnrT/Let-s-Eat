@@ -22,7 +22,7 @@ export default function CarouselCustomer() {
     clickable: true,
   };
   return (
-    <div className="w-full relative mb-[7.6rem] h-auto ">
+    <div className="w-full relative tablet:mb-[7.6rem] h-auto ">
       <Swiper
         pagination={pagination}
         modules={[Pagination]}
@@ -53,10 +53,10 @@ export default function CarouselCustomer() {
         <SwiperSlide>
           <CarouselItem />
         </SwiperSlide>
-        <button className=" text-secondary z-[1] absolute top-[5rem] left-[18rem] " onClick={swipePrev}>
+        <button className=" text-secondary z-[1] absolute tablet:top-[5rem] tablet:left-[18rem] top-[2rem] left-[8rem]" onClick={swipePrev}>
           <BsChevronLeft size={24} />
         </button>
-        <button className=" text-secondary z-[1] absolute top-[5rem] right-[18rem] " onClick={swipeNext}>
+        <button className=" text-secondary z-[1] absolute tablet:top-[5rem] tablet:right-[18rem] top-[2rem] right-[8rem] " onClick={swipeNext}>
           <BsChevronRight size={24} />
         </button>
       </Swiper>

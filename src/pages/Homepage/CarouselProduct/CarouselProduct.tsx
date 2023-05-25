@@ -32,16 +32,16 @@ export default function CarouselProduct({ products }: Props) {
         breakpoints={{
           // when window width is >= 320px
           320: {
-            slidesPerView: 2,
+            slidesPerView: 'auto',
           },
-          640: {
-            slidesPerView: 2,
+          768: {
+            slidesPerView: 4,
           },
           1024: {
             slidesPerView: 4,
           },
           1536: {
-            slidesPerView: 5,
+            slidesPerView: 4,
           },
         }}
       >
@@ -69,7 +69,7 @@ export default function CarouselProduct({ products }: Props) {
           </div>
         )}
       </Swiper>
-      <div className="w-[8.8rem] flex justify-between mx-auto mt-[2.8rem]">
+      <div className="w-[8.8rem]  justify-between mx-auto mt-[2.8rem] tablet:flex hidden">
         <button
           className="paginationBtn"
           onClick={swipePrev}

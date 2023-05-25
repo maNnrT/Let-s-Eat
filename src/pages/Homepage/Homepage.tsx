@@ -34,12 +34,12 @@ function Homepage() {
     dispatch(getProducts());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const handleFilterChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(dishFilterProductChange((e.target as HTMLButtonElement).value));
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(dishFilterProductChange((e.target as HTMLInputElement).value));
   };
 
   return (
-    <div>
+    <div className="w-full">
       <BannerSlide />
       <div className="w-full h-auto bg-primary">
         <div className="panel-layer tablet:mt-[-9.2rem] tablet:mb-[-13.8rem] z-[1] mt-0 mb-0">
@@ -80,10 +80,10 @@ function Homepage() {
           <div className="container tablet:pt-[6rem] tablet:pb-[5.4rem] py-[2.4rem] ">
             <div className=" flex flex-col tablet:items-center items-start ">
               <div className="tablet:flex flex-col">
-                <span className="text-secondary text-[3.2rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
+                <span className="text-secondary tablet:text-[3.2rem] text-[1.6rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
                   —
                 </span>
-                <p className="font-mukta font-normal text-[1.8rem] text-secondary mt-[0.8rem] inline-block tablet:block tablet:mt-[0.8rem]">
+                <p className="font-mukta font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary inline-block tablet:block tablet:mt-[0.8rem]">
                   FEATURE
                 </p>
               </div>
@@ -138,7 +138,9 @@ function Homepage() {
                 style={{ backgroundImage: `url(${workingHoursImg})` }}
               >
                 <span className="text-secondary mr-[0.8rem] text-[3.2rem] leading-[0] ">—</span>
-                <p className="font-normal text-[1.8rem] text-secondary leading-[100%] inline-block">ABOUT US</p>
+                <p className="font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary leading-[100%] inline-block">
+                  ABOUT US
+                </p>
                 <h3 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[6rem] line-clamp-1">
                   Working hours
                 </h3>
@@ -172,8 +174,10 @@ function Homepage() {
             </div>
             <div className="w-full flex flex-col tablet:hidden ">
               <div className="tablet:flex flex-col">
-                <span className="text-secondary text-[3.2rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0">—</span>
-                <p className="font-mukta font-normal text-[1.8rem] text-secondary mt-[0.8rem] inline-block tablet:block tablet:mt-[0.8rem] uppercase">
+                <span className="text-secondary tablet:text-[3.2rem] text-[1.6rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
+                  —
+                </span>
+                <p className="font-mukta font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary inline-block tablet:block tablet:mt-[0.8rem] uppercase">
                   About us
                 </p>
               </div>
@@ -214,79 +218,125 @@ function Homepage() {
         </div>
       </div>
       <div
-        className="w-full h-[76rem] bg-no-repeat bg-cover bg-center relative"
+        className="w-full tablet:h-[76rem] h-fit bg-no-repeat bg-cover bg-center relative "
         style={{ backgroundImage: `url(${sweetBakery})` }}
       >
         <div className="container">
-          <div className=" flex flex-col items-center pt-[22rem] pb-[31rem]">
-            <span className="text-secondary text-[3.2rem] leading-[0px]">—</span>
-            <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem]">ABOUT US</p>
-            <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-f6f4f3 text-center uppercase mb-0">
+          <div className=" flex flex-col item-start tablet:items-center pt-[4rem] tablet:pt-[22rem] tablet:pb-[31rem] pb-[4.7rem]">
+            <div className="tablet:flex flex-col">
+              <span className="text-secondary tablet:text-[3.2rem] text-[1.6rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
+                —
+              </span>
+              <p className="font-mukta font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary inline-block tablet:block tablet:mt-[0.8rem] uppercase">
+                About us
+              </p>
+            </div>
+            <h1 className="font-fahkwang font-normal tablet:text-[4rem] text-[2rem] tablet:leading-[100%] leading-[140%] mt-[2rem] text-f6f4f3 text-left uppercase mb-0 tablet:text-center">
               Sweet Bakery
             </h1>
-            <p className="font-light text-[1.6rem] mt-[2rem] text-center max-w-[79.4rem] line-clamp-4">
+            <p className="font-light text-[1.6rem] tablet:mt-[2rem] mt-[1.2rem] tablet:text-center max-w-[79.4rem] line-clamp-[9] tablet:line-clamp-4 ">
               We believe in making good bread. As we’ve grown, so has our menu and our community, yet our values have
               stayed the same. We take the time to make our bread, pastries, cakes, breakfasts and lunches as we always
               have – with care, by hand and according to the season – so that we don’t need to compromise on what we
               eat, whether we’re on the go, or taking time out in one of our bakeries.
             </p>
 
-            <div className="grid grid-cols-4 mt-[6rem] w-full gap-x-[3.2rem] ">
+            <div className="grid tablet:grid-cols-4 grid-cols-2 tablet:mt-[6rem] mt-[3.6rem] w-full tablet:gap-x-[3.2rem] gap-x-[4rem] gap-y-[2.4rem] ">
               <div>
-                <h3 className="font-fahkwang font-medium text-[5.2rem] leading-[100%] text-center text-f6f4f3">
+                <h3 className="font-fahkwang font-medium tablet:text-[5.2rem] text-[3.2rem] leading-[100%] tablet:text-center text-f6f4f3">
                   300<span className="text-secondary">+</span>
                 </h3>
-                <p className="font-normal text-[2rem] text-center text-cfcfcf mt-[1.6rem]">Visitors daily</p>
+                <p className="font-normal tablet:text-[2rem] text-[1.4rem] tablet:text-center text-cfcfcf tablet:mt-[1.6rem] mt-[0.4rem]">
+                  Visitors daily
+                </p>
               </div>
               <div>
-                <h3 className="font-fahkwang font-medium text-[52px] leading-[100%] text-center text-[#F6F4F3]">
+                <h3 className="font-fahkwang font-medium tablet:text-[5.2rem] text-[3.2rem] leading-[100%] tablet:text-center text-[#F6F4F3]">
                   500<span className="text-secondary">+</span>
                 </h3>
-                <p className="font-normal text-[2rem] text-center text-cfcfcf mt-[1.6rem]">Deliveries monthly</p>
+                <p className="font-normal tablet:text-[2rem] text-[1.4rem] tablet:text-center text-cfcfcf tablet:mt-[1.6rem] mt-[0.4rem]">
+                  Deliveries monthly
+                </p>
               </div>
               <div>
-                <h3 className="font-fahkwang font-medium text-[52px] leading-[100%] text-center text-[#F6F4F3]">
+                <h3 className="font-fahkwang font-medium tablet:text-[5.2rem] text-[3.2rem] leading-[100%] tablet:text-center text-[#F6F4F3]">
                   100<span className="text-secondary">%</span>
                 </h3>
-                <p className="font-normal text-[2rem] text-center text-cfcfcf mt-[1.6rem]">Positive feedback</p>
+                <p className="font-normal tablet:text-[2rem] text-[1.4rem] tablet:text-center text-cfcfcf tablet:mt-[1.6rem] mt-[0.4rem]">
+                  Positive feedback
+                </p>
               </div>
               <div>
-                <h3 className="font-fahkwang font-medium text-[52px] leading-[100%] text-center text-[#F6F4F3]">
+                <h3 className="font-fahkwang font-medium tablet:text-[5.2rem] text-[3.2rem] leading-[100%] tablet:text-center text-[#F6F4F3]">
                   40<span className="text-secondary">+</span>
                 </h3>
-                <p className="font-normal text-[2rem] text-center text-cfcfcf mt-[1.6rem]">Awards and honors</p>
+                <p className="font-normal tablet:text-[2rem] text-[1.4rem] tablet:text-center text-cfcfcf tablet:mt-[1.6rem] mt-[0.4rem]">
+                  Awards and honors
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="w-full h-auto bg-primary">
-        <div className="panel-layer mt-[-9.2rem] mb-[-13.8rem] z-[1]">
+        <div className="panel-layer tablet:mt-[-9.2rem] tablet:mb-[-13.8rem] z-[1]">
           <div className="container">
-            <div className=" flex flex-col items-center pt-[6rem]">
-              <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>
-              <p className="font-normal text-[1.8rem] text-secondary mt-[0.8rem]">OUR MENU</p>
-              <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
-                Special dishes!
+            <div className=" flex flex-col tablet:items-center tablet:pt-[6rem] pt-[2.4rem]  ">
+              <div className="tablet:flex flex-col">
+                <span className="text-secondary tablet:text-[3.2rem] text-[1.6rem] leading-[0] inline-block mr-[0.8rem] tablet:mr-0 text-center">
+                  —
+                </span>
+                <p className="font-mukta font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary inline-block tablet:block tablet:mt-[0.8rem] uppercase">
+                  our menu
+                </p>
+              </div>
+              <h1
+                className="font-fahkwang font-normal tablet:text-[4rem] text-[2rem] 
+              tablet:leading-[100%] leading-[140%] mt-[2rem] text-primary text-left
+              uppercase mb-0 tablet:text-center"
+              >
+                SPECIAL DISHES!
               </h1>
-              <p className="font-light text-[1.6rem] text-666565 mt-[2rem] text-center max-w-[59.4rem] line-clamp-3">
+              <p
+                className="font-light text-[1.6rem] text-666565 tablet:mt-[2rem] 
+              mt-[1.2rem] tablet:text-center max-w-[59.4rem] tablet:line-clamp-3 line-clamp-5"
+              >
                 We bake by hand with natural ingredients, and while we are ordinary people, we want to make
                 extraordinary things. We can’t imagine doing anything more gratifying than baking our, and your, bread.
               </p>
-              <div className="mt-[4rem] w-auto h-[5.4rem] grid grid-cols-4 gap-[0.4rem]">
-                {filterBtn.map((filter) => (
+              <div className="tablet:mt-[4rem] mt-[2.4rem] w-full h-fit flex tablet:justify-center tablet:gap-[0.4rem] gap-[0.8rem] overflow-x-auto no-scrollbar">
+                {/* {filterBtn.map((filter) => (
                   <div key={filterBtn.indexOf(filter)}>
                     <button
                       value={filter.value}
                       onClick={handleFilterChange}
-                      className="btn-secondary w-[12.7rem] font-bolds text-[1.8rem] leading-[130%]"
+                      className="btn-secondary w-[12.7rem] h-[5.4rem] font-bolds text-[1.8rem] leading-[130%] "
                     >
                       {filter.title}
                     </button>
                   </div>
+                ))} */}
+                {filterBtn.map((filter) => (
+                  <div key={filterBtn.indexOf(filter)} className=" ">
+                    <input
+                      type="radio"
+                      name="type"
+                      id={filter.value}
+                      value={filter.value}
+                      className="hidden peer"
+                      onChange={handleFilterChange}
+                    />
+                    <label
+                      htmlFor={filter.value}
+                      className="btn-secondary-reverse w-[12.7rem] h-[5.4rem] font-bolds text-[1.8rem] leading-[130%] 
+                                 peer-checked:bg-secondary peer-checked:text-white"
+                    >
+                      {filter.title}
+                    </label>
+                  </div>
                 ))}
               </div>
-              <div className="mt-[4rem] mb-[12.8rem] container h-fit">
+              <div className="tablet:mt-[4rem] tablet:mb-[12.8rem] my-[2.4rem] container h-fit w-full overflow-x-auto no-scrollbar">
                 <React.Suspense fallback={<LoadingFallback />}>
                   <CarouselProduct products={products} />
                 </React.Suspense>
@@ -295,12 +345,13 @@ function Homepage() {
           </div>
           <div className="panel-seperate"></div>
           <div className="container ">
-            <div className=" w-full h-auto py-[6rem]">
-              <div className="grid grid-cols-2  bg-white">
-                <div className="w-full flex flex-col items-center">
-                  <span className="text-secondary text-[3.2rem] leading-[0px] mt-[3.4rem]">—</span>
-                  <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem]">TESTIMONIALS</p>
-                  <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[1.2rem] text-primary text-center uppercase mb-[5.2rem] line-clamp-1">
+            <div className=" w-full h-auto tablet:py-[6rem] py-[2.4rem]">
+              <div className="grid grid-cols-2 bg-white gap-y-[2rem]">
+                <div className="w-full flex flex-col items-center tablet:col-span-1 col-span-2 tablet:order-1 order-2">
+                  <span className="text-secondary tablet:text-[3.2rem] text-[1.6rem] leading-[0px] tablet:mt-[3.4rem]">—</span>
+                  <p className="font-normal tablet:text-[1.8rem] text-[1.4rem] leading-[140%] text-secondary tablet:mt-[0.8rem] mt-[0.4rem]">TESTIMONIALS</p>
+                  <h1 className="font-fahkwang font-normal tablet:text-[4rem] text-[2rem] tablet:leading-[100%] 
+                  leading-[140%] tablet:mt-[1.2rem] mt-[0.4rem] text-primary text-center uppercase tablet:mb-[5.2rem] mb-[1.2rem] line-clamp-1">
                     OUR CUSTOMERS!
                   </h1>
                   <div className="w-full">
@@ -308,7 +359,7 @@ function Homepage() {
                   </div>
                 </div>
                 <div
-                  className="w-full bg-no-repeat bg-cover bg-center"
+                  className="w-full bg-no-repeat bg-cover bg-center tablet:col-span-1 col-span-2 tablet:h-auto h-[25.6rem] tablet:order-2 order-1"
                   style={{ backgroundImage: `url(${testimonial})` }}
                 ></div>
               </div>

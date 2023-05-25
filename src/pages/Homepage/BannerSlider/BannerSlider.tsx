@@ -73,7 +73,7 @@ function BannerSlide() {
           <img src={rightArrow} alt="" />
         </div>
         <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] tablet:pt-[27.4rem] pt-[11.2rem]">
-          <p className="font-fahkwang font-normal tablet:text-[6.4rem] text-[2.6rem] leading-[110%] w-[54.2%] m-[0rem] truncate">
+          <p className="font-fahkwang font-normal tablet:text-[6.4rem] text-[2.6rem] leading-[110%] tablet:w-[54.2%] m-[0rem] truncate w-full">
             Sign up & get baked!
           </p>
           <p className="w-[54.2%] mt-[2.9rem] font-light text-[1.8rem] text-ededed line-clamp-3 tablet:webkit-box hidden ">

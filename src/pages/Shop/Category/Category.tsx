@@ -3,14 +3,18 @@ import heroBannerCategoryFreshBaked from '@/assets/image/HeroBanner_FreshBaked.p
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
-import CategoryProduct from './CategoryProduct';
+// import CategoryProduct from './CategoryProduct';
 import freshBakedImg1 from '@/assets/image/image25.png';
 import freshBakedImg2 from '@/assets/image/image18.png';
 import { Product } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
-import { Link } from 'react-router-dom';
+import wait from '@/utils/wait';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import LoadingProduct from '@/components/LoadingProduct/LoadingProduct';
+// import CategoryProductList from './CategoryProductList/CategoryProductList';
+const CategoryProductList = React.lazy(() =>
+  wait(1000).then(() => import('./CategoryProductList/CategoryProductList')),
+);
 interface Props {
   category: string;
   description: string;
@@ -27,6 +31,7 @@ function Category({ category, description }: Props) {
 
   React.useEffect(() => {
     dispatch(getProducts());
+    window.scrollTo(0, 550);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let newName = category;
@@ -59,32 +64,16 @@ function Category({ category, description }: Props) {
               <p className="font-fahkwang font-semibold text-[2.4rem] leading-[130%] text-center uppercase text-secondary absolute top-[-4.8rem] right-[50%] translate-x-[50%]">
                 {newName}
               </p>
-              <div className="flex flex-col h-full">
-                {products.length > 0 ? (
-                  arrayProducts1.map((product) => (
-                    <div
-                      key={product.id}
-                      onClick={() => dispatch(setOpenModalTrue(product.id))}
-                      className="cursor-pointer w-full"
-                    >
-                      <CategoryProduct
-                        id={product.id}
-                        name={product.name}
-                        img={product.img}
-                        ingredient={product.ingredient}
-                        price={product.price}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex flex-col justify-center items-center h-full">
-                    <p className="text-secondary text-center text-[2rem] first-letter:capitalize">{newName} is out!</p>
-                    <Link to="/shop" className="btn-secondary uppercase">
-                      go to shop
-                    </Link>
-                  </div>
-                )}
-              </div>
+              <React.Suspense fallback={
+                <div className="flex flex-col h-full">
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                </div>
+              }>
+                <CategoryProductList products={products} arrayProducts={arrayProducts1} newName={newName} />
+              </React.Suspense>
             </div>
             <div className="w-full  h-auto mt-[3.2rem] mb-[20.1rem] self-end mr-0">
               <LazyLoadImage src={freshBakedImg1} alt="" className="w-full" />
@@ -95,32 +84,18 @@ function Category({ category, description }: Props) {
               <LazyLoadImage src={freshBakedImg2} alt="" className="w-full" />
             </div>
             <div className="w-[82.7%] h-[70.2rem] border-[1.5px] border-secondary p-[2rem] overflow-y-auto scrollbar">
-              <div className="flex flex-col w-full h-full">
-                {products.length > 0 ? (
-                  arrayProducts2.map((product) => (
-                    <div
-                      key={product.id}
-                      onClick={() => dispatch(setOpenModalTrue(product.id))}
-                      className="cursor-pointer w-full"
-                    >
-                      <CategoryProduct
-                        id={product.id}
-                        name={product.name}
-                        img={product.img}
-                        ingredient={product.ingredient}
-                        price={product.price}
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <div className="flex flex-col justify-center items-center h-full">
-                    <p className="text-secondary text-center text-[2rem] first-letter:capitalize">{newName} is out!</p>
-                    <Link to="/shop" className="btn-secondary uppercase">
-                      go to shop
-                    </Link>
-                  </div>
-                )}
-              </div>
+            <React.Suspense fallback={
+                <div className="flex flex-col h-full">
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                  <LoadingProduct/>
+                </div>
+              }>
+                <CategoryProductList products={products} arrayProducts={arrayProducts2} newName={newName} />
+              </React.Suspense>
             </div>
           </div>
         </div>

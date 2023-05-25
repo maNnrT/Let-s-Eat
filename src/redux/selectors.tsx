@@ -26,7 +26,7 @@ export const getDishFilterSelector = (state: RootState) => state.products.dishFi
 // export const getPriceOrderProductSelector = (state: RootState) => state.products.priceOrder;
 // export const getSearchFilterProductSelector = (state: RootState) => state.products.searchFilter;
 
-export const getTypeFilterSelector = (state: RootState) => state.filters.typeProductFilter;
+export const getTypeSelector = (state: RootState) => state.filters.typeFilter;
 export const getPriceFilterSelector = (state: RootState) => state.filters.priceFilter;
 export const getComboFilterSelector = (state: RootState) => state.filters.comboFilter;
 export const getProductFilterSelector = (state: RootState) => state.filters.productFilter;
@@ -55,7 +55,7 @@ export const getProductsByDishSelector = createSelector(
   },
 );
 export const getProductsByFiltersSelector = createSelector(
-  getTypeFilterSelector,
+  getTypeSelector,
   getPriceFilterSelector,
   getProductsSelector,
   getSearchFilterSelector,
@@ -105,10 +105,23 @@ export const getItemsByFilterSelector = createSelector(
   getPriceOrderSelector,
   getComboFilterSelector,
   getProductFilterSelector,
-  getTypeFilterSelector,
+  getTypeSelector,
 
-  (products, combos, priceOrder, comboFilter, productFilter) => {
-    let res: (Product | Combo)[] = [...products, ...combos];
+  (products, combos, priceOrder, comboFilter, productFilter, typeFilter) => {
+    let comboArray: Combo[] = [];
+    switch (typeFilter) {
+      case 'all':
+        comboArray = [...combos];
+        break;
+      default:
+        comboArray = combos.filter((combo: Combo) => {
+          return combo.dishes.some((dish) => {
+            return dish.type === typeFilter;
+          });
+        });
+        break;
+    }
+    let res: (Product | Combo)[] = [...products, ...comboArray];
     if (comboFilter === true) {
       res.splice(0, products.length);
     } else if (comboFilter === false) {
@@ -178,6 +191,7 @@ export const getItemsByFilterSelector = createSelector(
       default:
         break;
     }
+
     return res;
   },
 );

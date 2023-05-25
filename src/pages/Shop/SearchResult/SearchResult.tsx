@@ -13,8 +13,9 @@ import {
   getProductFilterSelector,
   getPriceFilterSelector,
   getPriceOrderSelector,
-  getSearchValueSelector,
+  // getSearchValueSelector,
   getItemsByFilterSelector,
+  getTypeSelector,
 } from '@/redux/selectors';
 import {
   comboFilterChange,
@@ -22,13 +23,14 @@ import {
   priceOrderChange,
   productFilterChange,
   searchFilterChange,
-  typeProductFilterChange,
+  typeFilterChange,
 } from '@/redux/features/filter/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultPaginate from './ResultPaginate/ResultPaginate';
 
 import { PriceSlider, PriceOrder } from '@/enum/enum';
 import useDebounce from '@/hooks/useDebounce';
+import { useLocation, useParams } from 'react-router-dom';
 const categories = [
   { title: 'All', value: 'all' },
   { title: 'Fresh Baked', value: 'fresh-baked' },
@@ -54,13 +56,19 @@ const CustomSlider = styled(Slider)({
 });
 function SearchResult() {
   const dispatch = useDispatch();
-  const items: (Product|Combo)[] = useSelector(getItemsByFilterSelector)
-  const [searchValue, setSearchValue] = React.useState<string>(useSelector(getSearchValueSelector));
+  const { searchValue } = useParams();
+  console.log(searchValue);
+  const location = useLocation()
+  console.log(location.search.slice());
+  
+  const items: (Product | Combo)[] = useSelector(getItemsByFilterSelector);
+
+  const [keyword, setSearchValue] = React.useState<string>(searchValue ? searchValue : '');
   const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const debouncedSearchValue: string = useDebounce<string>(searchValue, 500);
+  const debouncedSearchValue: string = useDebounce<string>(keyword, 500);
   const handleSearch = (): void => {
-    setSearchValue(searchValue);
-    dispatch(searchFilterChange(searchValue));
+    setSearchValue(keyword);
+    dispatch(searchFilterChange(keyword));
   };
   const handleClear = () => {
     setSearchValue('');
@@ -73,11 +81,12 @@ function SearchResult() {
     }
   }, [debouncedSearchValue]);
   React.useEffect(() => {
-    dispatch(searchFilterChange(searchValue));
+    dispatch(searchFilterChange(keyword));
+    window.scrollTo(0, 700);
   }, []);
-
-  const handleCategoryChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
-    dispatch(typeProductFilterChange((e.target as HTMLButtonElement).value));
+  const type = useSelector(getTypeSelector);
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(typeFilterChange((e.target as HTMLInputElement).value));
   };
 
   const [range, setRange] = React.useState<number[]>([...useSelector(getPriceFilterSelector)]);
@@ -132,16 +141,25 @@ function SearchResult() {
             <div className="w-full">
               <p className="text-secondary text-[2rem]">Category</p>
               {categories.map((category) => (
-                <button
-                  className="block w-full text-left text-666565 px-[1rem] pt-[0.7rem] pb-[0.2rem] 
-                  border-b-[1px] border-secondary hover:bg-gray-100 cursor-pointer duration-200 last-of-type:border-0
-                  active:bg-gray-100"
-                  key={categories.indexOf(category)}
-                  onClick={handleCategoryChange}
-                  value={category.value}
-                >
-                  {category.title}
-                </button>
+                <div key={categories.indexOf(category)} className="border-b-[1px] border-secondary">
+                  <input
+                    type="radio"
+                    name="type"
+                    id={category.value}
+                    value={category.value}
+                    className="hidden peer"
+                    onChange={handleCategoryChange}
+                    checked={type === category.value}
+                  />
+                  <label
+                    htmlFor={category.value}
+                    className="block w-full text-left text-666565 px-[1rem] pt-[0.7rem] pb-[0.2rem] 
+                 hover:bg-gray-100 cursor-pointer duration-200 last-of-type:border-0
+                peer-checked:bg-gray-100 peer-checked:text-secondary peer-checked:font-semibold"
+                  >
+                    {category.title}
+                  </label>
+                </div>
               ))}
             </div>
             <div className="mt-[4rem] w-full">
@@ -182,8 +200,6 @@ function SearchResult() {
             >
               <div className="flex justify-between items-center">
                 <p className="text-666565 text-[2rem]">Order by</p>
-                {/* <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Newest</button> */}
-                {/* <button className="btn-secondary w-[10rem] h-[4rem] ml-[2rem]">Best seller</button> */}
                 <Tippy
                   visible={showPriceOrder}
                   placement="bottom"
@@ -227,21 +243,13 @@ function SearchResult() {
                   </button>
                 </Tippy>
               </div>
-              {/* <div className="w-[8.8rem] flex justify-between">
-                <button className="paginationBtn">
-                  <BsChevronLeft size={20} />
-                </button>
-                <button className="paginationBtn">
-                  <BsChevronRight size={20} />
-                </button>
-              </div> */}
               <div
                 className="flex items-center h-[4rem] bg-white relative ml-[2rem] mr-[3rem] w-[30rem] pl-[1.5rem]
               shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
               >
                 <input
                   type="text"
-                  value={searchValue}
+                  value={keyword}
                   onChange={(e) => {
                     setSearchValue(e.target.value);
                   }}
@@ -250,7 +258,7 @@ function SearchResult() {
                   className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 "
                   spellCheck={false}
                 />
-                {!!searchValue && (
+                {!!keyword && (
                   <button className="absolute top-[50%] translate-y-[-50%] right-[6rem]" onClick={handleClear}>
                     <IoMdCloseCircle size={19} color={'#D08C30'} />
                   </button>
