@@ -38,15 +38,15 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   return (
     <div className="w-full mt-[4rem] flex flex-col">
       <form onSubmit={handleSubmit(onTouched)}>
-        <div className="grid grid-cols-2 gap-x-[3.2rem]">
+        <div className="grid grid-cols-2 gap-x-[3.2rem] gap-y-[2.8rem] col">
           <Input
             name="name"
             type="text"
             label="Your name"
             placeholder="Enter your name..."
-            classNameWrapper="flex flex-col items-start relative"
+            classNameWrapper="flex flex-col items-start relative col-span-2 tablet:col-span-1"
             classNameLabel="block mb-[1.2rem] font-normal text-[1.6rem] leading-[0%] text-primary"
-            classNameInput="block w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
+            classNameInput="block w-full h-[4.4rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
             classNameError="text-red-600 absolute bottom-0 translate-y-[2.4rem] transition-all duration-500"
             classNameSuccess="absolute right-[1.2rem] top-[2.4rem]"
             register={register}
@@ -58,9 +58,9 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
             type="text"
             label="Phone number"
             placeholder="Enter phone number..."
-            classNameWrapper="flex flex-col items-start relative"
+            classNameWrapper="flex flex-col items-start relative col-span-2 tablet:col-span-1"
             classNameLabel="block mb-[1.2rem] font-normal text-[1.6rem] leading-[0%] text-primary"
-            classNameInput="block w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
+            classNameInput="block w-full h-[4.4rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
             classNameError="text-red-600 absolute bottom-0 translate-y-[2.4rem] transition-all duration-500"
             classNameSuccess="absolute right-[1.2rem] top-[2.4rem]"
             register={register}
@@ -77,7 +77,7 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
           placeholder="Enter email..."
           classNameWrapper="relative"
           classNameLabel="block mt-[2.8rem] mb-[1.2rem] text-[1.6rem] leading-[0%] text-primary"
-          classNameInput="block w-full h-[4.4rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
+          classNameInput="block w-full h-[4.4rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
           classNameError="text-red-600 absolute bottom-[-2.4rem]"
           classNameSuccess="absolute right-[1.2rem] top-[2.4rem]"
           register={register}
@@ -90,9 +90,9 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
           label="Message"
           classNameWrapper="relative"
           classNameLabel="font-normal block mt-[2.8rem] mb-[1.2rem] text-[1.6rem] leading-[0%] text-primary"
-          classNameInput="w-full h-[4.8rem] max-h-[10rem] px-[1.6rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
+          classNameInput="w-full h-[4.8rem] max-h-[10rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
         />
-        <button className="btn-secondary mt-[4rem] uppercase">SEND MESSAGE</button>
+        <button className="btn-secondary tablet:mt-[4rem] mt-[2.4rem] uppercase">SEND MESSAGE</button>
       </form>
     </div>
   );
