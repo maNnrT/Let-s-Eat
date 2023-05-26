@@ -217,7 +217,7 @@ function AboutUs() {
       </div>
       <div className="w-full h-auto bg-primary tablet:pt-[10rem] tablet:pb-[21.6rem] py-[2.4rem] relative pb-[4.7rem]">
         <div className="container grid grid-cols-2 gap-x-[3.2rem] gap-y-[2.4rem] ">
-          <LazyLoadImage src={aboutUs1} alt="" className="w-auto h-auto col-span-2 tablet:col-span-1" />
+          <LazyLoadImage src={aboutUs1} alt="" className="tablet:w-auto w-full h-auto col-span-2 tablet:col-span-1" />
           <div className="flex flex-col col-span-2 tablet:col-span-1">
             <div>
               <span className="text-secondary mr-[0.8rem] tablet:text-[3.2rem] text-[1.6rem] leading-[0%]">—</span>
@@ -276,11 +276,11 @@ function AboutUs() {
             </button>
           </div>
           <div className="flex justify-end col-span-2 tablet:col-span-1 order-1 tablet:order-2">
-            <LazyLoadImage src={aboutUs2} alt="" className="w-auto h-auto " />
+            <LazyLoadImage src={aboutUs2} alt="" className="tablet:w-auto w-full h-auto " />
           </div>
         </div>
         <div className="container grid grid-cols-2 gap-x-[3.2rem] tablet:mt-[10rem] mt-[2.4rem] gap-y-[2.4rem]">
-          <LazyLoadImage src={aboutUs3} alt="" className="w-auto h-auto col-span-2 tablet:col-span-1" />
+          <LazyLoadImage src={aboutUs3} alt="" className="tablet:w-auto w-full h-auto col-span-2 tablet:col-span-1" />
           <div className="flex flex-col col-span-2 tablet:col-span-1">
             <div>
               <span className="text-secondary mr-[0.8rem] tablet:text-[3.2rem] text-[1.6rem] leading-[0%]">—</span>
@@ -305,7 +305,6 @@ function AboutUs() {
           </div>
         </div>
       </div>
-
       <div className="w-full h-auto bg-primary relative" id="contact">
         <BigPopup
           subtitle="thank you"

@@ -38,7 +38,7 @@ export const PublicRoutes = [
         path: config.routes.aboutus,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AboutUs />,
+            <AboutUs />
           </Suspense>
         ),
       },
