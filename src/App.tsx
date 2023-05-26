@@ -26,7 +26,7 @@ function App(): JSX.Element {
         <ScrollRestoration
           getKey={(location, matches) => {
             const excludePath = '/shop/search';
-            if (location.pathname === excludePath) return location.key;
+            // if (location.pathname === excludePath) return location.key;
             return location.pathname;
           }}
         />

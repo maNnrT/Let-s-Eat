@@ -6,6 +6,7 @@ import cheeseCake from '@/assets/image/image13.png';
 import { Link } from 'react-router-dom';
 import config from '@/config';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
+import React from 'react';
 const categories = [
   { title: 'Fresh Baked', to: `${config.routes.shop}/fresh-baked`, img: freshBakedImg },
   { title: 'Cookies', to: `${config.routes.shop}/cookies`, img: cookieImg },
@@ -13,6 +14,9 @@ const categories = [
   { title: 'Chessecake', to: `${config.routes.shop}/chessecake`, img: cheeseCake },
 ];
 function Shop() {
+  React.useEffect(() => {
+    window.scrollTo(0,550)
+  },)
   return (
     <div className="w-full mb-[-12rem]">
       <div

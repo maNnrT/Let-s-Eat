@@ -18,13 +18,7 @@ export const getProductsSelector = (state: RootState) => state.products.products
 export const getProductByIdSelector = (state: RootState) => state.products.productById;
 export const getProductsByIdArraySelector = (state: RootState) => state.products.productsByIdArray;
 export const getProductsByNameSelector = (state: RootState) => state.products.productsByName;
-
 export const getDishFilterSelector = (state: RootState) => state.products.dishFilter;
-// export const getTypeFilterSelector = (state: RootState) => state.products.typeFilter;
-// export const getPriceFilterProductSelector = (state: RootState) => state.products.priceFilter;
-// export const getComboFilterProductSelector = (state: RootState) => state.products.comboFilter;
-// export const getPriceOrderProductSelector = (state: RootState) => state.products.priceOrder;
-// export const getSearchFilterProductSelector = (state: RootState) => state.products.searchFilter;
 
 export const getTypeSelector = (state: RootState) => state.filters.typeFilter;
 export const getPriceFilterSelector = (state: RootState) => state.filters.priceFilter;
@@ -33,18 +27,16 @@ export const getProductFilterSelector = (state: RootState) => state.filters.prod
 export const getPriceOrderSelector = (state: RootState) => state.filters.priceOrder;
 export const getSearchFilterSelector = (state: RootState) => state.filters.searchFilter;
 
+
+
 export const getCombosSelector = (state: RootState) => state.combos.combos;
 export const getComboByIdSelector = (state: RootState) => state.combos.comboById;
 export const getCombosByNameSelector = (state: RootState) => state.combos.combosByName;
-// export const getPriceFilterComboSelector = (state: RootState) => state.combos.priceFilter;
-// export const getProductFilterComboSelector = (state: RootState) => state.combos.productFilter;
-// export const getPriceOrderComboSelector = (state: RootState) => state.combos.priceOrder;
-// export const getSearchFilterComboSelector = (state: RootState) => state.combos.searchFilter;
+
 
 export const getIdProductModal = (state: RootState) => state.modal.id;
 export const getIsOpenModal = (state: RootState) => state.modal.openModal;
 
-export const getSearchValueSelector = (state: RootState) => state.search.searchValue;
 export const getProductsByDishSelector = createSelector(
   getDishFilterSelector,
   getProductsSelector,

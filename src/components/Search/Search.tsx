@@ -4,19 +4,19 @@ import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react/headless';
 import SearchDishItem from '@/components/Popper/SearchDishItem/SearchDishItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCombosSelector, getProductsSelector, getSearchValueSelector } from '@/redux/selectors';
+import { useSelector } from 'react-redux';
+import { getCombosSelector, getProductsSelector } from '@/redux/selectors';
 import { Combo, Product } from '@/types/types';
 import useDebounce from '@/hooks/useDebounce';
 import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import config from '@/config';
-import { Link, createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
+import { PriceOrder } from '@/enum/enum';
 // import { setSearchValue } from '@/redux/features/search/searchSlice';
 
 function Search() {
   const [searchValue, setSearchValue] = React.useState<string>('');
-  // const searchValue = useSelector(getSearchValueSelector)
   const navigate = useNavigate();
   const [searchDishResult, setSearchDishResult] = React.useState<Product[]>([]);
   const [searchComboResult, setSearchComboResult] = React.useState<Combo[]>([]);
@@ -185,6 +185,12 @@ function Search() {
                       pathname: config.routes.search,
                       search: `?${createSearchParams({
                         keyword: searchValue,
+                        page: '1',
+                        type: 'all',
+                        combo: 'false',
+                        product: 'false',
+                        order: PriceOrder.DEFAULT.toString(),
+                        price: '0,50',
                       })}`,
                     });
                   }}

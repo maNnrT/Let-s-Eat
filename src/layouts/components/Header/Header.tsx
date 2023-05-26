@@ -73,21 +73,21 @@ function Header(): JSX.Element {
   //   dispatch(updateCart({ id: idUser, cartCombo: newCartCombo, cartProduct: newCartProduct }));
   // }, [cartProduct, cartCombo, newCartProduct, newCartCombo]);
   React.useEffect(() => {
-    dispatch(updateCart({ id: idUser, cartCombo, cartProduct  }));
-  }, [cartProduct, cartCombo ]);
+    dispatch(updateCart({ id: idUser, cartCombo, cartProduct }));
+  }, [cartProduct, cartCombo]);
   React.useEffect(() => {
     dispatch(getProducts());
     dispatch(getCombos());
-    document.addEventListener("click", handleClickOutside, true)
+    document.addEventListener('click', handleClickOutside, true);
   }, []);
-  const refNavMobile = React.useRef<HTMLDivElement|null>(null) 
-  const handleClickOutside = (e:any) => {
+  const refNavMobile = React.useRef<HTMLDivElement | null>(null);
+  const handleClickOutside = (e: any) => {
     if (refNavMobile.current && !refNavMobile.current.contains(e.target)) {
-      setNav(false)
+      setNav(false);
     } else {
-      return
+      return;
     }
-  }
+  };
   return (
     <div
       className={`flex justify-center h-[7.5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
@@ -109,7 +109,6 @@ function Header(): JSX.Element {
         </div>
         <Search />
         <div className="hidden tablet:flex items-center justify-end w-auto ">
-          
           {!isLogin ? (
             <>
               <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem] mr-[2rem]">
@@ -165,7 +164,7 @@ function Header(): JSX.Element {
             {/* <div className="tablet:hidden cursor-pointer self-end" onClick={handleNav}>
               <AiOutlineClose size={30} />
             </div> */}
-            <SearchMobile/>
+            <SearchMobile handleNav={handleNav} />
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>

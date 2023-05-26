@@ -8,6 +8,7 @@ interface initialState {
   productFilter: boolean;
   priceOrder: string;
   searchFilter: string;
+
 }
 const filterSlice = createSlice({
   name: 'products',
