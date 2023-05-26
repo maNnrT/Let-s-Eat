@@ -38,7 +38,7 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
   return (
     <div className="w-full mt-[4rem] flex flex-col">
       <form onSubmit={handleSubmit(onTouched)}>
-        <div className="grid grid-cols-2 gap-x-[3.2rem] gap-y-[2.8rem] col">
+        <div className="grid grid-cols-2 gap-x-[3.2rem] gap-y-[2.8rem]">
           <Input
             name="name"
             type="text"

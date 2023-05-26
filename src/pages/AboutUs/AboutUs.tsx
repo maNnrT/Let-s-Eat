@@ -41,8 +41,8 @@ function AboutUs() {
         </p>
         <Breadcrumbs />
       </div>
-      <div className="bg-fdf9f5">
-        <div className=" container w-full h-fit tablet:py-[10rem] py-[2rem] ">
+      <div className="bg-fdf9f5 w-full">
+        <div className=" container  h-fit tablet:py-[10rem] py-[2rem] ">
           <div className="grid grid-cols-[40.1%_auto] gap-x-[3.2rem] gap-y-[2.4rem]">
             <div className="flex flex-col order-2 tablet:order-1 col-span-2 tablet:col-span-1">
               <div>
@@ -186,16 +186,16 @@ function AboutUs() {
                 We hope this gives you a sense of Let’s Eat Bakery - what we value and what we strive for. We truly
                 enjoy baking our homemade treats for you, and thank you for supporting us for more than 20 years!
               </p>
-              <div className="container tablet:mt-[6.9rem] mt-[2.4rem] grid grid-cols-[57.2%_auto] gap-x-[3.2rem]">
+              <div className="container tablet:mt-[6.9rem] mt-[2.4rem] grid grid-cols-[57.2%_auto] tablet:gap-x-[3.2rem] gap-x-[1.2rem]">
                 <div className="flex flex-col">
-                  <LazyLoadImage src={gallery1} alt="" className="w-full h-auto mb-[3.2rem]" />
-                  <div className="grid grid-cols-[40.2%_auto] gap-x-[3.2rem]">
+                  <LazyLoadImage src={gallery1} alt="" className="w-full h-auto tablet:mb-[3.2rem] mb-[1.2rem]" />
+                  <div className="grid grid-cols-[40.2%_auto] tablet:gap-x-[3.2rem] gap-x-[1.2rem]">
                     <LazyLoadImage src={gallery3} alt="" className="w-full h-auto" />
                     <LazyLoadImage src={gallery4} alt="" className="w-full h-auto" />
                   </div>
                 </div>
                 <div>
-                  <LazyLoadImage src={gallery2} alt="" className="w-full h-auto mb-[3.2rem]" />
+                  <LazyLoadImage src={gallery2} alt="" className="w-full h-auto tablet:mb-[3.2rem] mb-[1.2rem]" />
                   <LazyLoadImage src={gallery5} alt="" className="w-full h-auto" />
                 </div>
               </div>
@@ -318,7 +318,7 @@ function AboutUs() {
         ></BigPopup>
         <div className="panel-layer h-auto tablet:mt-[-9.2rem] tablet:mb-[-13.8rem] z-[1] grid grid-cols-2 gap-x-[3.2rem]">
           <LazyLoadImage src={contactUs} alt="" className="hidden tablet:block" />
-          <p className="container col-span-2 tablet:col-span-1">
+          <div className="container col-span-2 tablet:col-span-1">
             <div className="flex flex-col tablet:pt-[6rem] tablet:pr-[4rem] tablet:pb-[4.9rem] py-[2.4rem] ">
               <div>
                 <span className="text-secondary mr-[0.8rem] tablet:text-[3.2rem] text-[1.6rem] leading-[0%]">—</span>
@@ -335,7 +335,7 @@ function AboutUs() {
               </p>
               <AboutUsForm openModal={openModal} />
             </div>
-          </p>
+          </div>
         </div>
       </div>
     </div>

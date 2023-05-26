@@ -19,7 +19,7 @@ function App(): JSX.Element {
   return (
     <div>
       {isOpen && <ProductDetail id={idProduct} />}
-      <div className="App h-fit">
+      <div className="App">
         {/* <ScrollToTop> */}
         <div id="portal"></div>
         <Outlet />
