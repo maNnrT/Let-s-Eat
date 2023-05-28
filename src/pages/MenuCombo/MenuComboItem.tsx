@@ -91,11 +91,11 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
     }
   };
   return (
-    <div className="container grid grid-cols-3 gap-x-[3.2rem] h-fit mt-[7.4rem] mb-[11.9rem]">
+    <div className="container grid tablet:grid-cols-3 grid-cols-1 gap-x-[3.2rem] h-full tablet:mt-[7.4rem] tablet:mb-[11.9rem] mt-[2.4rem] mb-[2.4rem]">
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
       <SmallPopup refDialog={refDialog2} img={cross} title="This combo is out!" />
 
-      <div className="grid grid-cols-1 gap-y-[3.2rem]">
+      <div className="grid-cols-1 gap-y-[3.2rem] hidden tablet:grid">
         <div className="w-full bg-333236 px-[3.8rem] py-[9.7rem] flex flex-col items-center h-fit">
           <p className="font-fahkwang font-normal text-[2.4rem] leading-[100%] text-center uppercase">FIND US HERE</p>
           <p className="font-light text-[1.8rem] text-center mt-[2.8rem]">
@@ -127,7 +127,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat"
+        className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat hidden tablet:block"
         style={{ backgroundImage: `url(${loveCombo})` }}
       >
         <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For {numberPeople} people</p>
@@ -142,7 +142,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat"
+        className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat hidden tablet:block"
         style={{
           backgroundImage: `url(${loveCombo2})`,
         }}
@@ -151,7 +151,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         <div className="absolute left-0 right-0 top-0 bottom-0 z-[2] p-[3.2rem]">
           <div className=" border-[1px] border-white h-full pt-[2.8rem] px-[1.6rem] pb-[2rem] relative">
             <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-center uppercase opacity-95">
-              RELAXING AFTERNOON
+              {name}
             </p>
             <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[6rem]">
               {dishes &&
@@ -193,6 +193,57 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
                 ADD TO CART
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="h-full bg-center bg-cover bg-no-repeat tablet:hidden"
+        style={{
+          backgroundImage: `url(${loveCombo2})`,
+        }}
+      >
+        <div className=" border-[1px] border-white h-fit pt-[2.8rem] px-[1.6rem] pb-[2rem] min-h-[60rem] flex flex-col ">
+          <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-center uppercase opacity-95">
+            {name}
+          </p>
+          <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[1.2rem] tablet:mb-[6rem]">
+            {dishes &&
+              dishes.reduce((total, dish) => {
+                return (total += dish.numberOfDish ? dish.numberOfDish : 0);
+              }, 0)}{' '}
+            DISHES - ${' '}
+            {dishes &&
+              dishes
+                .reduce((total, dish) => {
+                  return (total += dish.numberOfDish ? Number(dish.price) * dish.numberOfDish : Number(dish.price) * 0);
+                }, 0)
+                .toFixed(2)}
+          </p>
+          {dishes &&
+            dishes.map((dish) => (
+              <div className="w-full h-fit tablet:mt-[2.4rem] mt-[1.2rem]" key={dish.id}>
+                <div className="flex justify-between">
+                  <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
+                    {dish.numberOfDish}x {dish.name}
+                  </div>
+                  <div className="border-b-[4px] border-dotted border-white flex-1 h-[1.8rem] mx-[0.7rem]"></div>
+                  <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
+                    ${dish.numberOfDish && (Number(dish.price) * dish.numberOfDish).toFixed(2)}
+                  </div>
+                </div>
+                <div className="mt-[0.8rem] ">
+                  <p className="font-light text-[1.4rem] leading-[130%] text-b5b6b6 line-clamp-3">{dish.detail}</p>
+                </div>
+              </div>
+            ))}
+
+          <div className="w-[14.5rem] border-b-[1.25px] border-secondary bottom-[2rem] cursor-pointer flex justify-center items-end mt-[1.2rem] mx-auto flex-1">
+            <button
+              className="font-light text-[1.8rem] leading-[100%] text-secondary uppercase h-fit"
+              onClick={handleAddToCart}
+            >
+              ADD TO CART
+            </button>
           </div>
         </div>
       </div>

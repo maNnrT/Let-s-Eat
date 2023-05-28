@@ -305,17 +305,6 @@ function Homepage() {
                 extraordinary things. We can’t imagine doing anything more gratifying than baking our, and your, bread.
               </p>
               <div className="tablet:mt-[4rem] mt-[2.4rem] w-full h-fit flex tablet:justify-center tablet:gap-[0.4rem] gap-[0.8rem] overflow-x-auto no-scrollbar">
-                {/* {filterBtn.map((filter) => (
-                  <div key={filterBtn.indexOf(filter)}>
-                    <button
-                      value={filter.value}
-                      onClick={handleFilterChange}
-                      className="btn-secondary w-[12.7rem] h-[5.4rem] font-bolds text-[1.8rem] leading-[130%] "
-                    >
-                      {filter.title}
-                    </button>
-                  </div>
-                ))} */}
                 {filterBtn.map((filter) => (
                   <div key={filterBtn.indexOf(filter)} className=" ">
                     <input
