@@ -27,21 +27,24 @@ export default function CarouselProduct({ products }: Props) {
     <>
       <Swiper
         className="swiperProduct"
-        spaceBetween={32}
         ref={ref}
         breakpoints={{
           // when window width is >= 320px
           320: {
             slidesPerView: 'auto',
+            spaceBetween:16
           },
           768: {
             slidesPerView: 4,
+            spaceBetween:32
           },
           1024: {
             slidesPerView: 4,
+            spaceBetween:32
           },
           1536: {
             slidesPerView: 4,
+            spaceBetween:32
           },
         }}
       >
