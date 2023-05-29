@@ -35,7 +35,9 @@ export const getCombosByNameSelector = (state: RootState) => state.combos.combos
 
 
 export const getIdProductModal = (state: RootState) => state.modal.id;
-export const getIsOpenModal = (state: RootState) => state.modal.openModal;
+export const getIsOpenProductDetail = (state: RootState) => state.modal.openProductDetail;
+export const getIsOpenSendFormSuccess = (state: RootState) => state.modal.openSendFormSuccess;
+export const getIsOpenCheckOutSuccess = (state: RootState) => state.modal.openCheckOutSuccess;
 
 export const getProductsByDishSelector = createSelector(
   getDishFilterSelector,

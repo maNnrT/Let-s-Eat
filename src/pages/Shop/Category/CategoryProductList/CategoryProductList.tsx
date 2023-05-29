@@ -1,7 +1,7 @@
 import { Product } from '@/types/types';
 import React from 'react';
 import CategoryProduct from '../CategoryProduct/CategoryProduct';
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import config from '@/config';
@@ -18,7 +18,7 @@ function CategoryProductList({ products, arrayProducts,newName }: Props) {
         arrayProducts.map((product) => (
           <div
             key={product.id}
-            onClick={() => dispatch(setOpenModalTrue(product.id))}
+            onClick={() => dispatch(setOpenProductDetailTrue(product.id))}
             className="cursor-pointer w-full"
           >
             <CategoryProduct

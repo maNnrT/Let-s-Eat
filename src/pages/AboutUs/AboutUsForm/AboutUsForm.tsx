@@ -5,6 +5,8 @@ import Input from '@/components/Form/Input';
 import InputTextarea from '@/components/Form/InputTextarea';
 import React from 'react';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
+import { useDispatch } from 'react-redux';
+import { setOpenSendFormSuccess } from '@/redux/features/modalSlice/modalSlice';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
@@ -13,11 +15,10 @@ const schema = yup
     message: yup.string(),
   })
   .required();
-interface Props {
-  openModal: () => void;
-}
+
 type FormData = yup.InferType<typeof schema>;
-function AboutUsForm({ openModal }: Props): JSX.Element {
+function AboutUsForm(): JSX.Element {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,12 +28,12 @@ function AboutUsForm({ openModal }: Props): JSX.Element {
     resolver: yupResolver(schema),
   });
   const onTouched = (data: FormData) => {
-    openModal();
+    dispatch(setOpenSendFormSuccess(true));
     console.log(data);
   };
   const [phone, setPhone] = React.useState<string>('');
   const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatedPhoneNumber = formatPhoneNumber(e.target.value)
+    const formatedPhoneNumber = formatPhoneNumber(e.target.value);
     setPhone(formatedPhoneNumber);
   };
   return (

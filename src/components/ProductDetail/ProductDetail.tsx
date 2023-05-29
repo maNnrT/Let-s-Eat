@@ -18,7 +18,7 @@ import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
 import cross from '@/assets/svg/Red_X.svg';
 import { motion } from 'framer-motion';
-import { setOpenModalFalse } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenProductDetailFalse } from '@/redux/features/modalSlice/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
   id: number | undefined;
@@ -141,7 +141,7 @@ function ProductDetail({ id }: Props): JSX.Element | null {
           exit={{
             opacity: 0,
           }}
-          className="bg-[rgba(0,0,0,0.3)] fixed  h-full w-full z-[99999] top-0 left-0 right-0 bottom-0  "
+          className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-[99999] top-0 left-0 right-0 bottom-0  "
         >
           {/* <SmallPopup refDialog={refDialog2} img={cross} title="Add at least 1 product" /> */}
           <motion.div
@@ -249,8 +249,7 @@ function ProductDetail({ id }: Props): JSX.Element | null {
               <span
                 className="tablet:text-666565 text-white text-[6rem] absolute top-[2rem] right-[2rem] leading-[2rem] cursor-pointer z-10 font-light"
                 onClick={() => {
-                  dispatch(setOpenModalFalse());
-                  
+                  dispatch(setOpenProductDetailFalse());
                 }}
               >
                 &times;

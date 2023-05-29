@@ -15,14 +15,13 @@ import {
   getCartComboSelector,
 } from '@/redux/selectors';
 import { getCartTotal, getDiscountCode, updateCart } from '@/redux/features/cart/CartSlice';
-import BigPopup from '@/components/Popup/BigPopup';
-import config from '@/config';
 import * as yup from 'yup';
 import { ComboItem, DiscountCode, ProductItem } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import Input from '@/components/Form/Input';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { setOpenCheckOutSuccess } from '@/redux/features/modalSlice/modalSlice';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
@@ -67,7 +66,7 @@ function CheckOut(): JSX.Element {
     //     });
     // });
     dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo: [] }));
-    openModal();
+    dispatch(setOpenCheckOutSuccess(true))
   };
   const dispatch = useDispatch();
   const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
@@ -147,10 +146,6 @@ function CheckOut(): JSX.Element {
       if (refDiscount.current !== null) refDiscount.current.innerHTML = 'This discount code is expired or not exist!';
     }
   };
-  const refDialog = React.useRef<HTMLDialogElement>(null);
-  const openModal = () => {
-    refDialog.current?.showModal();
-  };
   React.useEffect(() => {
     setBillId(uuidv4().substring(0, 8));
   }, []);
@@ -167,15 +162,7 @@ function CheckOut(): JSX.Element {
         <Breadcrumbs />
       </div>
       <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] tablet:pb-[12rem] pb-0 ">
-        <BigPopup
-          title="for your ordering"
-          subtitle="thank you"
-          description="Thanks for your purchase. We have feeling this is the beginning of beautiful friendship! Don’t forget follow us on social media and stay
-         up to date with the lastest information"
-          btnTitle="back to homepage"
-          to={config.routes.homepage}
-          refDialog={refDialog}
-        />
+        
         <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem] hidden tablet:block">—</span>
         <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase hidden tablet:block">
           Check out
@@ -424,7 +411,7 @@ function CheckOut(): JSX.Element {
                     <div className="w-full h-[4rem] p-[1.2rem] border-[1.5px] border-[#ADADAE] flex justify-between ">
                       <input
                         type="text"
-                        className="h-full font-normal text-[1.6rem] leading-[100%] text-primary outline-none flex-1 bg-fdf9f5"
+                        className="h-full font-normal text-[1.6rem] leading-[100%] text-primary outline-none flex-1 bg-fdf9f5 tablet:bg-transparent"
                         value={discountCode}
                         onChange={handleDiscountCode}
                       />
@@ -459,7 +446,7 @@ function CheckOut(): JSX.Element {
                 <div className="w-full px-[1.2rem] mt-[4rem] hidden tablet:block">
                   <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>
                 </div>
-                <div className="fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end z-[2]">
+                <div className="tablet:hidden fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end z-[2]">
                   <p className="font-semibold tablet:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
                     TOTAL: {totalPrice} $
                   </p>

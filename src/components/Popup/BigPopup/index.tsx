@@ -1,1 +1,1 @@
-export {default} from './BigPopup'
+export { default } from './BigPopup';

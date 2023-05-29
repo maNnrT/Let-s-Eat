@@ -1,4 +1,4 @@
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
 import { useDispatch } from 'react-redux';
 
 interface Props {
@@ -13,8 +13,7 @@ function SearchDishItem({ id, name }: Props) {
       <div
         className=" py-[0.8rem] px-[3rem] cursor-pointer hover:bg-gray-100 duration-200"
         onClick={() => {
-          dispatch(setOpenModalTrue(id));
-         
+          dispatch(setOpenProductDetailTrue(id));
         }}
       >
         <div className="text-primary text-[1.6rem]">{name}</div>

@@ -1,22 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface initialState {
-  openModal: boolean;
+  openProductDetail: boolean;
+  openSendFormSuccess: boolean;
+  openCheckOutSuccess: boolean;
   id: number | undefined;
 }
 const modalSlice = createSlice({
   name: 'modal',
-  initialState: { openModal: false, id: undefined } as initialState,
+  initialState: { openProductDetail: false, id: undefined, openSendFormSuccess: false } as initialState,
   reducers: {
-    setOpenModalTrue: (state,actions) => {
-      state.openModal = true;
-      state.id=actions.payload
+    setOpenProductDetailTrue: (state, actions) => {
+      state.openProductDetail = true;
+      state.id = actions.payload;
     },
-    setOpenModalFalse: (state) => {
-      state.openModal = false;
+    setOpenProductDetailFalse: (state) => {
+      state.openProductDetail = false;
     },
-
+    setOpenSendFormSuccess: (state, action) => {
+      state.openSendFormSuccess = action.payload;
+    },
+    setOpenCheckOutSuccess: (state, action) => {
+      state.openCheckOutSuccess = action.payload;
+    },
   },
 });
-export const { setOpenModalTrue, setOpenModalFalse } = modalSlice.actions;
+export const { setOpenProductDetailTrue, setOpenProductDetailFalse, setOpenSendFormSuccess, setOpenCheckOutSuccess } =
+  modalSlice.actions;
 export default modalSlice;

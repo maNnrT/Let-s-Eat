@@ -1,7 +1,7 @@
 import { useDispatch, } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as React from 'react';
-import { setOpenModalTrue } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
 interface Props {
   id: number | undefined;
   img: string;
@@ -12,7 +12,7 @@ interface Props {
 function ProductCard({ id, img, name, description, price }: Props) {
   const dispatch = useDispatch();
   const openModal = () => {
-    dispatch(setOpenModalTrue(id));
+    dispatch(setOpenProductDetailTrue(id));
   };
   return (
     <div 

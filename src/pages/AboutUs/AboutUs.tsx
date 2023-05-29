@@ -20,16 +20,11 @@ import contactUs from '@/assets/image/image48.png';
 import { useNavigate } from 'react-router-dom';
 import AboutUsForm from './AboutUsForm';
 import config from '@/config';
-import BigPopup from '@/components/Popup/BigPopup/';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function AboutUs() {
   const navigate = useNavigate();
-  const refDialog = React.useRef<HTMLDialogElement>(null);
-  const openModal = () => {
-    refDialog.current?.showModal();
-  };
   return (
     <div className="w-full">
       <div
@@ -306,15 +301,7 @@ function AboutUs() {
         </div>
       </div>
       <div className="w-full h-auto bg-primary relative" id="contact">
-        <BigPopup
-          subtitle="thank you"
-          title="FOR SENDING US MESSAGE"
-          description="We will appreciate your opinion. Please keep an eye on your phone and email to receive feedback from us.
-                Don't forget to follow Let's Eat Bakery to receive the latest information. Best regards!"
-          to={config.routes.homepage}
-          btnTitle="back to homepage"
-          refDialog={refDialog}
-        ></BigPopup>
+        
         <div className="panel-layer h-auto tablet:mt-[-9.2rem] tablet:mb-[-13.8rem] z-[1] grid grid-cols-2 gap-x-[3.2rem]">
           <LazyLoadImage src={contactUs} alt="" className="hidden tablet:block" />
           <div className="container col-span-2 tablet:col-span-1">
@@ -332,7 +319,7 @@ function AboutUs() {
                 Tell us your vision and we can help you. Wanna have a perfect meal for your family? Don’t wait and leave
                 us your request.
               </p>
-              <AboutUsForm openModal={openModal} />
+              <AboutUsForm  />
             </div>
           </div>
         </div>
