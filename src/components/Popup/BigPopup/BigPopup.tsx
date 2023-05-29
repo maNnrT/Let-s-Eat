@@ -55,7 +55,7 @@ function BigPopup({ subtitle, title, description, to, btnTitle }: Props) {
               duration: 0.3,
             },
           }}
-          className="w-[80rem] m-auto absolute right-0 left-0 h-fit top-[7.5rem] duration-500 bg-fdf9f5"
+          className="w-[80rem] m-auto absolute right-0 left-0 h-fit top-[7.5rem] bg-fdf9f5"
         >
           <div className="flex flex-col items-center h-auto relative pt-[8rem] pb-[12rem] px-[9rem]">
             <span className="text-secondary leading-[0px] text-[3.2rem]">—</span>

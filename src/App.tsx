@@ -1,6 +1,8 @@
 import './App.css';
 import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import check from '@/assets/svg/check_formCheckOut.svg';
+import cross from '@/assets/svg/Red_X.svg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -19,6 +21,7 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import BigPopup from './components/Popup/BigPopup/BigPopup';
 import config from './config';
+import SmallPopup from './components/Popup/SmallPopup/SmallPopup';
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -27,7 +30,7 @@ function App(): JSX.Element {
   const isOpenSendForm = useSelector(getIsOpenSendFormSuccess);
   const isOpenCheckOut = useSelector(getIsOpenCheckOutSuccess);
   const location = useLocation();
-  const isScroll = React.useMemo(() => {
+  React.useMemo(() => {
     if (isOpenProductDetail || isOpenSendForm || isOpenCheckOut) {
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100%';
@@ -70,6 +73,9 @@ function App(): JSX.Element {
             />
           )}
         </AnimatePresence>
+        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={check} title="Cart is updated!" />}</AnimatePresence>
+        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={cross} title="Cart is empty!" />}</AnimatePresence>
+        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={check} title="Add to shopping cart!" />}</AnimatePresence>
       </div>
       <Outlet />
       <ScrollRestoration

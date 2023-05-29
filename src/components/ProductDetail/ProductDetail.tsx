@@ -15,7 +15,6 @@ import SmallPopup from '@/components/Popup/SmallPopup';
 import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
-import check from '@/assets/svg/check_formCheckOut.svg';
 import { motion } from 'framer-motion';
 import { setOpenProductDetailFalse } from '@/redux/features/modalSlice/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -126,7 +125,6 @@ function ProductDetail({ id }: Props): JSX.Element | null {
   if (el)
     return ReactDOM.createPortal(
       <div>
-        <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
         <motion.div
           initial={{
             opacity: 0,
