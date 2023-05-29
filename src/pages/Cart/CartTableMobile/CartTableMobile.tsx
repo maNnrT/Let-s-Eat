@@ -64,7 +64,7 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
     }
   };
   return (
-    <div className="container my-[2.4rem] h-fit block tablet:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] border-b-[0.15rem]">
+    <div className="container my-[2.4rem] h-fit block tablet:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] ">
       <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
       <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" />
       {cartProduct.length !== 0 &&
@@ -80,9 +80,9 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
           </React.Fragment>
         ))}
       {cartCombo.length === 0 && cartProduct.length === 0 && (
-        <div className="flex flex-col justify-center items-center my-[2rem]">
+        <div className="flex flex-col justify-center items-center my-[2rem] border-d9d9d9 border-b-[0.15rem] pb-[2rem]">
           <BsCart color="#D08C30" size={45} />
-          <p className="text-secondary text-center text-[1.6rem] first-letter:capitalize mt-[2rem]">
+          <p className="text-secondary text-center text-[1.6rem] first-letter:capitalize mt-[2rem] ">
             Cart is empty!
             <br />
             Add some products

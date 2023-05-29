@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin, getProductByIdSelector, getCartProductSelector } from '@/redux/selectors';
+import { getIsLogin, getProductByIdSelector, } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -16,7 +16,6 @@ import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg';
 import { motion } from 'framer-motion';
 import { setOpenProductDetailFalse } from '@/redux/features/modalSlice/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
