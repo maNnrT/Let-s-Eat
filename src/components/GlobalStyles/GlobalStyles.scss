@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
+  
 }
 
 * {
@@ -19,6 +20,21 @@ body {
   color: #ffffff;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+  overflow-y: scroll;
+  @media (max-width:767px) {
+    .swiper-pagination-bullet{
+      width: 8px;
+      height: 8px;
+      margin: 5px !important;
+    }          
+  }
+  @media (min-width:768px) {
+    .swiper-pagination-bullet{
+      width: 12px;
+      height: 12px;
+      margin: 8px !important;
+    }               
+  }
 }
 
 body::-webkit-scrollbar{

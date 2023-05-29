@@ -168,7 +168,7 @@ function Header(): JSX.Element {
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>
-            <HeaderItem title="Menu Combo" to={config.routes.menucombo} display="mobile"></HeaderItem>
+            <HeaderItem title="Menu Combo" to={config.routes.menucombo} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Shop" to={config.routes.shop} display="mobile" onClick={handleNav}></HeaderItem>
             <Link
               to={`${config.routes.cart}`}

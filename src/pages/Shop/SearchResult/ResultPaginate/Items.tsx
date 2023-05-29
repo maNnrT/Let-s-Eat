@@ -3,18 +3,16 @@ import { Combo, Product } from '@/types/types';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import ComboCard from '@/components/ComboCard/ComboCard';
 import { BsCart } from 'react-icons/bs';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 interface Props {
   currentItems: (Product | Combo)[];
 }
-function wait(time: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
-}
 function Items({ currentItems }: Props) {
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+
   return (
-    <div className="grid grid-cols-12 gap-[1.6rem]" key={currentItems.length}>
+    <div className="grid grid-cols-12 gap-[1.6rem]" ref={parent}  >
       {currentItems.length > 0 ? (
         currentItems.map((item) => {
           if (item.description !== undefined && item.price !== undefined) {
@@ -25,7 +23,6 @@ function Items({ currentItems }: Props) {
                   name={item.name}
                   img={item.img}
                   description={item.description}
-                  key={currentItems.indexOf(item)}
                   price={item.price}
                 />
               </div>
@@ -43,7 +40,6 @@ function Items({ currentItems }: Props) {
                   name={item.name}
                   img={item.img}
                   dishes={item.dishes}
-                  key={currentItems.indexOf(item)}
                   numberPeople={item.numberPeople}
                 />
               </div>

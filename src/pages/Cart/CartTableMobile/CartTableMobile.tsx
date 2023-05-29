@@ -93,7 +93,6 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
         <p className="font-semibold tablet:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
           TOTAL: {totalPrice} $
         </p>
-
         <button
           className="w-[10rem] h-[3rem] text-666565 text-[1.2rem] border-[1.5px] 
                 border-666565 uppercase hover:bg-666565 hover:text-white hover:duration-200 mr-[1rem]"
@@ -101,7 +100,6 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
         >
           update cart
         </button>
-
         <button
           className="w-[10rem] h-[3rem] text-white text-[1.2rem] btn-secondary uppercase font-normal "
           onClick={processToCheckOutBtnHandle}

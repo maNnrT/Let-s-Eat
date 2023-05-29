@@ -29,13 +29,6 @@ function BigPopup({ subtitle, title, description, to, btnTitle, refDialog }: Pro
           <div className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem] cursor-pointer" onClick={handleNavigateBtn}>
             {btnTitle}
           </div>
-          {/* <button
-            type="submit"
-            formMethod="dialog"
-            className="text-666565 text-[6rem] absolute top-[3.2rem] right-[3.2rem] leading-[2.4rem] cursor-pointer"
-          >
-            &times;
-          </button> */}
         </div>
       </form>
     </dialog>

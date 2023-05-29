@@ -50,7 +50,7 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
   };
   return (
     <div
-      className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] animate-slide_in "
+      className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] "
       key={id}
     >
       <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />

@@ -22,6 +22,7 @@ import { ComboItem, DiscountCode, ProductItem } from '@/types/types';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import Input from '@/components/Form/Input';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const schema = yup
   .object({
     name: yup.string().required('Name is required!'),
@@ -47,9 +48,8 @@ function CheckOut(): JSX.Element {
     resolver: yupResolver(schema),
   });
   const onTouched = (data: FormData) => {
-    console.log(data);
-    console.log(cartProduct);
-    
+
+
     // cartProduct.map((item) => {
     //   if (item.quantity <= item.dishLeft)
     //     request.put(`${config.api.products}/${item.id}`, {
@@ -66,12 +66,12 @@ function CheckOut(): JSX.Element {
     //       dishLeft: item.dishLeft - item.quantity,
     //     });
     // });
-    dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo:[] }));
+    dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo: [] }));
     openModal();
   };
   const dispatch = useDispatch();
   const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
-  console.log("sdfsdf",cartProduct);
+
   const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
   const idUser: number | undefined = useSelector(getIdUserSelector);
   const discountCodeArray: DiscountCode[] = useSelector(getDiscountCodeSelector);
@@ -142,7 +142,7 @@ function CheckOut(): JSX.Element {
     const foundCode = discountCodeArray.find((code) => code.code === discountCode);
     if (foundCode) {
       setCoupon(foundCode.discount);
-      console.log(coupon < Number(totalPrice));
+
     } else {
       if (refDiscount.current !== null) refDiscount.current.innerHTML = 'This discount code is expired or not exist!';
     }
@@ -156,15 +156,17 @@ function CheckOut(): JSX.Element {
   }, []);
   const date = new Date();
   return (
-    <div className="w-full mb-[-12rem] relative">
+    <div className="w-full tablet:mb-[-12rem] ">
       <div
-        className="w-full h-[60rem] bg-center bg-cover relative flex flex-col items-center justify-center"
+        className="w-full tablet:h-[60rem] h-[32rem] bg-center bg-cover relative flex flex-col items-center justify-center "
         style={{ backgroundImage: `url(${heroBannerCart})` }}
       >
-        <p className="font-fahkwang text-[6.4rem] leading-[8.3rem] text-center font-medium">Food delivery</p>
+        <p className="font-fahkwang tablet:text-[6.4rem] text-[2.6rem] leading-[130%] text-center font-medium mb-[1.2rem] tablet:mb-0 first-letter:capitalize">
+          food delivery
+        </p>
         <Breadcrumbs />
       </div>
-      <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] pb-[12rem] ">
+      <div className="w-full h-auto flex flex-col items-center bg-fdf9f5 relative z-[1] tablet:pb-[12rem] pb-0 ">
         <BigPopup
           title="for your ordering"
           subtitle="thank you"
@@ -174,20 +176,22 @@ function CheckOut(): JSX.Element {
           to={config.routes.homepage}
           refDialog={refDialog}
         />
-        <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem]">—</span>
-        <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase">Check out</p>
-        <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0">
+        <span className="text-secondary text-[3.2rem] leading-[0px] mt-[6rem] hidden tablet:block">—</span>
+        <p className="font-normal text-[1.8rem] leading-[150%] text-secondary mt-[0.8rem] uppercase hidden tablet:block">
+          Check out
+        </p>
+        <h1 className="font-fahkwang font-normal text-[4rem] leading-[100%] mt-[2rem] text-primary text-center uppercase mb-0 hidden tablet:block">
           fINAL STEP!
         </h1>
-        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem]">
+        <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center max-w-[59.4rem] hidden tablet:block">
           Thanks for your purchase. We have feeling this is the beginning of beautiful friendship! So that we can get to
           know each other a little better, we are offering you $10 off an order of $50 or more.
         </p>
-        <div className="container h-fit mt-[6rem]">
+        <div className="container h-fit tablet:mt-[6rem] my-[2.4rem]">
           <form onSubmit={handleSubmit(onTouched)} className="mx-auto h-fit">
-            <div className="w-[82.3%] h-fit grid grid-cols-[58.7%_auto] gap-x-[3.2rem] mx-auto">
-              <div className="h-fit">
-                <div className="pt-[4.4rem] px-[4rem] pb-[4rem] flex flex-col items-start bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
+            <div className="tablet:w-[82.3%] h-fit grid tablet:grid-cols-[58.7%_auto] grid-cols-1 gap-x-[3.2rem] mx-auto">
+              <div className="h-fit order-2 tablet:order-1">
+                <div className="tablet:pt-[4.4rem] pt-[2.4rem] tablet:px-[4rem]  tablet:pb-[4rem] flex flex-col items-start tablet:bg-white bg-fdf9f5 tablet:shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
                   <Input
                     name="name"
                     type="text"
@@ -319,7 +323,7 @@ function CheckOut(): JSX.Element {
                   ></Dropdown> */}
                   {/* <Select options={optionsCountryValue} onChange={handleOptionCountry} value={optionCountry} className='w-full h-[4.4rem]' styles={selectStyles} /> */}
                 </div>
-                <div className="mt-[4rem] pt-[4.4rem] px-[4rem] pb-[4rem] flex flex-col items-start bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
+                <div className="tablet:mt-[4rem] tablet:pt-[4.4rem] mt-[2.8rem] tablet:px-[4rem] tablet:pb-[4rem] flex flex-col items-start tablet:bg-white bg-fdf9f5 tablet:shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
                   <label
                     htmlFor="country"
                     className="font-normal block mb-[1.2rem] text-[1.6rem] leading-[100%] text-primary"
@@ -356,7 +360,7 @@ function CheckOut(): JSX.Element {
                   {/* <Select options={optionsPaymentValue} onChange={handleOptionPayment} value={optionPayment} /> */}
                 </div>
               </div>
-              <div className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[3.2rem] px-[4rem] pb-[4rem] flex flex-col items-center">
+              <div className="h-fit order-1 tablet:order-2 tablet:bg-white bg-fdf9f5 tablet:shadow-[0px_147px_183px_rgba(0,0,0,0.07)] tablet:pt-[3.2rem] tablet:px-[4rem] tablet:pb-[4rem] flex flex-col items-center">
                 <div className="w-full flex flex-col items-center pb-[2.4rem] border-b-[1px] border-dashed border-b-d9d9d9">
                   <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-primary uppercase">
                     ORDER SUMMARY - #{billId}
@@ -385,7 +389,14 @@ function CheckOut(): JSX.Element {
                         className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0"
                         key={cartProduct.indexOf(item)}
                       >
-                        <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
+                        <div className="flex ">
+                          <LazyLoadImage
+                            src={item.img}
+                            alt=""
+                            className="w-[5rem] h-[5rem] mr-[1.2rem] tablet:hidden"
+                          />
+                          <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
+                        </div>
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.quantity}</p>
                       </div>
                     ))}
@@ -394,19 +405,26 @@ function CheckOut(): JSX.Element {
                         className="flex justify-between w-full mb-[1.2rem] last-of-type:mb-0"
                         key={cartCombo.indexOf(item)}
                       >
-                        <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
+                        <div className="flex ">
+                          <LazyLoadImage
+                            src={item.img}
+                            alt=""
+                            className="w-[5rem] h-[5rem] mr-[1.2rem] tablet:hidden"
+                          />
+                          <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.name}</p>
+                        </div>
                         <p className="font-normal text-[1.6rem] leading-[100%] text-primary">{item.quantity}</p>
                       </div>
                     ))}
                   </div>
                   <div className="w-full mt-[3.7rem] relative">
-                    <p className="font-normal text-[1.6rem] leading-[100%] text-secondary text-center absolute bg-white left-[0.6rem] w-[10.5rem] top-[-1rem]">
+                    <p className="font-normal text-[1.6rem] leading-[100%] text-secondary text-center absolute tablet:bg-white bg-fdf9f5 left-[0.6rem] w-[10.5rem] top-[-1rem]">
                       Discount code
                     </p>
                     <div className="w-full h-[4rem] p-[1.2rem] border-[1.5px] border-[#ADADAE] flex justify-between ">
                       <input
                         type="text"
-                        className="h-full font-normal text-[1.6rem] leading-[100%] text-primary outline-none flex-1"
+                        className="h-full font-normal text-[1.6rem] leading-[100%] text-primary outline-none flex-1 bg-fdf9f5"
                         value={discountCode}
                         onChange={handleDiscountCode}
                       />
@@ -432,14 +450,22 @@ function CheckOut(): JSX.Element {
                     <p className="font-normal text-[1.8rem] leading-[100%] text-primary">0 $</p>
                   </div>
                 </div>
-                <div className="mt-[2.4rem] w-full flex justify-between">
+                <div className="mt-[2.4rem] w-full  justify-between hidden tablet:flex">
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">Total</p>
                   <p className="font-medium text-[2.4rem] leading-[100%] text-primary">
                     $ {Number(totalPrice) + coupon > 0 ? (Number(totalPrice) + coupon).toFixed(2) : 0.0}
                   </p>
                 </div>
-                <div className="w-full px-[1.2rem] mt-[4rem]">
+                <div className="w-full px-[1.2rem] mt-[4rem] hidden tablet:block">
                   <button className="btn-secondary w-full uppercase text-f6e8d6">confirm order</button>
+                </div>
+                <div className="fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end z-[2]">
+                  <p className="font-semibold tablet:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
+                    TOTAL: {totalPrice} $
+                  </p>
+                  <button className="btn-secondary w-[13rem] h-[3rem] uppercase text-f6e8d6 tablet:text-[1.6rem] text-[1.4rem]">
+                    confirm order
+                  </button>
                 </div>
               </div>
             </div>
