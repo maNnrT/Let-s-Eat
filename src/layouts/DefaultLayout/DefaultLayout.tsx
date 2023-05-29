@@ -4,9 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 function DefaultLayout(): JSX.Element {
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="w-full ">
       <Header />
-      <div className="h-auto w-full min-h-[50rem]">
+      <div className="min-h-[50rem] flex justify-center items-center">
         <Outlet></Outlet>
       </div>
       <Footer />

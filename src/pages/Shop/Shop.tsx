@@ -58,7 +58,7 @@ function Shop() {
                 <div key={categories.indexOf(category)} className="h-auto">
                   <Link
                     to={category.to}
-                    className="w-full h-[41.2rem] flex justify-center bg-center bg-cover bg-no-repeat items-center cursor-pointer hover:scale-110 duration-500"
+                    className="w-full tablet:h-[41.2rem] h-[20rem] flex justify-center bg-center bg-cover bg-no-repeat items-center cursor-pointer tablet:hover:scale-110 tablet:duration-500"
                     style={{ backgroundImage: `url(${category.img})` }}
                   >
                     <p className="font-fahkwang font-semibold text-[2.2rem] leading-[100%] uppercase text-center">

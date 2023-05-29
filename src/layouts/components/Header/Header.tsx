@@ -168,13 +168,15 @@ function Header(): JSX.Element {
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>
+            <HeaderItem title="Menu Combo" to={config.routes.menucombo} display="mobile"></HeaderItem>
             <HeaderItem title="Shop" to={config.routes.shop} display="mobile" onClick={handleNav}></HeaderItem>
-            <button
-              className="mt-[1.6rem] flex justify-center items-center w-[13.9rem] h-[5.2rem] bg-transparent font-semibold text-[1.8rem] leading-[3rem] text-secondary border-[1.5px] border-secondary
+            <Link
+              to={`${config.routes.cart}`}
+              className=" flex justify-center items-center w-[13.9rem] h-[5.2rem] bg-transparent font-semibold text-[1.8rem] leading-[3rem] text-secondary border-[1.5px] border-secondary
                       hover:bg-secondary hover:text-f6e8d6  hover:duration-200;"
             >
               Cart ({totalQuantity})
-            </button>
+            </Link>
           </div>
         </div>
       </div>

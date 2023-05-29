@@ -31,7 +31,7 @@ function CategoryProductList({ products, arrayProducts,newName }: Props) {
           </div>
         ))
       ) : (
-        <div className="flex flex-col justify-center items-center h-full">
+        <div className="flex flex-col justify-center items-center h-full my-[2rem]">
           <p className="text-secondary text-center text-[2rem] first-letter:capitalize">{newName} is out!</p>
           <Link to={config.routes.shop} className="btn-secondary uppercase">
             go to shop

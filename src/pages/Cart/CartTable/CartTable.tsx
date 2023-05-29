@@ -37,7 +37,6 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     }, 1000);
   };
 
-
   const updateCartBtnHandle = () => {
     dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
     openModal();
@@ -46,13 +45,12 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   //   return item.quantity <=item.dishLeft
   // })
   // console.log(isAvailable);
-  
+
   const processToCheckOutBtnHandle = () => {
-    
     if (cartProduct.length + cartCombo.length > 0) {
       // if (isAvailable){
-        dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
-        navigate(config.routes.cart + config.routes.checkout);
+      dispatch(updateCart({ id: idUser, cartProduct, cartCombo }));
+      navigate(config.routes.cart + config.routes.checkout);
       // }else {
       //   const res = cartProduct.filter((item) => {
       //     return item.quantity > item.dishLeft;
@@ -67,12 +65,12 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     }
   };
   return (
-    <div className="container mt-[6rem]">
+    <div className="container mt-[6rem] hidden tablet:block">
       <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
       <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" />
       <div className="w-[82.3%] mx-auto bg-fefefd">
         <div className="w-full h-auto shadow-[0_147px_183px_rgba(0,0,0,0.07)] px-[2rem] ">
-          <table className="w-full h-auto">
+          <table className="w-full h-auto border-b-[0.15rem] border-d9d9d9">
             <thead className="w-full">
               <tr className=" h-[6rem] border-b-[0.15rem] border-d9d9d9">
                 <th className="w-[40%]">
@@ -133,9 +131,6 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
                         <br />
                         Add some products
                       </p>
-                      <Link to="/shop" className="btn-secondary uppercase">
-                        go to shop
-                      </Link>
                     </div>
                   </td>
                 </tr>
