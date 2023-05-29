@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsLogin, getProductByIdSelector, } from '@/redux/selectors';
+import { getIsLogin, getProductByIdSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 // Import Swiper React components
@@ -11,12 +11,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
 import { addToCartProduct } from '@/redux/features/cart/CartSlice';
-import SmallPopup from '@/components/Popup/SmallPopup';
+// import SmallPopup from '@/components/Popup/SmallPopup';
 import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import { motion } from 'framer-motion';
-import { setOpenProductDetailFalse } from '@/redux/features/modalSlice/modalSlice';
+import { setOpenAddToCart, setOpenProductDetailFalse } from '@/redux/features/modalSlice/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 interface Props {
   id: number | undefined;
@@ -27,23 +27,17 @@ function ProductDetail({ id }: Props): JSX.Element | null {
   const isLogin: boolean = useSelector(getIsLogin);
   const productById: Product = useSelector(getProductByIdSelector);
   // console.log('check:' ,productById);
-  const refDialog = React.useRef<HTMLDialogElement>(null);
-  const refDialog2 = React.useRef<HTMLDialogElement>(null);
+
   const refBtn = React.useRef<HTMLButtonElement>(null);
   const refBtnIncrease = React.useRef<HTMLButtonElement>(null);
   const refBtnDecrease = React.useRef<HTMLButtonElement>(null);
   const openModal = () => {
-    refDialog.current?.showModal();
+    dispatch(setOpenAddToCart(true));
     setTimeout(() => {
-      refDialog.current?.close();
+      dispatch(setOpenAddToCart(false));
     }, 1000);
   };
-  const openModal2 = () => {
-    refDialog2.current?.showModal();
-    setTimeout(() => {
-      refDialog2.current?.close();
-    }, 1000);
-  };
+
   // if (productById.dishLeft === 0) {
   //   if (refBtn.current !== null) refBtn.current.disabled = true;
   //   if (refBtnIncrease.current !== null) refBtnIncrease.current.disabled = true;
@@ -140,7 +134,6 @@ function ProductDetail({ id }: Props): JSX.Element | null {
           }}
           className="bg-[rgba(0,0,0,0.3)] fixed h-full w-full z-[99999] top-0 left-0 right-0 bottom-0  "
         >
-          {/* <SmallPopup refDialog={refDialog2} img={cross} title="Add at least 1 product" /> */}
           <motion.div
             initial={{
               scale: 0.5,

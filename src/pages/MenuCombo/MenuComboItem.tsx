@@ -7,10 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsLogin } from '@/redux/selectors';
 import { addToCartCombo } from '@/redux/features/cart/CartSlice';
-import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg';
-
+import { setOpenAddToCart } from '@/redux/features/modalSlice/modalSlice';
 interface Props {
   id: number | undefined;
   name: string;
@@ -22,11 +19,10 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin: boolean = useSelector(getIsLogin);
-  const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
-    refDialog.current?.showModal();
+    dispatch(setOpenAddToCart(true));
     setTimeout(() => {
-      refDialog.current?.close();
+      dispatch(setOpenAddToCart(false));
     }, 1000);
   };
   const refDialog2 = React.useRef<HTMLDialogElement>(null);
@@ -92,8 +88,6 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   };
   return (
     <div className="container grid tablet:grid-cols-3 grid-cols-1 gap-x-[3.2rem] h-full tablet:mt-[7.4rem] tablet:mb-[11.9rem] mt-[2.4rem] mb-[2.4rem]">
-      <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
-      <SmallPopup refDialog={refDialog2} img={cross} title="This combo is out!" />
 
       <div className="grid-cols-1 gap-y-[3.2rem] hidden tablet:grid">
         <div className="w-full bg-333236 px-[3.8rem] py-[9.7rem] flex flex-col items-center h-fit">

@@ -38,6 +38,11 @@ export const getIdProductModal = (state: RootState) => state.modal.id;
 export const getIsOpenProductDetail = (state: RootState) => state.modal.openProductDetail;
 export const getIsOpenSendFormSuccess = (state: RootState) => state.modal.openSendFormSuccess;
 export const getIsOpenCheckOutSuccess = (state: RootState) => state.modal.openCheckOutSuccess;
+export const getIsOpenCartUpdateSuccess = (state: RootState) => state.modal.openCartUpdateSuccess;
+export const getIsOpenCartUpdateFail = (state: RootState) => state.modal.openCartUpdateFail;
+export const getIsOpenAddToCart = (state: RootState) => state.modal.openAddToCart;
+export const getIsOpenSignIn = (state: RootState) => state.modal.openSignIn;
+export const getIsOpenSignUp = (state: RootState) => state.modal.openSignUp;
 
 export const getProductsByDishSelector = createSelector(
   getDishFilterSelector,

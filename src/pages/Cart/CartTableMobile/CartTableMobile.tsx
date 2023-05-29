@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIdUserSelector } from '@/redux/selectors';
 import { updateCart } from '@/redux/features/cart/CartSlice';
 import config from '@/config';
-import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg';
+import { setOpenCartUpdateFail, setOpenCartUpdateSuccess } from '@/redux/features/modalSlice/modalSlice';
+
 interface Props {
   cartProduct: ProductItem[];
   cartCombo: ComboItem[];
@@ -18,22 +17,19 @@ interface Props {
 function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const refDialog = React.useRef<HTMLDialogElement>(null);
-  const refPara = React.useRef<HTMLParagraphElement>(null);
   const idUser = useSelector(getIdUserSelector);
   // console.log(cartProduct);
   // console.log(cartCombo);
   const openModal = () => {
-    refDialog.current?.showModal();
+    dispatch(setOpenCartUpdateSuccess(true));
     setTimeout(() => {
-      refDialog.current?.close();
+      dispatch(setOpenCartUpdateSuccess(false));
     }, 1000);
   };
-  const refDialog2 = React.useRef<HTMLDialogElement>(null);
   const openModal2 = () => {
-    refDialog2.current?.showModal();
+    dispatch(setOpenCartUpdateFail(true));
     setTimeout(() => {
-      refDialog2.current?.close();
+      dispatch(setOpenCartUpdateFail(false));
     }, 1000);
   };
   const updateCartBtnHandle = () => {
@@ -65,8 +61,8 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
   };
   return (
     <div className="container my-[2.4rem] h-fit block tablet:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] ">
-      <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
-      <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" />
+      {/* <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
+      <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" /> */}
       {cartProduct.length !== 0 &&
         cartProduct.map((item) => (
           <React.Fragment key={item.id}>

@@ -2,14 +2,12 @@ import * as React from 'react';
 import { CartProductItem, CartComboItem } from './CartItem/';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCart } from '@/redux/features/cart/CartSlice';
-import { Link, useNavigate } from 'react-router-dom';
-import SmallPopup from '@/components/Popup/SmallPopup';
+import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import { ComboItem, ProductItem } from '@/types/types';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg';
 import { getIdUserSelector } from '@/redux/selectors';
 import { BsCart } from 'react-icons/bs';
+import { setOpenCartUpdateFail, setOpenCartUpdateSuccess } from '@/redux/features/modalSlice/modalSlice';
 interface Props {
   cartProduct: ProductItem[];
   cartCombo: ComboItem[];
@@ -18,22 +16,20 @@ interface Props {
 function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const refDialog = React.useRef<HTMLDialogElement>(null);
   const refPara = React.useRef<HTMLParagraphElement>(null);
   const idUser = useSelector(getIdUserSelector);
   // console.log(cartProduct);
   // console.log(cartCombo);
   const openModal = () => {
-    refDialog.current?.showModal();
+    dispatch(setOpenCartUpdateSuccess(true));
     setTimeout(() => {
-      refDialog.current?.close();
+      dispatch(setOpenCartUpdateSuccess(false));
     }, 1000);
   };
-  const refDialog2 = React.useRef<HTMLDialogElement>(null);
   const openModal2 = () => {
-    refDialog2.current?.showModal();
+    dispatch(setOpenCartUpdateFail(true));
     setTimeout(() => {
-      refDialog2.current?.close();
+      dispatch(setOpenCartUpdateFail(false));
     }, 1000);
   };
 
@@ -65,9 +61,8 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     }
   };
   return (
-    <div className="container mt-[6rem] hidden tablet:block">
-      <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
-      <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" />
+    <div className="container mt-[6rem] hidden tablet:block mb-[6rem]">
+
       <div className="w-[82.3%] mx-auto bg-fefefd">
         <div className="w-full h-auto shadow-[0_147px_183px_rgba(0,0,0,0.07)] px-[2rem] ">
           <table className="w-full h-auto border-b-[0.15rem] border-d9d9d9">

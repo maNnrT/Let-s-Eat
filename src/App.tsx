@@ -7,9 +7,14 @@ import cross from '@/assets/svg/Red_X.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getIdProductModal,
+  getIsOpenAddToCart,
+  getIsOpenCartUpdateFail,
+  getIsOpenCartUpdateSuccess,
   getIsOpenCheckOutSuccess,
   getIsOpenProductDetail,
   getIsOpenSendFormSuccess,
+  getIsOpenSignIn,
+  getIsOpenSignUp,
 } from './redux/selectors';
 import ProductDetail from '@/components/ProductDetail';
 import React from 'react';
@@ -29,6 +34,11 @@ function App(): JSX.Element {
   const isOpenProductDetail = useSelector(getIsOpenProductDetail);
   const isOpenSendForm = useSelector(getIsOpenSendFormSuccess);
   const isOpenCheckOut = useSelector(getIsOpenCheckOutSuccess);
+  const isOpenCartUpdateSuccess = useSelector(getIsOpenCartUpdateSuccess);
+  const isOpenCartUpdateFail = useSelector(getIsOpenCartUpdateFail);
+  const isOpenAddToCart = useSelector(getIsOpenAddToCart);
+  const isOpenSignIn = useSelector(getIsOpenSignIn);
+  const isOpenSignUp = useSelector(getIsOpenSignUp);
   const location = useLocation();
   React.useMemo(() => {
     if (isOpenProductDetail || isOpenSendForm || isOpenCheckOut) {
@@ -73,9 +83,13 @@ function App(): JSX.Element {
             />
           )}
         </AnimatePresence>
-        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={check} title="Cart is updated!" />}</AnimatePresence>
-        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={cross} title="Cart is empty!" />}</AnimatePresence>
-        <AnimatePresence>{isOpenCheckOut && <SmallPopup img={check} title="Add to shopping cart!" />}</AnimatePresence>
+        <AnimatePresence>
+          {isOpenCartUpdateSuccess && <SmallPopup img={check} title="Cart is updated!" />}
+        </AnimatePresence>
+        <AnimatePresence>{isOpenCartUpdateFail && <SmallPopup img={cross} title="Cart is empty!" />}</AnimatePresence>
+        <AnimatePresence>{isOpenAddToCart && <SmallPopup img={check} title="Add to shopping cart!" />}</AnimatePresence>
+        <AnimatePresence>{isOpenSignIn && <SmallPopup img={check} title="Sign in success!" />}</AnimatePresence>
+        <AnimatePresence>{isOpenSignUp && <SmallPopup img={check} title="Sign up success!" />}</AnimatePresence>
       </div>
       <Outlet />
       <ScrollRestoration

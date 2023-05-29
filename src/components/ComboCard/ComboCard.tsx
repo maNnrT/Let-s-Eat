@@ -5,8 +5,8 @@ import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
 import { getIsLogin } from '@/redux/selectors';
-import SmallPopup from '../Popup/SmallPopup/SmallPopup';
-import check from '@/assets/svg/check_formCheckOut.svg';
+// import SmallPopup from '../Popup/SmallPopup/SmallPopup';
+// import check from '@/assets/svg/check_formCheckOut.svg';
 import { addToCartCombo } from '@/redux/features/cart/CartSlice';
 
 interface Props {
@@ -53,7 +53,7 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
       className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] "
       key={id}
     >
-      <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" />
+      {/* <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" /> */}
       <div className="w-full h-[26.1rem] overflow-hidden">
         <LazyLoadImage
           src={img}

@@ -8,10 +8,10 @@ import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSl
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { Account } from '@/types/types';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import SmallPopup from '@/components/Popup/SmallPopup/SmallPopup';
+
 import Input from '@/components/Form/Input';
 import { addNewUserCart } from '@/redux/features/cart/CartSlice';
+import { setOpenSignUp } from '@/redux/features/modalSlice/modalSlice';
 const schema = yup
   .object({
     firstName: yup.string().required('First name is required!'),
@@ -55,7 +55,7 @@ function Login(): JSX.Element {
           console.error("Can't add new account");
         });
       dispatch(addNewUserCart())
-      openModal();
+      openModal()
     } else {
       if (ref.current) ref.current.innerHTML = 'Email is used! Please use another email';
     }
@@ -68,10 +68,10 @@ function Login(): JSX.Element {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
-    refDialog.current?.showModal();
+    dispatch(setOpenSignUp(true))
     setTimeout(() => {
+      dispatch(setOpenSignUp(false))
       navigate(config.routes.login);
     }, 2000);
   };
@@ -108,7 +108,6 @@ function Login(): JSX.Element {
   // };
   return (
     <div className="w-full mb-[-12rem] ">
-      <SmallPopup refDialog={refDialog} img={check} title="Sign up success!" />
       <div className="bg-fdf9f5 w-full h-[80.9rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
         <div className="w-[45%] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[4.4rem] leading-[1] mt-[3.6rem] text-151618 self-center">
