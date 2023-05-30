@@ -2,7 +2,7 @@ import config from '@/config';
 import logo from '@/assets/svg/Logo.svg';
 import cartImg from '@/assets/svg/cart.svg';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import {
@@ -24,6 +24,7 @@ import SearchMobile from '@/components/SearchMobile';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import { getCombos } from '@/redux/features/combos/CombosSlice';
+import { BsPencilSquare } from 'react-icons/bs';
 
 function Header(): JSX.Element {
   const navigate = useNavigate();
@@ -114,18 +115,27 @@ function Header(): JSX.Element {
             <>
               <Link
                 to={config.routes.login}
-                className="text-secondary pr-[1rem] border-r-[1px] border-secondary lg_desktop:text-[2rem]"
+                className="text-secondary pr-[1rem] border-r-[1px] border-secondary lg_desktop:text-[2rem] flex items-center"
               >
-                Log in
+                <FiLogIn size={15} />
+                <span className="ml-[1rem]">Log in</span>
               </Link>
-              <Link to={config.routes.register} className="pl-[1rem] text-secondary lg_desktop:text-[2rem]">
-                Sign up
+              <Link
+                to={config.routes.register}
+                className="pl-[1rem] text-secondary lg_desktop:text-[2rem] flex items-center"
+              >
+                <BsPencilSquare size={15} />
+                <span className="ml-[1rem]">Sign up</span>
               </Link>
             </>
           ) : (
             <>
-              <button className="text-secondary lg_desktop:text-[2rem] mr-[2rem] " onClick={handleLogOut}>
-                Log out
+              <button
+                className="text-secondary lg_desktop:text-[2rem] mr-[2rem] flex items-center "
+                onClick={handleLogOut}
+              >
+                <FiLogOut size={15} />
+                <span className="ml-[1rem]">Log out</span>
               </button>
               <Link to={`${config.routes.cart}`} className="relative mr-[5px] hover:scale-150 hover:duration-500">
                 <img src={cartImg} alt="" />
@@ -159,8 +169,8 @@ function Header(): JSX.Element {
         <div
           className={
             nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] ease-in-out duration-500 desktop:hidden'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] right-[-100%] ease-in-out duration-500 desktop:hidden'
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[1rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] ease-in-out duration-500 desktop:hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[1rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] right-[-100%] ease-in-out duration-500 desktop:hidden'
           }
           ref={refNavMobile}
         >
@@ -168,7 +178,38 @@ function Header(): JSX.Element {
             {/* <div className="desktop:hidden cursor-pointer self-end" onClick={handleNav}>
               <AiOutlineClose size={30} />
             </div> */}
+            <div className="mb-[1rem] flex justify-end">
+              {!isLogin ? (
+                <>
+                  <Link
+                    to={config.routes.login}
+                    className="text-secondary pr-[1rem] border-r-[1px] border-secondary lg_desktop:text-[2rem] flex items-center"
+                  >
+                    <FiLogIn size={15} />
+                    <span className="ml-[1rem]">Log in</span>
+                  </Link>
+                  <Link
+                    to={config.routes.register}
+                    className="pl-[1rem] text-secondary lg_desktop:text-[2rem] flex items-center"
+                  >
+                    <BsPencilSquare size={15} />
+                    <span className="ml-[1rem]">Sign up</span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="text-secondary lg_desktop:text-[2rem] mr-[2rem] flex items-center "
+                    onClick={handleLogOut}
+                  >
+                    <FiLogOut size={15} />
+                    <span className="ml-[1rem]">Log out</span>
+                  </button>
+                </>
+              )}
+            </div>
             <SearchMobile handleNav={handleNav} />
+
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>
