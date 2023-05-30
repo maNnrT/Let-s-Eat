@@ -35,8 +35,8 @@ export default function CarouselProduct({ products }: Props) {
             spaceBetween: 16,
           },
           768: {
-            slidesPerView: 4,
-            spaceBetween: 32,
+            slidesPerView: 3,
+            spaceBetween: 16,
           },
           1024: {
             slidesPerView: 4,

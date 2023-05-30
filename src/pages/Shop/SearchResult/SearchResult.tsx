@@ -324,7 +324,7 @@ function SearchResult() {
       <div
         className={
           showFilter
-            ? 'w-[100vw] h-[100vh] fixed bottom-0 top-0 right-0 left-0 bg-151618/25 ease-in-out duration-500 z-[3] '
+            ? 'w-[100vw] h-[100vh] fixed bottom-0 top-0 right-0 left-0 bg-151618/50 ease-in-out duration-500 z-[3] '
             : ''
         }
       >
@@ -335,9 +335,9 @@ function SearchResult() {
               : 'w-[100vw] h-[100vh] fixed bottom-[-100%] bg-white ease-in duration-500 z-[3] py-[2.4rem] '
           }
         >
-          <div className="container pt-[4.4rem]">
+          <div className="container pt-[2.4rem]">
             <span
-              className="text-666565 text-[6rem] absolute top-[2rem] right-[3.7rem] leading-[2rem] cursor-pointer z-10 font-light"
+              className="text-666565 text-[6rem] absolute top-[1.5rem] right-[3.7rem] leading-[2rem] cursor-pointer z-10 font-light"
               onClick={() => {
                 setShowFilter(!showFilter);
               }}

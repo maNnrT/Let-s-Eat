@@ -183,14 +183,14 @@ function Header(): JSX.Element {
                 <>
                   <Link
                     to={config.routes.login}
-                    className="text-secondary pr-[1rem] border-r-[1px] border-secondary lg_desktop:text-[2rem] flex items-center"
+                    className="text-secondary pr-[1rem] border-r-[1px] border-secondary text-[1.3rem] tablet:text-[1.6rem] flex items-center"
                   >
                     <FiLogIn size={15} />
                     <span className="ml-[1rem]">Log in</span>
                   </Link>
                   <Link
                     to={config.routes.register}
-                    className="pl-[1rem] text-secondary lg_desktop:text-[2rem] flex items-center"
+                    className="pl-[1rem] text-secondary text-[1.3rem] tablet:text-[1.6rem] flex items-center"
                   >
                     <BsPencilSquare size={15} />
                     <span className="ml-[1rem]">Sign up</span>
@@ -199,7 +199,7 @@ function Header(): JSX.Element {
               ) : (
                 <>
                   <button
-                    className="text-secondary lg_desktop:text-[2rem] mr-[2rem] flex items-center "
+                    className="text-secondary text-[1.3rem] tablet:text-[1.6rem] flex items-center "
                     onClick={handleLogOut}
                   >
                     <FiLogOut size={15} />
