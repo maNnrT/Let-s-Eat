@@ -2,7 +2,8 @@ import * as React from 'react';
 import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
 import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/animations/scale-subtle.css';
 import SearchDishItem from '@/components/Popper/SearchDishItem/SearchDishItem';
 import { useSelector } from 'react-redux';
 import { getCombosSelector, getProductsSelector } from '@/redux/selectors';
@@ -131,8 +132,9 @@ function Search() {
       <Tippy
         visible={showResult}
         interactive
-        render={(attrs) => (
-          <div tabIndex={-1} {...attrs} className="w-[30rem]">
+        animation="scale-subtle"
+        content={
+          <div className="w-[30rem]">
             <PopperWrapper>
               {searchDishResult.length > 0 ? (
                 <>
@@ -200,7 +202,7 @@ function Search() {
               ) : null}
             </PopperWrapper>
           </div>
-        )}
+        }
         onClickOutside={handleHideResult}
       >
         <div className="hidden items-center h-[4rem] bg-white rounded-full relative w-[30rem] desktop:flex">

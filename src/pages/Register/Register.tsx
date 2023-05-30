@@ -108,7 +108,7 @@ function Login(): JSX.Element {
   // };
   return (
     <div className="w-full desktop:mb-[-12rem] ">
-      <div className="bg-fdf9f5 w-full h-[60rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
+      <div className="bg-fdf9f5 w-full h-[81rem] flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
         <div className="container max-w-[50rem] bg-white h-auto flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[3.2rem] leading-[1] mt-[3.6rem] text-151618 self-center">
             Sign Up
@@ -127,8 +127,8 @@ function Login(): JSX.Element {
             </p>
           </div>
           <form onSubmit={handleSubmit(onTouched)} className="w-full mt-[1rem]">
-            <div className="flex w-full justify-between">
-              <div className="flex flex-col flex-1 mr-[3rem]">
+            <div className="desktop:flex w-full justify-between">
+              <div className="flex flex-col flex-1 desktop:mr-[3rem]">
                 <Input
                   name="firstName"
                   type="text"
@@ -151,7 +151,7 @@ function Login(): JSX.Element {
                   label="Last name"
                   placeholder="Enter last name..."
                   classNameWrapper="flex flex-col items-start relative"
-                  classNameLabel="font-normal text-[1.8rem] text-secondary"
+                  classNameLabel="font-normal text-[1.8rem] text-secondary mt-[1.8rem] desktop:mt-[0]"
                   classNameInput="w-full px-[1rem] border-[2px] border-secondary outline-none h-[3rem] text-666565 "
                   classNameError="text-red-600 absolute bottom-[-2.4rem]"
                   classNameSuccess="absolute right-[1.2rem] top-[3.2rem]"
