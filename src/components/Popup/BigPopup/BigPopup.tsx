@@ -55,18 +55,22 @@ function BigPopup({ subtitle, title, description, to, btnTitle }: Props) {
               duration: 0.3,
             },
           }}
-          className="tablet:w-[80rem] w-[100vw] m-auto absolute right-0 left-0 h-fit tablet:top-[7.5rem] top-[50%] bottom-[50%] bg-fdf9f5 "
+          className="desktop:w-[80rem] w-[100vw] m-auto absolute right-0 left-0 h-fit desktop:top-[7.5rem] top-[50%] bottom-[50%] bg-fdf9f5 "
         >
-          <div className="container flex flex-col items-center h-auto relative tablet:pt-[8rem] pt-[2.4rem] tablet:pb-[12rem] pb-[2.4rem] tablet:px-[9rem]">
-            <span className="text-secondary leading-[0px] tablet:text-[3.2rem] text-[1.6rem]">—</span>
-            <p className="font-normal tablet:text-[1.8rem] text-[1.6rem] text-secondary mt-[0.8rem] uppercase">{subtitle}</p>
-            <h1 className="font-fahkwang font-normal tablet:text-[4rem] text-[2rem] leading-[100%] tablet:mt-[2rem] mt-[1.2rem] text-primary text-center uppercase mb-0">
+          <div className="container flex flex-col items-center h-auto relative desktop:pt-[8rem] pt-[2.4rem] desktop:pb-[12rem] pb-[2.4rem] desktop:px-[9rem]">
+            <span className="text-secondary leading-[0px] desktop:text-[3.2rem] text-[1.6rem]">—</span>
+            <p className="font-normal desktop:text-[1.8rem] text-[1.6rem] text-secondary mt-[0.8rem] uppercase">
+              {subtitle}
+            </p>
+            <h1 className="font-fahkwang font-normal desktop:text-[4rem] text-[2rem] leading-[100%] desktop:mt-[2rem] mt-[1.2rem] text-primary text-center uppercase mb-0">
               {title}
             </h1>
-            <img src={popupImg} alt="" className="tablet:mt-[5.2rem] mt-[2.4rem]" />
-            <p className="font-light tablet:text-[1.8rem] text-[1.6rem] text-666565 mt-[2rem] text-center mx-[0.5rem]">{description}</p>
+            <img src={popupImg} alt="" className="desktop:mt-[5.2rem] mt-[2.4rem]" />
+            <p className="font-light desktop:text-[1.8rem] text-[1.6rem] text-666565 mt-[2rem] text-center mx-[0.5rem]">
+              {description}
+            </p>
             <div
-              className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem] cursor-pointer text-[1.6rem] tablet:text-[1.8rem]"
+              className="btn-secondary uppercase mt-[3.6rem] text-white w-[21.1rem] cursor-pointer text-[1.6rem] desktop:text-[1.8rem]"
               onClick={handleNavigateBtn}
             >
               {btnTitle}

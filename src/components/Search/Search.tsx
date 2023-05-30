@@ -203,7 +203,7 @@ function Search() {
         )}
         onClickOutside={handleHideResult}
       >
-        <div className="hidden items-center h-[4rem] bg-white rounded-full relative] w-[30rem] tablet:flex">
+        <div className="hidden items-center h-[4rem] bg-white rounded-full relative w-[30rem] desktop:flex">
           <span className="w-[3.5rem] h-fit flex justify-center items-center">
             <IoMdSearch size={20} color={'#D08C30'} />
           </span>

@@ -90,14 +90,14 @@ function Header(): JSX.Element {
   };
   return (
     <div
-      className={`flex justify-center tablet:h-[7.5rem] h-[5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
+      className={`flex justify-center desktop:h-[7.5rem] h-[5rem] w-full fixed top-0 z-[2] duration-500 ease-in-out transition-all 
       ${scrollDirection === 'down' ? 'top-[-7.5rem]' : 'top-0'}
       ${transparent ? 'bg-transparent' : 'bg-primary'}`}
     >
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
-          <Link to={config.routes.homepage} className='w-[10rem] tablet:w-[14.3rem] mr-[5.3rem]'>
-            <img src={logo} alt="logo" className="mr-[4.7rem] w-[10rem] tablet:w-[14.3rem] " />
+          <Link to={config.routes.homepage} className="w-[10rem] desktop:w-[14.3rem] mr-[5.3rem]">
+            <img src={logo} alt="logo" className="mr-[4.7rem] w-[10rem] desktop:w-[14.3rem] " />
           </Link>
 
           <HeaderMenu>
@@ -109,22 +109,22 @@ function Header(): JSX.Element {
           </HeaderMenu>
         </div>
         <Search />
-        <div className="hidden tablet:flex items-center justify-end w-auto ">
+        <div className="hidden desktop:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
               <Link
                 to={config.routes.login}
-                className="text-secondary pr-[1rem] border-r-[1px] border-secondary text-[2rem]"
+                className="text-secondary pr-[1rem] border-r-[1px] border-secondary lg_desktop:text-[2rem]"
               >
                 Log in
               </Link>
-              <Link to={config.routes.register} className="pl-[1rem] text-secondary text-[2rem]">
+              <Link to={config.routes.register} className="pl-[1rem] text-secondary lg_desktop:text-[2rem]">
                 Sign up
               </Link>
             </>
           ) : (
             <>
-              <button className="text-secondary text-[2rem] mr-[2rem] " onClick={handleLogOut}>
+              <button className="text-secondary lg_desktop:text-[2rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
               <Link to={`${config.routes.cart}`} className="relative mr-[5px] hover:scale-150 hover:duration-500">
@@ -153,19 +153,19 @@ function Header(): JSX.Element {
             </>
           )}
         </div>
-        <div className="tablet:hidden cursor-pointer" onClick={handleNav}>
+        <div className="desktop:hidden cursor-pointer" onClick={handleNav}>
           <AiOutlineMenu size={30} />
         </div>
         <div
           className={
             nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] ease-in-out duration-500 tablet:hidden'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] ease-in-out duration-500 desktop:hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] right-[-100%] ease-in-out duration-500 desktop:hidden'
           }
           ref={refNavMobile}
         >
           <div className="flex flex-col">
-            {/* <div className="tablet:hidden cursor-pointer self-end" onClick={handleNav}>
+            {/* <div className="desktop:hidden cursor-pointer self-end" onClick={handleNav}>
               <AiOutlineClose size={30} />
             </div> */}
             <SearchMobile handleNav={handleNav} />

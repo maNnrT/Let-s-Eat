@@ -150,10 +150,10 @@ function ProductDetail({ id }: Props): JSX.Element | null {
                 duration: 0.3,
               },
             }}
-            className="tablet:container grid tablet:grid-cols-2 grid-cols-1 gap-x-[3.2rem] gap-y-[2.4rem] tablet:h-fit h-[100vh] 
-          tablet:min-w-[65.6rem] m-auto absolute right-0 left-0 tablet:top-[10rem] bg-fdf9f5 overflow-y-auto"
+            className="desktop:container grid desktop:grid-cols-2 grid-cols-1 gap-x-[3.2rem] gap-y-[2.4rem] desktop:h-fit h-[100vh] 
+          desktop:min-w-[65.6rem] m-auto absolute right-0 left-0 desktop:top-[10rem] bg-fdf9f5 overflow-y-auto"
           >
-            <div className="tablet:w-full tablet:h-full h-[40rem] relative ">
+            <div className="desktop:w-full desktop:h-full h-[40rem] relative ">
               <Swiper
                 pagination={pagination}
                 modules={[Pagination]}
@@ -173,7 +173,11 @@ function ProductDetail({ id }: Props): JSX.Element | null {
                   JSON.parse(productById.detailImg).map((img: string) => (
                     <SwiperSlide key={JSON.parse(productById.detailImg ? productById.detailImg : '').indexOf(img)}>
                       <div className="w-full h-full">
-                        <LazyLoadImage src={img} alt="" className="w-full h-full tablet:max-h-[55.7rem] object-cover" />
+                        <LazyLoadImage
+                          src={img}
+                          alt=""
+                          className="w-full h-full desktop:max-h-[55.7rem] object-cover"
+                        />
                       </div>
                     </SwiperSlide>
                   ))}
@@ -192,25 +196,27 @@ function ProductDetail({ id }: Props): JSX.Element | null {
               </Swiper>
             </div>
             <div className="container">
-              <div className=" tablet:mt-[2rem]">
-                <span className="text-secondary mr-[0.8rem] tablet:text-[3.2rem] text-[1.6rem] leading-[0rem] ">—</span>
-                <p className="font-normal tablet:text-[1.8rem] text-[1.4rem] text-secondary inline-block uppercase">
+              <div className=" desktop:mt-[2rem]">
+                <span className="text-secondary mr-[0.8rem] desktop:text-[3.2rem] text-[1.6rem] leading-[0rem] ">
+                  —
+                </span>
+                <p className="font-normal desktop:text-[1.8rem] text-[1.4rem] text-secondary inline-block uppercase">
                   Dish detail
                 </p>
               </div>
-              <h2 className="font-fahkwang font-normal tablet:text-[4.4rem] text-[2rem] leading-[1] tablet:mt-[3.6rem] mt-[2rem] text-151618 uppercase">
+              <h2 className="font-fahkwang font-normal desktop:text-[4.4rem] text-[2rem] leading-[1] desktop:mt-[3.6rem] mt-[2rem] text-151618 uppercase">
                 {productById.name}
               </h2>
-              <p className="tablet:mt-[2.4rem] mt-[2rem] font-fahkwang font-normal tablet:text-[3.2rem] text-[1.8rem] leading-[100%] text-2d2d2d">
+              <p className="desktop:mt-[2.4rem] mt-[2rem] font-fahkwang font-normal desktop:text-[3.2rem] text-[1.8rem] leading-[100%] text-2d2d2d">
                 ${productById.price}
               </p>
               {/* <p className="mt-[2.4rem] font-fahkwang font-normal text-[1.8rem] leading-[100%] text-2d2d2d">
                 Remaining: {productById.dishLeft}
               </p> */}
-              <p className="font-light text-[1.6rem] text-666565 tablet:mt-[2.8rem]  mt-[1.2rem]">
+              <p className="font-light text-[1.6rem] text-666565 desktop:mt-[2.8rem]  mt-[1.2rem]">
                 {productById.detail}
               </p>
-              <div className="tablet:mt-[5.7rem] mt-[2.4rem] h-[2.8rem] flex justify-start ">
+              <div className="desktop:mt-[5.7rem] mt-[2.4rem] h-[2.8rem] flex justify-start ">
                 <button
                   className="w-[2.8rem] h-full bg-e9e9e9 text-[1.6rem] text-aaa9a9 cursor-pointer disabled:cursor-default disabled:opacity-50"
                   onClick={decreaseNumber}
@@ -237,7 +243,7 @@ function ProductDetail({ id }: Props): JSX.Element | null {
                 ADD TO CART
               </button>
               <span
-                className="tablet:text-666565 text-white text-[6rem] absolute top-[2rem] right-[2rem] leading-[2rem] cursor-pointer z-10 font-light"
+                className="desktop:text-666565 text-white text-[6rem] absolute top-[2rem] right-[2rem] leading-[2rem] cursor-pointer z-10 font-light"
                 onClick={() => {
                   dispatch(setOpenProductDetailFalse());
                 }}

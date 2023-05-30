@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
 
@@ -41,11 +41,11 @@ function SmallPopup({ title, img }: Props) {
               duration: 0.3,
             },
           }}
-          className="tablet:w-[20rem] tablet:h-[20rem] w-[15rem] h-[15rem]  bg-fdf9f5 "
+          className="desktop:w-[20rem] desktop:h-[20rem] w-[15rem] h-[15rem]  bg-fdf9f5 "
         >
           <div className="w-auto h-full flex flex-col items-center justify-center p-[2rem]">
             <img src={img} alt="" className="object-cover w-[6rem] " />
-            <p className="font-light tablet:text-[1.8rem] text-[1.4rem] text-666565 mt-[2rem] text-center">{title}</p>
+            <p className="font-light desktop:text-[1.8rem] text-[1.4rem] text-666565 mt-[2rem] text-center">{title}</p>
           </div>
         </motion.div>
       </motion.div>,

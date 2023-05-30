@@ -58,9 +58,9 @@ function Login(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const openModal = () => {
-    dispatch(setOpenSignIn(true))
+    dispatch(setOpenSignIn(true));
     setTimeout(() => {
-      dispatch(setOpenSignIn(false))
+      dispatch(setOpenSignIn(false));
       navigate(config.routes.homepage);
     }, 2000);
   };
@@ -76,7 +76,7 @@ function Login(): JSX.Element {
   //   clearErrors('passwords');
   // };
   return (
-    <div className="w-full tablet:mb-[-12rem] ">
+    <div className="w-full desktop:mb-[-12rem] ">
       <div className="bg-fdf9f5 w-full h-[50rem]  flex justify-center items-center relative z-[1] shadow-[0px_147px_183px_rgba(0,0,0,0.07)]">
         <div className="container max-w-[50rem] bg-white h-fit flex flex-col items-start p-[2rem] ">
           <p className="font-fahkwang font-normal text-[3.2rem] leading-[1] mt-[3.6rem] text-151618 self-center">

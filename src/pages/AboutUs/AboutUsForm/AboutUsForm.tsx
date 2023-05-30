@@ -45,7 +45,7 @@ function AboutUsForm(): JSX.Element {
             type="text"
             label="Your name"
             placeholder="Enter your name..."
-            classNameWrapper="flex flex-col items-start relative col-span-2 tablet:col-span-1"
+            classNameWrapper="flex flex-col items-start relative col-span-2 desktop:col-span-1"
             classNameLabel="block mb-[1.2rem] font-normal text-[1.6rem] leading-[0%] text-primary"
             classNameInput="block w-full h-[4.4rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
             classNameError="text-red-600 absolute bottom-0 translate-y-[2.4rem] transition-all duration-500"
@@ -59,7 +59,7 @@ function AboutUsForm(): JSX.Element {
             type="text"
             label="Phone number"
             placeholder="Enter phone number..."
-            classNameWrapper="flex flex-col items-start relative col-span-2 tablet:col-span-1"
+            classNameWrapper="flex flex-col items-start relative col-span-2 desktop:col-span-1"
             classNameLabel="block mb-[1.2rem] font-normal text-[1.6rem] leading-[0%] text-primary"
             classNameInput="block w-full h-[4.4rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
             classNameError="text-red-600 absolute bottom-0 translate-y-[2.4rem] transition-all duration-500"
@@ -93,7 +93,7 @@ function AboutUsForm(): JSX.Element {
           classNameLabel="font-normal block mt-[2.8rem] mb-[1.2rem] text-[1.6rem] leading-[0%] text-primary"
           classNameInput="w-full h-[4.8rem] max-h-[10rem] pl-[1.6rem] pr-[4rem] py-[1.4rem] font-light text-[1.6rem] leading-[1.6rem] text-444546 border-[1px] border-d9d9d9 outline-none"
         />
-        <button className="btn-secondary tablet:mt-[4rem] mt-[2.4rem] uppercase">SEND MESSAGE</button>
+        <button className="btn-secondary desktop:mt-[4rem] mt-[2.4rem] uppercase">SEND MESSAGE</button>
       </form>
     </div>
   );

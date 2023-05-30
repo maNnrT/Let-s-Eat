@@ -60,7 +60,7 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
     }
   };
   return (
-    <div className="container my-[2.4rem] h-fit block tablet:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] ">
+    <div className="container my-[2.4rem] h-fit block desktop:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] ">
       {/* <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
       <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" /> */}
       {cartProduct.length !== 0 &&
@@ -86,7 +86,7 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
         </div>
       )}
       <div className="fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end">
-        <p className="font-semibold tablet:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
+        <p className="font-semibold desktop:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
           TOTAL: {totalPrice} $
         </p>
         <button

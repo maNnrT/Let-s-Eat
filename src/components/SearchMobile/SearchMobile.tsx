@@ -5,9 +5,9 @@ import config from '@/config';
 import { Link, createSearchParams, useNavigate } from 'react-router-dom';
 // import { setSearchValue } from '@/redux/features/search/searchSlice';
 interface Props {
-  handleNav: ()=> void
+  handleNav: () => void;
 }
-function Search({handleNav}:Props) {
+function Search({ handleNav }: Props) {
   const [searchValue, setSearchValue] = React.useState<string>('');
   const navigate = useNavigate();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -18,7 +18,7 @@ function Search({handleNav}:Props) {
   };
   return (
     <>
-      <div className="flex items-center h-[4rem] bg-white  relative w-full tablet:hidden mb-[1.2rem]">
+      <div className="flex items-center h-[4rem] bg-white  relative w-full desktop:hidden mb-[1.2rem]">
         <input
           type="text"
           value={searchValue}
@@ -31,10 +31,7 @@ function Search({handleNav}:Props) {
           spellCheck={false}
         />
         {!!searchValue && (
-          <button
-            className="absolute top-[50%] translate-y-[-50%] right-[3.5rem]  "
-            onClick={handleClear}
-          >
+          <button className="absolute top-[50%] translate-y-[-50%] right-[3.5rem]  " onClick={handleClear}>
             <IoMdCloseCircle size={19} color={'#D08C30'} />
           </button>
         )}
@@ -50,7 +47,7 @@ function Search({handleNav}:Props) {
                 keyword: searchValue,
               })}`,
             });
-            handleNav()
+            handleNav();
           }}
         >
           <IoMdSearch size={20} color={'#D08C30'} />

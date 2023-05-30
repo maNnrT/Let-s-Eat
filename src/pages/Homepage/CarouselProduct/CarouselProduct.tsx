@@ -32,19 +32,19 @@ export default function CarouselProduct({ products }: Props) {
           // when window width is >= 320px
           320: {
             slidesPerView: 'auto',
-            spaceBetween:16
+            spaceBetween: 16,
           },
           768: {
             slidesPerView: 4,
-            spaceBetween:32
+            spaceBetween: 32,
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween:32
+            spaceBetween: 32,
           },
           1536: {
             slidesPerView: 4,
-            spaceBetween:32
+            spaceBetween: 32,
           },
         }}
       >
@@ -72,17 +72,11 @@ export default function CarouselProduct({ products }: Props) {
           </div>
         )}
       </Swiper>
-      <div className="w-[8.8rem]  justify-between mx-auto mt-[2.8rem] tablet:flex hidden">
-        <button
-          className="paginationBtn"
-          onClick={swipePrev}
-        >
+      <div className="w-[8.8rem]  justify-between mx-auto mt-[2.8rem] desktop:flex hidden">
+        <button className="paginationBtn" onClick={swipePrev}>
           <BsChevronLeft size={20} />
         </button>
-        <button
-          className="paginationBtn"
-          onClick={swipeNext}
-        >
+        <button className="paginationBtn" onClick={swipeNext}>
           <BsChevronRight size={20} />
         </button>
       </div>

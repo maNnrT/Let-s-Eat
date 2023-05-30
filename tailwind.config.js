@@ -43,8 +43,8 @@ export default {
 				fahkwang: ['Fahkwang', 'sans-serif'],
 			},
 			screens: {
-				tablet: '768px',
-				desktop: '1024px',
+				desktop: '1280px',
+				lg_desktop:'1440px'
 			},
 			keyframes: {
 				slide_in: {

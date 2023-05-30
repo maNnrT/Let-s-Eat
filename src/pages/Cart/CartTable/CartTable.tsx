@@ -61,8 +61,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
     }
   };
   return (
-    <div className="container mt-[6rem] hidden tablet:block mb-[6rem]">
-
+    <div className="container mt-[6rem] hidden desktop:block mb-[6rem]">
       <div className="w-[82.3%] mx-auto bg-fefefd">
         <div className="w-full h-auto shadow-[0_147px_183px_rgba(0,0,0,0.07)] px-[2rem] ">
           <table className="w-full h-auto border-b-[0.15rem] border-d9d9d9">

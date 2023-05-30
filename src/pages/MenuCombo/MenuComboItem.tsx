@@ -87,9 +87,8 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
     }
   };
   return (
-    <div className="container grid tablet:grid-cols-3 grid-cols-1 gap-x-[3.2rem] h-full tablet:mt-[7.4rem] tablet:mb-[11.9rem] mt-[2.4rem] mb-[2.4rem]">
-
-      <div className="grid-cols-1 gap-y-[3.2rem] hidden tablet:grid">
+    <div className="container grid desktop:grid-cols-3 grid-cols-1 gap-x-[3.2rem] h-full desktop:mt-[7.4rem] desktop:mb-[11.9rem] mt-[2.4rem] mb-[2.4rem]">
+      <div className="grid-cols-1 gap-y-[3.2rem] hidden desktop:grid">
         <div className="w-full bg-333236 px-[3.8rem] py-[9.7rem] flex flex-col items-center h-fit">
           <p className="font-fahkwang font-normal text-[2.4rem] leading-[100%] text-center uppercase">FIND US HERE</p>
           <p className="font-light text-[1.8rem] text-center mt-[2.8rem]">
@@ -121,7 +120,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat hidden tablet:block"
+        className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat hidden desktop:block"
         style={{ backgroundImage: `url(${loveCombo})` }}
       >
         <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For {numberPeople} people</p>
@@ -136,7 +135,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat hidden tablet:block"
+        className="h-full p-[3.2rem] relative bg-center bg-cover bg-no-repeat hidden desktop:block"
         style={{
           backgroundImage: `url(${loveCombo2})`,
         }}
@@ -191,7 +190,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full bg-center bg-cover bg-no-repeat tablet:hidden"
+        className="h-full bg-center bg-cover bg-no-repeat desktop:hidden"
         style={{
           backgroundImage: `url(${loveCombo2})`,
         }}
@@ -200,7 +199,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
           <p className="font-fahkwang font-normal text-[1.8rem] leading-[100%] text-center uppercase opacity-95">
             {name}
           </p>
-          <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[1.2rem] tablet:mb-[6rem]">
+          <p className="font-light text-[1.4rem] leading-[100%] text-center text-b5b6b6 mt-[1.2rem] mb-[1.2rem] desktop:mb-[6rem]">
             {dishes &&
               dishes.reduce((total, dish) => {
                 return (total += dish.numberOfDish ? dish.numberOfDish : 0);
@@ -215,7 +214,7 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
           </p>
           {dishes &&
             dishes.map((dish) => (
-              <div className="w-full h-fit tablet:mt-[2.4rem] mt-[1.2rem]" key={dish.id}>
+              <div className="w-full h-fit desktop:mt-[2.4rem] mt-[1.2rem]" key={dish.id}>
                 <div className="flex justify-between">
                   <div className="text-[1.8rem] font-normal leading -[100%] capitalize">
                     {dish.numberOfDish}x {dish.name}

@@ -37,7 +37,7 @@ function BannerSlide() {
     clickable: true,
   };
   return (
-    <div className="w-full tablet:h-[90rem] h-[32rem] relative">
+    <div className="w-full desktop:h-[90rem] h-[32rem] relative">
       <Swiper
         pagination={pagination}
         modules={[Pagination]}
@@ -61,31 +61,31 @@ function BannerSlide() {
           </SwiperSlide>
         ))}
         <div
-          className="hidden tablet:block absolute top-[34.8rem] left-[3.9rem] cursor-pointer z-[1]"
+          className="hidden desktop:block absolute top-[34.8rem] left-[3.9rem] cursor-pointer z-[1]"
           onClick={swipePrev}
         >
           <img src={leftArrow} alt="" />
         </div>
         <div
-          className="hidden tablet:block absolute top-[34.8rem] right-[3.9rem] cursor-pointer z-[1]"
+          className="hidden desktop:block absolute top-[34.8rem] right-[3.9rem] cursor-pointer z-[1]"
           onClick={swipeNext}
         >
           <img src={rightArrow} alt="" />
         </div>
-        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] tablet:pt-[27.4rem] pt-[11.2rem]">
-          <p className="font-fahkwang font-normal tablet:text-[6.4rem] text-[2.6rem] leading-[110%] tablet:w-[54.2%] m-[0rem] truncate w-full">
+        <div className="container flex flex-col justify-start absolute top-0 left-0 right-0 z-[1] desktop:pt-[27.4rem] pt-[11.2rem]">
+          <p className="font-fahkwang font-normal desktop:text-[6.4rem] text-[2.6rem] leading-[110%] lg_desktop:w-[54.2%] m-[0rem] truncate w-full">
             Sign up & get baked!
           </p>
-          <p className="w-[54.2%] mt-[2.9rem] font-light text-[1.8rem] text-ededed line-clamp-3 tablet:webkit-box hidden ">
+          <p className="w-[54.2%] mt-[2.9rem] font-light text-[1.8rem] text-ededed line-clamp-3 desktop:webkit-box hidden ">
             Let’s Eat produces a variety of hand-crafted bakery goods for private label customers, as well as a full
             line of packaged and labeled specialty products. Sign up for our newsletter and be the first to see our
             latest events, exclusive promotions, and new arrivals!
           </p>
-          <p className="tablet:hidden font-light text-[1.6rem] leading-[140%] text-ededed mt-[2.9rem] webkit-box line-clamp-2 w-full">
+          <p className="desktop:hidden font-light text-[1.6rem] leading-[140%] text-ededed mt-[2.9rem] webkit-box line-clamp-2 w-full">
             Sign up for our newsletter and be the first to see our latest events, exclusive promotions, and new
             arrivals!
           </p>
-          <div className="w-full tablet:w-[28rem] h-[5.2rem] tablet:mt-[6.4rem] mt-[1.6rem] border-[2px] border-767676  flex items-center justify-between">
+          <div className="w-full desktop:w-[28rem] h-[5.2rem] desktop:mt-[6.4rem] mt-[1.6rem] border-[2px] border-767676  flex items-center justify-between">
             <input
               type="text"
               className="w-[23.2rem] h-full bg-transparent pl-[1.6rem] py-[1.2rem] outline-none  placeholder:text-white flex-1"

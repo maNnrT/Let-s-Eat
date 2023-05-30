@@ -1,13 +1,13 @@
-.swiperProduct{
-    .swiper-slide{
-        width: fit-content;
-    }
+.swiperProduct {
+  .swiper-slide {
+    width: fit-content;
+  }
 }
-@media (max-width:767px) {
-    .swiperProduct{
-        overflow: visible;
-        .swiper-slide{
-            width: fit-content;
-        }
+@media (max-width: 767px) {
+  .swiperProduct {
+    overflow: visible;
+    .swiper-slide {
+      width: fit-content;
     }
+  }
 }
