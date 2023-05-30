@@ -1,15 +1,6 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getIsOpenAddToCart,
-  getIsOpenCartUpdateFail,
-  getIsOpenCartUpdateSuccess,
-  getIsOpenSignIn,
-  getIsOpenSignUp,
-} from '@/redux/selectors';
-import { setOpenSignIn } from '@/redux/features/modalSlice/modalSlice';
 
 interface Props {
   title: string;
@@ -17,17 +8,6 @@ interface Props {
 }
 function SmallPopup({ title, img }: Props) {
   const el = document.getElementById('portal');
-  const dispatch = useDispatch()
-  // const isOpenCartUpdateSuccess = useSelector(getIsOpenCartUpdateSuccess);
-  const isOpenCartUpdateFail = useSelector(getIsOpenCartUpdateFail);
-  const isOpenAddToCart = useSelector(getIsOpenAddToCart);
-  const isOpenSignIn = useSelector(getIsOpenSignIn);
-  const isOpenSignUp = useSelector(getIsOpenSignUp);
-  // React.useEffect(() => {
-  //   if(isOpenCartUpdateSuccess) setTimeout(() => {
-  //     dispatch(setOpenSignIn(false))
-  //   }, 2000);
-  // }, []);
   if (el)
     return ReactDOM.createPortal(
       <motion.div
@@ -64,8 +44,8 @@ function SmallPopup({ title, img }: Props) {
           className="tablet:w-[20rem] tablet:h-[20rem] w-[15rem] h-[15rem]  bg-fdf9f5 "
         >
           <div className="w-auto h-full flex flex-col items-center justify-center p-[2rem]">
-            <img src={img} alt="" className="object-cover w-[6rem]" />
-            <p className="font-light text-[1.8rem] text-666565 mt-[2rem] text-center">{title}</p>
+            <img src={img} alt="" className="object-cover w-[6rem] " />
+            <p className="font-light tablet:text-[1.8rem] text-[1.4rem] text-666565 mt-[2rem] text-center">{title}</p>
           </div>
         </motion.div>
       </motion.div>,

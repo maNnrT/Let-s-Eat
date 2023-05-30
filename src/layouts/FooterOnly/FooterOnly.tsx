@@ -4,7 +4,9 @@ import { Outlet } from 'react-router-dom';
 function FooterOnly(): JSX.Element {
   return (
     <>
-      <div><Outlet></Outlet></div>
+      <div className="min-h-[50rem]">
+        <Outlet></Outlet>
+      </div>
       <Footer />
     </>
   );

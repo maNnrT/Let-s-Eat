@@ -1,8 +1,8 @@
 import './App.css';
 import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import cross from '@/assets/svg/Red_X.svg';
+import check from '@/assets/svg/check.svg';
+import cross from '@/assets/svg/cross.svg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {

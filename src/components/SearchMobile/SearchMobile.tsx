@@ -18,7 +18,7 @@ function Search({handleNav}:Props) {
   };
   return (
     <>
-      <div className="flex items-center h-[4rem] bg-white  relative w-full tablet:hidden mb-[2rem]">
+      <div className="flex items-center h-[4rem] bg-white  relative w-full tablet:hidden mb-[1.2rem]">
         <input
           type="text"
           value={searchValue}

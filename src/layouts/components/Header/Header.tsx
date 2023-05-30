@@ -96,9 +96,10 @@ function Header(): JSX.Element {
     >
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
-          <Link to={config.routes.homepage}>
+          <Link to={config.routes.homepage} className='w-[10rem] tablet:w-[14.3rem] mr-[5.3rem]'>
             <img src={logo} alt="logo" className="mr-[4.7rem] w-[10rem] tablet:w-[14.3rem] " />
           </Link>
+
           <HeaderMenu>
             <HeaderItem title="Homepage" to={config.routes.homepage}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus}></HeaderItem>
@@ -111,16 +112,19 @@ function Header(): JSX.Element {
         <div className="hidden tablet:flex items-center justify-end w-auto ">
           {!isLogin ? (
             <>
-              <Link to={config.routes.login} className="btn-secondary  w-[10rem] h-[3rem] mr-[2rem]">
+              <Link
+                to={config.routes.login}
+                className="text-secondary pr-[1rem] border-r-[1px] border-secondary text-[2rem]"
+              >
                 Log in
               </Link>
-              <Link to={config.routes.register} className="btn-secondary w-[10rem] h-[3rem]">
+              <Link to={config.routes.register} className="pl-[1rem] text-secondary text-[2rem]">
                 Sign up
               </Link>
             </>
           ) : (
             <>
-              <button className="btn-secondary w-[10rem] h-[3rem] mr-[2rem] " onClick={handleLogOut}>
+              <button className="text-secondary text-[2rem] mr-[2rem] " onClick={handleLogOut}>
                 Log out
               </button>
               <Link to={`${config.routes.cart}`} className="relative mr-[5px] hover:scale-150 hover:duration-500">
@@ -155,8 +159,8 @@ function Header(): JSX.Element {
         <div
           className={
             nav
-              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[4rem] pl-[1.6rem] pr-[1.6rem] pb-[4.4rem] ease-in-out duration-500 tablet:hidden'
-              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[4rem] pl-[1.6rem] pr-[1.6rem] pb-[4.4rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
+              ? 'fixed top-0 bg-primary w-[48vw] h-[32rem] right-0 pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] ease-in-out duration-500 tablet:hidden'
+              : 'fixed top-0 bg-primary w-[48vw] h-[32rem] pt-[2rem] pl-[1.6rem] pr-[1.6rem] pb-[2rem] right-[-100%] ease-in-out duration-500 tablet:hidden'
           }
           ref={refNavMobile}
         >
@@ -168,7 +172,12 @@ function Header(): JSX.Element {
             <HeaderItem title="Homepage" to={config.routes.homepage} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus} display="mobile" onClick={handleNav}></HeaderItem>
             <HeaderItem title="Contact" to={config.routes.contact} display="mobile" onClick={handleNav}></HeaderItem>
-            <HeaderItem title="Menu Combo" to={config.routes.menucombo} display="mobile" onClick={handleNav}></HeaderItem>
+            <HeaderItem
+              title="Menu Combo"
+              to={config.routes.menucombo}
+              display="mobile"
+              onClick={handleNav}
+            ></HeaderItem>
             <HeaderItem title="Shop" to={config.routes.shop} display="mobile" onClick={handleNav}></HeaderItem>
             <Link
               to={`${config.routes.cart}`}
