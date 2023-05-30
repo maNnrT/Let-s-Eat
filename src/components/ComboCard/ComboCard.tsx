@@ -8,6 +8,7 @@ import { getIsLogin } from '@/redux/selectors';
 // import SmallPopup from '../Popup/SmallPopup/SmallPopup';
 // import check from '@/assets/svg/check_formCheckOut.svg';
 import { addToCartCombo } from '@/redux/features/cart/CartSlice';
+import { setOpenAddToCart } from '@/redux/features/modalSlice/modalSlice';
 
 interface Props {
   id: number | undefined;
@@ -20,12 +21,8 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin: boolean = useSelector(getIsLogin);
-  const refDialog = React.useRef<HTMLDialogElement>(null);
   const openModal = () => {
-    refDialog.current?.showModal();
-    setTimeout(() => {
-      refDialog.current?.close();
-    }, 1000);
+    dispatch(setOpenAddToCart(id));
   };
   const handleAddToCart = () => {
     if (isLogin) {
@@ -50,27 +47,26 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
   };
   return (
     <div
-      className="w-full h-fit bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] "
+      className="desktop:w-full w-[22rem] h-full bg-white flex flex-col group shadow-[0_2px_12px_rgba(0,0,0,0.12)] "
       key={id}
     >
-      {/* <SmallPopup refDialog={refDialog} img={check} title="Add to shopping cart!" /> */}
-      <div className="w-full h-[26.1rem] overflow-hidden">
+      <div className="w-full desktop:h-[26.1rem] h-[20.6rem] overflow-hidden">
         <LazyLoadImage
           src={img}
           alt=""
-          className="w-full h-[26.1rem] object-cover group-hover:scale-110 duration-500 cursor-pointer"
+          className="w-full desktop:h-[26.1rem] h-[20.6rem] object-cover group-hover:scale-110 duration-500 cursor-pointer transition-all"
           onClick={() => navigate(`${config.routes.menucombo}/${id}`)}
         />
       </div>
-      <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full">
-        <p className="text-[2.2rem] leading-[2.9rem] font-fahkwang font-semibold text-444546 text-left line-clamp-1">
+      <div className="w-full px-[1.6rem] mt-[1.6rem] flex flex-col h-full flex-1">
+        <p className="desktop:text-[2.2rem] text-[1.6rem] leading-[130%] font-fahkwang font-semibold text-444546 text-left line-clamp-1">
           {name}
         </p>
-        <p className="text-[1.6rem] font-light text-3d3535 mt-[0.3rem] text-left min-h-[4.8rem] line-clamp-2">
+        <p className="desktop:text-[1.6rem] text-[1.4rem] font-light text-3d3535 mt-[0.3rem] text-left min-h-[4.8rem] line-clamp-2">
           For {numberPeople} people
         </p>
-        <div className="flex justify-between items-end mt-[1rem] self-end w-full mb-[0.8rem]">
-          <p className="font-bold text-[2.2rem] leading-[3.7rem] text-394149">
+        <div className="flex justify-between items-end desktop:mt-[1rem] mt-[0.4rem] self-end w-full desktop:mb-[0.8rem] mb-[0.7rem]">
+          <p className="font-bold desktop:text-[2.2rem] text-[1.8rem] leading-[170%] text-394149">
             $
             {dishes &&
               dishes
@@ -79,7 +75,10 @@ function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
                 }, 0)
                 .toFixed(2)}
           </p>
-          <p className="font-bold text-[1.8rem] leading-[3rem] text-secondary cursor-pointer" onClick={handleAddToCart}>
+          <p
+            className="font-bold desktop:text-[1.8rem] text-[1.6rem] leading-[170%] text-secondary cursor-pointer"
+            onClick={handleAddToCart}
+          >
             Add to cart
           </p>
         </div>

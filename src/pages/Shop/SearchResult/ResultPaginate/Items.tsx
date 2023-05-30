@@ -12,12 +12,12 @@ function Items({ currentItems }: Props) {
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   return (
-    <div className="grid grid-cols-12 gap-[1.6rem]" ref={parent}  >
+    <div className="grid grid-cols-12 gap-[1.6rem]" ref={parent}>
       {currentItems.length > 0 ? (
         currentItems.map((item) => {
           if (item.description !== undefined && item.price !== undefined) {
             return (
-              <div className="col-span-3" key={currentItems.indexOf(item)}>
+              <div className="col-span-12 tablet:col-span-6 desktop:col-span-3  flex justify-center" key={currentItems.indexOf(item)}>
                 <ProductCard
                   id={item.id}
                   name={item.name}
@@ -34,7 +34,7 @@ function Items({ currentItems }: Props) {
             item.numberPeople !== undefined
           ) {
             return (
-              <div className="col-span-3" key={currentItems.indexOf(item)}>
+              <div className=" col-span-12 tablet:col-span-6 desktop:col-span-3 flex justify-center" key={currentItems.indexOf(item)}>
                 <ComboCard
                   id={item.id}
                   name={item.name}

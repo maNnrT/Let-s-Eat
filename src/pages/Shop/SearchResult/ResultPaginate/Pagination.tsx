@@ -48,17 +48,17 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
       if (currentPage > 1) onPageChange(currentPage - 1);
     };
     return (
-      <div className="text-secondary mt-[4rem] mb-[4rem]">
+      <div className="text-secondary desktop:my-[3rem] my-[2rem]  ">
         <ul className="flex justify-center items-center">
-          <li className="mr-[2rem]">
-            <button className="paginationBtn" ref={refPrev} onClick={onPrevious}>
-              <BsChevronLeft size={20} />
+          <li className="desktop:mr-[2rem] mr-[1rem] tablet:mr-[1.5rem] ">
+            <button className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]" ref={refPrev} onClick={onPrevious}>
+              <BsChevronLeft size={20}  />
             </button>
           </li>
           {paginationRange.map((pageNumber) => {
             if (pageNumber === DOTS) {
               return (
-                <li key={Math.random()} className="text-[2rem] p-[1rem] cursor-default">
+                <li key={Math.random()} className="desktop:text-[2rem] p-[1rem] cursor-default">
                   &#8230;
                 </li>
               );
@@ -67,14 +67,14 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
                 <li key={pageNumber} className="flex justify-center items-center">
                   {pageNumber !== currentPage ? (
                     <button
-                      className="text-[2rem]  w-[4rem] h-[4rem] cursor-pointer mx-[2rem] "
+                      className="desktop:text-[2rem] desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem] cursor-pointer desktop:mx-[2rem] mx-[0.5rem] "
                       onClick={() => onPageChange(pageNumber)}
                     >
                       {pageNumber}
                     </button>
                   ) : (
                     <button
-                      className="text-[2rem] w-[4rem] h-[4rem] cursor-pointer bg-secondary text-white mx-[2rem] duration-200"
+                      className="desktop:text-[2rem] desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem] cursor-pointer bg-secondary text-white desktop:mx-[2rem] mx-[0.5rem] duration-200"
                       onClick={() => onPageChange(pageNumber)}
                     >
                       {pageNumber}
@@ -84,8 +84,8 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
               );
             }
           })}
-          <li className="ml-[2rem]">
-            <button className="paginationBtn" onClick={onNext} ref={refNext}>
+          <li className="desktop:ml-[2rem] ml-[1rem]">
+            <button className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]" onClick={onNext} ref={refNext}>
               <BsChevronRight size={20} />
             </button>
           </li>

@@ -97,7 +97,7 @@ function Header(): JSX.Element {
       <div className="h-full container flex items-center justify-between">
         <div className="flex items-center justify-start">
           <Link to={config.routes.homepage} className="w-[10rem] desktop:w-[14.3rem] mr-[5.3rem]">
-            <img src={logo} alt="logo" className="mr-[4.7rem] w-[10rem] desktop:w-[14.3rem] " />
+            <img src={logo} alt="logo" className="mr-[4.7rem] w-[10rem] desktop:w-[14.3rem]" />
           </Link>
 
           <HeaderMenu>
