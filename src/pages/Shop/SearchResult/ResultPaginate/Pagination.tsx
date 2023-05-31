@@ -9,8 +9,6 @@ interface Props {
   pageSize: number;
 }
 const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, pageSize }: Props) => {
-  console.log( totalCount, siblingCount, currentPage, pageSize);
-
   const refPrev = React.useRef<HTMLButtonElement>(null);
   const refNext = React.useRef<HTMLButtonElement>(null);
   const paginationRange = usePagination({

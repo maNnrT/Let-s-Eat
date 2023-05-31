@@ -120,11 +120,13 @@ function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
         </div>
       </div>
       <div
-        className="h-full px-[4.4rem] py-[28.6rem] bg-center bg-cover bg-no-repeat hidden desktop:block"
+        className="h-fit py-[28.6rem] bg-center bg-cover bg-no-repeat hidden desktop:block"
         style={{ backgroundImage: `url(${loveCombo})` }}
       >
         <p className="font-normal text-[1.8rem] leading-[100%] text-center uppercase">For {numberPeople} people</p>
-        <p className="font-fahkwang font-normal text-[4rem] leading-[100%] text-center uppercase mt-[1.6rem]">{name}</p>
+        <p className="font-fahkwang font-normal text-[4rem] leading-[100%] text-center uppercase mt-[1.6rem] h-fit line-clamp-1">
+          {name}
+        </p>
         <div className="w-[14.5rem] border-b-[1px] border-b-white mt-[4rem] mx-auto">
           <Link
             to={config.routes.shop}

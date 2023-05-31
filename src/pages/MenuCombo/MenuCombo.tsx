@@ -65,7 +65,7 @@ function MenuCombo() {
               A full meal of bread and coffee, or a relaxing afternoon with some sweets and tea. Let’s see what we have!
             </p>
             <p className="text-secondary mt-[1.2rem] desktop:hidden">Swipe left or right to see more combo</p>
-            <Swiper slidesPerView={1} className="w-full h-fit" ref={ref} initialSlide={id ? Number(id) - 1 : 0}>
+            <Swiper slidesPerView={1} className="w-full h-fit" ref={ref} initialSlide={id ? Number(id) - 1 : 0} spaceBetween={32}>
               {combos.map((combo) => (
                 <SwiperSlide className="bg-fdf9f5" key={combos.indexOf(combo)}>
                   <MenuComboItem
