@@ -2,13 +2,15 @@ import { usePagination, DOTS } from '../../../../hooks/usePagination';
 import * as React from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 interface Props {
-  onPageChange: any;
+  onPageChange: (page:number|string)=>void;
   totalCount: number;
   siblingCount: number;
   currentPage: number;
   pageSize: number;
 }
 const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, pageSize }: Props) => {
+  console.log( totalCount, siblingCount, currentPage, pageSize);
+
   const refPrev = React.useRef<HTMLButtonElement>(null);
   const refNext = React.useRef<HTMLButtonElement>(null);
   const paginationRange = usePagination({
@@ -18,7 +20,7 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     pageSize,
   });
   // React.useEffect(() => {
-  //   onPageChange(1);
+  //   if(currentPage > Math.ceil(totalCount / pageSize)) onPageChange(1);
   // }, [totalCount]);
   if (paginationRange) {
     const lastPage = paginationRange[paginationRange.length - 1];
@@ -50,8 +52,12 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
       <div className="text-secondary desktop:my-[3rem] my-[2rem]  ">
         <ul className="flex justify-center items-center">
           <li className="desktop:mr-[2rem] mr-[1rem] tablet:mr-[1.5rem] ">
-            <button className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]" ref={refPrev} onClick={onPrevious}>
-              <BsChevronLeft size={20}  />
+            <button
+              className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]"
+              ref={refPrev}
+              onClick={onPrevious}
+            >
+              <BsChevronLeft size={20} />
             </button>
           </li>
           {paginationRange.map((pageNumber) => {
@@ -84,7 +90,11 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
             }
           })}
           <li className="desktop:ml-[2rem] ml-[1rem]">
-            <button className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]" onClick={onNext} ref={refNext}>
+            <button
+              className="paginationBtn desktop:w-[4rem] w-[2rem] tablet:w-[3rem] desktop:h-[4rem] h-[2rem] tablet:h-[3rem]"
+              onClick={onNext}
+              ref={refNext}
+            >
               <BsChevronRight size={20} />
             </button>
           </li>

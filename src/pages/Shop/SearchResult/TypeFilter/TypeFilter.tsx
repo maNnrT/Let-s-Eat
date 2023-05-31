@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { typeFilterChange } from '@/redux/features/filter/filterSlice';
 import { useSearchParams } from 'react-router-dom';
@@ -18,6 +18,7 @@ function TypeFilter({ name }: Props) {
   const type = searchParams.get('type');
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     searchParams.set('type', (e.target as HTMLInputElement).value);
+    searchParams.set('page', "1");
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

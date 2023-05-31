@@ -11,8 +11,9 @@ import { getItemsByFilterSelector } from '@/redux/selectors';
 function ResultPaginate() {
   const [searchParams, setSearchParams] = useSearchParams();
   const items: (Product | Combo)[] = useSelector(getItemsByFilterSelector);
-  // const [currentPage, setCurrentPage] = React.useState<number>(Number(Object.fromEntries([...searchParams]).page));
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const page = Number(Object.fromEntries([...searchParams]).page);
+  const [currentPage, setCurrentPage] = React.useState<number>(page);
+  // const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [itemsPerPage, setItemPerPage] = React.useState<number>(8);
   const currentData = React.useMemo(() => {
     const firstPageIndex = (currentPage - 1) * itemsPerPage;
@@ -21,14 +22,14 @@ function ResultPaginate() {
   }, [currentPage, itemsPerPage, items]);
   const w = screen.width;
 
-  // const [showPaginate, setShowPaginate] = React.useState<boolean>(true);
+  const [showPaginate, setShowPaginate] = React.useState<boolean>(true);
 
   React.useMemo(() => {
-    // if (w < 1280) {
-    //   setShowPaginate(false);
-    // } else {
-    //   setShowPaginate(true);
-    // }
+    if (w < 1280) {
+      setShowPaginate(false);
+    } else {
+      setShowPaginate(true);
+    }
 
     if (w <= 768) {
       setItemPerPage(1);
@@ -38,13 +39,16 @@ function ResultPaginate() {
       setItemPerPage(8);
     }
   }, [w]);
+  React.useEffect(() => {
+    
+    setCurrentPage(page);
+  }, [page]);
   return (
     <div>
-      {/* {showPaginate && (
+      {showPaginate && (
         <Pagination
           currentPage={currentPage}
-          onPageChange={(page: number) => {
-            setCurrentPage(page);
+          onPageChange={(page: number|string) => {
             searchParams.set('page', page.toString());
             setSearchParams(searchParams);
           }}
@@ -52,7 +56,7 @@ function ResultPaginate() {
           siblingCount={1}
           totalCount={items.length}
         />
-      )} */}
+      )}
       <React.Suspense
         fallback={
           <div>
@@ -96,17 +100,16 @@ function ResultPaginate() {
       >
         <Items currentItems={currentData} />
       </React.Suspense>
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
-        onPageChange={(page: number) => {
-          setCurrentPage(page);
+        onPageChange={(page: number|string) => {
           searchParams.set('page', page.toString());
           setSearchParams(searchParams);
         }}
         pageSize={itemsPerPage}
         siblingCount={1}
         totalCount={items.length}
-      />
+      /> */}
     </div>
   );
 }
