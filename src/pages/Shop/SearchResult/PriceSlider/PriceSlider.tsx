@@ -48,6 +48,7 @@ function PriceSlider() {
   const applyPrice = () => {
     // console.log(range);
     searchParams.set('price', `${range[0].toString()},${range[1].toString()}`);
+    searchParams.set('page', "1");
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

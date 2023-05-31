@@ -100,7 +100,7 @@ function ResultPaginate() {
       >
         <Items currentItems={currentData} />
       </React.Suspense>
-      {/* <Pagination
+      <Pagination
         currentPage={currentPage}
         onPageChange={(page: number|string) => {
           searchParams.set('page', page.toString());
@@ -109,7 +109,7 @@ function ResultPaginate() {
         pageSize={itemsPerPage}
         siblingCount={1}
         totalCount={items.length}
-      /> */}
+      />
     </div>
   );
 }

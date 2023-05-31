@@ -15,6 +15,7 @@ function PriceOrder() {
   const handlePriceOrder = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     setShowPriceOrder(false);
     searchParams.set('order', (e.target as HTMLButtonElement).value);
+    searchParams.set('page', "1");
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

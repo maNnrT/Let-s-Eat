@@ -13,6 +13,7 @@ function CheckboxFilter() {
   const handleComboCheck = () => {
     // dispatch(comboFilterChange(!(isComboChecked ==='true')));
     searchParams.set('combo', (!(isComboChecked === 'true')).toString());
+    searchParams.set('page', "1");
     setSearchParams(searchParams);
   };
   const isProductChecked = searchParams.get('product');
@@ -21,6 +22,7 @@ function CheckboxFilter() {
   const handleProductCheck = () => {
     // dispatch(productFilterChange(!isProductChecked));
     searchParams.set('product', (!(isProductChecked === 'true')).toString());
+    searchParams.set('page', "1");
     setSearchParams(searchParams);
   };
   React.useEffect(() => {
