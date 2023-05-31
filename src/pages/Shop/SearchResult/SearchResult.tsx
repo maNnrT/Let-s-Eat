@@ -97,7 +97,7 @@ function SearchResult() {
     if (debouncedSearchValue === '') {
       dispatch(searchFilterChange(''));
     }
-  }, [debouncedSearchValue]);
+  }, [debouncedSearchValue, dispatch]);
   React.useEffect(() => {
     dispatch(searchFilterChange(searchValue));
     if (w >= 1280) window.scrollTo(0, 700);
@@ -171,6 +171,7 @@ function SearchResult() {
             className="h-fit bg-white shadow-[0px_147px_183px_rgba(0,0,0,0.07)] pt-[2rem] px-[3rem] pb-[2rem] 
            flex-col items-start sticky top-[7.5rem] right-0 desktop:flex hidden"
           >
+            {/* Category */}
             <div className="w-full">
               <p className="text-secondary text-[2rem]">Category</p>
               {categories.map((category) => (
@@ -195,6 +196,7 @@ function SearchResult() {
                 </div>
               ))}
             </div>
+            {/* Price Slider */}
             <div className="mt-[4rem] w-full">
               <p className="text-secondary text-[2rem]">Price</p>
               <CustomSlider value={range} onChange={handleChanges} valueLabelDisplay="off" disableSwap max={50} />
@@ -207,6 +209,8 @@ function SearchResult() {
                 </button>
               </div>
             </div>
+
+            {/* Check Combo,Product */}
             <Checkbox
               label="Combo"
               checked={isComboChecked}
@@ -233,6 +237,7 @@ function SearchResult() {
             >
               <div className="flex justify-between items-center">
                 <p className="text-666565 text-[2rem]">Order by</p>
+                {/* Price Order */}
                 <Tippy
                   visible={showPriceOrder}
                   placement="bottom"
@@ -277,6 +282,8 @@ function SearchResult() {
                   </button>
                 </Tippy>
               </div>
+
+              {/* Search */}
               <div
                 className="flex items-center h-[4rem] bg-white relative ml-[2rem] mr-[3rem] w-[30rem] pl-[1.5rem]
               shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
@@ -303,16 +310,15 @@ function SearchResult() {
                 >
                   <IoMdSearch size={20} color={'#D08C30'} />
                 </button>
-                {/* <div className="absolute top-[50%] translate-y-[-50%] right-[1.5rem]">
-                      <ImSpinner8 color={'#D08C30'} />
-                    </div> */}
               </div>
             </div>
-
-            <div className='flex justify-end desktop:hidden'>
-              <div className="text-secondary text-right flex border-[1px] border-secondary px-[0.8rem] rounded-full cursor-pointer items-center" onClick={() => setShowFilter(!showFilter)}>
-                <span className='mr-[0.8rem]'>Filter</span>
-                <CiSliderHorizontal size={20 } />
+            <div className="flex justify-end desktop:hidden">
+              <div
+                className="text-secondary text-right flex border-[1px] border-secondary px-[0.8rem] rounded-full cursor-pointer items-center"
+                onClick={() => setShowFilter(!showFilter)}
+              >
+                <span className="mr-[0.8rem]">Filter</span>
+                <CiSliderHorizontal size={20} />
               </div>
             </div>
             <div className="pt-[2rem] desktop:px-[3rem] px-[2rem] pb-[2rem] bg-white h-fit ">
@@ -321,6 +327,7 @@ function SearchResult() {
           </div>
         </div>
       </div>
+
       <div
         className={
           showFilter

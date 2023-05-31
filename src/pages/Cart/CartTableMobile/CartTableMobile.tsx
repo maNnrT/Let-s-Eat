@@ -8,6 +8,7 @@ import { getIdUserSelector } from '@/redux/selectors';
 import { updateCart } from '@/redux/features/cart/CartSlice';
 import config from '@/config';
 import { setOpenCartUpdateFail, setOpenCartUpdateSuccess } from '@/redux/features/modalSlice/modalSlice';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 interface Props {
   cartProduct: ProductItem[];
@@ -20,6 +21,7 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
   const idUser = useSelector(getIdUserSelector);
   // console.log(cartProduct);
   // console.log(cartCombo);
+  const [parent] = useAutoAnimate(/* optional config */);
   const openModal = () => {
     dispatch(setOpenCartUpdateSuccess(true));
     setTimeout(() => {
@@ -60,38 +62,49 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
     }
   };
   return (
-    <div className="container my-[2.4rem] h-fit block desktop:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] ">
-      {/* <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
-      <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" /> */}
-      {cartProduct.length !== 0 &&
-        cartProduct.map((item) => (
-          <React.Fragment key={item.id}>
-            <CartProductItem id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
-          </React.Fragment>
-        ))}
-      {cartCombo.length !== 0 &&
-        cartCombo.map((item) => (
-          <React.Fragment key={item.id}>
-            <CartComboItem id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
-          </React.Fragment>
-        ))}
-      {cartCombo.length === 0 && cartProduct.length === 0 && (
-        <div className="flex flex-col justify-center items-center my-[2rem] border-d9d9d9 border-b-[0.15rem] pb-[2rem]">
-          <BsCart color="#D08C30" size={45} />
-          <p className="text-secondary text-center text-[1.6rem] first-letter:capitalize mt-[2rem] ">
-            Cart is empty!
-            <br />
-            Add some products
-          </p>
-        </div>
-      )}
-      <div className="fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end">
+    <>
+      <div
+        className="container my-[2.4rem] h-fit block desktop:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] "
+        ref={parent}
+      >
+        {/* <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
+        <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" /> */}
+        {cartProduct.length !== 0 &&
+          cartProduct.map((item) => (
+            <React.Fragment key={item.id}>
+              <CartProductItem
+                id={item.id}
+                img={item.img}
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+              />
+            </React.Fragment>
+          ))}
+        {cartCombo.length !== 0 &&
+          cartCombo.map((item) => (
+            <React.Fragment key={item.id}>
+              <CartComboItem id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
+            </React.Fragment>
+          ))}
+        {cartCombo.length === 0 && cartProduct.length === 0 && (
+          <div className="flex flex-col justify-center items-center my-[2rem] border-d9d9d9 border-b-[0.15rem] pb-[2rem]">
+            <BsCart color="#D08C30" size={45} />
+            <p className="text-secondary text-center text-[1.6rem] first-letter:capitalize mt-[2rem] ">
+              Cart is empty!
+              <br />
+              Add some products
+            </p>
+          </div>
+        )}
+      </div>
+      <div className="fixed bottom-0 bg-fdf9f5 right-0 left-0  h-[5rem] shadow-[0_2px_12px_rgba(0,0,0,0.12)] flex items-center justify-end desktop:hidden">
         <p className="font-semibold desktop:text-[2.4rem] text-[1.6rem] text-primary uppercase mr-[1rem]">
           TOTAL: {totalPrice} $
         </p>
         <button
           className="w-[10rem] h-[3rem] text-666565 text-[1.2rem] border-[1.5px] 
-                border-666565 uppercase hover:bg-666565 hover:text-white hover:duration-200 mr-[1rem]"
+              border-666565 uppercase hover:bg-666565 hover:text-white hover:duration-200 mr-[1rem]"
           onClick={updateCartBtnHandle}
         >
           update cart
@@ -103,7 +116,7 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
           CHECKOUT
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

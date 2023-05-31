@@ -8,6 +8,7 @@ import { ComboItem, ProductItem } from '@/types/types';
 import { getIdUserSelector } from '@/redux/selectors';
 import { BsCart } from 'react-icons/bs';
 import { setOpenCartUpdateFail, setOpenCartUpdateSuccess } from '@/redux/features/modalSlice/modalSlice';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 interface Props {
   cartProduct: ProductItem[];
   cartCombo: ComboItem[];
@@ -18,6 +19,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
   const navigate = useNavigate();
   const refPara = React.useRef<HTMLParagraphElement>(null);
   const idUser = useSelector(getIdUserSelector);
+  const [parent] = useAutoAnimate(/* optional config */);
   // console.log(cartProduct);
   // console.log(cartCombo);
   const openModal = () => {
@@ -89,7 +91,7 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
                 </th>
               </tr>
             </thead>
-            <tbody className="w-full ">
+            <tbody className="w-full " ref={parent}>
               {cartProduct.length !== 0 &&
                 cartProduct.map((item) => (
                   <React.Fragment key={item.id}>

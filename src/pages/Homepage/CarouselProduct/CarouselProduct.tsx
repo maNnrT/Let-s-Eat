@@ -12,6 +12,7 @@ import './CarouselProduct.scss';
 // import required modules
 import { Product } from '@/types/types';
 import { BsCart } from 'react-icons/bs';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 interface Props {
   products: Product[];
 }
@@ -23,6 +24,8 @@ export default function CarouselProduct({ products }: Props) {
   const swipePrev = () => {
     ref.current?.swiper.slidePrev();
   };
+
+
   return (
     <>
       <Swiper
