@@ -13,7 +13,7 @@ import SearchTypeItem from '@/components/Popper/SearchTypeItem/SearchTypeItem';
 import useScrollDirection from '@/hooks/useScrollDirection';
 import config from '@/config';
 import { createSearchParams, useNavigate } from 'react-router-dom';
-import { PriceOrder } from '@/enum/enum';
+import { PriceOrderValue } from '@/enum/enum';
 // import { setSearchValue } from '@/redux/features/search/searchSlice';
 
 function Search() {
@@ -191,7 +191,7 @@ function Search() {
                         type: 'all',
                         combo: 'false',
                         product: 'false',
-                        order: PriceOrder.DEFAULT.toString(),
+                        order: PriceOrderValue.DEFAULT.toString(),
                         price: '0,50',
                       })}`,
                     });

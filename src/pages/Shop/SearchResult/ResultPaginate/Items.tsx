@@ -9,7 +9,7 @@ interface Props {
   currentItems: (Product | Combo)[];
 }
 function Items({ currentItems }: Props) {
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+  const [parent] = useAutoAnimate(/* optional config */);
 
   return (
     <div className="grid grid-cols-12 gap-[1.6rem]" ref={parent}>

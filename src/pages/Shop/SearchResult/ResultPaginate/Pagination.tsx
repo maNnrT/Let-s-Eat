@@ -1,5 +1,4 @@
 import { usePagination, DOTS } from '../../../../hooks/usePagination';
-import classnames from 'classnames';
 import * as React from 'react';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 interface Props {
@@ -18,9 +17,9 @@ const Pagination = ({ onPageChange, totalCount, siblingCount = 1, currentPage, p
     siblingCount,
     pageSize,
   });
-  React.useEffect(() => {
-    onPageChange(1);
-  }, [totalCount]);
+  // React.useEffect(() => {
+  //   onPageChange(1);
+  // }, [totalCount]);
   if (paginationRange) {
     const lastPage = paginationRange[paginationRange.length - 1];
     // if (currentPage === 0 || paginationRange.length < 2) {

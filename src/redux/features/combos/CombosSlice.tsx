@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import { Combo } from '@/types/types';
-import { PriceOrder, PriceSlider } from '@/enum/enum';
+import { PriceOrderValue, PriceSliderValue } from '@/enum/enum';
 
 interface initialState {
   combos: Combo[];
@@ -23,9 +23,9 @@ const combosSlice = createSlice({
       dishes: [],
     },
     combosByName: [],
-    priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
+    priceFilter: [PriceSliderValue.MIN, PriceSliderValue.MAX],
     productFilter: false,
-    priceOrder: PriceOrder.DEFAULT,
+    priceOrder: PriceOrderValue.DEFAULT,
     searchFilter: '',
   } as initialState,
   reducers: {},

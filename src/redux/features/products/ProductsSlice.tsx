@@ -2,8 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as request from '@/utils/request';
 import config from '@/config';
 import { Combo, Product } from '@/types/types';
-import { PriceSlider, PriceOrder } from '@/enum/enum';
-
 interface initialState {
   products: Product[];
   productsByIdArray: Product[];
@@ -12,11 +10,6 @@ interface initialState {
   productById: Product;
   productsByName: Product[];
   dishFilter: string;
-  typeFilter: string;
-  priceFilter: number[];
-  comboFilter: boolean;
-  priceOrder: string;
-  searchFilter: string;
 }
 const productsSlice = createSlice({
   name: 'products',
@@ -40,30 +33,10 @@ const productsSlice = createSlice({
     productsByName: [],
     combos: [],
     dishFilter: 'fresh-baked',
-    typeFilter: 'all',
-    priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
-    comboFilter: false,
-    priceOrder: PriceOrder.DEFAULT,
-    searchFilter: '',
   } as initialState,
   reducers: {
     dishFilterProductChange: (state, action) => {
       state.dishFilter = action.payload;
-    },
-    typeFilterChange: (state, action) => {
-      state.typeFilter = action.payload;
-    },
-    priceFilterProductChange: (state, action) => {
-      state.priceFilter = action.payload;
-    },
-    comboFilterChange: (state, action) => {
-      state.comboFilter = action.payload;
-    },
-    priceOrderProductChange: (state, action) => {
-      state.priceOrder = action.payload;
-    },
-    searchFilterProductChange: (state, action) => {
-      state.searchFilter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -161,12 +134,5 @@ export const getProductsByName = createAsyncThunk('products/getProductsByName', 
     console.error('Cant get products by name');
   }
 });
-export const {
-  dishFilterProductChange,
-  typeFilterChange,
-  priceFilterProductChange,
-  comboFilterChange,
-  priceOrderProductChange,
-  searchFilterProductChange,
-} = productsSlice.actions;
+export const { dishFilterProductChange } = productsSlice.actions;
 export default productsSlice;

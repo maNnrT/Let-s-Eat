@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PriceSlider, PriceOrder } from '@/enum/enum';
+import { PriceSliderValue, PriceOrderValue } from '@/enum/enum';
 
 interface initialState {
   typeFilter: string;
@@ -8,16 +8,15 @@ interface initialState {
   productFilter: boolean;
   priceOrder: string;
   searchFilter: string;
-
 }
 const filterSlice = createSlice({
   name: 'products',
   initialState: {
     typeFilter: 'all',
-    priceFilter: [PriceSlider.MIN, PriceSlider.MAX],
+    priceFilter: [PriceSliderValue.MIN, PriceSliderValue.MAX],
     comboFilter: false,
     productFilter: false,
-    priceOrder: PriceOrder.DEFAULT,
+    priceOrder: PriceOrderValue.DEFAULT,
     searchFilter: '',
   } as initialState,
   reducers: {

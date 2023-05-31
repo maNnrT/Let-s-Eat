@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { Combo, Product } from '@/types/types';
-import { PriceOrder } from '@/enum/enum';
+import { PriceOrderValue } from '@/enum/enum';
 
 export const getCartProductSelector = (state: RootState) => state.cart.cartProduct;
 export const getCartComboSelector = (state: RootState) => state.cart.cartCombo;
@@ -27,12 +27,9 @@ export const getProductFilterSelector = (state: RootState) => state.filters.prod
 export const getPriceOrderSelector = (state: RootState) => state.filters.priceOrder;
 export const getSearchFilterSelector = (state: RootState) => state.filters.searchFilter;
 
-
-
 export const getCombosSelector = (state: RootState) => state.combos.combos;
 export const getComboByIdSelector = (state: RootState) => state.combos.comboById;
 export const getCombosByNameSelector = (state: RootState) => state.combos.combosByName;
-
 
 export const getIdProductModal = (state: RootState) => state.modal.id;
 export const getIsOpenProductDetail = (state: RootState) => state.modal.openProductDetail;
@@ -135,9 +132,9 @@ export const getItemsByFilterSelector = createSelector(
       res = [...products, ...combos];
     }
     switch (priceOrder) {
-      case PriceOrder.DEFAULT:
+      case PriceOrderValue.DEFAULT:
         break;
-      case PriceOrder.LOWTOHIGH:
+      case PriceOrderValue.LOWTOHIGH:
         res.sort(
           (a, b) =>
             Number(
@@ -162,7 +159,7 @@ export const getItemsByFilterSelector = createSelector(
             ),
         );
         break;
-      case PriceOrder.HIGHTOLOW:
+      case PriceOrderValue.HIGHTOLOW:
         res.sort(
           (a, b) =>
             Number(

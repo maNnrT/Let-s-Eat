@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
-import { ImSpinner8 } from 'react-icons/im';
 import config from '@/config';
-import { Link, createSearchParams, useNavigate } from 'react-router-dom';
-import { PriceOrder } from '@/enum/enum';
+import { createSearchParams, useNavigate } from 'react-router-dom';
+import { PriceOrderValue } from '@/enum/enum';
 // import { setSearchValue } from '@/redux/features/search/searchSlice';
 interface Props {
   handleNav: () => void;
@@ -50,7 +49,7 @@ function Search({ handleNav }: Props) {
                 type: 'all',
                 combo: 'false',
                 product: 'false',
-                order: PriceOrder.DEFAULT.toString(),
+                order: PriceOrderValue.DEFAULT.toString(),
                 price: '0,50',
               })}`,
             });
