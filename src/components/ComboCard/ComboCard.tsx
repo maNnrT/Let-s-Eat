@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +17,9 @@ interface Props {
   dishes: Product[];
 }
 function ComboCard({ id, img, name, numberPeople, dishes }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isLogin: boolean = useSelector(getIsLogin);
+  const isLogin: boolean = useAppSelector(getIsLogin);
   const openModal = () => {
     dispatch(setOpenAddToCart(id));
   };

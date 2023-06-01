@@ -1,7 +1,7 @@
 import { priceFilterChange } from '@/redux/features/filter/filterSlice';
 import { getPriceFilterSelector } from '@/redux/selectors';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { PriceSliderValue } from '@/enum/enum';
@@ -23,11 +23,11 @@ const CustomSlider = styled(Slider)({
   },
 });
 function PriceSlider() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const priceRangeSearchQuery = searchParams.get('price');
   // if (priceRangeSearchQuery) console.log(priceRangeSearchQuery.split(','));
-  const priceRangeStore = useSelector(getPriceFilterSelector);
+  const priceRangeStore = useAppSelector(getPriceFilterSelector);
   const [range, setRange] = React.useState<number[]>(
     priceRangeSearchQuery
       ? priceRangeSearchQuery.split(',').map((str) => {
@@ -48,7 +48,7 @@ function PriceSlider() {
   const applyPrice = () => {
     // console.log(range);
     searchParams.set('price', `${range[0].toString()},${range[1].toString()}`);
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

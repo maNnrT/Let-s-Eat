@@ -3,7 +3,7 @@ import React from 'react';
 import { BsCart } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { CartComboItem, CartProductItem } from '../CartTableMobile/CartItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getIdUserSelector } from '@/redux/selectors';
 import { updateCart } from '@/redux/features/cart/CartSlice';
 import config from '@/config';
@@ -16,9 +16,9 @@ interface Props {
   totalPrice: string;
 }
 function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const idUser = useSelector(getIdUserSelector);
+  const idUser = useAppSelector(getIdUserSelector);
   // console.log(cartProduct);
   // console.log(cartCombo);
   const [parent] = useAutoAnimate(/* optional config */);

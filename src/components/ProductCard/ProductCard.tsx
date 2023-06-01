@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   price?: string;
 }
 function ProductCard({ id, img, name, description, price }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const openModal = () => {
     dispatch(setOpenProductDetailTrue(id));
   };

@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import config from '@/config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getAccounts } from '@/redux/features/account/AccountsSlice';
 import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/features/checkLogin/CheckLoginSlice';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
@@ -31,10 +31,10 @@ function Login(): JSX.Element {
     mode: 'onTouched',
     resolver: yupResolver(schema),
   });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isLogin: boolean = useSelector(getIsLogin);
-  const accountList: Account[] = useSelector(getAccountsSelector);
+  const isLogin: boolean = useAppSelector(getIsLogin);
+  const accountList: Account[] = useAppSelector(getAccountsSelector);
   const onTouched = (dataForm: FormData) => {
     const user = accountList.find((account: Account) => {
       return account.username === dataForm.email && account.password === dataForm.password;

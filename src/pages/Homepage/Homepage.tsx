@@ -10,7 +10,7 @@ import natureIngredient from '@/assets/svg/ingredients_Feature.svg';
 import workingHoursImg from '@/assets/image/image2.png';
 import sweetBakery from '@/assets/image/image3.png';
 import testimonial from '@/assets/Image/image9.png';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { dishFilterProductChange } from '@/redux/features/products/ProductsSlice';
 import { getProductsByDishSelector } from '@/redux/selectors';
@@ -20,10 +20,10 @@ import BannerSlide from './BannerSlider/BannerSlider';
 import { Product } from '@/types/types';
 import LoadingFallback from '@/components/LoadingFallback/LoadingFallback';
 function Homepage() {
-  // const isLogin = useSelector(getIsLogin);
+  // const isLogin = useAppSelector(getIsLogin);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const products: Product[] = useSelector(getProductsByDishSelector);
+  const dispatch = useAppDispatch();
+  const products: Product[] = useAppSelector(getProductsByDishSelector);
   const filterBtn = [
     { value: 'fresh-baked', title: 'Fresh Baked' },
     { value: 'sweetcake', title: 'Sweet cake' },

@@ -4,7 +4,7 @@ import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom';
 import check from '@/assets/svg/check.svg';
 import cross from '@/assets/svg/cross.svg';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import {
   getIdProductModal,
   getIsOpenAddToCart,
@@ -29,16 +29,16 @@ import config from './config';
 import SmallPopup from './components/Popup/SmallPopup/SmallPopup';
 
 function App(): JSX.Element {
-  const dispatch = useDispatch();
-  const idProduct = useSelector(getIdProductModal);
-  const isOpenProductDetail = useSelector(getIsOpenProductDetail);
-  const isOpenSendForm = useSelector(getIsOpenSendFormSuccess);
-  const isOpenCheckOut = useSelector(getIsOpenCheckOutSuccess);
-  const isOpenCartUpdateSuccess = useSelector(getIsOpenCartUpdateSuccess);
-  const isOpenCartUpdateFail = useSelector(getIsOpenCartUpdateFail);
-  const isOpenAddToCart = useSelector(getIsOpenAddToCart);
-  const isOpenSignIn = useSelector(getIsOpenSignIn);
-  const isOpenSignUp = useSelector(getIsOpenSignUp);
+  const dispatch = useAppDispatch();
+  const idProduct = useAppSelector(getIdProductModal);
+  const isOpenProductDetail = useAppSelector(getIsOpenProductDetail);
+  const isOpenSendForm = useAppSelector(getIsOpenSendFormSuccess);
+  const isOpenCheckOut = useAppSelector(getIsOpenCheckOutSuccess);
+  const isOpenCartUpdateSuccess = useAppSelector(getIsOpenCartUpdateSuccess);
+  const isOpenCartUpdateFail = useAppSelector(getIsOpenCartUpdateFail);
+  const isOpenAddToCart = useAppSelector(getIsOpenAddToCart);
+  const isOpenSignIn = useAppSelector(getIsOpenSignIn);
+  const isOpenSignUp = useAppSelector(getIsOpenSignUp);
   const location = useLocation();
   React.useMemo(() => {
     if (isOpenProductDetail || isOpenSendForm || isOpenCheckOut) {

@@ -1,5 +1,5 @@
 import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 
 interface Props {
   id?: number | undefined;
@@ -7,7 +7,7 @@ interface Props {
   // onOpen: (id: number | undefined) => void;
 }
 function SearchDishItem({ id, name }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="">
       <div

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getIsLogin, getProductByIdSelector } from '@/redux/selectors';
 import { getProductById } from '@/redux/features/products/ProductsSlice';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
@@ -22,10 +22,10 @@ interface Props {
   id: number | undefined;
 }
 function ProductDetail({ id }: Props): JSX.Element | null {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isLogin: boolean = useSelector(getIsLogin);
-  const productById: Product = useSelector(getProductByIdSelector);
+  const isLogin: boolean = useAppSelector(getIsLogin);
+  const productById: Product = useAppSelector(getProductByIdSelector);
   // console.log('check:' ,productById);
 
   const refBtn = React.useRef<HTMLButtonElement>(null);

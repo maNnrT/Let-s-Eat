@@ -1,13 +1,13 @@
 import React from 'react';
 import { getPriceOrderSelector } from '@/redux/selectors';
 import { priceOrderChange } from '@/redux/features/filter/filterSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { PriceOrderValue } from '@/enum/enum';
 
 function PriceOrderMobile() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const priceOrder = useSelector(getPriceOrderSelector);
+  const priceOrder = useAppSelector(getPriceOrderSelector);
   const handlePriceOrder = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.ChangeEvent<HTMLInputElement>,
   ): void => {

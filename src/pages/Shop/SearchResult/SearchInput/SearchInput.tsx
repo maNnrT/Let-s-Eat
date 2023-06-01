@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { useSearchParams } from 'react-router-dom';
 import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
 import { searchFilterChange } from '@/redux/features/filter/filterSlice';
 
 function SearchInput() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const keyword = searchParams.get('keyword');
   const [searchValue, setSearchValue] = React.useState(keyword !== null ? keyword : '');
   const handleSearch = (): void => {
     searchParams.set('keyword', searchValue);
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   const handleClear = () => {
     setSearchValue('');
     searchParams.set('keyword', '');
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
     inputRef.current?.focus();
   };

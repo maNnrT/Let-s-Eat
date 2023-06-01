@@ -1,6 +1,6 @@
 import * as React from 'react';
 import heroBannerCategoryFreshBaked from '@/assets/image/HeroBanner_FreshBaked.png';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
 import { getProductsSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 // import CategoryProduct from './CategoryProduct';
@@ -20,8 +20,8 @@ interface Props {
   description: string;
 }
 function Category({ category, description }: Props) {
-  const dispatch = useDispatch();
-  let products = useSelector(getProductsSelector);
+  const dispatch = useAppDispatch();
+  let products = useAppSelector(getProductsSelector);
   products = products.filter((product: Product) => {
     return product.type === category;
   });

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ImCross } from 'react-icons/im';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import {
   decreaseProductItemQuantity,
   increaseProductItemQuantity,
@@ -14,7 +14,7 @@ interface Props {
   quantity: number;
 }
 function CartProductItem({ id, img, name, price, quantity }: Props): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [subTotal, setSubTotal] = React.useState<string>('');
   const decreaseNumber = () => {
     dispatch(decreaseProductItemQuantity(id));

@@ -6,7 +6,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getCombosSelector } from '@/redux/selectors';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
 import MenuComboItem from './MenuComboItem';
@@ -15,9 +15,9 @@ import { Combo } from '@/types/types';
 import { useParams } from 'react-router-dom';
 function MenuCombo() {
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = React.useRef<SwiperRef | null>(null);
-  const combos: Combo[] = useSelector(getCombosSelector);
+  const combos: Combo[] = useAppSelector(getCombosSelector);
   const swipeNext = () => {
     ref.current?.swiper.slideNext();
   };
@@ -65,7 +65,13 @@ function MenuCombo() {
               A full meal of bread and coffee, or a relaxing afternoon with some sweets and tea. Let’s see what we have!
             </p>
             <p className="text-secondary mt-[1.2rem] desktop:hidden">Swipe left or right to see more combo</p>
-            <Swiper slidesPerView={1} className="w-full h-fit" ref={ref} initialSlide={id ? Number(id) - 1 : 0} spaceBetween={32}>
+            <Swiper
+              slidesPerView={1}
+              className="w-full h-fit"
+              ref={ref}
+              initialSlide={id ? Number(id) - 1 : 0}
+              spaceBetween={32}
+            >
               {combos.map((combo) => (
                 <SwiperSlide className="bg-fdf9f5" key={combos.indexOf(combo)}>
                   <MenuComboItem

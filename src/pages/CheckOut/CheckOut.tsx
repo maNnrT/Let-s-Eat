@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 // import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
 // import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import {
   getDiscountCodeSelector,
   getIdUserSelector,
@@ -64,15 +64,15 @@ function CheckOut(): JSX.Element {
     // });
     dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo: [] }));
     dispatch(setOpenCheckOutSuccess(true));
-    console.log(data)
+    console.log(data);
   };
-  const dispatch = useDispatch();
-  const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
+  const dispatch = useAppDispatch();
+  const cartProduct: ProductItem[] = useAppSelector(getCartProductSelector);
 
-  const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
-  const idUser: number | undefined = useSelector(getIdUserSelector);
-  const discountCodeArray: DiscountCode[] = useSelector(getDiscountCodeSelector);
-  const totalPrice: string = useSelector(getTotalPriceSelector);
+  const cartCombo: ComboItem[] = useAppSelector(getCartComboSelector);
+  const idUser: number | undefined = useAppSelector(getIdUserSelector);
+  const discountCodeArray: DiscountCode[] = useAppSelector(getDiscountCodeSelector);
+  const totalPrice: string = useAppSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps

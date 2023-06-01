@@ -4,7 +4,7 @@ import loveCombo2 from '@/assets/image/image27.png';
 import React from 'react';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getIsLogin } from '@/redux/selectors';
 import { addToCartCombo } from '@/redux/features/cart/CartSlice';
 import { setOpenAddToCart } from '@/redux/features/modalSlice/modalSlice';
@@ -17,8 +17,8 @@ interface Props {
 }
 function MenuComboItem({ id, name, img, numberPeople, dishes }: Props) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isLogin: boolean = useSelector(getIsLogin);
+  const dispatch = useAppDispatch();
+  const isLogin: boolean = useAppSelector(getIsLogin);
   const openModal = () => {
     dispatch(setOpenAddToCart(true));
     setTimeout(() => {

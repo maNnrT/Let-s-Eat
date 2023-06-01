@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import config from '@/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAccounts, addNewAccounts } from '@/redux/features/account/AccountsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { Account } from '@/types/types';
 
@@ -29,7 +29,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 function Login(): JSX.Element {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -39,8 +39,8 @@ function Login(): JSX.Element {
     mode: 'onTouched',
     resolver: yupResolver(schema),
   });
-  const accountList: Account[] = useSelector(getAccountsSelector);
-  const isLogin: boolean = useSelector(getIsLogin);
+  const accountList: Account[] = useAppSelector(getAccountsSelector);
+  const isLogin: boolean = useAppSelector(getIsLogin);
   const onTouched = (data: FormData) => {
     const isExist = accountList.every((account: Account) => {
       return account.username !== data.email;

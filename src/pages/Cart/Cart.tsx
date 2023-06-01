@@ -1,6 +1,6 @@
 import * as React from 'react';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getCartProductSelector, getTotalPriceSelector, getCartComboSelector } from '@/redux/selectors';
 import { ComboItem, ProductItem } from '@/types/types';
 import CartTable from './CartTable';
@@ -8,10 +8,10 @@ import { getCartTotal } from '@/redux/features/cart/CartSlice';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import CartTableMobile from './CartTableMobile/CartTableMobile';
 function Cart(): JSX.Element {
-  const dispatch = useDispatch();
-  const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
-  const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
-  const totalPrice: string = useSelector(getTotalPriceSelector);
+  const dispatch = useAppDispatch();
+  const cartProduct: ProductItem[] = useAppSelector(getCartProductSelector);
+  const cartCombo: ComboItem[] = useAppSelector(getCartComboSelector);
+  const totalPrice: string = useAppSelector(getTotalPriceSelector);
   React.useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps

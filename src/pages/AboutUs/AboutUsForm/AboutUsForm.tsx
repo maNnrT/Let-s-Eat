@@ -5,7 +5,7 @@ import Input from '@/components/Form/Input';
 import InputTextarea from '@/components/Form/InputTextarea';
 import React from 'react';
 import formatPhoneNumber from '@/utils/formatPhoneNumber';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setOpenSendFormSuccess } from '@/redux/features/modalSlice/modalSlice';
 const schema = yup
   .object({
@@ -18,7 +18,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 function AboutUsForm(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { typeFilterChange } from '@/redux/features/filter/filterSlice';
 import { useSearchParams } from 'react-router-dom';
 const categories = [
@@ -13,12 +13,12 @@ interface Props {
   name: string;
 }
 function TypeFilter({ name }: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const type = searchParams.get('type');
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     searchParams.set('type', (e.target as HTMLInputElement).value);
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

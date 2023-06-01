@@ -14,7 +14,7 @@ import {
   // getProductsSelector,
   // getCombosSelector,
 } from '@/redux/selectors';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart, updateCart } from '@/redux/features/cart/CartSlice';
@@ -29,20 +29,20 @@ import { BsPencilSquare } from 'react-icons/bs';
 function Header(): JSX.Element {
   const [scrollDirection, transparent] = useScrollDirection();
   const [nav, setNav] = React.useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleNav = (): void => {
     setNav(!nav);
   };
   const handleLogOut = () => {
     dispatch(setIsLoginFalse());
   };
-  const isLogin: boolean = useSelector(getIsLogin);
-  const idUser: number | undefined = useSelector(getIdUserSelector);
-  const totalQuantity: number = useSelector(getTotalQuantitySelector);
-  const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
-  const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
-  // const products: Product[] = useSelector(getProductsSelector);
-  // const combos: Combo[] = useSelector(getCombosSelector);
+  const isLogin: boolean = useAppSelector(getIsLogin);
+  const idUser: number | undefined = useAppSelector(getIdUserSelector);
+  const totalQuantity: number = useAppSelector(getTotalQuantitySelector);
+  const cartProduct: ProductItem[] = useAppSelector(getCartProductSelector);
+  const cartCombo: ComboItem[] = useAppSelector(getCartComboSelector);
+  // const products: Product[] = useAppSelector(getProductsSelector);
+  // const combos: Combo[] = useAppSelector(getCombosSelector);
   // const newCombos: Combo[] = JSON.parse(JSON.stringify(combos));
   // const newCartProduct: ProductItem[] = JSON.parse(JSON.stringify(cartProduct));
   // const newCartCombo: ComboItem[] = JSON.parse(JSON.stringify(cartCombo));

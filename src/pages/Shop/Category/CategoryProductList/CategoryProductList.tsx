@@ -1,7 +1,7 @@
 import { Product } from '@/types/types';
 import CategoryProduct from '../CategoryProduct/CategoryProduct';
 import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { Link } from 'react-router-dom';
 import config from '@/config';
 interface Props {
@@ -9,8 +9,8 @@ interface Props {
   arrayProducts: Product[];
   newName: string;
 }
-function CategoryProductList({ products, arrayProducts,newName }: Props) {
-  const dispatch = useDispatch();
+function CategoryProductList({ products, arrayProducts, newName }: Props) {
+  const dispatch = useAppDispatch();
   return (
     <div className="flex flex-col h-full">
       {products.length > 0 ? (

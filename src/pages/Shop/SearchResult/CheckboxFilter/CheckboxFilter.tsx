@@ -2,27 +2,27 @@ import * as React from 'react';
 import Checkbox from '@/components/Checkbox/Checkbox';
 import { comboFilterChange, productFilterChange } from '@/redux/features/filter/filterSlice';
 // import { getComboFilterSelector, getProductFilterSelector } from '@/redux/selectors';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { useSearchParams } from 'react-router-dom';
 
 function CheckboxFilter() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const isComboChecked = searchParams.get('combo');
-  // const isComboChecked: boolean = useSelector(getComboFilterSelector);
+  // const isComboChecked: boolean = useAppSelector(getComboFilterSelector);
   const handleComboCheck = () => {
     // dispatch(comboFilterChange(!(isComboChecked ==='true')));
     searchParams.set('combo', (!(isComboChecked === 'true')).toString());
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   const isProductChecked = searchParams.get('product');
 
-  // const isProductChecked: boolean = useSelector(getProductFilterSelector);
+  // const isProductChecked: boolean = useAppSelector(getProductFilterSelector);
   const handleProductCheck = () => {
     // dispatch(productFilterChange(!isProductChecked));
     searchParams.set('product', (!(isProductChecked === 'true')).toString());
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

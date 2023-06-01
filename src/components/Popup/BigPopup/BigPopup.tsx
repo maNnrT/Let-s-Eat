@@ -3,7 +3,7 @@ import popupImg from '@/assets/svg/image_PopUp.svg';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { setOpenCheckOutSuccess, setOpenSendFormSuccess } from '@/redux/features/modalSlice/modalSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 
 interface Props {
   subtitle: string;
@@ -15,7 +15,7 @@ interface Props {
 
 function BigPopup({ subtitle, title, description, to, btnTitle }: Props) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleNavigateBtn = () => {
     setTimeout(() => navigate(to), 1000);
     dispatch(setOpenSendFormSuccess(false));

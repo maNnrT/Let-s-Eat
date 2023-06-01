@@ -1,13 +1,13 @@
 import React from 'react';
 import { priceOrderChange } from '@/redux/features/filter/filterSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import Tippy from '@tippyjs/react';
 import { PriceOrderValue } from '@/enum/enum';
 import { BsChevronDown } from 'react-icons/bs';
 import { useSearchParams } from 'react-router-dom';
 
 function PriceOrder() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const priceOrder = searchParams.get('order');
 
@@ -15,7 +15,7 @@ function PriceOrder() {
   const handlePriceOrder = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     setShowPriceOrder(false);
     searchParams.set('order', (e.target as HTMLButtonElement).value);
-    searchParams.set('page', "1");
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
   React.useEffect(() => {

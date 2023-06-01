@@ -5,12 +5,12 @@ const Items = React.lazy(() => wait(1000).then(() => import('./Items')));
 import Pagination from '@/pages/Shop/SearchResult/ResultPaginate/Pagination';
 import LoadingCard from '@/components/LoadingCard/LoadingCard';
 import { useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/hooks/reduxHooks';
 import { getItemsByFilterSelector } from '@/redux/selectors';
 
 function ResultPaginate() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const items: (Product | Combo)[] = useSelector(getItemsByFilterSelector);
+  const items: (Product | Combo)[] = useAppSelector(getItemsByFilterSelector);
   const page = Number(Object.fromEntries([...searchParams]).page);
   const [currentPage, setCurrentPage] = React.useState<number>(page);
   const [itemsPerPage, setItemPerPage] = React.useState<number>(8);
@@ -46,7 +46,7 @@ function ResultPaginate() {
       {showPaginate && (
         <Pagination
           currentPage={currentPage}
-          onPageChange={(page: number|string) => {
+          onPageChange={(page: number | string) => {
             searchParams.set('page', page.toString());
             setSearchParams(searchParams);
           }}
@@ -100,7 +100,7 @@ function ResultPaginate() {
       </React.Suspense>
       <Pagination
         currentPage={currentPage}
-        onPageChange={(page: number|string) => {
+        onPageChange={(page: number | string) => {
           searchParams.set('page', page.toString());
           setSearchParams(searchParams);
         }}

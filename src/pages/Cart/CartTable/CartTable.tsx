@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CartProductItem, CartComboItem } from './CartItem/';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { updateCart } from '@/redux/features/cart/CartSlice';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';
@@ -15,10 +15,10 @@ interface Props {
   totalPrice: string;
 }
 function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const refPara = React.useRef<HTMLParagraphElement>(null);
-  const idUser = useSelector(getIdUserSelector);
+  const idUser = useAppSelector(getIdUserSelector);
   const [parent] = useAutoAnimate(/* optional config */);
   // console.log(cartProduct);
   // console.log(cartCombo);
