@@ -80,7 +80,7 @@ function Login(): JSX.Element {
   // const [email, setEmail] = React.useState<string>('');
   // const [password, setPassword] = React.useState<string>('');
   // const [confirmPassword, setConfirmPassword] = React.useState<string>('');
-  const [term, setTerm] = React.useState<boolean>(false);
+  // const [term, setTerm] = React.useState<boolean>(false);
   const ref = React.useRef<HTMLParagraphElement>(null);
   // const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setFirstName(e.target.value);

@@ -10,7 +10,6 @@ import { getAccounts } from '@/redux/features/account/AccountsSlice';
 import { setIsLoginTrue, setIsLoginFalse, setIdUser } from '@/redux/features/checkLogin/CheckLoginSlice';
 import { getAccountsSelector, getIsLogin } from '@/redux/selectors';
 import { Account } from '@/types/types';
-import check from '@/assets/svg/check_formCheckOut.svg';
 import Input from '@/components/Form/Input';
 import { setOpenSignIn } from '@/redux/features/modalSlice/modalSlice';
 

@@ -1,4 +1,4 @@
-import React, { FC, TextareaHTMLAttributes } from 'react';
+import { FC, TextareaHTMLAttributes } from 'react';
 import check from '@/assets/svg/check_formCheckOut.svg';
 
 interface InputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {

@@ -1,6 +1,6 @@
 import './App.css';
 import { Outlet, useLocation, ScrollRestoration } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+// import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import check from '@/assets/svg/check.svg';
 import cross from '@/assets/svg/cross.svg';
 
@@ -93,8 +93,8 @@ function App(): JSX.Element {
       </div>
       <Outlet />
       <ScrollRestoration
-        getKey={(location, matches) => {
-          const excludePath = '/shop/search';
+        getKey={(location) => {
+          // const excludePath = '/shop/search';
           // if (location.pathname === excludePath) return location.key;
           return location.pathname;
         }}

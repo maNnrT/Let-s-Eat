@@ -1,5 +1,4 @@
 import config from '@/config';
-import React from 'react';
 import { Link } from 'react-router-dom';
 interface Props {
   id?: number | undefined;

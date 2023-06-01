@@ -2,9 +2,8 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { v4 as uuidv4 } from 'uuid';
-import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
-import check from '@/assets/svg/check_formCheckOut.svg';
-import flag from '@/assets/image/image33.png';
+// import Select, { GroupBase, SingleValue, StylesConfig } from 'react-select';
+// import flag from '@/assets/image/image33.png';
 import heroBannerCart from '@/assets/image/HeroBanner_Cart.png';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -41,7 +40,7 @@ function CheckOut(): JSX.Element {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-    clearErrors,
+    // clearErrors,
   } = useForm<FormData>({
     mode: 'onTouched',
     resolver: yupResolver(schema),
@@ -65,6 +64,7 @@ function CheckOut(): JSX.Element {
     // });
     dispatch(updateCart({ id: idUser, cartProduct: [], cartCombo: [] }));
     dispatch(setOpenCheckOutSuccess(true));
+    console.log(data)
   };
   const dispatch = useDispatch();
   const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
@@ -80,25 +80,25 @@ function CheckOut(): JSX.Element {
   React.useEffect(() => {
     dispatch(getDiscountCode());
   }, []);
-  const [name, setName] = React.useState<string>('');
+  // const [name, setName] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
-  const [email, setEmail] = React.useState<string>('');
-  const [city, setCity] = React.useState<string>('');
-  const [zipCode, setZipCode] = React.useState<string>('');
-  const [address, setAddress] = React.useState<string>('');
+  // const [email, setEmail] = React.useState<string>('');
+  // const [city, setCity] = React.useState<string>('');
+  // const [zipCode, setZipCode] = React.useState<string>('');
+  // const [address, setAddress] = React.useState<string>('');
   const [discountCode, setDiscountCode] = React.useState<string>('');
   const [coupon, setCoupon] = React.useState<number>(0);
   const [billId, setBillId] = React.useState<string>('');
   const refDiscount = React.useRef<HTMLSpanElement | null>(null);
-  const optionsCountryValue = [
-    { value: 'usa', label: `United State of America` },
-    { value: 'england', label: 'England' },
-    { value: 'canada', label: 'Canada' },
-  ];
-  const optionsPaymentValue = [
-    { value: 'COD', label: `By cash when receive` },
-    { value: 'Transfer', label: 'Transfer via bank account' },
-  ];
+  // const optionsCountryValue = [
+  //   { value: 'usa', label: `United State of America` },
+  //   { value: 'england', label: 'England' },
+  //   { value: 'canada', label: 'Canada' },
+  // ];
+  // const optionsPaymentValue = [
+  //   { value: 'COD', label: `By cash when receive` },
+  //   { value: 'Transfer', label: 'Transfer via bank account' },
+  // ];
 
   // const [optionCountry, setOptionCountry] = React.useState<Option>(optionsCountryValue[0]);
   // const [optionPayment, setOptionPayment] = React.useState<Option>(optionsPaymentValue[0]);
@@ -108,30 +108,30 @@ function CheckOut(): JSX.Element {
   // const handleOptionPayment = (selectOption: SingleValue<Option>) => {
   //   if (selectOption) setOptionPayment(selectOption);
   // };
-  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    clearErrors('name');
-  };
+  // const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setName(e.target.value);
+  //   clearErrors('name');
+  // };
   const handlePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatedPhoneNumber = formatPhoneNumber(e.target.value);
     setPhone(formatedPhoneNumber);
   };
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    clearErrors('email');
-  };
-  const handleCity = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(e.target.value);
-    clearErrors('city');
-  };
-  const handleZipCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZipCode(e.target.value);
-    clearErrors('zipCode');
-  };
-  const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-    clearErrors('address');
-  };
+  // const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(e.target.value);
+  //   clearErrors('email');
+  // };
+  // const handleCity = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setCity(e.target.value);
+  //   clearErrors('city');
+  // };
+  // const handleZipCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setZipCode(e.target.value);
+  //   clearErrors('zipCode');
+  // };
+  // const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setAddress(e.target.value);
+  //   clearErrors('address');
+  // };
   const handleDiscountCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDiscountCode(e.target.value);
   };

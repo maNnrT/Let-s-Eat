@@ -7,7 +7,7 @@ import modalSlice from './features/modalSlice/modalSlice';
 import combosSlice from './features/combos/CombosSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import * as reduxThunk from 'redux-thunk/extend-redux';
+// import * as reduxThunk from 'redux-thunk/extend-redux';
 import filterSlice from './features/filter/filterSlice';
 const persistConfig = {
   key: 'root',

@@ -1,4 +1,3 @@
-import React from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-types
 const debounceFunction = (fn: Function, ms = 300) => {
   let timeoutId: ReturnType<typeof setTimeout>;

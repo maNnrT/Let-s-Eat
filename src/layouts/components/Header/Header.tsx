@@ -1,9 +1,9 @@
 import config from '@/config';
 import logo from '@/assets/svg/Logo.svg';
 import cartImg from '@/assets/svg/cart.svg';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { FiLogIn, FiLogOut } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderMenu, { HeaderItem } from './HeaderMenu';
 import {
   getIsLogin,
@@ -11,14 +11,14 @@ import {
   getTotalQuantitySelector,
   getCartProductSelector,
   getCartComboSelector,
-  getProductsSelector,
-  getCombosSelector,
+  // getProductsSelector,
+  // getCombosSelector,
 } from '@/redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoginFalse } from '@/redux/features/checkLogin/CheckLoginSlice';
 import * as React from 'react';
 import { getCartTotal, getUserCart, updateCart } from '@/redux/features/cart/CartSlice';
-import { ProductItem, ComboItem, Product, Combo } from '@/types/types';
+import { ProductItem, ComboItem } from '@/types/types';
 import Search from '@/components/Search';
 import SearchMobile from '@/components/SearchMobile';
 import { getProducts } from '@/redux/features/products/ProductsSlice';
@@ -27,7 +27,6 @@ import { getCombos } from '@/redux/features/combos/CombosSlice';
 import { BsPencilSquare } from 'react-icons/bs';
 
 function Header(): JSX.Element {
-  const navigate = useNavigate();
   const [scrollDirection, transparent] = useScrollDirection();
   const [nav, setNav] = React.useState<boolean>(false);
   const dispatch = useDispatch();
@@ -42,8 +41,8 @@ function Header(): JSX.Element {
   const totalQuantity: number = useSelector(getTotalQuantitySelector);
   const cartProduct: ProductItem[] = useSelector(getCartProductSelector);
   const cartCombo: ComboItem[] = useSelector(getCartComboSelector);
-  const products: Product[] = useSelector(getProductsSelector);
-  const combos: Combo[] = useSelector(getCombosSelector);
+  // const products: Product[] = useSelector(getProductsSelector);
+  // const combos: Combo[] = useSelector(getCombosSelector);
   // const newCombos: Combo[] = JSON.parse(JSON.stringify(combos));
   // const newCartProduct: ProductItem[] = JSON.parse(JSON.stringify(cartProduct));
   // const newCartCombo: ComboItem[] = JSON.parse(JSON.stringify(cartCombo));

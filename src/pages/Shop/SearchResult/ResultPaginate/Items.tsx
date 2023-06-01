@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Combo, Product } from '@/types/types';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import ComboCard from '@/components/ComboCard/ComboCard';

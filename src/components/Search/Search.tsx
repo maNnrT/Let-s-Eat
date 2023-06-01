@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IoMdCloseCircle, IoMdSearch } from 'react-icons/io';
-import { ImSpinner8 } from 'react-icons/im';
+// import { ImSpinner8 } from 'react-icons/im';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/animations/scale-subtle.css';

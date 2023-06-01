@@ -1,5 +1,4 @@
 import { Product } from '@/types/types';
-import React from 'react';
 import CategoryProduct from '../CategoryProduct/CategoryProduct';
 import { setOpenProductDetailTrue } from '@/redux/features/modalSlice/modalSlice';
 import { useDispatch } from 'react-redux';

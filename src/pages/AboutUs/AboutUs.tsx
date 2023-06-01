@@ -1,4 +1,3 @@
-import * as React from 'react';
 import heroBannerAboutUs from '@/assets/image/HeroBanner_AboutUs.png';
 import ourPassion1 from '@/assets/image/image34.png';
 import ourPassion2 from '@/assets/image/image35.png';
@@ -19,7 +18,6 @@ import logoipsum3 from '@/assets/svg/logoipsum3.svg';
 import contactUs from '@/assets/image/image48.png';
 import { useNavigate } from 'react-router-dom';
 import AboutUsForm from './AboutUsForm';
-import config from '@/config';
 import Breadcrumbs from '@/components/Breadcrumb/Breadcrumb';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 

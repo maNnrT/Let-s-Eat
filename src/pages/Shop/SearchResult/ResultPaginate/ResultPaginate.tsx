@@ -13,7 +13,6 @@ function ResultPaginate() {
   const items: (Product | Combo)[] = useSelector(getItemsByFilterSelector);
   const page = Number(Object.fromEntries([...searchParams]).page);
   const [currentPage, setCurrentPage] = React.useState<number>(page);
-  // const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [itemsPerPage, setItemPerPage] = React.useState<number>(8);
   const currentData = React.useMemo(() => {
     const firstPageIndex = (currentPage - 1) * itemsPerPage;
@@ -39,8 +38,7 @@ function ResultPaginate() {
       setItemPerPage(8);
     }
   }, [w]);
-  React.useEffect(() => {
-    
+  React.useLayoutEffect(() => {
     setCurrentPage(page);
   }, [page]);
   return (

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import * as React from 'react';
 import { Product } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import config from '@/config';

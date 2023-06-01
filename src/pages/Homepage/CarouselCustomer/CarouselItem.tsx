@@ -1,9 +1,9 @@
-interface Props {
-  img: string;
-  name: string;
-  description: string;
-  price: number;
-}
+// interface Props {
+//   img: string;
+//   name: string;
+//   description: string;
+//   price: number;
+// }
 import IMG from '@/assets/image/image8.png';
 function CarouselItem() {
   return (

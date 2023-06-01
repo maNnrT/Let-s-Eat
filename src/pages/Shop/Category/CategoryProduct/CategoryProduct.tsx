@@ -1,4 +1,3 @@
-import React from 'react';
 import cart from '@/assets/svg/cart.svg';
 interface Props {
   id: number | undefined;
@@ -7,7 +6,7 @@ interface Props {
   ingredient?: string;
   price?: string;
 }
-function CategoryProduct({ id, name, img, ingredient, price }: Props) {
+function CategoryProduct({ name, img, ingredient, price }: Props) {
   return (
     <div className="flex justify-start items-center desktop:h-[10rem] h-[5rem] desktop:mb-[1.2rem] mb-[0.8rem]  ">
       <div className="desktop:w-[10rem] desktop:h-[10rem] w-[5rem] h-[5rem] desktop:basis-[10rem] grow-0 shrink-0 relative group ">

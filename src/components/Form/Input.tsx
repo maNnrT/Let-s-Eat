@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import check from '@/assets/svg/check_formCheckOut.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -36,14 +36,7 @@ const Input: FC<InputProps> = ({
           {label}
         </label>
       )}
-      <input
-        type={type}
-        id={name}
-        name={name}
-        {...register(name)}
-        {...rest}
-        className={`${classNameInput}`}
-      />
+      <input type={type} id={name} name={name} {...register(name)} {...rest} className={`${classNameInput}`} />
       {error && <p className={classNameError}>{error}</p>}
       {touchedFields && !error && (
         <span className={classNameSuccess}>

@@ -12,7 +12,6 @@ import './CarouselProduct.scss';
 // import required modules
 import { Product } from '@/types/types';
 import { BsCart } from 'react-icons/bs';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 interface Props {
   products: Product[];
 }
