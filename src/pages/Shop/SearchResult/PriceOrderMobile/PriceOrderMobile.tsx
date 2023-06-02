@@ -1,18 +1,24 @@
 import React from 'react';
-import { getPriceOrderSelector } from '@/redux/selectors';
 import { priceOrderChange } from '@/redux/features/filter/filterSlice';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { PriceOrderValue } from '@/enum/enum';
+import { useSearchParams } from 'react-router-dom';
 
 function PriceOrderMobile() {
   const dispatch = useAppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const priceOrder = useAppSelector(getPriceOrderSelector);
-  const handlePriceOrder = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.ChangeEvent<HTMLInputElement>,
-  ): void => {
-    dispatch(priceOrderChange((e.target as HTMLButtonElement | HTMLInputElement).value));
+  const priceOrder = searchParams.get('order');
+
+  const handlePriceOrder = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(priceOrderChange((e.target as HTMLInputElement).value));
+    searchParams.set('order', (e.target as HTMLInputElement).value);
+    searchParams.set('page', '1');
+    setSearchParams(searchParams);
   };
+  React.useEffect(() => {
+    dispatch(priceOrderChange(priceOrder));
+  }, [dispatch, priceOrder]);
   return (
     <>
       <div>
