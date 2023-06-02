@@ -28,6 +28,11 @@ function SearchInput() {
   React.useEffect(() => {
     dispatch(searchFilterChange(keyword));
   }, [dispatch, keyword]);
+  const handleKeyDown = (event: { key: string }) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
   return (
     <div
       className="flex items-center h-[4rem] bg-white relative desktop:ml-[2rem] desktop:mr-[3rem] desktop:w-[30rem] pl-[1.5rem]
@@ -43,6 +48,7 @@ shadow-[0_2px_12px_rgba(0,0,0,0.12)]"
         placeholder="Search dish or combo"
         className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 "
         spellCheck={false}
+        onKeyDown={handleKeyDown}
       />
       {!!searchValue && (
         <button className="absolute top-[50%] translate-y-[-50%] right-[6rem]" onClick={handleClear}>

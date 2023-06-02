@@ -60,7 +60,7 @@ function SearchResult() {
            flex-col items-start sticky top-[7.5rem] right-0 desktop:flex hidden"
           >
             {/* Category */}
-            <TypeFilter name='typeFilter1' />
+            <TypeFilter name="typeFilter1" />
             {/* Price Slider */}
             <PriceSlider />
             {/* Check Combo,Product */}
@@ -74,7 +74,7 @@ function SearchResult() {
               <div className="flex justify-between items-center">
                 <p className="text-666565 text-[2rem]">Order by</p>
                 {/* Price Order */}
-                <PriceOrder/>
+                <PriceOrder />
               </div>
 
               {/* Search */}
@@ -106,24 +106,26 @@ function SearchResult() {
         <div
           className={
             showFilter
-              ? 'w-[100vw] h-[100vh] fixed bottom-0 bg-white ease-in-out duration-500 z-[3] py-[2.4rem] '
-              : 'w-[100vw] h-[100vh] fixed bottom-[-100%] bg-white ease-in duration-500 z-[3] py-[2.4rem] '
+              ? 'w-[100vw] h-[100vh] fixed bottom-0 bg-white ease-in-out duration-500 z-[3] pb-[2.4rem] pt-[2.4rem]'
+              : 'w-[100vw] h-[100vh] fixed bottom-[-100%] bg-white ease-in duration-500 z-[3] pb-[2.4rem] pt-[2.4rem]'
           }
         >
-          <div className="container pt-[2.4rem]">
-            <span
-              className="text-666565 text-[6rem] absolute top-[1.5rem] right-[3.7rem] leading-[2rem] cursor-pointer z-10 font-light"
-              onClick={() => {
-                setShowFilter(!showFilter);
-              }}
-            >
-              &times;
-            </span>
+          <div className="container">
+            <div className=" text-right font-light mb-[2.4rem] leading-[0] text-666565 text-[6rem]">
+              <span
+                onClick={() => {
+                  setShowFilter(!showFilter);
+                }}
+                className="cursor-pointer "
+              >
+                &times;
+              </span>
+            </div>
+
             <SearchInput />
             <p className="text-secondary mt-[1.2rem]">Filter</p>
-
             <p className="text-secondary font-semibold mt-[1.2rem]">Category</p>
-            <TypeFilter name='typeFilter2' />
+            <TypeFilter name="typeFilter2" />
             <p className="text-secondary font-semibold mt-[1.2rem]">Price</p>
             <PriceSlider />
             <div className="pb-[1.2rem] border-b-[1px] border-secondary">

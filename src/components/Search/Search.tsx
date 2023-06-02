@@ -127,6 +127,26 @@ function Search() {
       inputRef.current?.blur();
     }
   }, [scrollDirection]);
+  const handleKeyDown = (event: { key: string }) => {
+    if (event.key === 'Enter') {
+      handleSeeAllResult();
+    }
+  };
+  const handleSeeAllResult = () => {
+    setShowResult(false);
+    navigate({
+      pathname: config.routes.search,
+      search: `?${createSearchParams({
+        keyword: searchValue,
+        page: '1',
+        type: 'all',
+        combo: 'false',
+        product: 'false',
+        order: PriceOrderValue.DEFAULT.toString(),
+        price: '0,50',
+      })}`,
+    });
+  };
   return (
     <>
       <Tippy
@@ -181,21 +201,7 @@ function Search() {
               {searchDishResult.length !== 0 || searchTypeResult.length !== 0 || searchComboResult.length !== 0 ? (
                 <button
                   className="text-secondary py-[0.8rem] px-[2rem] text-center cursor-pointer w-full"
-                  onClick={() => {
-                    setShowResult(false);
-                    navigate({
-                      pathname: config.routes.search,
-                      search: `?${createSearchParams({
-                        keyword: searchValue,
-                        page: '1',
-                        type: 'all',
-                        combo: 'false',
-                        product: 'false',
-                        order: PriceOrderValue.DEFAULT.toString(),
-                        price: '0,50',
-                      })}`,
-                    });
-                  }}
+                  onClick={handleSeeAllResult}
                 >
                   See all result
                 </button>
@@ -220,6 +226,7 @@ function Search() {
             className="text-primary h-fit outline-none mr-[2rem] flex-1 pr-[2rem] py-[0.7rem] placeholder:text-gray-500 text-[1.4rem"
             spellCheck={false}
             onFocus={() => setShowResult(true)}
+            onKeyDown={handleKeyDown}
           />
           {!!searchValue && (
             <button className="absolute top-[50%] translate-y-[-50%] right-[1.5rem]" onClick={handleClear}>
