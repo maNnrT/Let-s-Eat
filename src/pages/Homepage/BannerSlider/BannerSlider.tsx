@@ -6,7 +6,9 @@ import heroBannerHomepage4 from '@/assets/Image/HeroBanner_Homepage4.png';
 import leftArrow from '@/assets/svg/back_Arrow.svg';
 import rightArrow from '@/assets/svg/next_Arrow.svg';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
+import { Pagination, Autoplay, EffectFade } from 'swiper';
+import 'swiper/css/effect-fade';
+
 import BannerSliderItem from './BannerSliderItem';
 import { IoIosArrowForward } from 'react-icons/io';
 import './BannerSlider.scss';
@@ -40,9 +42,18 @@ function BannerSlide() {
     <div className="w-full desktop:h-[90rem] h-[32rem] relative">
       <Swiper
         pagination={pagination}
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay, EffectFade]}
         slidesPerView={1}
         className="mySwiper1"
+        autoplay={{
+          disableOnInteraction: false,
+        }}
+        speed={2000}
+        effect={'fade'}
+        loop={true}
+        fadeEffect={{
+          crossFade: true,
+        }}
         ref={ref}
         style={
           {
