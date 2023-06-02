@@ -27,6 +27,8 @@ function Breadcrumbs() {
       );
     });
 
+
+  
   return (
     <div className="font-normal desktop:text-[2.2rem] desktop:leading-[3.7rem] leading-[100%] text-center text-cbcac9  ">
       <Link to={config.routes.homepage} className="hover:text-secondary">
