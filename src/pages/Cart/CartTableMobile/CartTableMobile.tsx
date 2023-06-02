@@ -67,8 +67,6 @@ function CartTableMobile({ cartProduct, cartCombo, totalPrice }: Props) {
         className="container my-[2.4rem] h-fit block desktop:hidden border-t-[0.15rem] border-d9d9d9 pt-[0.8rem] "
         ref={parent}
       >
-        {/* <SmallPopup refDialog={refDialog} img={check} title="Cart is updated!" />
-        <SmallPopup refDialog={refDialog2} img={cross} title="Cart is empty!" /> */}
         {cartProduct.length !== 0 &&
           cartProduct.map((item) => (
             <React.Fragment key={item.id}>

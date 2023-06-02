@@ -120,7 +120,6 @@ function CartTable({ cartProduct, cartCombo, totalPrice }: Props): JSX.Element {
                 <tr className="h-[40rem]">
                   <td colSpan={4}>
                     <div className="flex flex-col justify-center items-center ">
-                      {/* <img src={cartImg} alt="" className="object-cover w-[6rem] text-secondary" /> */}
                       <BsCart color="#D08C30" size={60} />
                       <p className="text-secondary text-center text-[2rem] first-letter:capitalize mt-[2rem]">
                         Cart is empty!

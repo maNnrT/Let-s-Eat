@@ -129,7 +129,7 @@ export const getItemsByFilterSelector = createSelector(
       res = [...res];
     }
     if (comboFilter === true && productFilter === true) {
-      res = [...products, ...combos];
+      res = [...res];
     }
     switch (priceOrder) {
       case PriceOrderValue.DEFAULT:
@@ -187,7 +187,6 @@ export const getItemsByFilterSelector = createSelector(
       default:
         break;
     }
-
     return res;
   },
 );
