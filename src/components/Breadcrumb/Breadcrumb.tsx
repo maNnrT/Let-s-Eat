@@ -16,6 +16,9 @@ function Breadcrumbs() {
       }
       currentLink += `/${crumb}`;
       return (
+
+
+        
         <div className="inline-block " key={crumb}>
           <Link to={currentLink}>
             /
