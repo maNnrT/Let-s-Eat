@@ -14,6 +14,8 @@ function Breadcrumbs() {
       } else if (crumb.includes('&')) {
         newCrumb = crumb.replace('&', ' & ');
       }
+
+      
       currentLink += `/${crumb}`;
       return (
         <div className="inline-block " key={crumb}>

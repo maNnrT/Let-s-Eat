@@ -26,7 +26,7 @@ function PriceSlider() {
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const priceRangeSearchQuery = searchParams.get('price');
-  // if (priceRangeSearchQuery) console.log(priceRangeSearchQuery.split(','));
+
   const priceRangeStore = useAppSelector(getPriceFilterSelector);
   const [range, setRange] = React.useState<number[]>(
     priceRangeSearchQuery
