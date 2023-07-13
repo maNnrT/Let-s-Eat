@@ -9,7 +9,7 @@ import menuFeature from '@/assets/svg/menu_Feature.svg';
 import natureIngredient from '@/assets/svg/ingredients_Feature.svg';
 import workingHoursImg from '@/assets/image/image2.png';
 import sweetBakery from '@/assets/image/image3.png';
-import testimonial from '@/assets/Image/image9.png';
+import testimonial from '@/assets/image/image9.png';
 import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { dishFilterProductChange } from '@/redux/features/products/ProductsSlice';

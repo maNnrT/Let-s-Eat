@@ -1,8 +1,8 @@
 import React from 'react';
-import heroBannerHomepage from '@/assets/Image/HeroBanner_Homepage.png';
-import heroBannerHomepage2 from '@/assets/Image/HeroBanner_Homepage2.png';
-import heroBannerHomepage3 from '@/assets/Image/HeroBanner_Homepage3.png';
-import heroBannerHomepage4 from '@/assets/Image/HeroBanner_Homepage4.png';
+import heroBannerHomepage from '@/assets/image/HeroBanner_Homepage.png';
+import heroBannerHomepage2 from '@/assets/image/HeroBanner_Homepage2.png';
+import heroBannerHomepage3 from '@/assets/image/HeroBanner_Homepage3.png';
+import heroBannerHomepage4 from '@/assets/image/HeroBanner_Homepage4.png';
 import leftArrow from '@/assets/svg/back_Arrow.svg';
 import rightArrow from '@/assets/svg/next_Arrow.svg';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
