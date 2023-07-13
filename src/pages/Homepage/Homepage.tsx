@@ -9,7 +9,7 @@ import menuFeature from '@/assets/svg/menu_Feature.svg';
 import natureIngredient from '@/assets/svg/ingredients_Feature.svg';
 import workingHoursImg from '@/assets/image/image2.png';
 import sweetBakery from '@/assets/image/image3.png';
-import testimonial from '@/assets/Image/image9.png';
+// import testimonial from '@/assets/Image/image9.png';
 import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { dishFilterProductChange } from '@/redux/features/products/ProductsSlice';
@@ -353,10 +353,10 @@ function Homepage() {
                     <CarouselCustomer />
                   </div>
                 </div>
-                <div
+                {/* <div
                   className="w-full bg-no-repeat bg-cover bg-center desktop:col-span-1 col-span-2 desktop:h-auto h-[25.6rem] desktop:order-2 order-1"
                   style={{ backgroundImage: `url(${testimonial})` }}
-                ></div>
+                ></div> */}
               </div>
             </div>
           </div>
