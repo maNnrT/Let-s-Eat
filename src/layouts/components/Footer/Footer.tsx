@@ -46,7 +46,7 @@ function Footer(): JSX.Element {
             <div className="w-full flex ">
               <MdEmail size={20} color={'#4e4e4e'} />
               <p className="text-d0d0d0 font-light text-[1.6rem] desktop:ml-[1rem] ml-[1.4rem]">
-                bakery.adamo@gmail.com
+                bakery@gmail.com
               </p>
             </div>
           </div>
@@ -70,7 +70,7 @@ function Footer(): JSX.Element {
         </div>
       </div>
       <div className="container h-[5.6rem] desktop:mt-[2.9rem] mt-[2.4rem] border-t-[1px] border-[#424242] flex justify-between items-center">
-        <p className="text-[1.2rem] text-717171">Copyright © 2021 by Adamo Software</p>
+        <p className="text-[1.2rem] text-717171">Copyright © 2023 by TRANNAM Software</p>
         <div className="flex">
           <img
             src={instagram}
