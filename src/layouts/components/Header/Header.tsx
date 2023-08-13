@@ -103,7 +103,6 @@ function Header(): JSX.Element {
           <HeaderMenu>
             <HeaderItem title="Homepage" to={config.routes.homepage}></HeaderItem>
             <HeaderItem title="About Us" to={config.routes.aboutus}></HeaderItem>
-            <HeaderItem title="Contact" to={config.routes.contact}></HeaderItem>
             <HeaderItem title="Menu Combo" to={config.routes.menucombo}></HeaderItem>
             <HeaderItem title="Shop" to={config.routes.shop}></HeaderItem>
           </HeaderMenu>

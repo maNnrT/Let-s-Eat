@@ -53,14 +53,11 @@ function Footer(): JSX.Element {
           <div className="col-span-2 desktop:col-span-1">
             <p className="desktop:text-[2.2rem] text-[1.8rem] font-medium desktop:mb-[2rem] mb-[1.2rem] ">Link</p>
             <div className=" grid grid-cols-2 desktop:block gap-y-[1.2rem]">
-              <div className="w-full flex desktop:mb-[1.2rem] ">
-                <p className="text-d0d0d0 font-semibold text-[1.6rem]">Term & Condition</p>
-              </div>
+              <Link to={config.routes.homepage} className="w-full flex desktop:mb-[1.2rem] ">
+                <p className="text-d0d0d0 font-semibold text-[1.6rem]">Homepage</p>
+              </Link>
               <Link to={config.routes.aboutus} className="w-full flex desktop:mb-[1.2rem] ">
                 <p className="text-d0d0d0 font-semibold text-[1.6rem]">About us</p>
-              </Link>
-              <Link to={config.routes.contact} className="w-full flex desktop:mb-[1.2rem] ">
-                <p className="text-d0d0d0 font-semibold text-[1.6rem]">Contact</p>
               </Link>
               <Link to={config.routes.shop} className="w-full flex desktop:mb-[1.2rem] ">
                 <p className="text-d0d0d0 font-semibold text-[1.6rem]">Shop</p>
